@@ -1,0 +1,22 @@
+{
+  "title": "Before You Apply",
+
+  "intro": "We carefully review every application submitted to St. Hannah Foundation. To help us assess your request accurately and efficiently, please ensure that all information provided is complete, truthful and supported by relevant documentation where applicable.",
+
+  "importantNotes": [
+    "Applications are reviewed individually based on need, eligibility and available resources.",
+    "Submission of an application does not automatically guarantee approval.",
+    "Additional information or supporting documents may be requested during the review process.",
+    "Our team may contact you for clarification or verification.",
+    "All information provided will be treated with confidentiality and respect."
+  ],
+
+  "requiredInformation": [
+    "Valid means of identification",
+    "Current contact information",
+    "Detailed description of the support being requested",
+    "Supporting documents where applicable",
+    "Medical reports for medical aid applications",
+    "Educational records for education support applications"
+  ]
+}

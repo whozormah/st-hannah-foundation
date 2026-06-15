@@ -1,6 +1,26 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
+interface SiteSettings {
+  bank: {
+    bankName: string;
+    accountNumber: string;
+    accountName: string;
+  };
+}
+
 export default function DonationBanner() {
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    fetch("/data/site-settings.json")
+      .then((res) => res.json())
+      .then((data) => setSettings(data))
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
     <section className="py-28 bg-[#844204]">
       <div className="container-custom">
@@ -19,8 +39,6 @@ export default function DonationBanner() {
             Africa.
           </p>
 
-          {/* Bank Details */}
-
           <div className="mt-12 bg-white/10 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-10">
             <h3 className="text-2xl font-bold mb-8">Direct Bank Donation</h3>
 
@@ -28,20 +46,24 @@ export default function DonationBanner() {
               <div>
                 <p className="text-sm text-gray-300">Bank Name</p>
 
-                <h4 className="text-xl font-semibold mt-2">FirstBank</h4>
+                <h4 className="text-xl font-semibold mt-2">
+                  {settings?.bank.bankName}
+                </h4>
               </div>
 
               <div>
                 <p className="text-sm text-gray-300">Account Number</p>
 
-                <h4 className="text-xl font-semibold mt-2">2047855878</h4>
+                <h4 className="text-xl font-semibold mt-2">
+                  {settings?.bank.accountNumber}
+                </h4>
               </div>
 
               <div>
                 <p className="text-sm text-gray-300">Account Name</p>
 
                 <h4 className="text-xl font-semibold mt-2">
-                  St. Hannah Charity Foundation
+                  {settings?.bank.accountName}
                 </h4>
               </div>
             </div>
@@ -52,8 +74,6 @@ export default function DonationBanner() {
             online donation platform. Every contribution helps create
             opportunities, restore hope and transform lives.
           </p>
-
-          {/* Buttons */}
 
           <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4">
             <Link

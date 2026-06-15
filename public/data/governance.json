@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Mrs Glory Akinola",
+    "role": "President",
+    "image": "/leadership/glory.jpeg"
+  },
+  {
+    "name": "Dr. A.Akinyemi",
+    "role": "Vice President",
+    "image": "/leadership/vice-president.png"
+  },
+  {
+    "name": "Pastor Chinedu Momah",
+    "role": "Secretary",
+    "image": "/leadership/secretary.png"
+  },
+  {
+    "name": "Chief Joseph Bayo FNIM",
+    "role": "Advisory Board Member",
+    "image": "/leadership/advisory-board.png"
+  },
+  {
+    "name": "Mr Ola Onifade",
+    "role": "Operations Director",
+    "image": "/leadership/programs-director.png"
+  },
+  {
+    "name": "Engr. Maxwell Nwajei",
+    "role": "Programs Manager",
+    "image": "/leadership/program-manager.jpg"
+  }
+]

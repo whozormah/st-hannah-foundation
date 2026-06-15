@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Education Support",
+    "image": "/causes/education.jpg",
+    "description": "Providing educational assistance, school materials and opportunities for children and young people.",
+    "link": "/programs"
+  },
+  {
+    "title": "Widow Support Program",
+    "image": "/causes/widows.jpg",
+    "description": "Supporting widows through empowerment initiatives, welfare support and community care.",
+    "link": "/programs"
+  },
+  {
+    "title": "Family Support",
+    "image": "/causes/community.jpg",
+    "description": "Providing assistance and resources that strengthen families and improve livelihoods.",
+    "link": "/programs"
+  },
+  {
+    "title": "Business Empowerment",
+    "image": "/causes/community.jpg",
+    "description": "Helping individuals build sustainable income through skills development and business support.",
+    "link": "/programs"
+  }
+]

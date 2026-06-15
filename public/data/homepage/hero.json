@@ -1,0 +1,23 @@
+[
+  {
+    "image": "/hero/hero-1.jpg",
+    "title": "Restoring Hope. Empowering Lives.",
+    "description": "Supporting widows, children, families and vulnerable communities through education, empowerment, outreach and life-changing interventions.",
+    "buttonText": "Donate Now",
+    "buttonLink": "/donate"
+  },
+  {
+    "image": "/hero/hero-2.jpg",
+    "title": "Inspiring Through Education",
+    "description": "Providing educational support, empowerment opportunities and practical assistance to those who need it most.",
+    "buttonText": "Become A Volunteer",
+    "buttonLink": "/volunteer"
+  },
+  {
+    "image": "/hero/hero-3.jpg",
+    "title": "Building Stronger Families And Communities",
+    "description": "Together we are creating opportunities, strengthening families and transforming lives across communities.",
+    "buttonText": "View Programs",
+    "buttonLink": "/programs"
+  }
+]

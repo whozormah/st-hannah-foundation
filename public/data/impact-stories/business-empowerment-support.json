@@ -1,0 +1,30 @@
+{
+  "slug": "business-empowerment-support",
+  "category": "Business Empowerment",
+  "title": "Creating Sustainable Livelihoods",
+  "beneficiaries": "50+",
+  "featured": true,
+  "donationProgram": "Business Empowerment",
+  "summary": "Providing tools, resources and support that help beneficiaries start or grow small businesses.",
+  "date": "November 2025",
+  "location": "Bariga, Lagos",
+  "image": "/impact/business-empowerment/1.jpg",
+  "images": [
+    "/impact/business-empowerment/1.jpg",
+    "/impact/business-empowerment/2.jpg",
+    "/impact/business-empowerment/3.jpg"
+  ],
+  "challenge": "Many individuals lacked the resources needed to establish sustainable sources of income.",
+  "response": "Business support, equipment and empowerment resources were provided to selected beneficiaries.",
+  "impact": "Beneficiaries gained opportunities to improve income and support their families.",
+  "story": [
+    "Economic empowerment creates lasting impact beyond immediate assistance.",
+    "The Foundation supported beneficiaries with tools and resources to strengthen livelihoods.",
+    "Participants received practical assistance aimed at promoting self-reliance.",
+    "Many beneficiaries have since expanded their income-generating activities."
+  ],
+  "quote": {
+    "text": "The equipment I received helped me restart my business and support my family.",
+    "author": "Business Empowerment Beneficiary"
+  }
+}

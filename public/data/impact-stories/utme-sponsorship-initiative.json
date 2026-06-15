@@ -1,0 +1,26 @@
+{
+  "slug": "utme-sponsorship-initiative",
+  "category": "Education Support",
+  "title": "Opening Doors Through UTME Sponsorship",
+  "beneficiaries": "15+",
+  "featured": true,
+  "donationProgram": "Education Support",
+  "summary": "Helping students pursue higher education by covering UTME registration and examination costs.",
+  "date": "March 2025",
+  "location": "Lagos, Nigeria",
+  "image": "/impact/utme/1.jpg",
+  "images": ["/impact/utme/1.jpg", "/impact/utme/2.jpg", "/impact/utme/3.jpg"],
+  "challenge": "Many bright students were unable to register for UTME due to financial constraints.",
+  "response": "The Foundation sponsored examination registration fees and provided educational support.",
+  "impact": "Several students successfully registered and continued pursuing their academic dreams.",
+  "story": [
+    "Education remains one of the strongest tools for breaking the cycle of poverty.",
+    "Through the UTME sponsorship initiative, students received assistance with registration costs.",
+    "The programme removed financial barriers that could have prevented them from pursuing university education.",
+    "Today, many beneficiaries continue to progress academically."
+  ],
+  "quote": {
+    "text": "Without this sponsorship, I would have missed the opportunity to sit for my exams.",
+    "author": "Student Beneficiary"
+  }
+}

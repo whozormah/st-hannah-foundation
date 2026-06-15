@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Widow Empowerment Programme",
+    "category": "Empowerment",
+    "description": "See how widows are being empowered through practical support and sustainable opportunities.",
+    "thumbnail": "/gallery/videos/widows.jpg",
+    "link": "https://youtube.com"
+  },
+  {
+    "title": "Education Support Initiative",
+    "category": "Education",
+    "description": "Providing educational opportunities and hope for children and young people.",
+    "thumbnail": "/gallery/videos/education.jpg",
+    "link": "https://youtube.com"
+  },
+  {
+    "title": "Esther Orga's Story",
+    "category": "Featured Story",
+    "description": "A powerful story of resilience, support and transformation.",
+    "thumbnail": "/gallery/videos/esther.jpg",
+    "link": "https://youtube.com"
+  }
+]

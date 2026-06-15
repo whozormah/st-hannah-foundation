@@ -1,0 +1,34 @@
+{
+  "name": "Esther Orga",
+  "age": 33,
+  "tagline": "Mother Of Five • Lagos, Nigeria",
+
+  "headline": "A Mother's Fight To Keep Hope Alive",
+
+  "description": [
+    "Esther Orga is a 33-year-old mother raising five children under extremely challenging circumstances. Struggling with inadequate accommodation, food insecurity and limited income opportunities, she works tirelessly through washing and cleaning jobs to support her family. Despite her resilience and determination, the income she earns is often insufficient to meet her children's basic needs, while ongoing health concerns further compound her situation. Esther's story highlights the urgent need for support that can help restore stability, dignity and hope for her family."
+  ],
+
+  "whyStoryMattersTitle": "Why This Story Matters",
+
+  "whyStoryMatters": "This story represents the reality faced by many vulnerable families. Through collective support, compassion and practical intervention, lives can be transformed and hope restored.",
+
+  "mainImage": "/campaigns/esther-main.png",
+
+  "gallery": [
+    "/campaigns/esther-1.png",
+    "/campaigns/esther-2.png",
+    "/campaigns/esther-3.png"
+  ],
+
+  "needs": [
+    "Safe Accommodation",
+    "Food Support",
+    "Medical Support",
+    "Income Empowerment"
+  ],
+
+  "donationLink": "/donate?cause=esther-orga-family-support",
+
+  "videoLink": "https://drive.google.com/drive/folders/178ZZ4blhtxzrVEs7HLZvI6d-ISXdujkA"
+}

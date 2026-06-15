@@ -1,0 +1,46 @@
+{
+  "stats": [
+    {
+      "number": "500+",
+      "label": "Widows Reached Through Empowerment Programmes"
+    },
+    {
+      "number": "15+",
+      "label": "UTME Candidates Sponsored"
+    },
+    {
+      "number": "100+",
+      "label": "Families Supported Through Welfare Initiatives"
+    },
+    {
+      "number": "Multiple",
+      "label": "Communities Impacted Across Various Programmes"
+    }
+  ],
+  "causes": [
+    {
+      "title": "Education Support",
+      "description": "Help students access educational materials, examination sponsorship and learning opportunities."
+    },
+    {
+      "title": "Widow Empowerment",
+      "description": "Support empowerment programmes, welfare initiatives and sustainable livelihood opportunities."
+    },
+    {
+      "title": "Family Support",
+      "description": "Provide food assistance, welfare support and essential resources for vulnerable families."
+    },
+    {
+      "title": "Medical Aid",
+      "description": "Help provide access to healthcare interventions, treatment support and medical assistance."
+    },
+    {
+      "title": "Business Empowerment",
+      "description": "Support small business grants, entrepreneurship development and economic empowerment initiatives."
+    },
+    {
+      "title": "Community Outreach",
+      "description": "Enable us to reach underserved communities through outreach programmes and intervention projects."
+    }
+  ]
+}

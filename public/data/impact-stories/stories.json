@@ -1,0 +1,52 @@
+[
+  {
+    "slug": "widow-empowerment-program",
+    "title": "Restoring Dignity Through Widow Empowerment",
+    "category": "Widow Empowerment",
+    "excerpt": "Supporting widows with food assistance, empowerment resources and opportunities for sustainable livelihoods.",
+    "image": "/impact/widow-empowerment/1.jpg",
+    "beneficiaries": "500+",
+    "date": "August 2025",
+    "featured": true
+  },
+  {
+    "slug": "utme-sponsorship-initiative",
+    "title": "Opening Doors Through UTME Sponsorship",
+    "category": "Education Support",
+    "excerpt": "Helping students pursue higher education by covering UTME registration and examination costs.",
+    "image": "/impact/utme/1.jpg",
+    "beneficiaries": "15+",
+    "date": "March 2025",
+    "featured": true
+  },
+  {
+    "slug": "family-feeding-support",
+    "title": "Supporting Families Through Difficult Times",
+    "category": "Family Support",
+    "excerpt": "Providing food assistance and welfare support to vulnerable families.",
+    "image": "/impact/family-support/1.jpg",
+    "beneficiaries": "100+",
+    "date": "October 2025",
+    "featured": true
+  },
+  {
+    "slug": "medical-aid-outreach",
+    "title": "Bringing Hope Through Medical Assistance",
+    "category": "Medical Aid",
+    "excerpt": "Providing access to medical support and healthcare interventions for vulnerable individuals.",
+    "image": "/impact/medical-aid/1.jpg",
+    "beneficiaries": "80+",
+    "date": "July 2025",
+    "featured": true
+  },
+  {
+    "slug": "business-empowerment-support",
+    "title": "Creating Sustainable Livelihoods",
+    "category": "Business Empowerment",
+    "excerpt": "Providing tools, resources and support that help beneficiaries start or grow small businesses.",
+    "image": "/impact/business-empowerment/1.jpg",
+    "beneficiaries": "50+",
+    "date": "November 2025",
+    "featured": true
+  }
+]

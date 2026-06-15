@@ -1,0 +1,30 @@
+{
+  "slug": "family-feeding-support",
+  "category": "Family Support",
+  "title": "Supporting Families Through Difficult Times",
+  "beneficiaries": "100+",
+  "featured": true,
+  "donationProgram": "Family Support",
+  "summary": "Providing food assistance and welfare support to vulnerable families.",
+  "date": "October 2025",
+  "location": "Bariga, Lagos",
+  "image": "/impact/family-support/1.jpg",
+  "images": [
+    "/impact/family-support/1.jpg",
+    "/impact/family-support/2.jpg",
+    "/impact/family-support/3.jpg"
+  ],
+  "challenge": "Many families struggled to meet basic feeding and household needs.",
+  "response": "Food packs and welfare items were distributed to vulnerable households.",
+  "impact": "Over 100 families received practical support and relief.",
+  "story": [
+    "Families remain at the heart of strong communities.",
+    "The Foundation organized a family feeding support initiative to address immediate needs.",
+    "Beneficiaries received food items and essential supplies.",
+    "The programme provided relief and restored hope to many households."
+  ],
+  "quote": {
+    "text": "This support eased a burden that my family had been carrying for months.",
+    "author": "Family Beneficiary"
+  }
+}

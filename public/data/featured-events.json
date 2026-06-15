@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Widows Empowerment Programme",
+    "description": "Supporting widows through empowerment initiatives, financial assistance, food support and community development programmes.",
+    "image": "/gallery/events/widows.jpg",
+    "category": "Widows",
+    "link": "/programs/widows-empowerment"
+  },
+  {
+    "title": "Medical Outreach",
+    "description": "Providing healthcare interventions, medical screenings, consultations and essential healthcare support to underserved communities.",
+    "image": "/gallery/events/medical.jpg",
+    "category": "Medical",
+    "link": "/programs/medical-aid"
+  },
+  {
+    "title": "Education Support",
+    "description": "Creating opportunities for children and young people through educational sponsorship, school supplies and learning support.",
+    "image": "/gallery/events/education.jpg",
+    "category": "Education",
+    "link": "/programs/education-support"
+  }
+]

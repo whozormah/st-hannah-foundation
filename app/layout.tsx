@@ -17,7 +17,7 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "St. Hannah Foundation",
-  description: "Empowering Communities Through Love and Service",
+  description: "Restoring Hope, Empowering Lives & Transforming Communities",
 };
 
 export default function RootLayout({
@@ -26,7 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className={`${inter.variable} ${playfair.variable}`}>
         <Navbar />
 

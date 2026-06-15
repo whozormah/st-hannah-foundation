@@ -1,0 +1,223 @@
+[
+  {
+    "slug": "education-support",
+
+    "title": "Education Support",
+
+    "icon": "GraduationCap",
+
+    "heroImage": "/programs/education.jpg",
+
+    "excerpt": "Creating opportunities through access to education, mentorship, school support and learning resources.",
+
+    "why": "Education remains one of the most powerful tools for breaking cycles of poverty and unlocking opportunities for future success. Unfortunately, many children and young people face barriers that prevent them from accessing quality education, learning materials and the support needed to thrive academically.",
+
+    "approach": "Through educational assistance, mentorship programmes, school fee support, learning materials and access to digital learning opportunities, St. Hannah Foundation helps learners gain the knowledge, confidence and opportunities required to achieve their full potential.",
+
+    "impact": "Our goal is to equip children and young people with the educational foundation necessary to pursue their dreams, improve their quality of life and contribute positively to their communities.",
+
+    "activities": [
+      "School Fee Support",
+      "Educational Materials",
+      "Mentorship Programmes",
+      "Digital Literacy Training",
+      "Academic Guidance",
+      "Learning Support"
+    ],
+
+    "beneficiaries": ["Children", "Teenagers", "Students", "Young Adults"],
+
+    "ctaTitle": "Support A Child's Future",
+
+    "ctaText": "Help create educational opportunities that empower children and young people to build brighter futures."
+  },
+
+  {
+    "slug": "widows-empowerment",
+    "title": "Widows Support Program",
+    "icon": "HeartHandshake",
+    "heroImage": "/programs/widows.jpg",
+    "excerpt": "Restoring dignity, hope and economic independence for widows through support, empowerment and community care.",
+    "why": "Many widows face significant social, emotional and financial challenges following the loss of a spouse. In many communities, they are left to shoulder the responsibility of caring for their families with limited resources, reduced income and little support. Without intervention, these challenges can affect their wellbeing, confidence and ability to provide for their households.",
+    "approach": "St. Hannah Foundation provides practical assistance, empowerment opportunities, business support, food relief, vocational training and community-based programmes designed to help widows rebuild their lives with dignity and confidence. Through regular outreach activities, counselling, skills development and economic empowerment initiatives, we create pathways for long-term stability and self-reliance.",
+    "impact": "Our goal is to empower widows to become financially independent, emotionally supported and socially connected while strengthening the wellbeing of the families and communities they nurture.",
+    "activities": [
+      "Annual Widows Outreach",
+      "Business Grants",
+      "Food and Relief Distribution",
+      "Vocational Training",
+      "Mentorship and Counselling",
+      "Community Support Networks"
+    ],
+    "beneficiaries": [
+      "Widows",
+      "Single Mothers",
+      "Low-Income Families",
+      "Vulnerable Women"
+    ],
+    "ctaTitle": "Restore Hope To A Widow",
+    "ctaText": "Partner with us to empower widows with resources, opportunities and support that create lasting transformation."
+  },
+
+  {
+    "slug": "medical-aid",
+    "title": "Medical Aid",
+    "icon": "Stethoscope",
+    "heroImage": "/programs/medical-aid.jpg",
+    "excerpt": "Improving access to healthcare services, medical support and wellness programmes for vulnerable communities.",
+    "why": "Access to quality healthcare remains a major challenge for many families. Preventable illnesses, inadequate medical attention and limited financial resources often result in poor health outcomes, reduced productivity and avoidable suffering.",
+    "approach": "Through medical outreaches, health screenings, awareness campaigns, medication support and partnerships with healthcare professionals, St. Hannah Foundation helps individuals and families access essential healthcare services. We focus on prevention, early detection and timely intervention to improve overall wellbeing.",
+    "impact": "Our goal is to promote healthier communities by reducing barriers to healthcare and ensuring vulnerable individuals receive the support they need to live healthier lives.",
+    "activities": [
+      "Medical Outreach Programmes",
+      "Health Screenings",
+      "Medication Support",
+      "Health Awareness Campaigns",
+      "Maternal and Child Health Initiatives",
+      "Wellness Education"
+    ],
+    "beneficiaries": [
+      "Children",
+      "Women",
+      "Elderly Persons",
+      "Low-Income Families"
+    ],
+    "ctaTitle": "Support Better Health",
+    "ctaText": "Help provide life-changing medical support and healthcare access to those who need it most."
+  },
+
+  {
+    "slug": "family-support",
+    "title": "Family Support",
+    "icon": "Users",
+    "heroImage": "/programs/family-support.jpg",
+    "excerpt": "Strengthening families through practical assistance, care programmes and social support initiatives.",
+    "why": "Strong families build strong communities. However, many households face challenges such as unemployment, financial hardship, emotional stress and limited access to basic necessities. These difficulties can affect family stability and overall wellbeing.",
+    "approach": "St. Hannah Foundation provides targeted support to families through welfare programmes, food assistance, counselling, educational support and community engagement initiatives designed to strengthen households and improve quality of life.",
+    "impact": "Our goal is to help families overcome challenges, build resilience and create stable environments where every family member can thrive.",
+    "activities": [
+      "Family Welfare Assistance",
+      "Food Support Programmes",
+      "Family Counselling",
+      "Educational Support",
+      "Community Engagement Activities",
+      "Emergency Relief Support"
+    ],
+    "beneficiaries": [
+      "Families",
+      "Children",
+      "Single Parents",
+      "Vulnerable Households"
+    ],
+    "ctaTitle": "Support Stronger Families",
+    "ctaText": "Help families access the resources and support they need to build brighter futures."
+  },
+
+  {
+    "slug": "financial-aid",
+    "title": "Financial Aid",
+    "icon": "HandCoins",
+    "heroImage": "/programs/financial-aid.jpg",
+    "excerpt": "Providing timely financial assistance to individuals and families facing hardship and emergencies.",
+    "why": "Unexpected financial challenges can quickly become overwhelming, affecting access to food, healthcare, education and basic necessities. Many vulnerable individuals simply need temporary support to regain stability and move forward.",
+    "approach": "Through carefully assessed financial assistance programmes, emergency intervention support and economic empowerment initiatives, St. Hannah Foundation provides relief while helping beneficiaries work towards long-term sustainability and independence.",
+    "impact": "Our goal is to reduce financial hardship, restore stability and create opportunities for individuals and families to rebuild their lives with confidence.",
+    "activities": [
+      "Emergency Financial Support",
+      "Small Business Grants",
+      "Livelihood Assistance",
+      "Income Support Programmes",
+      "Crisis Intervention",
+      "Economic Empowerment Initiatives"
+    ],
+    "beneficiaries": [
+      "Individuals in Crisis",
+      "Low-Income Families",
+      "Widows",
+      "Vulnerable Households"
+    ],
+    "ctaTitle": "Provide Financial Relief",
+    "ctaText": "Your support can help families overcome hardship and regain financial stability."
+  },
+
+  {
+    "slug": "support-our-men",
+    "title": "Support Our Men",
+    "icon": "Shield",
+    "heroImage": "/programs/support-men.jpg",
+    "excerpt": "Empowering men through mentorship, personal development, economic opportunities and community support.",
+    "why": "Men often carry significant responsibilities within their families and communities while facing challenges related to employment, mental wellbeing, leadership and personal development. Many lack access to support systems that encourage growth and resilience.",
+    "approach": "Through mentorship programmes, leadership development, entrepreneurship support, vocational opportunities and community engagement initiatives, St. Hannah Foundation equips men with the tools needed to become stronger providers, leaders and role models.",
+    "impact": "Our goal is to help men reach their full potential, strengthen families and contribute positively to society through responsible leadership and economic empowerment.",
+    "activities": [
+      "Leadership Development",
+      "Mentorship Programmes",
+      "Entrepreneurship Support",
+      "Vocational Training",
+      "Personal Development Workshops",
+      "Community Engagement Forums"
+    ],
+    "beneficiaries": [
+      "Young Men",
+      "Fathers",
+      "Community Leaders",
+      "Entrepreneurs"
+    ],
+    "ctaTitle": "Empower Men To Lead",
+    "ctaText": "Support programmes that help men build stronger families, businesses and communities."
+  },
+
+  {
+    "slug": "equipment-support",
+    "title": "Equipment Support",
+    "icon": "Wrench",
+    "heroImage": "/programs/equipment-support.jpg",
+    "excerpt": "Providing tools, equipment and resources that help skilled workers grow sustainable livelihoods.",
+    "why": "Many talented artisans and skilled labourers possess the knowledge and expertise needed to earn a living but lack access to the equipment required to practise their trade effectively. This limits income opportunities and economic growth.",
+    "approach": "St. Hannah Foundation supports skilled workers by providing essential tools, equipment grants, business support and capacity-building opportunities that help them expand their services and increase their earning potential.",
+    "impact": "Our goal is to promote economic self-sufficiency by empowering artisans and skilled workers with the resources they need to build sustainable livelihoods.",
+    "activities": [
+      "Tool Distribution",
+      "Equipment Grants",
+      "Vocational Support",
+      "Business Development Training",
+      "Entrepreneurship Coaching",
+      "Trade Capacity Building"
+    ],
+    "beneficiaries": [
+      "Artisans",
+      "Technicians",
+      "Tradesmen",
+      "Skilled Labourers"
+    ],
+    "ctaTitle": "Equip A Skilled Worker",
+    "ctaText": "Help provide the tools and equipment that transform skills into sustainable income."
+  },
+
+  {
+    "slug": "community-outreach",
+    "title": "Community Outreach",
+    "icon": "Building2",
+    "heroImage": "/programs/community-outreach.jpg",
+    "excerpt": "Reaching communities with impactful programmes that address social, educational, health and welfare needs.",
+    "why": "Many communities face challenges that require collective action and targeted support. From healthcare and education to welfare and empowerment, community-based interventions play a critical role in improving lives and creating lasting development.",
+    "approach": "Through strategic outreach programmes, partnerships, awareness campaigns, volunteer initiatives and direct community engagement, St. Hannah Foundation delivers support where it is needed most while fostering unity and positive social change.",
+    "impact": "Our goal is to create healthier, stronger and more empowered communities through sustainable programmes that improve quality of life and inspire collective progress.",
+    "activities": [
+      "Community Development Projects",
+      "Awareness Campaigns",
+      "Relief Distribution",
+      "Volunteer Engagement",
+      "Educational Outreach",
+      "Health and Welfare Programmes"
+    ],
+    "beneficiaries": [
+      "Communities",
+      "Children",
+      "Families",
+      "Vulnerable Groups"
+    ],
+    "ctaTitle": "Transform Communities",
+    "ctaText": "Join us in bringing hope, support and sustainable impact to communities in need."
+  }
+]

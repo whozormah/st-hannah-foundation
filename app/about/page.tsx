@@ -18,13 +18,12 @@ export default function AboutPage() {
       />
 
       <AboutMission />
+      <AboutFounder />
       <AboutImpactAreas />
       <AboutImpact />
-      <AboutFounder />
       <AboutTestimonials />
       <AboutGovernance />
       <AboutVolunteers />
-      <AboutPresence />
       <AboutCTA />
     </>
   );

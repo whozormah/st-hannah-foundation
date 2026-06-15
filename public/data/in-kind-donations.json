@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Educational Materials",
+    "description": "Books, school supplies, learning materials and educational resources for students."
+  },
+  {
+    "title": "School Bags",
+    "description": "School bags and educational accessories for children and young learners."
+  },
+  {
+    "title": "Books & Stationery",
+    "description": "Exercise books, writing materials and classroom resources."
+  },
+  {
+    "title": "Food Items",
+    "description": "Food supplies and nutritional support for vulnerable families and communities."
+  },
+  {
+    "title": "Clothing",
+    "description": "New or gently used clothing for children, widows and vulnerable individuals."
+  },
+  {
+    "title": "Business Equipment",
+    "description": "Tools, equipment and resources that support entrepreneurship and livelihoods."
+  },
+  {
+    "title": "Medical Supplies",
+    "description": "Medical consumables, healthcare items and support materials."
+  },
+  {
+    "title": "Household Essentials",
+    "description": "Essential household items that improve quality of life for families."
+  }
+]

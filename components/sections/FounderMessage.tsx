@@ -1,90 +1,85 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
-export default function FounderMessage() {
+interface FounderData {
+  badge: string;
+  title: string;
+  name: string;
+  position: string;
+  organization: string;
+  image: string;
+  quote: string;
+  message: string[];
+}
+
+export default function AboutFounder() {
+  const [founder, setFounder] = useState<FounderData | null>(null);
+
+  useEffect(() => {
+    fetch("/data/homepage/founder.json")
+      .then((res) => res.json())
+      .then((data) => setFounder(data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  if (!founder) return null;
+
   return (
-    <section className="py-28 bg-[#FAF7F2]">
+    <section className="py-32 bg-white">
+      {" "}
       <div className="container-custom">
-        {/* Section Header */}
-
-        <div className="text-center mb-20">
+        {" "}
+        <div className="text-center max-w-4xl mx-auto mb-20">
+          {" "}
           <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
-            The Heart Behind The Mission
+            {founder.badge}{" "}
           </span>
-
           <h2 className="text-4xl md:text-5xl font-bold mt-4">
-            A Story Rooted In Compassion
+            {founder.title}
           </h2>
+          <p className="max-w-3xl mx-auto mt-6 text-gray-600 text-lg leading-8">
+            Discover the vision, inspiration and legacy that gave birth to St.
+            Hannah Foundation and continues to guide its mission today.
+          </p>
         </div>
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Founder Image */}
 
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
-          {/* Left Side */}
-
-          <div className="relative">
-            {/* Accent Background */}
-
-            <div className="absolute -left-6 -bottom-6 w-full h-full rounded-3xl bg-[#844204]/10"></div>
-
-            <div className="relative">
+          <div className="bg-[#FAF7F2] rounded-[32px] overflow-hidden shadow-lg">
+            <div className="relative h-[650px]">
               <Image
-                src="/founder.jpeg"
-                alt="Glory Akinola"
-                width={800}
-                height={1000}
-                className="w-full rounded-3xl object-cover shadow-xl"
+                src={founder.image}
+                alt={founder.name}
+                fill
+                className="object-cover"
               />
-            </div>
-
-            {/* Founder Details */}
-
-            <div className="mt-8">
-              <h3 className="text-3xl font-bold text-[#844204]">
-                Glory Akinola
-              </h3>
-
-              <p className="text-gray-600 mt-2">Founder & President</p>
-
-              <p className="text-sm uppercase tracking-widest text-gray-400 mt-3">
-                St. Hannah Foundation
-              </p>
             </div>
           </div>
 
-          {/* Right Side */}
+          {/* Founder Content */}
 
           <div>
-            <blockquote className="border-l-4 border-[#D9A441] pl-6 text-2xl md:text-4xl leading-relaxed italic text-[#844204] mb-10">
-              “I pour my life into helping others, because every joyous smile
-              reminds me that hope is never lost — it only needed a hand, and
-              I’m glad to be that hand.”
+            <span className="inline-flex px-4 py-2 rounded-full bg-[#844204]/10 text-[#844204] font-semibold text-sm">
+              {founder.position}
+            </span>
+
+            <h3 className="text-4xl font-bold mt-6">{founder.name}</h3>
+
+            <p className="text-[#844204] font-medium mt-2">
+              {founder.organization}
+            </p>
+
+            <blockquote className="mt-8 text-2xl leading-relaxed italic text-[#844204] border-l-4 border-[#D9A441] pl-6">
+              "{founder.quote}"
             </blockquote>
 
-            <div className="space-y-6 text-gray-700 leading-8">
-              <p>
-                St. Hannah Foundation was birthed from a heart of compassion and
-                a deep desire to bring hope where it is most needed.
-              </p>
-
-              <p>
-                It is more than a nonprofit. It is a movement grounded in
-                compassion, committed to restoring dignity and opportunity where
-                it is needed most.
-              </p>
-
-              <p>
-                Through sustainable initiatives, educational access, and
-                collaborative outreach, we aim to support families and
-                strengthen communities, with the hope of transforming lives one
-                restored story at a time.
-              </p>
-
-              <p>
-                Our work is fueled by the belief that every child deserves a
-                chance, every family deserves support, and every community
-                deserves the opportunity to thrive.
-              </p>
+            <div className="space-y-6 mt-10 text-gray-600 leading-8">
+              {founder.message.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
-
-            {/* Signature */}
           </div>
         </div>
       </div>

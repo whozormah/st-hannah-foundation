@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface StoryGalleryProps {
-  images: string[];
-  galleryLink: string;
+  images?: string[];
+  galleryLink?: string;
 }
 
 export default function StoryGallery({
@@ -15,16 +15,18 @@ export default function StoryGallery({
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-2xl font-bold">Event Gallery</h3>
 
-        <Link
-          href={galleryLink}
-          className="text-[#844204] font-semibold hover:underline"
-        >
-          View All Photos →
-        </Link>
+        {galleryLink && (
+          <Link
+            href={galleryLink}
+            className="text-[#844204] font-semibold hover:underline"
+          >
+            View Full Gallery
+          </Link>
+        )}
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {images.slice(0, 8).map((image, index) => (
+        {(images || []).slice(0, 8).map((image, index) => (
           <div
             key={index}
             className="relative h-[220px] rounded-2xl overflow-hidden group"

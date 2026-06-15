@@ -1,0 +1,28 @@
+{
+  "homepage": {
+    "childrenReached": "100+",
+    "widowsSupported": "500+",
+    "educationalBeneficiaries": "45+",
+    "communitiesImpacted": "50+"
+  },
+
+  "programs": {
+    "yearsOfCompassion": "10+",
+    "livesReached": "900+",
+    "outreachActivities": "50+",
+    "countriesRepresented": "2"
+  },
+
+  "impact": {
+    "widowsSupported": "500+",
+    "childrenReached": "100+",
+    "communityOutreachEvents": "50+",
+    "livesImpacted": "900+"
+  },
+  "gallery": {
+    "livesImpacted": "1,000+",
+    "outreachEvents": "50+",
+    "communitiesReached": "100+",
+    "yearsOfService": "10+"
+  }
+}

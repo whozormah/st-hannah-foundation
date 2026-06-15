@@ -1,19 +1,43 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+interface ProgramsStatsData {
+  yearsOfCompassion: string;
+  livesReached: string;
+  outreachActivities: string;
+  countriesRepresented: string;
+}
+
+interface StatsData {
+  programs: ProgramsStatsData;
+}
+
 export default function ProgramsStats() {
+  const [statsData, setStatsData] = useState<ProgramsStatsData | null>(null);
+
+  useEffect(() => {
+    fetch("/data/stats.json")
+      .then((res) => res.json())
+      .then((data: StatsData) => setStatsData(data.programs))
+      .catch((err) => console.error(err));
+  }, []);
+
   const stats = [
     {
-      number: "10+",
+      number: statsData?.yearsOfCompassion || "0",
       label: "Years of Compassion",
     },
     {
-      number: "1,000+",
+      number: statsData?.livesReached || "0",
       label: "Lives Reached",
     },
     {
-      number: "50+",
+      number: statsData?.outreachActivities || "0",
       label: "Outreach Activities",
     },
     {
-      number: "2",
+      number: statsData?.countriesRepresented || "0",
       label: "Countries Represented",
     },
   ];

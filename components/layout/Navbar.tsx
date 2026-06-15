@@ -2,30 +2,53 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { Menu, X, ChevronDown, Heart } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
 
+  const pathname = usePathname();
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setMoreOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const links = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Programs", href: "/programs" },
+    { name: "Apply For Support", href: "/apply-for-support" },
     { name: "Stories", href: "/impact-stories" },
     { name: "Gallery", href: "/gallery" },
   ];
-
   const moreLinks = [
     { name: "Team", href: "/team" },
-    { name: "Apply For Support", href: "/apply-for-support" },
+    { name: "Volunteer", href: "/volunteer" },
+    { name: "Become A Partner", href: "/partnerships" },
     { name: "Contact", href: "/contact" },
   ];
 
   return (
     <>
-      <header className="bg-white/95 backdrop-blur-md border-b shadow-sm sticky top-0 z-50">
+      <header className="bg-white/95 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-50 shadow-sm">
         <div className="container-custom">
           <div className="h-20 flex items-center justify-between">
             {/* Logo */}
@@ -58,7 +81,11 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="font-medium hover:text-[#844204] transition"
+                  className={`font-medium transition ${
+                    pathname === link.href
+                      ? "text-[#844204] font-semibold"
+                      : "hover:text-[#844204]"
+                  }`}
                 >
                   {link.name}
                 </Link>
@@ -66,7 +93,7 @@ export default function Navbar() {
 
               {/* More Dropdown */}
 
-              <div className="relative">
+              <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setMoreOpen(!moreOpen)}
                   className="flex items-center gap-1 font-medium hover:text-[#844204] transition"
@@ -81,8 +108,8 @@ export default function Navbar() {
                       <Link
                         key={link.name}
                         href={link.href}
-                        className="block px-6 py-4 hover:bg-[#FAF7F2]"
                         onClick={() => setMoreOpen(false)}
+                        className="block px-6 py-4 hover:bg-[#FAF7F2] transition"
                       >
                         {link.name}
                       </Link>
@@ -104,8 +131,9 @@ export default function Navbar() {
 
               <Link
                 href="/donate"
-                className="bg-[#844204] text-white px-6 py-3 rounded-xl hover:bg-[#A85A12] transition font-semibold"
+                className="bg-[#844204] text-white px-6 py-3 rounded-xl hover:bg-[#A85A12] shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 font-semibold flex items-center gap-2"
               >
+                <Heart size={18} />
                 Donate
               </Link>
             </div>
@@ -145,6 +173,16 @@ export default function Navbar() {
           </div>
 
           <div className="flex flex-col px-8 py-8">
+            <div className="bg-[#FAF7F2] p-6 rounded-2xl mb-8">
+              <h3 className="font-bold text-lg">
+                Together We Can Change Lives
+              </h3>
+
+              <p className="text-gray-600 mt-2 text-sm leading-6">
+                Join us in empowering widows, supporting families, providing
+                educational opportunities and transforming communities.
+              </p>
+            </div>
             <Link
               href="/"
               onClick={() => setIsOpen(false)}
@@ -208,12 +246,26 @@ export default function Navbar() {
             >
               Contact
             </Link>
+            <Link
+              href="/partnerships"
+              onClick={() => setIsOpen(false)}
+              className="py-5 border-b"
+            >
+              Become A Partner
+            </Link>
 
             <div className="flex flex-col gap-4 mt-8">
               <Link
+                href="/apply-for-support"
+                onClick={() => setIsOpen(false)}
+                className="bg-[#FAF7F2] text-center py-4 rounded-xl font-semibold"
+              >
+                Apply For Support
+              </Link>
+              <Link
                 href="/volunteer"
                 onClick={() => setIsOpen(false)}
-                className="border border-[#844204] text-center py-4 rounded-xl font-semibold"
+                className="py-5 border-b"
               >
                 Volunteer
               </Link>

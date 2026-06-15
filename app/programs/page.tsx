@@ -15,11 +15,8 @@ export default function ProgramsPage() {
       />
 
       <ProgramsAreas />
-
-      <ProgramsAreas />
       <ProgramsFeatured />
       <ProgramsProcess />
-      <ProgramsStats />
       <ProgramsGetInvolved />
       <ProgramsCTA />
     </>

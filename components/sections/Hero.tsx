@@ -1,40 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import slides from "@/public/data/homepage/hero.json";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
-
-const slides = [
-  {
-    image: "/hero/hero-1.jpg",
-    title: "Empowering Communities Through Love and Service",
-    description:
-      "Supporting widows, families and vulnerable communities through sustainable programs and life-changing interventions.",
-    button2: "Donate Now",
-    button2Link: "/donate",
-  },
-
-  {
-    image: "/hero/hero-2.jpg",
-    title: "Restoring Hope Through Education And Empowerment",
-    description:
-      "Providing educational support, empowerment opportunities and practical assistance to those who need it most.",
-    button2: "Become A Volunteer",
-    button2Link: "/volunteer",
-  },
-
-  {
-    image: "/hero/hero-3.jpg",
-    title: "Building Stronger Families And Communities",
-    description:
-      "Together we are creating opportunities, strengthening families and transforming lives across communities.",
-    button2: "View Programs",
-    button2Link: "/programs",
-  },
-];
 
 export default function Hero() {
   return (
@@ -51,45 +24,60 @@ export default function Hero() {
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div
-              className="relative min-h-[90vh] flex items-center"
+              className="relative min-h-screen flex items-center"
               style={{
                 backgroundImage: `url(${slide.image})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/55 to-black/30" />
-
+              {/* Overlay */}{" "}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
+              ```
+              {/* Content */}
               <div className="relative z-10 container-custom">
-                <div className="max-w-4xl text-white">
-                  <span className="inline-block bg-[#D9A441] text-black px-4 py-2 rounded-full font-medium">
-                    St. Hannah Foundation
+                <div className="max-w-3xl text-white">
+                  <span className="inline-flex items-center bg-[#D9A441] text-black px-5 py-2 rounded-full font-semibold text-sm shadow-lg">
+                    Serving Widows, Children & Families
                   </span>
 
-                  <h1 className="mt-6 text-5xl md:text-7xl font-bold leading-tight">
+                  <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
                     {slide.title}
                   </h1>
 
-                  <p className="mt-6 text-lg md:text-xl max-w-2xl text-gray-200">
+                  <p className="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl leading-relaxed">
                     {slide.description}
                   </p>
 
                   <div className="mt-10 flex flex-col sm:flex-row gap-4">
                     <Link
                       href="/apply-for-support"
-                      className="bg-[#844204] hover:bg-[#A85A12] px-8 py-4 rounded-lg text-center font-semibold transition"
+                      className="bg-[#844204] hover:bg-[#A85A12] hover:scale-105 transition-all duration-300 px-8 py-4 rounded-lg text-center font-semibold shadow-lg"
                     >
                       Apply For Aid
                     </Link>
 
                     <Link
-                      href={slide.button2Link}
-                      className="bg-[#D9A441] text-black hover:opacity-90 px-8 py-4 rounded-lg text-center font-semibold transition"
+                      href={slide.buttonLink}
+                      className="bg-[#D9A441] text-black hover:opacity-90 hover:scale-105 transition-all duration-300 px-8 py-4 rounded-lg text-center font-semibold shadow-lg"
                     >
-                      {slide.button2}
+                      {slide.buttonText}
                     </Link>
                   </div>
+
+                  <div className="mt-10 border-l-4 border-[#D9A441] pl-5">
+                    <p className="text-sm md:text-base text-gray-300 italic">
+                      Every act of kindness creates hope, restores dignity and
+                      transforms lives.
+                    </p>
+                  </div>
                 </div>
+              </div>
+              {/* Scroll Indicator */}
+              <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 animate-bounce hidden md:block">
+                <span className="text-sm tracking-wider uppercase">
+                  Scroll To Explore
+                </span>
               </div>
             </div>
           </SwiperSlide>

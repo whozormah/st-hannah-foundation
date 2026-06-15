@@ -1,0 +1,25 @@
+{
+  "slug": "widow-empowerment-program",
+  "category": "Widow Support Program",
+  "title": "Bariga Widows Program",
+  "summary": "Supporting widows through relief assistance, empowerment initiatives and opportunities for sustainable living.",
+  "beneficiaries": "500+",
+  "featured": true,
+  "donationProgram": "Widow Support Program",
+  "date": "December 2025",
+  "location": "35 Ilaje Road, Bariga, Lagos",
+  "image": "/impact/widows/1.jpg",
+  "images": [
+    "/impact/widows/1.jpg",
+    "/impact/widows/2.jpg",
+    "/impact/widows/3.jpg"
+  ],
+  "videoUrl": "https://youtube.com/",
+  "galleryLink": "/gallery?category=widows",
+  "story": [
+    "Students from low-income households struggled to pay school fees and continue their education.",
+    "The Foundation provided educational assistance and school fee support to vulnerable students.",
+
+    "Beneficiaries were able to remain in school and continue pursuing their educational goals."
+  ]
+}

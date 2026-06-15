@@ -1,41 +1,55 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+interface Opportunity {
+  title: string;
+  description: string;
+}
+
 export default function VolunteerOpportunities() {
-  const opportunities = [
-    "Community Outreach",
-    "Programs Associate",
-    "Education Support",
-    "Widow Empowerment Support",
-    "Family Support",
-    "Content Creation",
-    "Social Media Management",
-    "Photography & Videography",
-    "Media & Communications",
-    "Fundraising",
-    "Partnerships & Sponsorship",
-    "Administrative Support",
-    "Technology Support",
-    "Event Coordination",
-    "Volunteer Coordination",
-    "Monitoring & Evaluation",
-  ];
+  const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
+
+  useEffect(() => {
+    fetch("/data/volunteer-opportunities.json")
+      .then((res) => res.json())
+      .then((data) => setOpportunities(data))
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
-    <section className="py-24 bg-[#FAF7F2]">
+    <section className="py-28 bg-[#FAF7F2]">
+      {" "}
       <div className="container-custom">
-        <div className="text-center mb-16">
+        {" "}
+        <div className="text-center max-w-4xl mx-auto mb-20">
+          {" "}
           <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
-            Opportunities
+            Volunteer Opportunities{" "}
           </span>
-
-          <h2 className="text-5xl font-bold mt-4">Volunteer Opportunities</h2>
+          ```
+          <h2 className="text-5xl font-bold mt-4">
+            Find A Place To Make An Impact
+          </h2>
+          <p className="mt-6 text-lg text-gray-600 leading-8">
+            Whether you are passionate about community development, education,
+            communications, fundraising or professional service, there are many
+            ways to contribute your skills and make a meaningful difference.
+          </p>
         </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {opportunities.map((role) => (
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+          {opportunities.map((opportunity) => (
             <div
-              key={role}
-              className="bg-white p-6 rounded-[24px] text-center shadow-sm"
+              key={opportunity.title}
+              className="bg-white rounded-[32px] p-8 shadow-sm hover:shadow-xl transition"
             >
-              <h3 className="font-semibold">{role}</h3>
+              <div className="w-12 h-1 bg-[#D9A441] rounded-full mb-6" />
+
+              <h3 className="text-xl font-bold">{opportunity.title}</h3>
+
+              <p className="mt-4 text-gray-600 leading-7">
+                {opportunity.description}
+              </p>
             </div>
           ))}
         </div>

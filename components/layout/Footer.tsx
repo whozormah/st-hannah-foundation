@@ -1,76 +1,122 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Mail, MapPin, Heart, ArrowRight } from "lucide-react";
+import settings from "@/public/data/site-settings.json";
+
+import DonationModal from "@/components/shared/DonationModal";
+
+interface SiteSettings {
+  foundationName: string;
+  email: string;
+  phone: string;
+
+  nigeriaOffice: {
+    address: string;
+  };
+
+  usaOffice: {
+    address: string;
+  };
+
+  socials: {
+    facebook: string;
+    instagram: string;
+    youtube: string;
+    linkedin: string;
+    tiktok: string;
+  };
+}
 
 export default function Footer() {
+  const [showDonationModal, setShowDonationModal] = useState(false);
+
   return (
-    <footer className="bg-[#140B02] text-white overflow-hidden">
-      {/* CTA Banner */}
+    <>
+      <footer className="bg-[#140B02] text-white">
+        {/* Newsletter Section */}
 
-      <div className="border-b border-white/10">
-        <div className="container-custom py-20">
-          <div className="text-center max-w-4xl mx-auto">
-            <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
-              Join The Mission
-            </span>
+        <div className="border-b border-white/10">
+          <div className="container-custom py-20">
+            <div className="max-w-4xl mx-auto text-center">
+              <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+                Stay Connected
+              </span>
 
-            <h2 className="text-4xl md:text-6xl font-bold mt-6 leading-tight">
-              Together We Can Restore Hope And Transform Lives
-            </h2>
+              <h2 className="text-4xl md:text-5xl font-bold mt-4">
+                Stay Connected To The Mission
+              </h2>
 
-            <p className="mt-6 text-gray-300 text-lg">
-              Every act of kindness creates opportunities, restores dignity and
-              strengthens communities.
-            </p>
+              <p className="mt-6 text-gray-300 max-w-2xl mx-auto leading-8">
+                Receive updates on outreach activities, impact stories,
+                volunteer opportunities and community initiatives.
+              </p>
 
-            <Link
-              href="/donate"
-              className="inline-flex items-center gap-2 mt-10 bg-[#844204] hover:bg-[#A85A12] transition px-8 py-4 rounded-xl font-semibold"
-            >
-              Donate Today
-              <ArrowRight size={18} />
-            </Link>
+              <form
+                action="YOUR_FORMSPREE_ENDPOINT"
+                method="POST"
+                className="mt-10 flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto"
+              >
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="Enter your email address"
+                  className="flex-1 px-6 py-4 rounded-xl bg-white text-black outline-none"
+                />
+
+                <button
+                  type="submit"
+                  className="bg-[#844204] hover:bg-[#A85A12] px-8 py-4 rounded-xl font-semibold transition"
+                >
+                  Subscribe
+                </button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+        {/* Main Footer */}
 
-      {/* Main Footer */}
+        <div className="container-custom py-24">
+          <div className="grid lg:grid-cols-12 gap-12">
+            {/* Foundation Info */}
 
-      <div className="container-custom py-24">
-        <div className="grid lg:grid-cols-12 gap-16">
-          {/* Brand Section */}
+            <div className="lg:col-span-4">
+              <div className="flex items-center gap-4">
+                <div className="relative w-16 h-16">
+                  <Image
+                    src="/logo.png"
+                    alt={settings?.foundationName || ""}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
 
-          <div className="lg:col-span-5">
-            <div className="flex items-center gap-4">
-              <div className="relative w-16 h-16">
-                <Image
-                  src="/logo.png"
-                  alt="St. Hannah Foundation"
-                  fill
-                  className="object-contain"
-                />
+                <div>
+                  <h3 className="text-2xl font-bold">
+                    {settings?.foundationName}
+                  </h3>
+
+                  <p className="text-[#D9A441] text-sm">
+                    Empowering Communities Through Love & Service
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <h3 className="text-3xl font-bold">St. Hannah Foundation</h3>
+              <p className="mt-8 text-gray-300 leading-8">
+                We exist to uplift families and communities through education,
+                empowerment, compassionate support and sustainable development
+                initiatives that create lasting impact.
+              </p>
 
-                <p className="text-[#D9A441]">
-                  Empowering Communities Through Love & Service
+              <div className="mt-8 border-l-4 border-[#D9A441] pl-5">
+                <p className="italic text-gray-300 leading-8">
+                  "To build a world where every child and family experiences the
+                  fullness of their God-given potential."
                 </p>
               </div>
-            </div>
 
-            <p className="mt-8 text-gray-300 leading-8">
-              We exist to uplift families and communities through dignified
-              access to resources, education and community empowerment, igniting
-              hope and restoring the power of possibility.
-            </p>
-
-            <div className="mt-8 border-l-4 border-[#D9A441] pl-5">
-              <p className="italic text-gray-300 leading-8">
-                "To build a world where every child and family experiences the
-                fullness of their God-given potential."
-              </p>
               <div className="flex flex-wrap gap-4 mt-8">
                 <Link
                   href="/volunteer"
@@ -79,208 +125,195 @@ export default function Footer() {
                   Volunteer
                 </Link>
 
-                <Link
-                  href="/donate"
-                  className="bg-[#844204] px-6 py-3 rounded-xl font-semibold"
+                <button
+                  onClick={() => setShowDonationModal(true)}
+                  className="bg-[#844204] hover:bg-[#A85A12] px-6 py-3 rounded-xl font-semibold transition"
                 >
                   Donate
-                </Link>
+                </button>
               </div>
             </div>
-          </div>
 
-          {/* Explore */}
+            {/* Explore */}
 
-          <div className="lg:col-span-2">
-            <h4 className="font-bold text-xl mb-6">Explore</h4>
+            <div className="lg:col-span-2">
+              <h4 className="font-bold text-xl mb-6">Explore</h4>
 
-            <ul className="space-y-4 text-gray-300">
-              <li>
-                <Link href="/">Home</Link>
-              </li>
+              <ul className="space-y-4 text-gray-300">
+                <li>
+                  <Link href="/">Home</Link>
+                </li>
+                <li>
+                  <Link href="/about">About Us</Link>
+                </li>
+                <li>
+                  <Link href="/programs">Programs</Link>
+                </li>
+                <li>
+                  <Link href="/impact-stories">Impact Stories</Link>
+                </li>
+                <li>
+                  <Link href="/gallery">Gallery</Link>
+                </li>
+                <li>
+                  <Link href="/team">Leadership</Link>
+                </li>
+              </ul>
+            </div>
 
-              <li>
-                <Link href="/about">About Us</Link>
-              </li>
+            {/* Get Involved */}
 
-              <li>
-                <Link href="/programs">Programs</Link>
-              </li>
+            <div className="lg:col-span-2">
+              <h4 className="font-bold text-xl mb-6">Get Involved</h4>
 
-              <li>
-                <Link href="/stories">Stories of Impact</Link>
-              </li>
+              <ul className="space-y-4 text-gray-300">
+                <li>
+                  <button
+                    onClick={() => setShowDonationModal(true)}
+                    className="hover:text-[#D9A441] transition"
+                  >
+                    Donate
+                  </button>
+                </li>
 
-              <li>
-                <Link href="/gallery">Gallery</Link>
-              </li>
-              <li>
-                <Link href="/team">Team</Link>
-              </li>
-            </ul>
-          </div>
+                <li>
+                  <Link href="/volunteer">Volunteer</Link>
+                </li>
 
-          {/* Get Involved */}
+                <li>
+                  <Link href="/contact">Partner With Us</Link>
+                </li>
 
-          <div className="lg:col-span-2">
-            <h4 className="font-bold text-xl mb-6">Get Involved</h4>
+                <li>
+                  <Link href="/apply-for-support">Apply For Support</Link>
+                </li>
+              </ul>
+            </div>
+            {/* Contact */}
 
-            <ul className="space-y-4 text-gray-300">
-              <li>
-                <Link href="/donate">Donate</Link>
-              </li>
+            <div className="lg:col-span-4">
+              <h4 className="font-bold text-xl mb-6">Contact</h4>
 
-              <li>
-                <Link href="/volunteer">Volunteer</Link>
-              </li>
-
-              <li>
-                <Link href="/apply-for-support">Apply For Support</Link>
-              </li>
-
-              <li>
-                <Link href="/impact-stories">Impact Stories</Link>
-              </li>
-
-              <li>
-                <Link href="/contact">Contact Us</Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact */}
-
-          <div className="lg:col-span-3">
-            <h4 className="font-bold text-xl mb-6">Contact</h4>
-
-            <div className="space-y-6">
-              <div className="flex gap-3">
-                <Mail size={18} className="text-[#D9A441] mt-1" />
-
-                <span className="text-gray-300 break-all">
-                  support@thesthannahfoundation.com
-                </span>
-              </div>
-
-              <div className="flex gap-3 items-start">
-                <MapPin size={18} className="text-[#D9A441] mt-1" />
+              <div className="space-y-6">
+                {/* Email */}
 
                 <div>
-                  <p className="font-semibold">Nigeria Office</p>
-
-                  <p className="text-gray-300">
-                    35, Ilaje Road
-                    <br />
-                    Bariga, Lagos
+                  <p className="text-[#D9A441] text-sm uppercase tracking-wider">
+                    Email
                   </p>
-                </div>
-              </div>
 
-              <div className="flex gap-3 items-start">
-                <MapPin size={18} className="text-[#D9A441] mt-1" />
+                  <a
+                    href={`mailto:${settings?.email}`}
+                    className="text-gray-300 hover:text-white transition"
+                  >
+                    {settings?.email}
+                  </a>
+                </div>
+
+                {/* Phone */}
 
                 <div>
-                  <p className="font-semibold">United States Office</p>
-
-                  <p className="text-gray-300">
-                    4310 S King Dr.
-                    <br />
-                    Unit 3D
-                    <br />
-                    Chicago, IL 60653
+                  <p className="text-[#D9A441] text-sm uppercase tracking-wider">
+                    Phone
                   </p>
+
+                  <a
+                    href={`tel:${settings?.phone}`}
+                    className="text-gray-300 hover:text-white transition"
+                  >
+                    {settings?.phone}
+                  </a>
+                </div>
+
+                {/* Nigeria Office */}
+
+                <div>
+                  <p className="text-[#D9A441] text-sm uppercase tracking-wider">
+                    Nigeria Office
+                  </p>
+
+                  <p className="text-gray-300 leading-7">
+                    {settings?.nigeriaOffice.address}
+                  </p>
+                </div>
+
+                {/* USA Office */}
+
+                <div>
+                  <p className="text-[#D9A441] text-sm uppercase tracking-wider">
+                    USA Office
+                  </p>
+
+                  <p className="text-gray-300 leading-7">
+                    {settings?.usaOffice.address}
+                  </p>
+                </div>
+
+                {/* Socials */}
+
+                <div className="pt-6 border-t border-white/10">
+                  <p className="font-semibold mb-4">Follow Us</p>
+
+                  <div className="flex flex-wrap gap-4">
+                    <a
+                      href={settings?.socials.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#D9A441] transition"
+                    >
+                      Facebook
+                    </a>
+
+                    <a
+                      href={settings?.socials.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#D9A441] transition"
+                    >
+                      Instagram
+                    </a>
+
+                    <a
+                      href={settings?.socials.tiktok}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-[#D9A441] transition"
+                    >
+                      TikTok
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="mt-10">
-          <h4 className="font-bold text-xl mb-6">Follow Us</h4>
+        {/* Footer Bottom */}
 
-          <div className="flex gap-4">
-            <a
-              href="#"
-              target="_blank"
-              className="text-gray-300 hover:text-[#D9A441] transition"
-            >
-              Facebook
-            </a>
+        <div className="border-t border-white/10">
+          <div className="container-custom py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-400 text-sm text-center md:text-left">
+              © 2026 {settings?.foundationName}. All Rights Reserved.
+            </p>
 
-            <a
-              href="#"
-              target="_blank"
-              className="text-gray-300 hover:text-[#D9A441] transition"
-            >
-              Instagram
-            </a>
-
-            <a
-              href="#"
-              target="_blank"
-              className="text-gray-300 hover:text-[#D9A441] transition"
-            >
-              LinkedIn
-            </a>
-
-            <a
-              href="#"
-              target="_blank"
-              className="text-gray-300 hover:text-[#D9A441] transition"
-            >
-              YouTube
-            </a>
+            <p className="text-gray-400 text-sm text-center md:text-right">
+              Designed & Developed by{" "}
+              <a
+                href="https://www.instagram.com/whozormah?igsh=bmJhbW12bjhvMDRp"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#D9A441] hover:text-white transition font-medium"
+              >
+                @whozormah
+              </a>
+            </p>
           </div>
         </div>
+      </footer>
 
-        {/* Donation Card */}
-
-        <div className="mt-20">
-          <div className="bg-gradient-to-r from-[#844204] to-[#A85A12] rounded-[32px] p-10">
-            <div className="grid md:grid-cols-4 gap-8 items-center">
-              <div>
-                <h3 className="text-3xl font-bold">Support Our Mission</h3>
-
-                <p className="text-white/80 mt-3">
-                  Every contribution creates impact.
-                </p>
-              </div>
-
-              <div>
-                <p className="text-white/70 text-sm">Bank Name</p>
-
-                <p className="font-semibold text-xl">FirstBank</p>
-              </div>
-
-              <div>
-                <p className="text-white/70 text-sm">Account Number</p>
-
-                <p className="font-semibold text-xl">2047855878</p>
-              </div>
-
-              <div>
-                <p className="text-white/70 text-sm">Account Name</p>
-
-                <p className="font-semibold">St. Hannah Charity Foundation</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Bar */}
-
-      <div className="border-t border-white/10">
-        <div className="container-custom py-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} St. Hannah Foundation. All Rights
-            Reserved.
-          </p>
-
-          <p className="text-gray-400 text-sm flex items-center gap-2">
-            Made with <Heart size={14} /> for lasting impact.
-          </p>
-        </div>
-      </div>
-    </footer>
+      <DonationModal
+        isOpen={showDonationModal}
+        onClose={() => setShowDonationModal(false)}
+      />
+    </>
   );
 }

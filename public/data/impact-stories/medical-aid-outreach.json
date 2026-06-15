@@ -1,0 +1,30 @@
+{
+  "slug": "medical-aid-outreach",
+  "category": "Medical Aid",
+  "title": "Bringing Hope Through Medical Assistance",
+  "beneficiaries": "80+",
+  "featured": true,
+  "donationProgram": "Medical Aid",
+  "summary": "Providing access to medical support and healthcare interventions for vulnerable individuals.",
+  "date": "July 2025",
+  "location": "Lagos, Nigeria",
+  "image": "/impact/medical-aid/1.jpg",
+  "images": [
+    "/impact/medical-aid/1.jpg",
+    "/impact/medical-aid/2.jpg",
+    "/impact/medical-aid/3.jpg"
+  ],
+  "challenge": "Access to healthcare remains a challenge for many vulnerable individuals.",
+  "response": "The Foundation provided medical support and connected beneficiaries with healthcare resources.",
+  "impact": "Dozens of individuals received healthcare assistance and support.",
+  "story": [
+    "Healthcare should never be out of reach because of financial challenges.",
+    "The Foundation's medical outreach programme helped vulnerable individuals access needed support.",
+    "Beneficiaries received guidance, treatment support and healthcare resources.",
+    "The initiative brought hope and relief to many families."
+  ],
+  "quote": {
+    "text": "I received help when I needed it most and I am deeply grateful.",
+    "author": "Medical Aid Beneficiary"
+  }
+}
