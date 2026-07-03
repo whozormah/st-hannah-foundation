@@ -79,15 +79,15 @@ export async function sendDonationEmails({
   );
 
   await resend.emails.send({
-    from: FROM_EMAIL,
+    from: FROM_EMAIL!,
     to: email,
     subject: "Your Official Donation Receipt | St. Hannah Foundation",
     html: donorEmail,
   });
 
   await resend.emails.send({
-    from: FROM_EMAIL,
-    to: DONATION_EMAIL,
+    from: FROM_EMAIL!,
+    to: DONATION_EMAIL!,
     subject: `New Donation Received • ${formattedAmount}`,
     html: foundationEmail,
   });
@@ -117,7 +117,7 @@ export async function sendInternationalInterestEmails({
   );
 
   await resend.emails.send({
-    from: FROM_EMAIL,
+    from: FROM_EMAIL!,
     to: email,
     subject:
       "You're on the List • International Giving | St. Hannah Foundation",
@@ -125,8 +125,8 @@ export async function sendInternationalInterestEmails({
   });
 
   await resend.emails.send({
-    from: FROM_EMAIL,
-    to: DONATION_EMAIL,
+    from: FROM_EMAIL!,
+    to: DONATION_EMAIL!,
     subject: "🌍 New International Giving Interest",
     html: foundationEmail,
   });
