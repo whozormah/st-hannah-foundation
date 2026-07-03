@@ -3,63 +3,62 @@
 interface PaystackButtonProps {
   name: string;
   email: string;
+  phone: string;
   amount: number;
   currency: string;
+  purpose: string;
 }
 
 export default function PaystackButton({
   name,
   email,
+  phone,
   amount,
   currency,
+  purpose,
 }: PaystackButtonProps) {
   const isValid =
     name.trim().length >= 3 &&
     /\S+@\S+\.\S+/.test(email) &&
     currency &&
+    purpose &&
     amount > 0;
 
-  const handlePayment = () => {
-    if (!name.trim()) {
-      alert("Please enter your full name.");
+  const handlePayment = async () => {
+    if (!isValid) {
+      alert("Please complete all required fields.");
       return;
     }
 
-    if (name.trim().length < 3) {
-      alert("Full name must be at least 3 characters.");
-      return;
+    try {
+      const response = await fetch("/api/paystack/initialize", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          amount,
+          currency,
+          purpose,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        alert(data.message || "Unable to initialize payment.");
+        return;
+      }
+
+      window.location.href = data.authorization_url;
+    } catch (error) {
+      console.error(error);
+
+      alert("Something went wrong. Please try again.");
     }
-
-    if (!email.trim()) {
-      alert("Please enter your email address.");
-      return;
-    }
-
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    if (!currency) {
-      alert("Please choose your currency.");
-      return;
-    }
-
-    if (!amount || amount <= 0) {
-      alert("Please enter a valid donation amount.");
-      return;
-    }
-
-    alert(
-      "Paystack integration will be activated once the public key is added.",
-    );
-
-    console.log({
-      name,
-      email,
-      amount,
-      currency,
-    });
   };
 
   return (
