@@ -50,8 +50,9 @@ export async function GET(
       date: formatDate(new Date(payment.paid_at)),
     });
 
-    const pdfStream = await pdf(document).toBuffer();
-    return new Response(pdfStream as BodyInit, {
+    const pdfBuffer = await pdf(document).toBuffer();
+
+    return new Response(pdfBuffer as unknown as BodyInit, {
       headers: {
         "Content-Type": "application/pdf",
         "Content-Disposition": `attachment; filename="Donation-Receipt-${payment.reference}.pdf"`,
