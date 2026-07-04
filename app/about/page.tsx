@@ -5,7 +5,7 @@ import AboutMission from "@/components/sections/about/AboutMission";
 import AboutFounder from "@/components/sections/about/AboutFounder";
 import AboutImpact from "@/components/sections/about/AboutImpact";
 import AboutImpactAreas from "@/components/sections/about/AboutImpactAreas";
-import AboutLeadership from "@/components/sections/about/AboutLeadership";
+
 import AboutTestimonials from "@/components/sections/about/AboutTestimonials";
 import AboutVolunteers from "@/components/sections/about/AboutVolunteers";
 import AboutPresence from "@/components/sections/about/AboutPresence";
