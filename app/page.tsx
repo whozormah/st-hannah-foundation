@@ -15,12 +15,12 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ImpactStats />
       <VisionMission />
       <FounderMessage />
-      <FeaturedCampaign />
       <Causes />
+      <FeaturedCampaign />
       <AboutTestimonials />
+      <ImpactStats />
       <ImpactStories />
       <GalleryPreview />
       <LeadershipPreview />

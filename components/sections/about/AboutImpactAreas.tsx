@@ -6,7 +6,7 @@ import {
   HandHeart,
   Briefcase,
 } from "lucide-react";
-
+import { ArrowRight } from "lucide-react";
 export default function AboutImpactAreas() {
   const areas = [
     {
@@ -78,7 +78,7 @@ export default function AboutImpactAreas() {
               key={step}
               className="bg-white rounded-[28px] p-8 text-center shadow-sm hover:shadow-lg transition-all duration-300"
             >
-              <div className="w-14 h-14 rounded-full bg-[#844204] text-white flex items-center justify-center mx-auto font-bold text-lg">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#844204] to-[#A85A12] text-xl font-bold text-white shadow-lg transition-all duration-500 group-hover:scale-110">
                 {index + 1}
               </div>
 
@@ -96,8 +96,11 @@ export default function AboutImpactAreas() {
                 key={area.title}
                 className="group bg-white rounded-[32px] p-8 border border-gray-100 hover:border-[#D9A441]/40 hover:-translate-y-2 hover:shadow-xl transition-all duration-500"
               >
-                <div className="w-16 h-16 rounded-2xl bg-[#844204]/10 flex items-center justify-center mb-6">
-                  <Icon size={30} className="text-[#844204]" />
+                <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-[#FFF8EC] transition-all duration-500 group-hover:scale-110 group-hover:bg-[#844204]">
+                  <Icon
+                    size={36}
+                    className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                  />
                 </div>
 
                 <h3 className="text-2xl font-bold">{area.title}</h3>
@@ -105,21 +108,31 @@ export default function AboutImpactAreas() {
                 <p className="mt-4 text-gray-600 leading-7">
                   {area.description}
                 </p>
+                <div className="mt-8 flex items-center gap-2 font-semibold text-[#844204]">
+                  Learn More
+                  <ArrowRight
+                    size={18}
+                    className="transition-transform duration-300 group-hover:translate-x-2"
+                  />
+                </div>
               </div>
             );
           })}
         </div>
         {/* Closing Statement */}
-        <div className="max-w-4xl mx-auto text-center mt-20">
-          <h3 className="text-3xl font-bold text-[#844204]">
+        <div className="mt-24 rounded-[40px] bg-[#844204] px-12 py-16 text-center text-white">
+          <span className="uppercase tracking-[5px] text-[#D9A441]">
+            Our Commitment
+          </span>
+
+          <h3 className="mt-5 text-4xl font-bold">
             Creating Opportunities For Lasting Change
           </h3>
 
-          <p className="mt-6 text-gray-600 text-lg leading-8">
-            From education and family support to humanitarian assistance and
-            community development, our work is focused on restoring dignity,
-            strengthening resilience and creating opportunities for people to
-            thrive.
+          <p className="mx-auto mt-8 max-w-4xl text-lg leading-9 text-white/80">
+            Every programme we design is rooted in dignity, compassion and
+            sustainability—ensuring that today's support becomes tomorrow's
+            opportunity for individuals, families and communities.
           </p>
         </div>
       </div>

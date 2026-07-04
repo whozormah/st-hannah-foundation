@@ -1,35 +1,105 @@
 import Link from "next/link";
+import { Heart, Users, Handshake, ArrowRight } from "lucide-react";
 
 export default function ContactCTA() {
   return (
-    <section className="py-28 bg-[#844204] text-white">
-      <div className="container-custom text-center">
-        <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
-          Join The Mission
-        </span>
+    <section className="relative overflow-hidden bg-[#844204] py-32 text-white">
+      {/* Background Glow */}
 
-        <h2 className="text-5xl font-bold mt-6">
-          Together We Can Transform Lives
-        </h2>
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute -top-20 -left-20 h-96 w-96 rounded-full bg-[#D9A441] blur-3xl" />
 
-        <p className="max-w-3xl mx-auto mt-8 text-lg leading-8">
-          Whether through volunteering, donating or partnering with us, your
-          support helps create lasting impact in communities.
-        </p>
+        <div className="absolute -bottom-20 -right-20 h-96 w-96 rounded-full bg-[#D9A441] blur-3xl" />
+      </div>
 
-        <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
+      <div className="container-custom relative z-10">
+        {/* Heading */}
+
+        <div className="mx-auto max-w-5xl text-center">
+          <span className="font-semibold uppercase tracking-[6px] text-[#D9A441]">
+            Join The Mission
+          </span>
+
+          <h2 className="mt-6 text-5xl font-bold leading-tight md:text-7xl">
+            Together We Can
+            <br />
+            Transform More Lives
+          </h2>
+
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-white/90">
+            Every act of generosity creates hope for someone in need. Whether
+            you choose to volunteer, donate or partner with us, your support
+            helps restore dignity, strengthen families and create sustainable
+            change across communities.
+          </p>
+        </div>
+
+        {/* Action Cards */}
+
+        <div className="mx-auto mt-20 grid max-w-6xl gap-8 md:grid-cols-3">
+          <div className="rounded-[32px] bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:bg-white/15">
+            <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-white/10">
+              <Heart size={38} />
+            </div>
+
+            <h3 className="mt-8 text-3xl font-bold">Donate</h3>
+
+            <p className="mt-5 leading-8 text-white/80">
+              Help fund education, widow empowerment, healthcare, family support
+              and community development programmes.
+            </p>
+          </div>
+
+          <div className="rounded-[32px] bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:bg-white/15">
+            <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-white/10">
+              <Users size={38} />
+            </div>
+
+            <h3 className="mt-8 text-3xl font-bold">Volunteer</h3>
+
+            <p className="mt-5 leading-8 text-white/80">
+              Share your skills, time and passion to help us create meaningful
+              and lasting impact.
+            </p>
+          </div>
+
+          <div className="rounded-[32px] bg-white/10 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:bg-white/15">
+            <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-white/10">
+              <Handshake size={38} />
+            </div>
+
+            <h3 className="mt-8 text-3xl font-bold">Partner</h3>
+
+            <p className="mt-5 leading-8 text-white/80">
+              Collaborate with us as an individual, church, business or
+              organisation to expand our impact.
+            </p>
+          </div>
+        </div>
+
+        {/* Buttons */}
+
+        <div className="mt-20 flex flex-col items-center justify-center gap-5 sm:flex-row">
           <Link
             href="/donate"
-            className="bg-white text-[#844204] px-8 py-4 rounded-xl font-semibold"
+            className="group inline-flex items-center gap-3 rounded-full bg-white px-10 py-5 font-semibold text-[#844204] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
           >
             Donate Today
+            <ArrowRight
+              size={18}
+              className="transition-transform duration-300 group-hover:translate-x-2"
+            />
           </Link>
 
           <Link
             href="/volunteer"
-            className="border border-white px-8 py-4 rounded-xl font-semibold"
+            className="group inline-flex items-center gap-3 rounded-full border border-white/30 px-10 py-5 font-semibold transition-all duration-300 hover:border-white hover:bg-white hover:text-[#844204]"
           >
             Become A Volunteer
+            <ArrowRight
+              size={18}
+              className="transition-transform duration-300 group-hover:translate-x-2"
+            />
           </Link>
         </div>
       </div>

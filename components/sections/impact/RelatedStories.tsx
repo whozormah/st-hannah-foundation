@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 interface Story {
   slug: string;
@@ -11,6 +12,7 @@ interface Story {
   excerpt: string;
   image: string;
 }
+
 export default function RelatedStories({
   currentSlug,
 }: {
@@ -37,50 +39,97 @@ export default function RelatedStories({
       .catch(console.error);
   }, [currentSlug]);
 
+  if (!stories.length) return null;
+
   return (
-    <section className="py-24 bg-[#FAF7F2]">
+    <section className="bg-[#FAF7F2] py-32">
       <div className="container-custom">
-        <div className="text-center mb-16">
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
-            More Stories
+        {/* Heading */}
+
+        <div className="mx-auto mb-20 max-w-4xl text-center">
+          <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+            Continue Reading
           </span>
 
-          <h2 className="text-5xl font-bold mt-4">
-            Continue Exploring Our Impact
+          <h2 className="mt-5 text-5xl font-bold text-[#1B1815] md:text-6xl">
+            More Stories
+            <br />
+            That Inspire Hope
           </h2>
+
+          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+            Every story reflects lives transformed through compassion,
+            generosity and sustainable community impact.
+          </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        {/* Stories */}
+
+        <div className="grid gap-8 lg:grid-cols-3">
           {stories.map((story) => (
             <Link
               key={story.slug}
               href={`/impact-stories/${story.slug}`}
-              className="group bg-white rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl transition"
+              className="group overflow-hidden rounded-[36px] border border-gray-100 bg-white shadow-xl transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:shadow-2xl"
             >
-              <div className="relative h-72">
+              <div className="relative h-72 overflow-hidden">
                 <Image
                   src={story.image}
                   alt={story.title}
                   fill
-                  className="object-cover group-hover:scale-105 transition duration-500"
+                  className="object-cover transition duration-700 group-hover:scale-105"
                 />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+                <div className="absolute left-5 top-5">
+                  <span className="rounded-full bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[3px] text-[#844204]">
+                    {story.category}
+                  </span>
+                </div>
               </div>
 
               <div className="p-8">
-                <span className="uppercase tracking-[3px] text-sm text-[#844204]">
-                  {story.category}
-                </span>
+                <h3 className="text-2xl font-bold leading-tight text-[#1B1815]">
+                  {story.title}
+                </h3>
 
-                <h3 className="text-2xl font-bold mt-3">{story.title}</h3>
+                <div className="mt-5 h-[3px] w-14 rounded-full bg-[#D9A441]" />
 
-                <p className="mt-4 text-gray-600 leading-7">{story.excerpt}</p>
+                <p className="mt-6 leading-8 text-gray-600">{story.excerpt}</p>
 
-                <div className="mt-6 text-[#844204] font-semibold">
-                  Read Story →
+                <div className="mt-8 inline-flex items-center gap-2 font-semibold text-[#844204]">
+                  Read Story
+                  <ArrowRight
+                    size={18}
+                    className="transition duration-300 group-hover:translate-x-2"
+                  />
                 </div>
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Bottom */}
+
+        <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-white p-14 text-center shadow-xl">
+          <span className="uppercase tracking-[5px] text-[#844204]">
+            More Than Stories
+          </span>
+
+          <h3 className="mt-5 text-4xl font-bold text-[#1B1815]">
+            Every Story Is A Reminder That Hope Is Possible
+          </h3>
+
+          <div className="mx-auto mt-6 h-[3px] w-20 rounded-full bg-[#D9A441]" />
+
+          <p className="mt-8 text-lg leading-9 text-gray-600">
+            These stories celebrate courage, resilience and transformation. They
+            remind us that when communities come together with compassion,
+            extraordinary change becomes possible.
+          </p>
         </div>
       </div>
     </section>

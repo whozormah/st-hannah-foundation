@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Heart, Users, Handshake } from "lucide-react";
+import { Heart, Users, Handshake, ArrowRight } from "lucide-react";
 
 import DonationModal from "@/components/shared/DonationModal";
 import PartnerModal from "@/components/shared/PartnerModal";
@@ -12,83 +12,134 @@ export default function AboutCTA() {
 
   return (
     <>
-      {" "}
-      <section className="py-32 bg-[#844204] text-white relative overflow-hidden">
-        {" "}
-        <div className="absolute inset-0 opacity-10">
-          {" "}
-          <div className="absolute top-0 left-0 w-96 h-96 bg-[#D9A441] rounded-full blur-3xl" />{" "}
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#D9A441] rounded-full blur-3xl" />{" "}
+      <section className="relative overflow-hidden bg-[#844204] py-32 text-white">
+        {/* Background */}
+
+        <div className="absolute inset-0">
+          <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-[#D9A441]/10 blur-3xl" />
+
+          <div className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-[#D9A441]/10 blur-3xl" />
         </div>
-        ```
+
         <div className="container-custom relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
-              Join The Mission
+          {/* Heading */}
+
+          <div className="mx-auto max-w-4xl text-center">
+            <span className="font-semibold uppercase tracking-[6px] text-[#D9A441]">
+              Become Part Of The Story
             </span>
 
-            <h2 className="text-5xl md:text-6xl font-bold mt-6 leading-tight">
-              Everyone Has A
+            <h2 className="mt-6 text-5xl font-bold leading-tight md:text-6xl">
+              Together We Can
               <br />
-              Role To Play
+              Transform More Lives
             </h2>
 
-            <p className="max-w-3xl mx-auto mt-8 text-lg text-gray-200 leading-8">
-              Whether through giving, volunteering or partnership, your support
-              helps create opportunities, restore hope and transform lives
-              across communities.
+            <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-white/85">
+              Every act of generosity, every volunteer and every partnership
+              helps restore dignity, strengthen families and create lasting
+              opportunities across communities.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-16">
+          {/* Cards */}
+
+          <div className="mx-auto mt-20 grid max-w-7xl gap-8 lg:grid-cols-3">
+            {/* Donate */}
+
             <button
               onClick={() => setShowDonationModal(true)}
-              className="bg-white/10 backdrop-blur-sm rounded-[32px] p-10 hover:bg-white/15 hover:-translate-y-2 transition-all duration-300 text-center"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:bg-white/10 hover:shadow-2xl"
             >
-              <Heart size={48} className="mx-auto text-[#D9A441]" />
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-[#D9A441]/20 bg-[#D9A441]/10">
+                <Heart size={38} className="text-[#D9A441]" />
+              </div>
 
-              <h3 className="text-2xl font-bold mt-6">Donate</h3>
+              <h3 className="mt-8 text-3xl font-bold">Donate</h3>
 
-              <p className="mt-4 text-gray-200 leading-7">
-                Support programmes that restore dignity, strengthen families and
-                create opportunities for lasting change.
+              <p className="mt-5 leading-8 text-white/80">
+                Help provide food, education, healthcare and opportunities that
+                restore hope and transform lives.
               </p>
+
+              <div className="mt-8 flex items-center gap-2 font-semibold text-[#D9A441]">
+                Support A Cause
+                <ArrowRight
+                  size={18}
+                  className="transition group-hover:translate-x-2"
+                />
+              </div>
             </button>
+
+            {/* Volunteer */}
 
             <a
               href="/volunteer"
-              className="bg-white/10 backdrop-blur-sm rounded-[32px] p-10 hover:bg-white/15 hover:-translate-y-2 transition-all duration-300 text-center"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:bg-white/10 hover:shadow-2xl"
             >
-              <Users size={48} className="mx-auto text-[#D9A441]" />
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-[#D9A441]/20 bg-[#D9A441]/10">
+                <Users size={38} className="text-[#D9A441]" />
+              </div>
 
-              <h3 className="text-2xl font-bold mt-6">Volunteer</h3>
+              <h3 className="mt-8 text-3xl font-bold">Volunteer</h3>
 
-              <p className="mt-4 text-gray-200 leading-7">
-                Use your time, talents and expertise to support programmes that
-                impact lives and communities.
+              <p className="mt-5 leading-8 text-white/80">
+                Share your skills, passion and time to help create lasting
+                change in the lives of children and families.
               </p>
+
+              <div className="mt-8 flex items-center gap-2 font-semibold text-[#D9A441]">
+                Join Our Team
+                <ArrowRight
+                  size={18}
+                  className="transition group-hover:translate-x-2"
+                />
+              </div>
             </a>
+
+            {/* Partner */}
 
             <button
               onClick={() => setShowPartnerModal(true)}
-              className="bg-white/10 backdrop-blur-sm rounded-[32px] p-10 hover:bg-white/15 hover:-translate-y-2 transition-all duration-300 text-center"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:bg-white/10 hover:shadow-2xl"
             >
-              <Handshake size={48} className="mx-auto text-[#D9A441]" />
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-[#D9A441]/20 bg-[#D9A441]/10">
+                <Handshake size={38} className="text-[#D9A441]" />
+              </div>
 
-              <h3 className="text-2xl font-bold mt-6">Partner</h3>
+              <h3 className="mt-8 text-3xl font-bold">Partner With Us</h3>
 
-              <p className="mt-4 text-gray-200 leading-7">
-                Collaborate with us to expand our reach and create sustainable
-                impact in more communities.
+              <p className="mt-5 leading-8 text-white/80">
+                Collaborate with us through strategic partnerships, sponsorships
+                and initiatives that expand our impact.
               </p>
+
+              <div className="mt-8 flex items-center gap-2 font-semibold text-[#D9A441]">
+                Become A Partner
+                <ArrowRight
+                  size={18}
+                  className="transition group-hover:translate-x-2"
+                />
+              </div>
             </button>
+          </div>
+
+          {/* Closing */}
+
+          <div className="mx-auto mt-20 max-w-3xl text-center">
+            <p className="text-xl leading-9 text-white/80">
+              Every contribution creates new opportunities, restores dignity and
+              helps build stronger communities for generations to come.
+            </p>
           </div>
         </div>
       </section>
+
       <DonationModal
         isOpen={showDonationModal}
         onClose={() => setShowDonationModal(false)}
       />
+
       <PartnerModal
         isOpen={showPartnerModal}
         onClose={() => setShowPartnerModal(false)}

@@ -39,22 +39,7 @@ export default function VolunteerBenefits() {
             transformation.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {benefits.map((benefit) => (
-            <div
-              key={benefit.title}
-              className="bg-[#FAF7F2] rounded-[32px] p-8 hover:shadow-lg transition"
-            >
-              <div className="w-14 h-1 bg-[#D9A441] rounded-full mb-6" />
-
-              <h3 className="text-2xl font-bold">{benefit.title}</h3>
-
-              <p className="mt-4 text-gray-600 leading-7">
-                {benefit.description}
-              </p>
-            </div>
-          ))}
-        </div>
+        <GalleryGrid images={filteredImages} onOpen={setSelectedImage} />
       </div>
     </section>
   );

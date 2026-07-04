@@ -9,10 +9,15 @@ import { usePathname } from "next/navigation";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const pathname = usePathname();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  /* ----------------------------
+     Close dropdown on outside click
+  ----------------------------- */
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -31,13 +36,65 @@ export default function Navbar() {
     };
   }, []);
 
-  const links = [
+  /* ----------------------------
+     Navbar Scroll Effect
+  ----------------------------- */
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  /* ----------------------------
+     Navigation
+  ----------------------------- */
+
+  const primaryLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Programs", href: "/programs" },
-    { name: "Apply For Support", href: "/apply-for-support" },
-    { name: "Stories", href: "/impact-stories" },
-    { name: "Gallery", href: "/gallery" },
+  ];
+
+  const impactLinks = [
+    {
+      name: "Impact Stories",
+      href: "/impact-stories",
+    },
+    {
+      name: "Gallery",
+      href: "/gallery",
+    },
+  ];
+
+  const getInvolvedLinks = [
+    {
+      name: "Volunteer",
+      href: "/volunteer",
+    },
+    {
+      name: "Become A Partner",
+      href: "/partnerships",
+    },
+    {
+      name: "Apply For Support",
+      href: "/apply-for-support",
+    },
+  ];
+
+  const secondaryLinks = [
+    {
+      name: "Contact",
+      href: "/contact",
+    },
   ];
   const moreLinks = [
     { name: "Team", href: "/team" },
@@ -48,13 +105,27 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="bg-white/95 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+      <header
+        className={`sticky top-0 z-50 border-b transition-all duration-500 ${
+          scrolled
+            ? "border-gray-200 bg-white/90 shadow-xl backdrop-blur-2xl"
+            : "border-transparent bg-white"
+        }`}
+      >
         <div className="container-custom">
-          <div className="h-20 flex items-center justify-between">
+          <div
+            className={`flex items-center justify-between transition-all duration-500 ${
+              scrolled ? "h-16" : "h-20"
+            }`}
+          >
             {/* Logo */}
 
             <Link href="/" className="flex items-center gap-4">
-              <div className="relative w-14 h-14">
+              <div
+                className={`relative transition-all duration-500 ${
+                  scrolled ? "h-11 w-11" : "h-14 w-14"
+                }`}
+              >
                 <Image
                   src="/logo.png"
                   alt="St. Hannah Foundation"
@@ -64,83 +135,172 @@ export default function Navbar() {
               </div>
 
               <div>
-                <h1 className="text-xl lg:text-2xl font-bold text-[#844204] leading-tight">
-                  St. Hannah Foundation
+                <h1
+                  className={`font-bold leading-tight text-[#844204] transition-all duration-500 ${
+                    scrolled ? "text-lg" : "text-2xl"
+                  }`}
+                >
+                  St. Hannah
+                  <span className="block text-[#A86A1A]">Foundation</span>
                 </h1>
 
-                <p className="hidden lg:block text-xs text-gray-500">
-                  Empowering Communities Through Love & Service
+                <p className="hidden lg:block text-[11px] uppercase tracking-[2px] text-gray-500">
+                  Empowering Communities
                 </p>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
 
-            <nav className="hidden lg:flex items-center gap-8">
-              {links.map((link) => (
+            <nav className="hidden lg:flex items-center gap-10">
+              {primaryLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`font-medium transition ${
+                  className={`relative pb-2 font-medium transition-all duration-300 ${
                     pathname === link.href
-                      ? "text-[#844204] font-semibold"
-                      : "hover:text-[#844204]"
+                      ? "text-[#844204]"
+                      : "text-[#3A3A3A] hover:text-[#844204]"
                   }`}
                 >
                   {link.name}
+
+                  {pathname === link.href && (
+                    <span className="absolute bottom-0 left-0 h-[2px] w-full rounded-full bg-[#D9A441]" />
+                  )}
                 </Link>
               ))}
 
-              {/* More Dropdown */}
+              {/* Impact */}
 
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setMoreOpen(!moreOpen)}
-                  className="flex items-center gap-1 font-medium hover:text-[#844204] transition"
+                  className="flex items-center gap-2 pb-2 font-medium text-[#3A3A3A] transition hover:text-[#844204]"
                 >
-                  More
-                  <ChevronDown size={16} />
+                  Impact
+                  <ChevronDown
+                    size={16}
+                    className={`transition ${moreOpen ? "rotate-180" : ""}`}
+                  />
                 </button>
 
                 {moreOpen && (
-                  <div className="absolute top-full mt-3 right-0 w-64 bg-white rounded-2xl shadow-xl border overflow-hidden">
-                    {moreLinks.map((link) => (
+                  <div
+                    className={`absolute right-0 top-full mt-5 w-72 overflow-hidden rounded-[28px] border bg-white shadow-2xl transition-all duration-300 ${
+                      moreOpen
+                        ? "visible translate-y-0 opacity-100"
+                        : "invisible -translate-y-2 opacity-0"
+                    }`}
+                  >
+                    <div className="border-b bg-[#FAF7F2] p-6">
+                      <h4 className="font-bold text-[#844204]">Our Impact</h4>
+
+                      <p className="mt-2 text-sm leading-6 text-gray-500">
+                        Explore the stories, moments and lives transformed
+                        through our mission.
+                      </p>
+                    </div>
+
+                    {impactLinks.map((link) => (
                       <Link
                         key={link.name}
                         href={link.href}
                         onClick={() => setMoreOpen(false)}
-                        className="block px-6 py-4 hover:bg-[#FAF7F2] transition"
+                        className="block px-7 py-5 transition hover:bg-[#FAF7F2]"
                       >
                         {link.name}
                       </Link>
                     ))}
+
+                    <div className="border-t bg-[#FAF7F2] p-5">
+                      <Link
+                        href="/impact-stories"
+                        className="font-semibold text-[#844204]"
+                      >
+                        View Our Impact →
+                      </Link>
+                    </div>
                   </div>
                 )}
               </div>
+
+              {/* Get Involved */}
+
+              <div className="group relative">
+                <button className="flex items-center gap-2 pb-2 font-medium text-[#3A3A3A] transition hover:text-[#844204]">
+                  Get Involved
+                  <ChevronDown size={16} />
+                </button>
+
+                <div className="absolute right-0 top-full invisible mt-5 w-72 overflow-hidden rounded-[28px] border bg-white opacity-0 shadow-2xl transition-all duration-300 group-hover:visible group-hover:opacity-100">
+                  <div className="border-b bg-[#FAF7F2] p-6">
+                    <h4 className="font-bold text-[#844204]">
+                      Join The Mission
+                    </h4>
+                  </div>
+
+                  {getInvolvedLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="block px-7 py-5 transition hover:bg-[#FAF7F2]"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+              {secondaryLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`relative pb-2 font-medium transition-all duration-300 ${
+                    pathname === link.href
+                      ? "text-[#844204]"
+                      : "text-[#3A3A3A] hover:text-[#844204]"
+                  }`}
+                >
+                  {link.name}
+
+                  {pathname === link.href && (
+                    <span className="absolute -bottom-[6px] left-1/2 h-[3px] w-8 -translate-x-1/2 rounded-full bg-[#D9A441]" />
+                  )}
+                </Link>
+              ))}
             </nav>
 
             {/* Desktop Buttons */}
 
-            <div className="hidden lg:flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-4">
               <Link
                 href="/volunteer"
-                className="border border-[#844204] px-6 py-3 rounded-xl hover:bg-[#844204] hover:text-white transition font-semibold"
+                className="rounded-xl border border-[#844204]/20 px-6 py-3 font-semibold text-[#844204] transition-all duration-300 hover:border-[#844204] hover:bg-[#FAF7F2]"
               >
                 Volunteer
               </Link>
 
               <Link
                 href="/donate"
-                className="bg-[#844204] text-white px-6 py-3 rounded-xl hover:bg-[#A85A12] shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 font-semibold flex items-center gap-2"
+                className="group rounded-xl bg-[#844204] px-7 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-[#A85A12] hover:shadow-2xl"
               >
-                <Heart size={18} />
-                Donate
+                <span className="flex items-center gap-2">
+                  <Heart
+                    size={18}
+                    className="animate-pulse text-[#FFD77A] transition-transform duration-300 group-hover:scale-125"
+                  />
+                  Donate Now
+                </span>
               </Link>
             </div>
 
             {/* Mobile Menu Button */}
 
-            <button className="lg:hidden" onClick={() => setIsOpen(true)}>
+            <button
+              onClick={() => setIsOpen(true)}
+              className="rounded-xl p-2 transition hover:bg-[#FAF7F2] lg:hidden"
+            >
               <Menu size={30} />
             </button>
           </div>
@@ -150,7 +310,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
 
       {isOpen && (
-        <div className="fixed inset-0 bg-white z-[100] overflow-y-auto">
+        <div className="fixed inset-0 z-[100] overflow-y-auto bg-white/95 backdrop-blur-xl">
           <div className="flex justify-between items-center p-6 border-b">
             <div className="flex items-center gap-3">
               <div className="relative w-10 h-10">
@@ -167,7 +327,10 @@ export default function Navbar() {
               </span>
             </div>
 
-            <button onClick={() => setIsOpen(false)}>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="rounded-xl p-2 transition hover:bg-[#FAF7F2]"
+            >
               <X size={30} />
             </button>
           </div>
@@ -249,7 +412,7 @@ export default function Navbar() {
             <Link
               href="/partnerships"
               onClick={() => setIsOpen(false)}
-              className="py-5 border-b"
+              className="border-b border-gray-100 py-5 text-lg font-medium transition hover:text-[#844204]"
             >
               Become A Partner
             </Link>

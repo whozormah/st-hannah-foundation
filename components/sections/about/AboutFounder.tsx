@@ -27,55 +27,93 @@ export default function AboutFounder() {
   if (!founder) return null;
 
   return (
-    <section className="py-32 bg-white">
-      {" "}
+    <section className="bg-[#FAF7F2] py-32">
       <div className="container-custom">
-        {" "}
-        <div className="text-center max-w-4xl mx-auto mb-20">
-          {" "}
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
-            The Vision Behind The Foundation{" "}
+        {/* Section Heading */}
+
+        <div className="mx-auto mb-24 max-w-4xl text-center">
+          <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+            The Vision Behind The Foundation
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-4">
+
+          <h2 className="mt-5 text-5xl font-bold text-[#1B1815] md:text-6xl">
             A Story Rooted In Compassion
           </h2>
-          <p className="max-w-3xl mx-auto mt-6 text-gray-600 text-lg leading-8">
+
+          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
             Every movement begins with a story. St. Hannah Foundation was born
             from a deep commitment to serving others, restoring hope and helping
             vulnerable individuals discover new possibilities for their future.
           </p>
         </div>
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Founder Image */}
 
-          <div className="bg-[#FAF7F2] rounded-[32px] overflow-hidden shadow-lg">
-            <div className="relative h-[650px]">
-              <Image
-                src={founder.image}
-                alt={founder.name}
-                fill
-                className="object-contain p-8"
-              />
+        <div className="grid items-center gap-20 lg:grid-cols-2">
+          {/* Image */}
+
+          <div className="relative">
+            <div className="overflow-hidden rounded-[40px] bg-white shadow-2xl">
+              <div className="relative h-[760px]">
+                <Image
+                  src={founder.image}
+                  alt={founder.name}
+                  fill
+                  className="object-contain p-8"
+                />
+              </div>
+            </div>
+
+            {/* Floating Quote Card */}
+
+            <div className="absolute -bottom-10 -right-10 max-w-sm rounded-[28px] border border-[#D9A441]/20 bg-white p-8 shadow-2xl">
+              <span className="text-6xl font-serif text-[#D9A441]/20">"</span>
+
+              <p className="-mt-5 italic leading-8 text-gray-600">
+                {founder.quote}
+              </p>
             </div>
           </div>
 
-          {/* Founder Story */}
+          {/* Content */}
 
           <div>
-            <span className="inline-flex px-4 py-2 rounded-full bg-[#844204]/10 text-[#844204] font-semibold text-sm">
-              {founder.title}
+            <span className="inline-flex rounded-full bg-[#844204]/10 px-5 py-2 text-sm font-semibold text-[#844204]">
+              {founder.badge}
             </span>
 
-            <h3 className="text-4xl font-bold mt-6">{founder.name}</h3>
+            <h3 className="mt-6 text-5xl font-bold leading-tight text-[#1B1815]">
+              {founder.name}
+            </h3>
 
-            <blockquote className="mt-8 text-2xl leading-relaxed italic text-[#844204] border-l-4 border-[#D9A441] pl-6">
-              "{founder.quote}"
-            </blockquote>
+            <p className="mt-3 text-xl font-semibold text-[#9A6A17]">
+              {founder.position}
+            </p>
 
-            <div className="space-y-6 mt-10 text-gray-600 leading-8">
-              {founder.message?.map((paragraph, index) => (
+            <div className="mt-8 h-[3px] w-20 rounded-full bg-[#D9A441]" />
+
+            <div className="mt-10 space-y-8 text-lg leading-9 text-gray-600">
+              {founder.message.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
+            </div>
+
+            {/* Signature Card */}
+
+            <div className="mt-14 rounded-[30px] border border-[#D9A441]/20 bg-white p-8 shadow-lg">
+              <h4 className="text-2xl font-bold text-[#844204]">
+                {founder.name}
+              </h4>
+
+              <p className="mt-2 font-semibold text-[#9A6A17]">
+                {founder.position}
+              </p>
+
+              <div className="mt-6 h-px w-16 bg-[#D9A441]" />
+
+              <p className="mt-6 italic leading-8 text-gray-600">
+                "{founder.quote}"
+              </p>
             </div>
           </div>
         </div>

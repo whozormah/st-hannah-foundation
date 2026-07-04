@@ -42,7 +42,10 @@ export default function AboutVolunteers() {
 
         {/* Message Banner */}
 
-        <div className="max-w-5xl mx-auto bg-gradient-to-r from-[#844204] to-[#A85A12] rounded-[32px] p-10 md:p-14 mb-20 text-center text-white">
+        <div className="relative mx-auto mb-24 max-w-6xl overflow-hidden rounded-[40px] bg-gradient-to-r from-[#844204] via-[#9A5A12] to-[#B27425] px-12 py-16 text-center text-white shadow-2xl">
+          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
+
+          <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
           <h3 className="text-3xl md:text-4xl font-bold">
             Volunteers Make The Difference
           </h3>
@@ -60,19 +63,19 @@ export default function AboutVolunteers() {
           {volunteers.map((volunteer) => (
             <div
               key={volunteer.name}
-              className="bg-white rounded-[32px] overflow-hidden hover:-translate-y-3 hover:shadow-2xl transition-all duration-500"
+              className="group overflow-hidden rounded-[36px] border border-gray-100 bg-white shadow-lg transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/30 hover:shadow-2xl"
             >
               <div className="relative h-[350px] bg-white flex items-end justify-center">
                 <Image
                   src={volunteer.image}
                   alt={volunteer.name}
                   fill
-                  className="object-contain p-6"
+                  className="object-contain p-6 transition duration-700 group-hover:scale-105"
                 />
               </div>
 
               <div className="p-8 text-center">
-                <span className="inline-flex items-center px-4 py-2 rounded-full bg-[#FAF7F2] text-[#844204] text-xs font-semibold mb-5">
+                <span className="inline-flex rounded-full bg-[#844204]/10 px-5 py-2 text-xs font-semibold uppercase tracking-[3px] text-[#844204]">
                   Volunteer Leader
                 </span>
 
@@ -80,20 +83,37 @@ export default function AboutVolunteers() {
                   {volunteer.name}
                 </h3>
 
-                <p className="mt-3 text-[#844204] font-medium">
+                <p className="mt-3 font-semibold uppercase tracking-[2px] text-[#9A6A17]">
                   {volunteer.role}
                 </p>
 
-                <div className="w-12 h-1 bg-[#D9A441] mx-auto mt-6 rounded-full" />
+                <div className="mx-auto mt-8 h-[3px] w-16 rounded-full bg-[#D9A441]" />
 
-                <p className="mt-5 text-gray-600 text-sm leading-7">
-                  Supporting outreach programmes, community engagement and
-                  initiatives that bring hope, opportunities and lasting impact
-                  to individuals and families.
+                <p className="mt-6 italic leading-7 text-gray-500">
+                  "Serving others is one of the greatest ways to create lasting
+                  change."
                 </p>
               </div>
             </div>
           ))}
+        </div>
+        <div className="mt-24 text-center">
+          <h3 className="text-4xl font-bold text-[#1B1815]">
+            Join Our Volunteer Family
+          </h3>
+
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-600">
+            Whether you have a few hours each month or want to make long-term
+            impact, there is a place for you to serve with St. Hannah
+            Foundation.
+          </p>
+
+          <a
+            href="/volunteer"
+            className="mt-10 inline-flex items-center rounded-full bg-[#844204] px-8 py-4 font-semibold text-white transition hover:bg-[#6D3503]"
+          >
+            Become A Volunteer
+          </a>
         </div>
       </div>
     </section>

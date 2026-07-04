@@ -1,6 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import {
+  Users,
+  HandHeart,
+  HeartHandshake,
+  ArrowRight,
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  MessageCircle,
+} from "lucide-react";
 
 import PageHeader from "@/components/shared/PageHeader";
 import ContactMap from "@/components/sections/contact/ContactMap";
@@ -56,166 +68,378 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
-            <a
+          <div className="grid gap-8 mb-24 md:grid-cols-3">
+            <Link
               href="/volunteer"
-              className="bg-[#FAF7F2] rounded-[28px] p-8 hover:shadow-lg transition"
+              className="group rounded-[36px] border border-gray-100 bg-[#FAF7F2] p-10 transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/30 hover:bg-white hover:shadow-2xl"
             >
-              <h3 className="text-2xl font-bold">Volunteer</h3>
+              <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-white transition-all duration-500 group-hover:bg-[#844204]">
+                <Users
+                  size={34}
+                  className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                />
+              </div>
 
-              <p className="mt-3 text-gray-600">
-                Join our growing network of volunteers and make a difference.
+              <span className="uppercase tracking-[4px] text-sm font-semibold text-[#844204]">
+                Join Our Team
+              </span>
+
+              <h3 className="mt-4 text-3xl font-bold text-[#1B1815]">
+                Volunteer
+              </h3>
+
+              <p className="mt-5 leading-8 text-gray-600">
+                Share your time, talents and passion to help create lasting
+                impact in vulnerable communities.
               </p>
-            </a>
 
-            <a
+              <div className="mt-8 inline-flex items-center gap-3 font-semibold text-[#844204]">
+                Become A Volunteer
+                <ArrowRight
+                  size={18}
+                  className="transition duration-300 group-hover:translate-x-2"
+                />
+              </div>
+            </Link>
+
+            <Link
               href="/support"
-              className="bg-[#FAF7F2] rounded-[28px] p-8 hover:shadow-lg transition"
+              className="group rounded-[36px] border border-gray-100 bg-[#FAF7F2] p-10 transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/30 hover:bg-white hover:shadow-2xl"
             >
-              <h3 className="text-2xl font-bold">Request Support</h3>
+              <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-white transition-all duration-500 group-hover:bg-[#844204]">
+                <HandHeart
+                  size={34}
+                  className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                />
+              </div>
 
-              <p className="mt-3 text-gray-600">
-                Apply for assistance through our available programmes.
+              <span className="uppercase tracking-[4px] text-sm font-semibold text-[#844204]">
+                Need Assistance
+              </span>
+
+              <h3 className="mt-4 text-3xl font-bold text-[#1B1815]">
+                Request Support
+              </h3>
+
+              <p className="mt-5 leading-8 text-gray-600">
+                Learn about our programmes and discover whether you or someone
+                you know may be eligible for assistance.
               </p>
-            </a>
 
-            <a
-              href="/contact"
-              className="bg-[#FAF7F2] rounded-[28px] p-8 hover:shadow-lg transition"
+              <div className="mt-8 inline-flex items-center gap-3 font-semibold text-[#844204]">
+                Learn More
+                <ArrowRight
+                  size={18}
+                  className="transition duration-300 group-hover:translate-x-2"
+                />
+              </div>
+            </Link>
+
+            <Link
+              href="#contact-form"
+              className="group rounded-[36px] border border-gray-100 bg-[#FAF7F2] p-10 transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/30 hover:bg-white hover:shadow-2xl"
             >
-              <h3 className="text-2xl font-bold">Partner With Us</h3>
+              <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-white transition-all duration-500 group-hover:bg-[#844204]">
+                <HeartHandshake
+                  size={34}
+                  className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                />
+              </div>
 
-              <p className="mt-3 text-gray-600">
-                Collaborate with us to create lasting impact in communities.
+              <span className="uppercase tracking-[4px] text-sm font-semibold text-[#844204]">
+                Work With Us
+              </span>
+
+              <h3 className="mt-4 text-3xl font-bold text-[#1B1815]">
+                Partner With Us
+              </h3>
+
+              <p className="mt-5 leading-8 text-gray-600">
+                Collaborate with us as an individual, business or organisation
+                to create sustainable change across communities.
               </p>
-            </a>
+
+              <div className="mt-8 inline-flex items-center gap-3 font-semibold text-[#844204]">
+                Start A Partnership
+                <ArrowRight
+                  size={18}
+                  className="transition duration-300 group-hover:translate-x-2"
+                />
+              </div>
+            </Link>
           </div>
           <div className="grid lg:grid-cols-2 gap-12">
-            <div className="bg-[#FAF7F2] rounded-[32px] p-10">
-              <h3 className="text-3xl font-bold">Contact Information</h3>
+            <div className="rounded-[40px] bg-[#FAF7F2] p-10 lg:p-12">
+              <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+                Contact Information
+              </span>
 
-              <div className="space-y-6 mt-10">
-                <div>
-                  <h4 className="font-bold text-lg">Email Address</h4>
+              <h3 className="text-4xl font-bold mt-5 leading-tight">
+                Let's Start A
+                <br />
+                Meaningful Conversation
+              </h3>
 
-                  <p className="mt-2 text-gray-600">{settings?.email}</p>
+              <p className="mt-6 text-gray-600 leading-8 text-lg">
+                We'd love to hear from you. Whether you're interested in
+                partnering, volunteering, supporting a programme or making an
+                enquiry, our team is ready to assist.
+              </p>
+
+              <div className="space-y-6 mt-12">
+                {/* Email */}
+
+                <div className="group flex gap-5 bg-white rounded-[28px] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <div className="w-16 h-16 rounded-2xl bg-[#FFF8EC] flex items-center justify-center group-hover:bg-[#844204] transition">
+                    <Mail
+                      size={28}
+                      className="text-[#844204] group-hover:text-white transition"
+                    />
+                  </div>
+
+                  <div>
+                    <h4 className="font-bold text-xl">Email Address</h4>
+
+                    <p className="mt-2 text-gray-600 leading-7">
+                      {settings?.email}
+                    </p>
+                  </div>
                 </div>
-                <div className="bg-white rounded-2xl p-6">
-                  <h4 className="font-bold text-lg">Phone Number</h4>
 
-                  <p className="mt-2 text-gray-600">{settings?.phone}</p>
+                {/* Phone */}
+
+                <div className="group flex gap-5 bg-white rounded-[28px] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <div className="w-16 h-16 rounded-2xl bg-[#FFF8EC] flex items-center justify-center group-hover:bg-[#844204] transition">
+                    <Phone
+                      size={28}
+                      className="text-[#844204] group-hover:text-white transition"
+                    />
+                  </div>
+
+                  <div>
+                    <h4 className="font-bold text-xl">Phone Number</h4>
+
+                    <p className="mt-2 text-gray-600">{settings?.phone}</p>
+                  </div>
                 </div>
 
-                <div>
-                  <h4 className="font-bold text-lg">Nigeria Office</h4>
+                {/* Nigeria */}
 
-                  <p className="mt-2 text-gray-600 leading-7">
-                    {settings?.nigeriaOffice.address}
-                  </p>
+                <div className="group flex gap-5 bg-white rounded-[28px] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <div className="w-16 h-16 rounded-2xl bg-[#FFF8EC] flex items-center justify-center group-hover:bg-[#844204] transition">
+                    <MapPin
+                      size={28}
+                      className="text-[#844204] group-hover:text-white transition"
+                    />
+                  </div>
+
+                  <div>
+                    <h4 className="font-bold text-xl">Nigeria Office</h4>
+
+                    <p className="mt-2 text-gray-600 leading-7">
+                      {settings?.nigeriaOffice.address}
+                    </p>
+                  </div>
                 </div>
 
-                <div>
-                  <h4 className="font-bold text-lg">United States Office</h4>
+                {/* USA */}
 
-                  <p className="mt-2 text-gray-600 leading-7">
-                    {settings?.usaOffice.address}
-                  </p>
+                <div className="group flex gap-5 bg-white rounded-[28px] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <div className="w-16 h-16 rounded-2xl bg-[#FFF8EC] flex items-center justify-center group-hover:bg-[#844204] transition">
+                    <MapPin
+                      size={28}
+                      className="text-[#844204] group-hover:text-white transition"
+                    />
+                  </div>
+
+                  <div>
+                    <h4 className="font-bold text-xl">United States Office</h4>
+
+                    <p className="mt-2 text-gray-600 leading-7">
+                      {settings?.usaOffice.address}
+                    </p>
+                  </div>
                 </div>
 
-                <div>
-                  <h4 className="font-bold text-lg">Response Time</h4>
+                {/* Response */}
 
-                  <p className="mt-2 text-gray-600">
-                    We typically respond to enquiries within 24 - 48 hours.
-                  </p>
+                <div className="group flex gap-5 bg-white rounded-[28px] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                  <div className="w-16 h-16 rounded-2xl bg-[#FFF8EC] flex items-center justify-center group-hover:bg-[#844204] transition">
+                    <Clock
+                      size={28}
+                      className="text-[#844204] group-hover:text-white transition"
+                    />
+                  </div>
+
+                  <div>
+                    <h4 className="font-bold text-xl">Response Time</h4>
+
+                    <p className="mt-2 text-gray-600">
+                      We typically respond within 24–48 hours.
+                    </p>
+                  </div>
                 </div>
+              </div>
+
+              {/* WhatsApp */}
+
+              <div className="mt-10 rounded-[32px] bg-[#844204] p-8 text-white">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center">
+                    <MessageCircle size={28} />
+                  </div>
+
+                  <div>
+                    <h4 className="font-bold text-2xl">
+                      Need A Faster Response?
+                    </h4>
+                  </div>
+                </div>
+
+                <p className="mt-6 leading-8 text-white/90">
+                  Chat directly with our team on WhatsApp for quick enquiries,
+                  partnership discussions and programme information.
+                </p>
+
+                <a
+                  href={`https://wa.me/${settings?.phone?.replace(/\D/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center mt-8 bg-white text-[#844204] px-8 py-4 rounded-full font-semibold hover:scale-105 transition"
+                >
+                  Chat On WhatsApp
+                </a>
               </div>
             </div>
 
-            <div className="bg-white border border-gray-100 shadow-sm rounded-[32px] p-10">
-              <h3 className="text-3xl font-bold">Send Us A Message</h3>
+            <div
+              id="contact-form"
+              className="rounded-[40px] border border-gray-100 bg-white p-10 shadow-xl lg:p-12"
+            >
+              <span className="font-semibold uppercase tracking-[5px] text-[#844204]">
+                Send A Message
+              </span>
 
-              <p className="text-gray-600 mt-3">
-                Fill out the form below and a member of our team will get back
-                to you.
+              <h3 className="mt-5 text-4xl font-bold leading-tight text-[#1B1815]">
+                We'd Love To
+                <br />
+                Hear From You
+              </h3>
+
+              <p className="mt-6 text-lg leading-8 text-gray-600">
+                Tell us how we can help. Whether it's a general enquiry,
+                partnership, volunteering opportunity or support request, we'll
+                connect you with the right member of our team.
               </p>
 
               <form
                 action="https://formspree.io/f/xlgkpggp"
                 method="POST"
-                className="mt-8 space-y-6"
+                className="mt-10 space-y-7"
               >
                 <input type="hidden" name="form-name" value="Contact Form" />
 
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="Full Name"
-                  className="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:border-[#844204]"
-                />
+                {/* Name & Email */}
 
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="Email Address"
-                  className="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:border-[#844204]"
-                />
+                <div className="grid gap-6 md:grid-cols-2">
+                  <div>
+                    <label className="mb-3 block font-semibold text-[#1B1815]">
+                      Full Name
+                    </label>
 
-                <select
-                  name="enquiry"
-                  className="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:border-[#844204]"
-                >
-                  <option>Reason For Contact</option>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      placeholder="John Doe"
+                      className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 transition-all duration-300 focus:border-[#844204] focus:bg-white focus:outline-none"
+                    />
+                  </div>
 
-                  <option>General Enquiry</option>
+                  <div>
+                    <label className="mb-3 block font-semibold text-[#1B1815]">
+                      Email Address
+                    </label>
 
-                  <option>Volunteer Application</option>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="john@example.com"
+                      className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 transition-all duration-300 focus:border-[#844204] focus:bg-white focus:outline-none"
+                    />
+                  </div>
+                </div>
 
-                  <option>Partnership Request</option>
+                {/* Subject */}
 
-                  <option>Donation Enquiry</option>
+                <div>
+                  <label className="mb-3 block font-semibold text-[#1B1815]">
+                    Subject
+                  </label>
 
-                  <option>Media Enquiry</option>
+                  <input
+                    type="text"
+                    name="subject"
+                    required
+                    placeholder="How can we help?"
+                    className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 transition-all duration-300 focus:border-[#844204] focus:bg-white focus:outline-none"
+                  />
+                </div>
 
-                  <option>Support Request</option>
+                {/* Enquiry */}
 
-                  <option>Other</option>
-                </select>
-                <input
-                  type="text"
-                  name="subject"
-                  required
-                  placeholder="Subject"
-                  className="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:border-[#844204]"
-                />
+                <div>
+                  <label className="mb-3 block font-semibold text-[#1B1815]">
+                    Reason For Contact
+                  </label>
 
-                <textarea
-                  rows={6}
-                  name="message"
-                  required
-                  placeholder="Your Message"
-                  className="w-full p-4 rounded-xl border border-gray-200 focus:outline-none focus:border-[#844204]"
-                />
+                  <select
+                    name="enquiry"
+                    className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 transition-all duration-300 focus:border-[#844204] focus:bg-white focus:outline-none"
+                  >
+                    <option>General Enquiry</option>
+                    <option>Volunteer Application</option>
+                    <option>Partnership Request</option>
+                    <option>Donation Enquiry</option>
+                    <option>Support Request</option>
+                    <option>Media Enquiry</option>
+                    <option>Corporate Partnership</option>
+                    <option>Other</option>
+                  </select>
+                </div>
 
-                <button
-                  type="submit"
-                  className="bg-[#844204] hover:bg-[#6d3503] transition text-white px-8 py-4 rounded-xl font-semibold"
-                >
-                  Send Message
-                </button>
+                {/* Message */}
+
+                <div>
+                  <label className="mb-3 block font-semibold text-[#1B1815]">
+                    Your Message
+                  </label>
+
+                  <textarea
+                    rows={8}
+                    name="message"
+                    required
+                    placeholder="Tell us about your enquiry..."
+                    className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 transition-all duration-300 focus:border-[#844204] focus:bg-white focus:outline-none"
+                  />
+                </div>
+
+                {/* Button */}
+
+                <div className="pt-3">
+                  <button
+                    type="submit"
+                    className="group inline-flex items-center gap-3 rounded-full bg-[#844204] px-10 py-5 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#6D3503] hover:shadow-xl"
+                  >
+                    Send Message
+                    <ArrowRight
+                      size={18}
+                      className="transition-transform duration-300 group-hover:translate-x-2"
+                    />
+                  </button>
+                </div>
               </form>
-              <div className="mt-6">
-                <a
-                  href={`https://wa.me/${settings?.phone?.replace(/\D/g, "")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center border border-[#844204] text-[#844204] px-6 py-4 rounded-xl font-semibold hover:bg-[#844204] hover:text-white transition"
-                >
-                  Chat With Us On WhatsApp
-                </a>
-              </div>
             </div>
           </div>
         </div>

@@ -22,23 +22,23 @@ interface FoundationData {
 
 interface Value {
   title: string;
-  description: string;
 }
 
 export default function VisionMission() {
   const [foundation, setFoundation] = useState<FoundationData | null>(null);
+
   const [values, setValues] = useState<Value[]>([]);
 
   useEffect(() => {
     fetch("/data/homepage/foundation.json")
       .then((res) => res.json())
       .then((data) => setFoundation(data))
-      .catch((err) => console.error(err));
+      .catch(console.error);
 
     fetch("/data/homepage/core-values.json")
       .then((res) => res.json())
       .then((data) => setValues(data))
-      .catch((err) => console.error(err));
+      .catch(console.error);
   }, []);
 
   const valueIcons = [
@@ -51,80 +51,146 @@ export default function VisionMission() {
   ];
 
   return (
-    <section className="py-28 bg-white">
-      {" "}
-      <div className="container-custom">
-        {/* About Foundation */}
-        ```
-        <div className="max-w-4xl mx-auto text-center mb-20">
-          <span className="text-[#844204] font-semibold uppercase tracking-[4px]">
+    <section className="relative overflow-hidden bg-white py-32">
+      {/* Decorative Background */}
+
+      <div className="absolute inset-0">
+        <div className="absolute -top-56 -left-32 h-[520px] w-[520px] rounded-full bg-[#FAF7F2]" />
+
+        <div className="absolute bottom-0 right-0 h-[420px] w-[420px] rounded-full bg-[#FAF7F2]/70" />
+      </div>
+
+      <div className="container-custom relative">
+        {/* Heading */}
+        <div className="mx-auto mb-24 max-w-5xl text-center">
+          <span className="uppercase tracking-[6px] font-semibold text-[#844204]">
             {foundation?.badge}
           </span>
 
-          <h2 className="text-4xl md:text-5xl font-bold mt-5 text-[#1B1815]">
+          <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-[#1B1815]">
             {foundation?.title}
           </h2>
 
-          <p className="mt-8 text-lg text-gray-600 leading-8">
+          <div className="mx-auto mt-8 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+
+          <p className="mx-auto mt-8 max-w-4xl text-lg leading-9 text-gray-600">
             {foundation?.description}
           </p>
         </div>
-        {/* Mission & Vision */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-20">
-          <div className="bg-[#FAF7F2] p-10 rounded-3xl border border-[#D9A441]/20 hover:shadow-xl transition-all duration-300">
-            <div className="w-16 h-16 rounded-2xl bg-[#844204]/10 flex items-center justify-center mb-6">
-              <Eye className="text-[#844204]" size={30} />
+        {/* Vision + Mission */}
+        <div className="grid gap-8 lg:grid-cols-2">
+          {/* Vision */}
+
+          <div className="group relative overflow-hidden rounded-[36px] border border-[#D9A441]/20 bg-white p-10 shadow-lg transition-all duration-700 hover:-translate-y-2 hover:border-[#D9A441] hover:shadow-2xl">
+            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[#FAF7F2] blur-3xl" />
+
+            <div className="relative">
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-[#844204]/10 transition-all duration-500 group-hover:bg-[#844204]">
+                <Eye
+                  size={36}
+                  className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                />
+              </div>
+
+              <span className="mt-8 block uppercase tracking-[4px] text-sm font-semibold text-[#844204]">
+                Our Vision
+              </span>
+
+              <h3 className="mt-4 text-4xl font-bold text-[#1B1815]">
+                Inspiring Hope.
+              </h3>
+
+              <div className="mt-6 h-[2px] w-16 rounded-full bg-[#D9A441]" />
+
+              <p className="mt-8 text-[17px] leading-9 text-gray-600">
+                {foundation?.vision}
+              </p>
             </div>
-
-            <h3 className="text-3xl font-bold mb-5 text-[#1B1815]">
-              Our Vision
-            </h3>
-
-            <p className="text-gray-600 leading-8">{foundation?.vision}</p>
           </div>
 
-          <div className="bg-[#FAF7F2] p-10 rounded-3xl border border-[#D9A441]/20 hover:shadow-xl transition-all duration-300">
-            <div className="w-16 h-16 rounded-2xl bg-[#844204]/10 flex items-center justify-center mb-6">
-              <Target className="text-[#844204]" size={30} />
+          {/* Mission */}
+
+          <div className="group relative overflow-hidden rounded-[36px] border border-[#D9A441]/20 bg-white p-10 shadow-lg transition-all duration-700 hover:-translate-y-2 hover:border-[#D9A441] hover:shadow-2xl">
+            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[#FAF7F2] blur-3xl" />
+
+            <div className="relative">
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-[#844204]/10 transition-all duration-500 group-hover:bg-[#844204]">
+                <Target
+                  size={36}
+                  className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                />
+              </div>
+
+              <span className="mt-8 block uppercase tracking-[4px] text-sm font-semibold text-[#844204]">
+                Our Mission
+              </span>
+
+              <h3 className="mt-4 text-4xl font-bold text-[#1B1815]">
+                Transforming Lives.
+              </h3>
+
+              <div className="mt-6 h-[2px] w-16 rounded-full bg-[#D9A441]" />
+
+              <p className="mt-8 text-[17px] leading-9 text-gray-600">
+                {foundation?.mission}
+              </p>
             </div>
-
-            <h3 className="text-3xl font-bold mb-5 text-[#1B1815]">
-              Our Mission
-            </h3>
-
-            <p className="text-gray-600 leading-8">{foundation?.mission}</p>
           </div>
-        </div>
+        </div>{" "}
         {/* Core Values */}
-        <div>
-          <div className="text-center mb-12">
-            <span className="text-[#844204] font-semibold uppercase tracking-[4px]">
+        <div className="mt-28">
+          <div className="mx-auto mb-16 max-w-3xl text-center">
+            <span className="uppercase tracking-[6px] font-semibold text-[#844204]">
               What Guides Us
             </span>
 
-            <h3 className="text-4xl font-bold mt-4 text-[#1B1815]">
+            <h3 className="mt-5 text-5xl font-bold text-[#1B1815]">
               Our Core Values
             </h3>
+
+            <div className="mx-auto mt-6 h-[3px] w-20 rounded-full bg-[#D9A441]" />
+
+            <p className="mt-7 text-lg leading-8 text-gray-600">
+              These values define our culture, shape our decisions and inspire
+              the way we serve every individual and community.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
             {values.map((value, index) => {
               const Icon = valueIcons[index];
 
               return (
                 <div
                   key={index}
-                  className="bg-white p-8 rounded-2xl border border-[#D9A441]/20 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                  className="group relative overflow-hidden rounded-[30px] border border-[#D9A441]/15 bg-white p-8 text-center shadow-sm transition-all duration-700 hover:-translate-y-3 hover:border-[#D9A441] hover:shadow-2xl"
                 >
-                  <div className="w-14 h-14 rounded-xl bg-[#844204]/10 flex items-center justify-center mb-5">
-                    {Icon && <Icon size={26} className="text-[#844204]" />}
+                  {/* Background Glow */}
+
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#FAF7F2] opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+
+                  <div className="relative">
+                    {/* Icon */}
+
+                    <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#844204]/10 transition-all duration-700 group-hover:rotate-6 group-hover:bg-[#844204]">
+                      {Icon && (
+                        <Icon
+                          size={34}
+                          className="text-[#844204] transition-all duration-700 group-hover:scale-110 group-hover:text-white"
+                        />
+                      )}
+                    </div>
+
+                    {/* Title */}
+
+                    <h4 className="mt-8 text-xl font-bold leading-7 text-[#1B1815]">
+                      {value.title}
+                    </h4>
+
+                    {/* Accent */}
+
+                    <div className="mx-auto mt-6 h-[2px] w-10 rounded-full bg-[#D9A441] transition-all duration-700 group-hover:w-16" />
                   </div>
-
-                  <h4 className="text-xl font-semibold mb-3 text-[#1B1815]">
-                    {value.title}
-                  </h4>
-
-                  <p className="text-gray-600 leading-7">{value.description}</p>
                 </div>
               );
             })}

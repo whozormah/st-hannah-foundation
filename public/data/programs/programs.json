@@ -1,7 +1,7 @@
 [
   {
     "title": "Education Support",
-    "image": "/causes/education.jpg",
+    "image": "/causes/education.jpeg",
     "description": "Providing educational assistance, school materials and opportunities for children and young people.",
     "link": "/programs"
   },
@@ -13,13 +13,13 @@
   },
   {
     "title": "Family Support",
-    "image": "/causes/community.jpg",
+    "image": "/causes/family.png",
     "description": "Providing assistance and resources that strengthen families and improve livelihoods.",
     "link": "/programs"
   },
   {
     "title": "Business Empowerment",
-    "image": "/causes/community.jpg",
+    "image": "/causes/business.png",
     "description": "Helping individuals build sustainable income through skills development and business support.",
     "link": "/programs"
   }

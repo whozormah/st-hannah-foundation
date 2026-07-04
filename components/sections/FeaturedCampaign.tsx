@@ -1,191 +1,148 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-
-import {
-  Home,
-  HeartPulse,
-  Utensils,
-  BriefcaseBusiness,
-  ArrowRight,
-} from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 import DonationModal from "@/components/shared/DonationModal";
 
-interface CampaignData {
-  name: string;
-  age: number;
-  tagline: string;
-  headline: string;
-  description: string[];
-  whyStoryMattersTitle: string;
-  whyStoryMatters: string;
-  mainImage: string;
-  gallery: string[];
-  needs: string[];
-  donationLink: string;
-  videoLink: string;
-}
+import StoryCard from "@/components/story/StoryCard";
+import StoryNavigation from "@/components/story/StoryNavigation";
+import StoryProgress from "@/components/story/StoryProgress";
+
+import { useStoryCarousel } from "@/hooks/useStoryCarousel";
+import { Story } from "@/types/story";
 
 export default function FeaturedCampaign() {
-  const [campaign, setCampaign] = useState<CampaignData | null>(null);
+  const [stories, setStories] = useState<Story[]>([]);
   const [showDonationModal, setShowDonationModal] = useState(false);
 
   useEffect(() => {
     fetch("/data/campaigns.json")
       .then((res) => res.json())
-      .then((data) => setCampaign(data))
-      .catch((err) => console.error(err));
+      .then((data) => setStories(data))
+      .catch(console.error);
   }, []);
 
-  const getIcon = (need: string) => {
-    switch (need) {
-      case "Safe Accommodation":
-        return <Home className="text-[#844204]" size={20} />;
+  const { current, currentStory, next, previous } = useStoryCarousel(stories);
 
-      case "Food Support":
-        return <Utensils className="text-[#844204]" size={20} />;
-
-      case "Medical Support":
-        return <HeartPulse className="text-[#844204]" size={20} />;
-
-      case "Income Empowerment":
-        return <BriefcaseBusiness className="text-[#844204]" size={20} />;
-
-      default:
-        return <HeartPulse className="text-[#844204]" size={20} />;
-    }
-  };
-
-  if (!campaign) return null;
+  if (!stories.length || !currentStory) return null;
 
   return (
     <>
-      <section className="py-28 bg-[#FAF7F2]">
-        <div className="container-custom">
+      <section className="relative overflow-hidden bg-[#FAF7F2] py-36">
+        {/* Decorative Background */}
+
+        <div className="absolute inset-0">
+          <div className="absolute -left-48 -top-40 h-[520px] w-[520px] rounded-full bg-white/70 blur-3xl" />
+
+          <div className="absolute bottom-0 right-0 h-[420px] w-[420px] rounded-full bg-white/60 blur-3xl" />
+
+          <div className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#D9A441]/10 blur-3xl" />
+        </div>
+
+        <div className="container-custom relative">
           {/* Header */}
 
-          <div className="text-center max-w-4xl mx-auto mb-20">
-            <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
-              Featured Story
-            </span>
+          <div className="mx-auto max-w-5xl text-center">
+            <div className="inline-flex items-center rounded-full border border-[#D9A441]/30 bg-white px-6 py-3 shadow-sm">
+              <span className="uppercase tracking-[4px] text-sm font-semibold text-[#844204]">
+                Stories of Hope
+              </span>
+            </div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mt-4 text-[#1B1815]">
-              {campaign.headline}
+            <h2 className="mt-8 text-5xl font-bold leading-tight text-[#1B1815] md:text-7xl">
+              Lives Changed Through Compassion
             </h2>
 
-            <p className="mt-6 text-lg text-gray-600">
-              Real lives. Real challenges. Real transformation.
+            <div className="mx-auto mt-8 h-1 w-28 rounded-full bg-[#D9A441]" />
+
+            <p className="mx-auto mt-10 max-w-4xl text-lg leading-9 text-gray-600">
+              Behind every programme is a real person, a real family and a real
+              journey. Discover inspiring stories of resilience, hope and
+              transformation made possible through compassion and collective
+              action.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Images */}
+          {/* Impact Statistics */}
 
-            <div>
-              <div className="relative h-[520px] rounded-[32px] overflow-hidden shadow-xl">
-                <Image
-                  src={campaign.mainImage}
-                  alt={campaign.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+          <div className="mx-auto mt-20 grid max-w-5xl gap-6 md:grid-cols-3">
+            <div className="rounded-[28px] border border-[#D9A441]/20 bg-white p-8 text-center shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+              <h3 className="text-5xl font-bold text-[#844204]">50+</h3>
 
-              <div className="grid grid-cols-3 gap-4 mt-5">
-                {campaign.gallery.map((image, index) => (
-                  <div
-                    key={index}
-                    className="relative h-28 rounded-2xl overflow-hidden"
-                  >
-                    <Image
-                      src={image}
-                      alt={campaign.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
+              <p className="mt-3 font-semibold text-[#1B1815]">
+                Families Supported
+              </p>
             </div>
 
-            {/* Content */}
+            <div className="rounded-[28px] border border-[#D9A441]/20 bg-white p-8 text-center shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+              <h3 className="text-5xl font-bold text-[#844204]">200+</h3>
 
-            <div>
-              <span className="inline-flex items-center bg-[#844204]/10 text-[#844204] px-4 py-2 rounded-full font-medium">
-                {campaign.tagline}
-              </span>
+              <p className="mt-3 font-semibold text-[#1B1815]">
+                Lives Impacted
+              </p>
+            </div>
 
-              <h3 className="text-3xl md:text-4xl font-bold mt-6 text-[#1B1815]">
-                {campaign.name}
-              </h3>
+            <div className="rounded-[28px] border border-[#D9A441]/20 bg-white p-8 text-center shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+              <h3 className="text-5xl font-bold text-[#844204]">12+</h3>
 
-              <div className="mt-8 space-y-6 text-gray-700 leading-8 text-lg">
-                {campaign.description.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                ))}
-              </div>
-
-              {/* Why Story Matters */}
-
-              <div className="mt-10 bg-white rounded-3xl p-8 border border-[#D9A441]/20">
-                <h4 className="text-2xl font-bold text-[#844204] mb-4">
-                  {campaign.whyStoryMattersTitle}
-                </h4>
-
-                <p className="text-gray-600 leading-8">
-                  {campaign.whyStoryMatters}
-                </p>
-              </div>
-
-              {/* Needs */}
-
-              <div className="mt-10">
-                <h4 className="text-2xl font-bold mb-6">Current Needs</h4>
-
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {campaign.needs.map((need, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-[#D9A441]/20"
-                    >
-                      {getIcon(need)}
-
-                      <span className="font-medium">{need}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* CTA */}
-
-              <div className="mt-10 flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => setShowDonationModal(true)}
-                  className="bg-[#844204] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#6d3503] transition"
-                >
-                  Support Esther's Family
-                </button>
-
-                <Link
-                  href={campaign.videoLink}
-                  target="_blank"
-                  className="border border-[#844204] text-[#844204] px-8 py-4 rounded-xl font-semibold text-center hover:bg-[#844204] hover:text-white transition flex items-center justify-center gap-2"
-                >
-                  Watch Story
-                  <ArrowRight size={18} />
-                </Link>
-              </div>
+              <p className="mt-3 font-semibold text-[#1B1815]">
+                Community Projects
+              </p>
             </div>
           </div>
+
+          {/* Navigation */}
+
+          <div className="mt-24">
+            <StoryNavigation
+              current={current}
+              total={stories.length}
+              onPrevious={previous}
+              onNext={next}
+            />
+
+            <StoryProgress current={current} total={stories.length} />
+          </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStory.id}
+              initial={{
+                opacity: 0,
+                y: 60,
+                scale: 0.98,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                y: -60,
+                scale: 0.98,
+              }}
+              transition={{
+                duration: 0.7,
+                ease: "easeOut",
+              }}
+            >
+              {" "}
+              <StoryCard
+                story={currentStory}
+                onDonate={() => setShowDonationModal(true)}
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Final CTA */}
         </div>
       </section>
 
       <DonationModal
         isOpen={showDonationModal}
-        programName="Esther Orga Family Support"
+        programName={currentStory.name}
         onClose={() => setShowDonationModal(false)}
       />
     </>

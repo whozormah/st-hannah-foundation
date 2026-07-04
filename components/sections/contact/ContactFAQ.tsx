@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { ChevronDown, MessageCircle, ArrowRight } from "lucide-react";
 
 export default function ContactFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -10,95 +11,131 @@ export default function ContactFAQ() {
     {
       question: "How do I apply for support?",
       answer:
-        "You can apply through our Apply For Support page by completing the application form and providing any relevant supporting documents.",
+        "You can submit an application through our Apply for Support page. Each application is carefully reviewed based on eligibility, need and available programme resources.",
     },
     {
       question: "Does submitting an application guarantee approval?",
       answer:
-        "No. Every application is carefully reviewed based on need, eligibility, available resources and programme requirements.",
+        "No. Every application undergoes an assessment process to ensure available resources reach individuals and families with the greatest need.",
     },
     {
       question: "How long does the review process take?",
       answer:
-        "Review timelines vary depending on the type of support requested and the volume of applications being processed.",
+        "Processing times vary depending on the programme and application volume. Our team will keep you informed throughout the review process.",
     },
     {
       question: "How can I volunteer with St. Hannah Foundation?",
       answer:
-        "You can complete our volunteer application form and a member of our team will contact you regarding available opportunities.",
+        "Complete the Volunteer Application form and our team will contact you regarding available opportunities that match your skills and interests.",
     },
     {
-      question: "Do you accept corporate partnerships?",
+      question: "Do you welcome corporate partnerships?",
       answer:
-        "Yes. We welcome partnerships with businesses, institutions and organizations that share our commitment to creating sustainable impact.",
+        "Absolutely. We collaborate with businesses, churches, institutions and organisations that share our vision of creating sustainable impact.",
     },
     {
       question: "Can I refer someone who needs assistance?",
       answer:
-        "Yes. Referrals are welcome and are reviewed using the same assessment process as direct applications.",
+        "Yes. Referrals are welcome and are assessed using the same transparent review process as direct applications.",
     },
   ];
 
   return (
-    <section className="py-28 bg-[#FAF7F2]">
-      {" "}
+    <section className="py-32 bg-white">
       <div className="container-custom">
-        {" "}
-        <div className="text-center mb-20">
-          {" "}
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
-            Frequently Asked Questions{" "}
+        {/* Header */}
+
+        <div className="mx-auto mb-20 max-w-4xl text-center">
+          <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+            Frequently Asked Questions
           </span>
-          ```
-          <h2 className="text-4xl md:text-5xl font-bold mt-4">
-            We're Here To Help
+
+          <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-[#1B1815]">
+            Answers To The
+            <br />
+            Questions We Hear Most
           </h2>
-          <p className="max-w-3xl mx-auto mt-6 text-gray-600 leading-8">
-            Find answers to some of the most common questions about our
-            programmes, partnerships, volunteer opportunities and support
+
+          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+            We've answered some of the most common questions about our
+            programmes, partnerships, volunteering opportunities and support
             services.
           </p>
         </div>
-        <div className="max-w-4xl mx-auto space-y-5">
+
+        {/* FAQ */}
+
+        <div className="mx-auto max-w-5xl space-y-6">
           {faqs.map((faq, index) => (
             <div
               key={faq.question}
-              className="bg-white rounded-[24px] overflow-hidden shadow-sm"
+              className="group overflow-hidden rounded-[32px] border border-gray-100 bg-[#FAF7F2] transition-all duration-300 hover:border-[#D9A441]/30 hover:shadow-xl"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-center justify-between p-8 text-left"
+                className="flex w-full items-center justify-between p-8 text-left"
               >
-                <h3 className="font-bold text-lg md:text-xl">{faq.question}</h3>
+                <h3 className="pr-6 text-xl font-bold leading-8 text-[#1B1815]">
+                  {faq.question}
+                </h3>
 
-                <ChevronDown
-                  className={`transition duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
+                <div
+                  className={`flex h-12 w-12 items-center justify-center rounded-full bg-white transition-all duration-300 ${
+                    openIndex === index
+                      ? "rotate-180 bg-[#844204] text-white"
+                      : "text-[#844204]"
                   }`}
-                />
+                >
+                  <ChevronDown size={22} />
+                </div>
               </button>
 
-              {openIndex === index && (
-                <div className="px-8 pb-8">
-                  <p className="text-gray-600 leading-8">{faq.answer}</p>
+              <div
+                className={`grid transition-all duration-500 ${
+                  openIndex === index ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="px-8 pb-8">
+                    <div className="mb-6 h-[2px] w-16 rounded-full bg-[#D9A441]" />
+
+                    <p className="text-lg leading-9 text-gray-600">
+                      {faq.answer}
+                    </p>
+                  </div>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
-        <div className="text-center mt-16">
-          <h3 className="text-3xl font-bold">Still Have Questions?</h3>
 
-          <p className="mt-4 text-gray-600">
-            Our team would be happy to assist you.
+        {/* Bottom Card */}
+
+        <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-[#844204] p-12 text-center text-white shadow-2xl">
+          <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-white/10">
+            <MessageCircle size={38} />
+          </div>
+
+          <h3 className="mt-8 text-4xl font-bold">Still Need Help?</h3>
+
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-9 text-white/90">
+            If you couldn't find the answer you were looking for, our team is
+            always happy to help. Reach out and we'll respond as quickly as
+            possible.
           </p>
 
-          <a
+          <Link
             href="/contact"
-            className="inline-block mt-8 bg-[#844204] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#6e3503] transition"
+            className="group mt-10 inline-flex items-center gap-3 rounded-full bg-white px-10 py-5 font-semibold text-[#844204] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
             Contact Our Team
-          </a>
+            <ArrowRight
+              size={18}
+              className="transition-transform duration-300 group-hover:translate-x-2"
+            />
+          </Link>
         </div>
       </div>
     </section>

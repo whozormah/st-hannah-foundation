@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Heart, Users, Handshake } from "lucide-react";
+import Link from "next/link";
+import { Heart, Users, Handshake, ArrowRight } from "lucide-react";
 
 import DonationModal from "@/components/shared/DonationModal";
 import PartnerModal from "@/components/shared/PartnerModal";
@@ -12,114 +13,174 @@ export default function ImpactCTA() {
 
   return (
     <>
-      {" "}
-      <section className="py-32 bg-[#844204] text-white relative overflow-hidden">
-        {/* Background Effects */}
+      <section className="relative overflow-hidden bg-[#844204] py-32 text-white">
+        {/* Background Glow */}
 
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-[#D9A441] rounded-full blur-3xl" />
+        <div className="absolute inset-0">
+          <div className="absolute -left-32 -top-32 h-[520px] w-[520px] rounded-full bg-[#D9A441]/10 blur-3xl" />
 
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#D9A441] rounded-full blur-3xl" />
+          <div className="absolute -bottom-32 -right-32 h-[520px] w-[520px] rounded-full bg-[#D9A441]/10 blur-3xl" />
         </div>
 
-        <div className="container-custom text-center relative z-10">
-          {/* Section Header */}
+        <div className="container-custom relative z-10">
+          {/* Heading */}
 
-          <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
-            Join The Mission
-          </span>
+          <div className="mx-auto max-w-5xl text-center">
+            <span className="font-semibold uppercase tracking-[6px] text-[#F4D06F]">
+              Become Part Of The Story
+            </span>
 
-          <h2 className="text-5xl md:text-7xl font-bold mt-6 leading-tight max-w-5xl mx-auto">
-            The Next Story Of Hope
-            <br />
-            Could Begin With You
-          </h2>
+            <h2 className="mt-6 text-5xl font-bold leading-tight md:text-7xl">
+              The Next Story Of Hope
+              <br />
+              Could Begin With You
+            </h2>
 
-          <p className="max-w-3xl mx-auto mt-8 text-lg text-gray-200 leading-8">
-            Through your generosity, partnership and service, we are restoring
-            hope, empowering widows, supporting education, strengthening
-            families and transforming communities one life at a time.
-          </p>
+            <div className="mx-auto mt-8 h-[3px] w-24 rounded-full bg-[#D9A441]" />
 
-          {/* Impact Statistics */}
+            <p className="mx-auto mt-10 max-w-3xl text-lg leading-9 text-white/85">
+              Every donation, every volunteer and every partnership makes it
+              possible to restore dignity, strengthen families and create new
+              opportunities for those who need them most.
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mt-16 mb-16">
-            <div>
-              <h3 className="text-5xl font-bold text-[#D9A441]">500+</h3>
+          {/* Statistics */}
 
-              <p className="mt-2 text-gray-200">Widows Supported</p>
+          <div className="mx-auto mt-20 grid max-w-5xl gap-10 md:grid-cols-3">
+            <div className="text-center">
+              <h3 className="text-6xl font-bold text-[#D9A441]">500+</h3>
+
+              <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-[#D9A441]" />
+
+              <p className="mt-5 text-lg text-white/85">Widows Supported</p>
             </div>
 
-            <div>
-              <h3 className="text-5xl font-bold text-[#D9A441]">100+</h3>
+            <div className="text-center">
+              <h3 className="text-6xl font-bold text-[#D9A441]">100+</h3>
 
-              <p className="mt-2 text-gray-200">Families Reached</p>
+              <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-[#D9A441]" />
+
+              <p className="mt-5 text-lg text-white/85">Families Reached</p>
             </div>
 
-            <div>
-              <h3 className="text-5xl font-bold text-[#D9A441]">15+</h3>
+            <div className="text-center">
+              <h3 className="text-6xl font-bold text-[#D9A441]">15+</h3>
 
-              <p className="mt-2 text-gray-200">Students Sponsored</p>
+              <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-[#D9A441]" />
+
+              <p className="mt-5 text-lg text-white/85">Students Sponsored</p>
             </div>
           </div>
 
-          {/* Action Cards */}
+          {/* Cards */}
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16">
+          <div className="mt-24 grid gap-8 lg:grid-cols-3">
+            {/* Donate */}
+
             <button
               onClick={() => setIsDonateOpen(true)}
-              className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 hover:bg-white/20 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:bg-white/10 hover:shadow-2xl"
             >
-              <Heart size={42} className="mx-auto text-[#D9A441]" />
+              <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-[#D9A441]/10 transition-all duration-500 group-hover:bg-[#D9A441]">
+                <Heart
+                  size={38}
+                  className="text-[#D9A441] transition-all duration-500 group-hover:text-[#2E1B05]"
+                />
+              </div>
 
-              <h3 className="font-bold text-2xl mt-5">Donate</h3>
+              <h3 className="text-3xl font-bold">Donate</h3>
 
-              <p className="mt-3 text-gray-200 leading-7">
-                Support life-changing programmes that directly impact widows,
-                students, families and vulnerable communities.
+              <p className="mt-5 leading-8 text-white/80">
+                Help fund programmes that provide education, healthcare,
+                empowerment and sustainable support to vulnerable communities.
               </p>
+
+              <div className="mt-10 inline-flex items-center gap-3 font-semibold text-[#F4D06F]">
+                Support A Cause
+                <ArrowRight
+                  size={18}
+                  className="transition duration-300 group-hover:translate-x-2"
+                />
+              </div>
             </button>
 
-            <a
+            {/* Volunteer */}
+
+            <Link
               href="/volunteer"
-              className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 hover:bg-white/20 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 block"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:bg-white/10 hover:shadow-2xl"
             >
-              <Users size={42} className="mx-auto text-[#D9A441]" />
+              <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-[#D9A441]/10 transition-all duration-500 group-hover:bg-[#D9A441]">
+                <Users
+                  size={38}
+                  className="text-[#D9A441] transition-all duration-500 group-hover:text-[#2E1B05]"
+                />
+              </div>
 
-              <h3 className="font-bold text-2xl mt-5">Volunteer</h3>
+              <h3 className="text-3xl font-bold">Volunteer</h3>
 
-              <p className="mt-3 text-gray-200 leading-7">
-                Share your skills, expertise and time to help us create
-                sustainable impact in communities.
+              <p className="mt-5 leading-8 text-white/80">
+                Use your time, experience and passion to create lasting impact
+                in the lives of children, widows and families.
               </p>
-            </a>
+
+              <div className="mt-10 inline-flex items-center gap-3 font-semibold text-[#F4D06F]">
+                Join Our Team
+                <ArrowRight
+                  size={18}
+                  className="transition duration-300 group-hover:translate-x-2"
+                />
+              </div>
+            </Link>
+
+            {/* Partner */}
 
             <button
               onClick={() => setIsPartnerOpen(true)}
-              className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 hover:bg-white/20 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:bg-white/10 hover:shadow-2xl"
             >
-              <Handshake size={42} className="mx-auto text-[#D9A441]" />
+              <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-[#D9A441]/10 transition-all duration-500 group-hover:bg-[#D9A441]">
+                <Handshake
+                  size={38}
+                  className="text-[#D9A441] transition-all duration-500 group-hover:text-[#2E1B05]"
+                />
+              </div>
 
-              <h3 className="font-bold text-2xl mt-5">Partner</h3>
+              <h3 className="text-3xl font-bold">Partner With Us</h3>
 
-              <p className="mt-3 text-gray-200 leading-7">
-                Collaborate with us through sponsorships, strategic partnerships
-                and corporate support initiatives.
+              <p className="mt-5 leading-8 text-white/80">
+                Collaborate with us through sponsorships, corporate partnerships
+                and strategic initiatives that expand our reach.
               </p>
+
+              <div className="mt-10 inline-flex items-center gap-3 font-semibold text-[#F4D06F]">
+                Become A Partner
+                <ArrowRight
+                  size={18}
+                  className="transition duration-300 group-hover:translate-x-2"
+                />
+              </div>
             </button>
           </div>
 
-          <p className="mt-12 text-lg text-gray-200 max-w-3xl mx-auto leading-8">
-            Every donation, every volunteer and every partner helps us extend
-            hope, restore dignity and create lasting transformation in the lives
-            of those who need it most.
-          </p>
+          {/* Closing */}
+
+          <div className="mx-auto mt-24 max-w-4xl text-center">
+            <p className="text-xl leading-9 text-white/85">
+              The stories you've read today are only the beginning. Together, we
+              can create many more stories of hope, resilience and lasting
+              transformation for generations to come.
+            </p>
+          </div>
         </div>
       </section>
+
       <DonationModal
         isOpen={isDonateOpen}
         onClose={() => setIsDonateOpen(false)}
       />
+
       <PartnerModal
         isOpen={isPartnerOpen}
         onClose={() => setIsPartnerOpen(false)}

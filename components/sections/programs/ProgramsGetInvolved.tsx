@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-import { Heart, Users, Building2, HandHeart } from "lucide-react";
+import { Heart, Users, Building2, HandHeart, ArrowRight } from "lucide-react";
 
 import DonationModal from "@/components/shared/DonationModal";
 import PartnerModal from "@/components/shared/PartnerModal";
@@ -39,51 +39,106 @@ export default function ProgramsGetInvolved() {
       icon: HandHeart,
       description:
         "Learn about available programmes and submit an application for assistance where eligible.",
-      link: "/support",
+      link: "/apply-for-support",
     },
   ];
 
   return (
     <>
-      {" "}
-      <section className="py-32 bg-[#FAF7F2]">
-        {" "}
+      <section className="bg-[#FAF7F2] py-32">
         <div className="container-custom">
-          {" "}
-          <div className="text-center max-w-4xl mx-auto mb-20">
-            {" "}
-            <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
-              Get Involved{" "}
+          {/* Heading */}
+
+          <div className="mx-auto mb-20 max-w-4xl text-center">
+            <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+              Get Involved
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold mt-4">
-              Join Us In Transforming Lives
+
+            <h2 className="mt-5 text-5xl font-bold text-[#1B1815] md:text-6xl">
+              Be Part Of
+              <br />
+              Something Bigger
             </h2>
-            <p className="mt-6 text-lg text-gray-600 leading-8">
+
+            <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+
+            <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
               Every act of generosity, service and partnership helps us reach
               more individuals, strengthen more families and create lasting
               impact across communities.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          {/* Banner */}
+
+          <div className="relative mb-20 overflow-hidden rounded-[40px] bg-gradient-to-r from-[#844204] via-[#9A5A12] to-[#B27425] px-12 py-16 text-white shadow-2xl">
+            <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
+
+            <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
+
+            <div className="relative mx-auto max-w-4xl text-center">
+              <span className="uppercase tracking-[5px] text-[#F4D06F]">
+                Join The Mission
+              </span>
+
+              <h3 className="mt-5 text-4xl font-bold">
+                Small Acts Of Kindness
+                <br />
+                Create Extraordinary Impact
+              </h3>
+
+              <p className="mt-8 text-lg leading-9 text-white/85">
+                Whether you choose to give, volunteer, partner or seek support,
+                every connection strengthens our mission of restoring hope and
+                empowering communities.
+              </p>
+            </div>
+          </div>
+
+          {/* Cards */}
+
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {options.map((option) => {
               const Icon = option.icon;
+
+              const cardClasses =
+                "group flex flex-col rounded-[36px] border border-gray-100 bg-white p-8 shadow-lg transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:shadow-2xl";
+
+              const CardContent = (
+                <>
+                  <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-[#FFF8EC] transition-all duration-500 group-hover:scale-110 group-hover:bg-[#844204]">
+                    <Icon
+                      size={36}
+                      className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                    />
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-[#1B1815]">
+                    {option.title}
+                  </h3>
+
+                  <p className="mt-5 flex-grow leading-8 text-gray-600">
+                    {option.description}
+                  </p>
+
+                  <div className="mt-10 flex items-center gap-2 font-semibold text-[#844204]">
+                    Learn More
+                    <ArrowRight
+                      size={18}
+                      className="transition duration-300 group-hover:translate-x-2"
+                    />
+                  </div>
+                </>
+              );
 
               if (option.action === "donate") {
                 return (
                   <button
                     key={option.title}
                     onClick={() => setShowDonationModal(true)}
-                    className="text-left bg-white rounded-[32px] p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+                    className={`${cardClasses} text-left`}
                   >
-                    <div className="w-16 h-16 rounded-2xl bg-[#844204]/10 flex items-center justify-center mb-6">
-                      <Icon size={28} className="text-[#844204]" />
-                    </div>
-
-                    <h3 className="text-2xl font-bold">{option.title}</h3>
-
-                    <p className="mt-4 text-gray-600 leading-7">
-                      {option.description}
-                    </p>
+                    {CardContent}
                   </button>
                 );
               }
@@ -93,46 +148,53 @@ export default function ProgramsGetInvolved() {
                   <button
                     key={option.title}
                     onClick={() => setShowPartnerModal(true)}
-                    className="text-left bg-white rounded-[32px] p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
+                    className={`${cardClasses} text-left`}
                   >
-                    <div className="w-16 h-16 rounded-2xl bg-[#844204]/10 flex items-center justify-center mb-6">
-                      <Icon size={28} className="text-[#844204]" />
-                    </div>
-
-                    <h3 className="text-2xl font-bold">{option.title}</h3>
-
-                    <p className="mt-4 text-gray-600 leading-7">
-                      {option.description}
-                    </p>
+                    {CardContent}
                   </button>
                 );
               }
 
               return (
                 <Link
-                  href={option.link!}
                   key={option.title}
-                  className="bg-white rounded-[32px] p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 block"
+                  href={option.link!}
+                  className={cardClasses}
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-[#844204]/10 flex items-center justify-center mb-6">
-                    <Icon size={28} className="text-[#844204]" />
-                  </div>
-
-                  <h3 className="text-2xl font-bold">{option.title}</h3>
-
-                  <p className="mt-4 text-gray-600 leading-7">
-                    {option.description}
-                  </p>
+                  {CardContent}
                 </Link>
               );
             })}
           </div>
+
+          {/* Closing */}
+
+          <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-white p-14 text-center shadow-xl">
+            <span className="uppercase tracking-[5px] text-[#844204]">
+              Together We Can
+            </span>
+
+            <h3 className="mt-5 text-4xl font-bold text-[#1B1815]">
+              Every Contribution Creates A Brighter Tomorrow
+            </h3>
+
+            <div className="mx-auto mt-6 h-[3px] w-20 rounded-full bg-[#D9A441]" />
+
+            <p className="mt-8 text-lg leading-9 text-gray-600">
+              Lasting transformation happens when compassionate people come
+              together. Your support, whether through giving, volunteering or
+              partnership, enables us to reach more families, empower more
+              children and strengthen more communities.
+            </p>
+          </div>
         </div>
       </section>
+
       <DonationModal
         isOpen={showDonationModal}
         onClose={() => setShowDonationModal(false)}
       />
+
       <PartnerModal
         isOpen={showPartnerModal}
         onClose={() => setShowPartnerModal(false)}

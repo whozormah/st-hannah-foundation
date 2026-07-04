@@ -24,7 +24,7 @@
     "title": "Supporting Families Through Difficult Times",
     "category": "Family Support",
     "excerpt": "Providing food assistance and welfare support to vulnerable families.",
-    "image": "/impact/family-support/1.jpg",
+    "image": "/impact/family-support/1.png",
     "beneficiaries": "100+",
     "date": "October 2025",
     "featured": true
@@ -34,17 +34,17 @@
     "title": "Bringing Hope Through Medical Assistance",
     "category": "Medical Aid",
     "excerpt": "Providing access to medical support and healthcare interventions for vulnerable individuals.",
-    "image": "/impact/medical-aid/1.jpg",
+    "image": "/impact/medical-aid/1.png",
     "beneficiaries": "80+",
     "date": "July 2025",
-    "featured": true
+    "featured": false
   },
   {
     "slug": "business-empowerment-support",
     "title": "Creating Sustainable Livelihoods",
     "category": "Business Empowerment",
     "excerpt": "Providing tools, resources and support that help beneficiaries start or grow small businesses.",
-    "image": "/impact/business-empowerment/1.jpg",
+    "image": "/impact/business-empowerment/1.png",
     "beneficiaries": "50+",
     "date": "November 2025",
     "featured": true

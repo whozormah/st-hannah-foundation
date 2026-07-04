@@ -44,25 +44,63 @@ export default function ProgramsAreas() {
   }, []);
 
   return (
-    <section className="py-32 bg-[#FAF7F2]">
-      {" "}
+    <section className="bg-[#FAF7F2] py-32">
       <div className="container-custom">
-        {" "}
-        <div className="text-center max-w-4xl mx-auto mb-20">
-          {" "}
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
-            Areas Of Impact{" "}
+        {/* Heading */}
+
+        <div className="mx-auto mb-20 max-w-4xl text-center">
+          <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+            Areas Of Impact
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-4">
-            Creating Change Through Purposeful Action
+
+          <h2 className="mt-5 text-5xl font-bold text-[#1B1815] md:text-6xl">
+            Creating Change Through
+            <br />
+            Purposeful Action
           </h2>
-          <p className="mt-6 text-lg text-gray-600 leading-8 max-w-3xl mx-auto">
+
+          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
             Through targeted programmes and community-driven initiatives, St.
             Hannah Foundation restores hope, strengthens families and empowers
             communities to build brighter futures.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+
+        {/* Featured Banner */}
+
+        <div className="relative mb-20 overflow-hidden rounded-[40px] bg-gradient-to-r from-[#844204] via-[#9A5A12] to-[#B27425] px-12 py-16 text-white shadow-2xl">
+          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
+
+          <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
+
+          <div className="relative mx-auto max-w-4xl text-center">
+            <span className="uppercase tracking-[5px] text-[#F4D06F]">
+              Our Commitment
+            </span>
+
+            <h3 className="mt-5 text-4xl font-bold leading-tight">
+              Every Programme Exists To Restore Hope
+              <br />
+              And Create Lasting Change
+            </h3>
+
+            <p className="mt-8 text-lg leading-9 text-white/85">
+              Every initiative is intentionally designed to meet real needs,
+              strengthen families, empower communities and create sustainable
+              opportunities that continue long after an outreach has ended.
+            </p>
+          </div>
+        </div>
+
+        {/* Divider */}
+
+        <div className="mx-auto mb-16 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+
+        {/* Programme Cards */}
+
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
           {programs.map((program) => {
             const Icon = iconMap[program.icon as keyof typeof iconMap];
 
@@ -70,41 +108,56 @@ export default function ProgramsAreas() {
               <Link
                 key={program.slug}
                 href={`/programs/${program.slug}`}
-                className="group bg-white rounded-[32px] p-8 border border-gray-100 hover:border-[#D9A441]/40 hover:-translate-y-3 hover:shadow-2xl transition-all duration-500 flex flex-col"
+                className="group flex flex-col rounded-[36px] border border-gray-100 bg-white p-8 shadow-lg transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:shadow-2xl"
               >
-                <div className="w-16 h-16 rounded-2xl bg-[#844204]/10 flex items-center justify-center mb-6">
-                  {Icon && <Icon size={30} className="text-[#844204]" />}
+                <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-[#FFF8EC] transition-all duration-500 group-hover:scale-110 group-hover:bg-[#844204]">
+                  {Icon && (
+                    <Icon
+                      size={36}
+                      className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                    />
+                  )}
                 </div>
 
-                <h3 className="text-2xl font-bold leading-tight">
+                <h3 className="text-2xl font-bold leading-tight text-[#1B1815]">
                   {program.title}
                 </h3>
 
-                <p className="mt-4 text-gray-600 leading-7 flex-grow">
+                <p className="mt-5 flex-grow leading-8 text-gray-600">
                   {program.excerpt}
                 </p>
 
-                <div className="mt-8 flex items-center gap-2 text-[#844204] font-semibold">
+                <div className="mt-10 flex items-center gap-2 font-semibold text-[#844204]">
                   Learn More
                   <ArrowRight
                     size={18}
-                    className="group-hover:translate-x-1 transition"
+                    className="transition duration-300 group-hover:translate-x-2"
                   />
                 </div>
               </Link>
             );
           })}
         </div>
-        <div className="max-w-4xl mx-auto text-center mt-24">
-          <h3 className="text-3xl md:text-4xl font-bold text-[#844204]">
-            Every Programme Begins With A Need
+
+        {/* Closing Statement */}
+
+        <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-white p-14 text-center shadow-xl">
+          <span className="uppercase tracking-[5px] text-[#844204]">
+            Why It Matters
+          </span>
+
+          <h3 className="mt-5 text-4xl font-bold text-[#1B1815]">
+            Lasting Impact Starts With Intentional Action
           </h3>
 
-          <p className="mt-6 text-gray-600 text-lg leading-8">
-            Whether supporting education, empowering widows, providing medical
-            assistance, strengthening families or creating opportunities for
-            skilled labourers, our mission remains the same — restoring dignity,
-            creating opportunities and transforming lives.
+          <div className="mx-auto mt-6 h-[3px] w-20 rounded-full bg-[#D9A441]" />
+
+          <p className="mt-8 text-lg leading-9 text-gray-600">
+            Behind every programme is a person, a family or a community waiting
+            for an opportunity to thrive. Through sustainable interventions,
+            compassionate service and meaningful partnerships, we continue to
+            restore dignity, strengthen resilience and create brighter futures
+            one life at a time.
           </p>
         </div>
       </div>

@@ -12,7 +12,19 @@ interface Leader {
   bio: string;
 }
 
-export default function LeadershipPreview() {
+interface LeadershipPreviewProps {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  showButton?: boolean;
+}
+
+export default function LeadershipPreview({
+  eyebrow = "Governance & Leadership",
+  title = "Meet The Leaders Behind The Mission",
+  description = "Behind every initiative is a dedicated team committed to advancing our mission, strengthening communities and ensuring every programme delivers meaningful, measurable and lasting impact.",
+  showButton = true,
+}: LeadershipPreviewProps) {
   const [leaders, setLeaders] = useState<Leader[]>([]);
 
   useEffect(() => {
@@ -37,17 +49,15 @@ export default function LeadershipPreview() {
 
         <div className="mx-auto mb-24 max-w-4xl text-center">
           <span className="uppercase tracking-[6px] text-[#844204] font-semibold">
-            Governance & Leadership
+            {eyebrow}
           </span>
 
           <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-[#1B1815]">
-            Meet The Leaders Behind The Mission
+            {title}
           </h2>
 
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
-            Behind every initiative is a dedicated team committed to advancing
-            our mission, strengthening communities and ensuring every programme
-            delivers meaningful, measurable and lasting impact.
+            {description}
           </p>
         </div>
 
@@ -173,18 +183,20 @@ export default function LeadershipPreview() {
 
         {/* CTA */}
 
-        <div className="mt-20 text-center">
-          <Link
-            href="/team"
-            className="group inline-flex items-center gap-3 rounded-full bg-[#844204] px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-[#6D3503] hover:shadow-xl"
-          >
-            View Full Leadership Team
-            <ArrowRight
-              size={18}
-              className="transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </Link>
-        </div>
+        {showButton && (
+          <div className="mt-20 text-center">
+            <Link
+              href="/team"
+              className="group inline-flex items-center gap-3 rounded-full bg-[#844204] px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-[#6D3503] hover:shadow-xl"
+            >
+              View Full Leadership Team
+              <ArrowRight
+                size={18}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
