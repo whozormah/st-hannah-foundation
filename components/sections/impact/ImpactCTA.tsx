@@ -13,10 +13,10 @@ export default function ImpactCTA() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-brand py-32 text-white">
+      <section className="relative overflow-hidden bg-brand py-24 text-white">
         {/* Background Glow */}
 
-        <div className="absolute inset-0">
+        <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="absolute -left-32 -top-32 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
 
           <div className="absolute -bottom-32 -right-32 h-[520px] w-[520px] rounded-full bg-accent/10 blur-3xl" />
@@ -30,7 +30,7 @@ export default function ImpactCTA() {
               Become Part Of The Story
             </span>
 
-            <h2 className="mt-6 text-5xl font-bold leading-tight md:text-7xl">
+            <h2 className="mt-6 text-3xl font-bold leading-tight md:text-5xl">
               The Next Story Of Hope{" "}
               <br />
               Could Begin With You
@@ -45,37 +45,9 @@ export default function ImpactCTA() {
             </p>
           </div>
 
-          {/* Statistics */}
-
-          <div className="mx-auto mt-20 grid max-w-5xl gap-10 md:grid-cols-3">
-            <div className="text-center">
-              <h3 className="text-6xl font-bold text-accent">500+</h3>
-
-              <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-accent" />
-
-              <p className="mt-5 text-lg text-white/85">Widows Supported</p>
-            </div>
-
-            <div className="text-center">
-              <h3 className="text-6xl font-bold text-accent">100+</h3>
-
-              <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-accent" />
-
-              <p className="mt-5 text-lg text-white/85">Families Reached</p>
-            </div>
-
-            <div className="text-center">
-              <h3 className="text-6xl font-bold text-accent">15+</h3>
-
-              <div className="mx-auto mt-4 h-[3px] w-12 rounded-full bg-accent" />
-
-              <p className="mt-5 text-lg text-white/85">Students Sponsored</p>
-            </div>
-          </div>
-
           {/* Cards */}
 
-          <div className="mt-24 grid gap-8 lg:grid-cols-3">
+          <div className="mt-16 grid gap-6 lg:grid-cols-3">
             {/* Donate */}
 
             <button
@@ -166,7 +138,7 @@ export default function ImpactCTA() {
 
           {/* Closing */}
 
-          <div className="mx-auto mt-24 max-w-4xl text-center">
+          <div className="mx-auto mt-16 max-w-3xl text-center">
             <p className="text-xl leading-9 text-white/85">
               The stories you&apos;ve read today are only the beginning. Together, we
               can create many more stories of hope, resilience and lasting
