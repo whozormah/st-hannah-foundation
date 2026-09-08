@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import {
   Eye,
   Target,
@@ -11,6 +8,9 @@ import {
   Scale,
   Users,
 } from "lucide-react";
+
+import foundationData from "@/public/data/homepage/foundation.json";
+import coreValues from "@/public/data/homepage/core-values.json";
 
 interface FoundationData {
   badge: string;
@@ -24,23 +24,10 @@ interface Value {
   title: string;
 }
 
+const foundation: FoundationData = foundationData;
+const values: Value[] = coreValues;
+
 export default function VisionMission() {
-  const [foundation, setFoundation] = useState<FoundationData | null>(null);
-
-  const [values, setValues] = useState<Value[]>([]);
-
-  useEffect(() => {
-    fetch("/data/homepage/foundation.json")
-      .then((res) => res.json())
-      .then((data) => setFoundation(data))
-      .catch(console.error);
-
-    fetch("/data/homepage/core-values.json")
-      .then((res) => res.json())
-      .then((data) => setValues(data))
-      .catch(console.error);
-  }, []);
-
   const valueIcons = [
     HeartHandshake,
     ShieldCheck,

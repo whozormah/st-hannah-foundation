@@ -1,8 +1,7 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+import eventsData from "@/public/data/featured-events.json";
 
 interface EventItem {
   title: string;
@@ -12,15 +11,10 @@ interface EventItem {
   link: string;
 }
 
-export default function FeaturedEvents() {
-  const [events, setEvents] = useState<EventItem[]>([]);
+const events: EventItem[] = eventsData;
 
-  useEffect(() => {
-    fetch("/data/featured-events.json")
-      .then((res) => res.json())
-      .then((data) => setEvents(data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function FeaturedEvents() {
+
 
   return (
     <section className="py-24 bg-[#FAF7F2]">

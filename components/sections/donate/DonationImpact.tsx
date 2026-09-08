@@ -1,6 +1,5 @@
-"use client";
 
-import { useEffect, useState } from "react";
+import donationImpact from "@/public/data/donation-impact.json";
 
 interface Stat {
   number: string;
@@ -17,19 +16,9 @@ interface DonationImpactData {
   causes: Cause[];
 }
 
+const data: DonationImpactData = donationImpact;
+
 export default function DonationImpact() {
-  const [data, setData] = useState<DonationImpactData>({
-    stats: [],
-    causes: [],
-  });
-
-  useEffect(() => {
-    fetch("/data/donation-impact.json")
-      .then((res) => res.json())
-      .then((data) => setData(data))
-      .catch((err) => console.error(err));
-  }, []);
-
   return (
     <section className="py-28 bg-[#FAF7F2]">
       {" "}

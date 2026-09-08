@@ -1,9 +1,8 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+
+import allStories from "@/public/data/impact-stories/stories.json";
 
 interface Story {
   slug: string;
@@ -18,26 +17,9 @@ export default function RelatedStories({
 }: {
   currentSlug: string;
 }) {
-  const [stories, setStories] = useState<Story[]>([]);
-
-  useEffect(() => {
-    fetch("/data/impact-stories/stories.json")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to load stories");
-        }
-
-        return res.json();
-      })
-      .then((data) => {
-        const filtered = data
-          .filter((story: Story) => story.slug !== currentSlug)
-          .slice(0, 3);
-
-        setStories(filtered);
-      })
-      .catch(console.error);
-  }, [currentSlug]);
+  const stories: Story[] = (allStories as Story[])
+    .filter((story) => story.slug !== currentSlug)
+    .slice(0, 3);
 
   if (!stories.length) return null;
 

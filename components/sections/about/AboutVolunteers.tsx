@@ -1,7 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
+
+import volunteersData from "@/public/data/volunteers.json";
 
 interface Volunteer {
   name: string;
@@ -9,15 +8,10 @@ interface Volunteer {
   image: string;
 }
 
-export default function AboutVolunteers() {
-  const [volunteers, setVolunteers] = useState<Volunteer[]>([]);
+const volunteers: Volunteer[] = volunteersData;
 
-  useEffect(() => {
-    fetch("/data/volunteers.json")
-      .then((res) => res.json())
-      .then((data) => setVolunteers(data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function AboutVolunteers() {
+
 
   return (
     <section className="py-32 bg-[#FAF7F2]">
@@ -90,8 +84,8 @@ export default function AboutVolunteers() {
                 <div className="mx-auto mt-8 h-[3px] w-16 rounded-full bg-[#D9A441]" />
 
                 <p className="mt-6 italic leading-7 text-gray-500">
-                  "Serving others is one of the greatest ways to create lasting
-                  change."
+                  &quot;Serving others is one of the greatest ways to create lasting
+                  change.&quot;
                 </p>
               </div>
             </div>

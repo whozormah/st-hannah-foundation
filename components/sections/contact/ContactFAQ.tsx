@@ -59,7 +59,7 @@ export default function ContactFAQ() {
           <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
 
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
-            We've answered some of the most common questions about our
+            We&apos;ve answered some of the most common questions about our
             programmes, partnerships, volunteering opportunities and support
             services.
           </p>
@@ -121,8 +121,8 @@ export default function ContactFAQ() {
           <h3 className="mt-8 text-4xl font-bold">Still Need Help?</h3>
 
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-9 text-white/90">
-            If you couldn't find the answer you were looking for, our team is
-            always happy to help. Reach out and we'll respond as quickly as
+            If you couldn&apos;t find the answer you were looking for, our team is
+            always happy to help. Reach out and we&apos;ll respond as quickly as
             possible.
           </p>
 

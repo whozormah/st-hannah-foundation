@@ -1,9 +1,12 @@
 interface SuccessScreenProps {
   onClose: () => void;
+  reference: string;
 }
 
-export default function SuccessScreen({ onClose }: SuccessScreenProps) {
-  const reference = "SHF-" + Date.now().toString().slice(-6);
+export default function SuccessScreen({
+  onClose,
+  reference,
+}: SuccessScreenProps) {
   return (
     <div className="min-h-[60vh] flex items-center justify-center">
       <div className="text-center max-w-2xl mx-auto">
@@ -36,7 +39,9 @@ export default function SuccessScreen({ onClose }: SuccessScreenProps) {
         <div className="mt-6 bg-[#FAF7F2] p-4 rounded-xl">
           <p className="text-sm text-gray-500">Reference Number</p>
 
-          <p className="font-bold text-lg text-[#844204]">{reference}</p>
+          <p className="font-bold text-lg text-[#844204]">
+            {reference}
+          </p>
         </div>
         <button
           onClick={onClose}

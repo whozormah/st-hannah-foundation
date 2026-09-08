@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import fs from "fs";
 import path from "path";
 import Image from "next/image";
@@ -61,6 +62,33 @@ async function getStory(slug: string): Promise<StoryData | null> {
 
     return null;
   }
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  const story = await getStory(slug);
+
+  if (!story) {
+    return { title: "Story Not Found" };
+  }
+
+  return {
+    title: story.title,
+    description: story.summary,
+    alternates: { canonical: `/impact-stories/${slug}` },
+    openGraph: {
+      type: "article",
+      title: `${story.title} | St. Hannah Foundation`,
+      description: story.summary,
+      url: `/impact-stories/${slug}`,
+      images: [{ url: story.image }],
+    },
+  };
 }
 
 export default async function StoryPage({
@@ -214,7 +242,7 @@ export default async function StoryPage({
           {story.quote && (
             <div className="mt-24 bg-[#FAF7F2] p-10 md:p-14 rounded-[32px] border-l-4 border-[#844204]">
               <p className="text-2xl italic leading-10 text-gray-700">
-                "{story.quote.text}"
+                &quot;{story.quote.text}&quot;
               </p>
 
               <p className="mt-8 font-bold text-[#844204] text-lg">

@@ -1,16 +1,18 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Crown } from "lucide-react";
+
+import governance from "@/public/data/governance.json";
 
 interface Leader {
   name: string;
   role: string;
   image: string;
-  bio: string;
+  // Not yet supplied for every board member in governance.json.
+  bio?: string;
 }
+
+const leaders: Leader[] = governance;
 
 interface LeadershipPreviewProps {
   eyebrow?: string;
@@ -25,15 +27,6 @@ export default function LeadershipPreview({
   description = "Behind every initiative is a dedicated team committed to advancing our mission, strengthening communities and ensuring every programme delivers meaningful, measurable and lasting impact.",
   showButton = true,
 }: LeadershipPreviewProps) {
-  const [leaders, setLeaders] = useState<Leader[]>([]);
-
-  useEffect(() => {
-    fetch("/data/governance.json")
-      .then((res) => res.json())
-      .then((data) => setLeaders(data))
-      .catch((err) => console.error(err));
-  }, []);
-
   return (
     <section className="relative overflow-hidden bg-white py-32">
       {/* Decorative Background */}
@@ -147,7 +140,7 @@ export default function LeadershipPreview({
 
                         <blockquote className="relative pl-6 italic leading-8 text-gray-600">
                           <span className="absolute -left-1 -top-6 text-6xl font-serif text-[#D9A441]/20">
-                            "
+                            &quot;
                           </span>
                           Transforming lives begins with compassion, commitment
                           and collective action.
@@ -166,9 +159,11 @@ export default function LeadershipPreview({
                     </>
                   ) : (
                     <>
-                      <p className="mt-6 leading-8 text-gray-600">
-                        {leader.bio}
-                      </p>
+                      {leader.bio && (
+                        <p className="mt-6 leading-8 text-gray-600">
+                          {leader.bio}
+                        </p>
+                      )}
 
                       <div className="mt-auto pt-8">
                         <div className="h-px w-14 bg-[#D9A441]/50" />

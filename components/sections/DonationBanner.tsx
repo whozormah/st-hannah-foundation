@@ -1,7 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
+
+import settingsData from "@/public/data/site-settings.json";
 
 interface SiteSettings {
   bank: {
@@ -11,15 +10,10 @@ interface SiteSettings {
   };
 }
 
-export default function DonationBanner() {
-  const [settings, setSettings] = useState<SiteSettings | null>(null);
+const settings: SiteSettings | null = settingsData;
 
-  useEffect(() => {
-    fetch("/data/site-settings.json")
-      .then((res) => res.json())
-      .then((data) => setSettings(data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function DonationBanner() {
+
 
   return (
     <section className="py-28 bg-[#844204]">

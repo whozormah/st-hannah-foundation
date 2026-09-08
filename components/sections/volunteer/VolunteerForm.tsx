@@ -91,9 +91,9 @@ export default function VolunteerForm() {
 
                 <option>HND</option>
 
-                <option>Bachelor's Degree</option>
+                <option>Bachelor&apos;s Degree</option>
 
-                <option>Master's Degree</option>
+                <option>Master&apos;s Degree</option>
 
                 <option>Doctorate</option>
 

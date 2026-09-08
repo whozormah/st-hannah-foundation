@@ -168,7 +168,7 @@ export default function ImpactCTA() {
 
           <div className="mx-auto mt-24 max-w-4xl text-center">
             <p className="text-xl leading-9 text-white/85">
-              The stories you've read today are only the beginning. Together, we
+              The stories you&apos;ve read today are only the beginning. Together, we
               can create many more stories of hope, resilience and lasting
               transformation for generations to come.
             </p>

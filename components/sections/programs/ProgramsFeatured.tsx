@@ -1,9 +1,8 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+
+import allPrograms from "@/public/data/programs.json";
 
 interface Program {
   slug: string;
@@ -12,16 +11,9 @@ interface Program {
   excerpt: string;
 }
 
+const programs: Program[] = allPrograms.slice(0, 4);
+
 export default function ProgramsFeatured() {
-  const [programs, setPrograms] = useState<Program[]>([]);
-
-  useEffect(() => {
-    fetch("/data/programs.json")
-      .then((res) => res.json())
-      .then((data) => setPrograms(data.slice(0, 4)))
-      .catch((err) => console.error(err));
-  }, []);
-
   return (
     <section className="bg-white py-32">
       <div className="container-custom">

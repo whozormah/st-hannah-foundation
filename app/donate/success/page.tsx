@@ -69,8 +69,8 @@ export default function DonationSuccessPage() {
           </h1>
 
           <p className="mt-6 text-gray-600 leading-8">
-            We couldn't verify your donation at this time. If your account has
-            been debited, please contact the Foundation and we'll gladly assist
+            We couldn&apos;t verify your donation at this time. If your account has
+            been debited, please contact the Foundation and we&apos;ll gladly assist
             you.
           </p>
 
@@ -141,7 +141,7 @@ export default function DonationSuccessPage() {
               <li>• Your official donation receipt is ready for download.</li>
 
               <li>
-                • Your contribution will directly support the Foundation's
+                • Your contribution will directly support the Foundation&apos;s
                 programmes and community initiatives.
               </li>
 

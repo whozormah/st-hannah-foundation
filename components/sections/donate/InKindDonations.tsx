@@ -1,25 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InKindDonationModal from "@/components/shared/in-kind/InKindDonationModal";
+
+import inKindItems from "@/public/data/in-kind-donations.json";
 
 interface DonationItem {
   title: string;
   description: string;
 }
 
+const items: DonationItem[] = inKindItems;
+
 export default function InKindDonations() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [items, setItems] = useState<DonationItem[]>([]);
-
-  useEffect(() => {
-    fetch("/data/in-kind-donations.json")
-      .then((res) => res.json())
-      .then((data) => setItems(data))
-      .catch((err) => console.error(err));
-  }, []);
-
   const handleDonate = (category: string) => {
     setSelectedCategory(category);
     setIsOpen(true);
@@ -103,6 +98,7 @@ export default function InKindDonations() {
         </div>
       </section>
       <InKindDonationModal
+        key={selectedCategory}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         initialCategory={selectedCategory}

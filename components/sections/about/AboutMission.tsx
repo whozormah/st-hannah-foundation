@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function AboutMission() {
   return (
     <section className="bg-white py-32">
@@ -32,11 +34,13 @@ export default function AboutMission() {
           {/* Left */}
 
           <div className="relative">
-            <div className="overflow-hidden rounded-[40px]">
-              <img
+            <div className="relative h-[650px] overflow-hidden rounded-[40px]">
+              <Image
                 src="/about/story.jpg"
                 alt="About St. Hannah Foundation"
-                className="h-[650px] w-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
               />
             </div>
 

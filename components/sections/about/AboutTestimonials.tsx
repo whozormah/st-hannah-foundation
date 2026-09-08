@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+import testimonialsData from "@/public/data/testimonials.json";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -13,15 +14,9 @@ interface Testimonial {
   text: string;
 }
 
-export default function Testimonials() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+const testimonials: Testimonial[] = testimonialsData;
 
-  useEffect(() => {
-    fetch("/data/testimonials.json")
-      .then((res) => res.json())
-      .then((data) => setTestimonials(data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function Testimonials() {
 
   const getInitials = (name: string) =>
     name

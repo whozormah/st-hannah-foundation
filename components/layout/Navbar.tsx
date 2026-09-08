@@ -92,15 +92,13 @@ export default function Navbar() {
 
   const secondaryLinks = [
     {
+      name: "Team",
+      href: "/team",
+    },
+    {
       name: "Contact",
       href: "/contact",
     },
-  ];
-  const moreLinks = [
-    { name: "Team", href: "/team" },
-    { name: "Volunteer", href: "/volunteer" },
-    { name: "Become A Partner", href: "/partnerships" },
-    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -135,14 +133,14 @@ export default function Navbar() {
               </div>
 
               <div>
-                <h1
-                  className={`font-bold leading-tight text-[#844204] transition-all duration-500 ${
+                <span
+                  className={`block font-bold leading-tight text-[#844204] transition-all duration-500 ${
                     scrolled ? "text-lg" : "text-2xl"
                   }`}
                 >
                   St. Hannah
                   <span className="block text-[#A86A1A]">Foundation</span>
-                </h1>
+                </span>
 
                 <p className="hidden lg:block text-[11px] uppercase tracking-[2px] text-gray-500">
                   Empowering Communities

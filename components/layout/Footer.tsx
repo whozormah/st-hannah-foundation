@@ -1,33 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import settings from "@/public/data/site-settings.json";
 
 import DonationModal from "@/components/shared/DonationModal";
-
-interface SiteSettings {
-  foundationName: string;
-  email: string;
-  phone: string;
-
-  nigeriaOffice: {
-    address: string;
-  };
-
-  usaOffice: {
-    address: string;
-  };
-
-  socials: {
-    facebook: string;
-    instagram: string;
-    youtube: string;
-    linkedin: string;
-    tiktok: string;
-  };
-}
 
 export default function Footer() {
   const [showDonationModal, setShowDonationModal] = useState(false);
@@ -112,8 +90,8 @@ export default function Footer() {
 
               <div className="mt-8 border-l-4 border-[#D9A441] pl-5">
                 <p className="italic text-gray-300 leading-8">
-                  "To build a world where every child and family experiences the
-                  fullness of their God-given potential."
+                  &quot;To build a world where every child and family experiences the
+                  fullness of their God-given potential.&quot;
                 </p>
               </div>
 

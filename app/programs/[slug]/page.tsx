@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -21,6 +22,30 @@ interface Program {
   beneficiaries: string[];
   ctaTitle: string;
   ctaText: string;
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const program = (programs as Program[]).find((item) => item.slug === slug);
+
+  if (!program) {
+    return { title: "Programme Not Found" };
+  }
+
+  return {
+    title: program.title,
+    description: program.excerpt,
+    alternates: { canonical: `/programs/${program.slug}` },
+    openGraph: {
+      title: `${program.title} | St. Hannah Foundation`,
+      description: program.excerpt,
+      url: `/programs/${program.slug}`,
+      images: [{ url: program.heroImage }],
+    },
+  };
 }
 
 interface PageProps {

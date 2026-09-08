@@ -1,7 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
+
+import founderData from "@/public/data/homepage/founder.json";
 
 interface FounderData {
   badge: string;
@@ -14,18 +13,9 @@ interface FounderData {
   message: string[];
 }
 
+const founder: FounderData = founderData;
+
 export default function AboutFounder() {
-  const [founder, setFounder] = useState<FounderData | null>(null);
-
-  useEffect(() => {
-    fetch("/data/homepage/founder.json")
-      .then((res) => res.json())
-      .then((data) => setFounder(data))
-      .catch((err) => console.error(err));
-  }, []);
-
-  if (!founder) return null;
-
   return (
     <section className="py-32 bg-white">
       <div className="container-custom">
@@ -97,7 +87,7 @@ export default function AboutFounder() {
 
             <blockquote className="relative mt-12 border-l-4 border-[#D9A441] pl-8 text-2xl italic leading-relaxed text-[#844204]">
               <span className="absolute -left-5 -top-12 text-[120px] leading-none text-[#D9A441]/10 font-serif">
-                "
+                &quot;
               </span>
 
               {founder.quote}

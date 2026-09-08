@@ -1,9 +1,8 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { PlayCircle } from "lucide-react";
+
+import videosData from "@/public/data/video-highlights.json";
 
 interface VideoItem {
   title: string;
@@ -13,15 +12,10 @@ interface VideoItem {
   link: string;
 }
 
-export default function VideoHighlights() {
-  const [videos, setVideos] = useState<VideoItem[]>([]);
+const videos: VideoItem[] = videosData;
 
-  useEffect(() => {
-    fetch("/data/video-highlights.json")
-      .then((res) => res.json())
-      .then((data) => setVideos(data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function VideoHighlights() {
+
 
   return (
     <section className="py-28 bg-[#FAF7F2]">
@@ -33,7 +27,6 @@ export default function VideoHighlights() {
           <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
             Stories In Motion{" "}
           </span>
-          ```
           <h2 className="text-5xl font-bold mt-4">Experience The Impact</h2>
           <p className="mt-6 text-lg text-gray-600 leading-8">
             Watch stories of hope, transformation and community impact through

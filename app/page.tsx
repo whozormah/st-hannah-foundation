@@ -5,7 +5,6 @@ import AboutTestimonials from "@/components/sections/about/AboutTestimonials";
 import ImpactStats from "@/components/sections/ImpactStats";
 import FeaturedCampaign from "@/components/sections/FeaturedCampaign";
 import Causes from "@/components/sections/Causes";
-import DonationBanner from "@/components/sections/DonationBanner";
 import ImpactStories from "@/components/sections/ImpactStories";
 import GalleryPreview from "@/components/sections/GalleryPreview";
 import LeadershipPreview from "@/components/sections/LeadershipPreview";

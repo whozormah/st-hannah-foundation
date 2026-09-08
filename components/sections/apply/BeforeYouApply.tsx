@@ -1,7 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { AlertCircle, FileText } from "lucide-react";
+
+import dataData from "@/public/data/apply-info.json";
 
 interface ApplyInfo {
   title: string;
@@ -10,15 +9,10 @@ interface ApplyInfo {
   requiredInformation: string[];
 }
 
-export default function BeforeYouApply() {
-  const [data, setData] = useState<ApplyInfo | null>(null);
+const data: ApplyInfo | null = dataData;
 
-  useEffect(() => {
-    fetch("/data/apply-info.json")
-      .then((res) => res.json())
-      .then((data) => setData(data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function BeforeYouApply() {
+
 
   if (!data) return null;
 

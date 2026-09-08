@@ -9,7 +9,6 @@ export default function VolunteerCTA() {
         <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
           Ready To Make A Difference?{" "}
         </span>
-        ```
         <h2 className="text-5xl md:text-6xl font-bold mt-6 leading-tight">
           Your Time.
           <br />

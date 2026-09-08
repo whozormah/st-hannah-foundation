@@ -54,7 +54,6 @@ export default function AboutImpactAreas() {
       {" "}
       <div className="container-custom">
         {/* Header */}
-        ```
         <div className="text-center max-w-4xl mx-auto mb-20">
           <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
             Our Approach
@@ -131,7 +130,7 @@ export default function AboutImpactAreas() {
 
           <p className="mx-auto mt-8 max-w-4xl text-lg leading-9 text-white/80">
             Every programme we design is rooted in dignity, compassion and
-            sustainability—ensuring that today's support becomes tomorrow's
+            sustainability—ensuring that today&apos;s support becomes tomorrow&apos;s
             opportunity for individuals, families and communities.
           </p>
         </div>

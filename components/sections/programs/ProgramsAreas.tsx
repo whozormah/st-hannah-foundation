@@ -1,7 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
+
+import programsData from "@/public/data/programs.json";
 
 import {
   GraduationCap,
@@ -33,15 +32,10 @@ const iconMap = {
   ShieldCheck,
 };
 
-export default function ProgramsAreas() {
-  const [programs, setPrograms] = useState<Program[]>([]);
+const programs: Program[] = programsData;
 
-  useEffect(() => {
-    fetch("/data/programs.json")
-      .then((res) => res.json())
-      .then((data) => setPrograms(data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function ProgramsAreas() {
+
 
   return (
     <section className="bg-[#FAF7F2] py-32">

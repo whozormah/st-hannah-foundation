@@ -1,7 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
+
+import teamData from "@/public/data/governance.json";
 
 interface TeamMember {
   name: string;
@@ -10,22 +9,16 @@ interface TeamMember {
   bio?: string;
 }
 
-export default function AboutGovernance() {
-  const [team, setTeam] = useState<TeamMember[]>([]);
+const team: TeamMember[] = teamData;
 
-  useEffect(() => {
-    fetch("/data/governance.json")
-      .then((res) => res.json())
-      .then((data) => setTeam(data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function AboutGovernance() {
+
 
   return (
     <section className="py-32 bg-white">
       {" "}
       <div className="container-custom">
         {/* Header */}
-        ```
         <div className="text-center max-w-4xl mx-auto mb-20">
           <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
             Governance & Leadership
@@ -112,14 +105,14 @@ export default function AboutGovernance() {
                 {member.role === "President" ? (
                   <div className="mt-6 border-l-4 border-[#D9A441] pl-4">
                     <p className="italic text-white/90 leading-7">
-                      "Transforming lives begins with compassion, commitment and
-                      collective action."
+                      &quot;Transforming lives begins with compassion, commitment and
+                      collective action.&quot;
                     </p>
                   </div>
                 ) : (
                   <p className="mt-5 text-gray-600 text-sm leading-7">
                     Helping provide strategic leadership, governance and
-                    oversight that strengthens the Foundation's mission and
+                    oversight that strengthens the Foundation&apos;s mission and
                     long-term impact.
                   </p>
                 )}

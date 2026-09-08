@@ -1,6 +1,5 @@
-"use client";
 
-import { useEffect, useState } from "react";
+import settingsData from "@/public/data/site-settings.json";
 import {
   Mail,
   Phone,
@@ -23,15 +22,10 @@ interface SiteSettings {
   };
 }
 
-export default function ContactInformation() {
-  const [settings, setSettings] = useState<SiteSettings | null>(null);
+const settings: SiteSettings | null = settingsData;
 
-  useEffect(() => {
-    fetch("/data/site-settings.json")
-      .then((res) => res.json())
-      .then((data) => setSettings(data))
-      .catch(console.error);
-  }, []);
+export default function ContactInformation() {
+
 
   return (
     <section className="bg-white py-24  overflow-hidden">
@@ -45,13 +39,13 @@ export default function ContactInformation() {
             </span>
 
             <h2 className="mt-5 text-4xl font-bold leading-tight text-[#1B1815] lg:text-5xl">
-              Let's Start A
+              Let&apos;s Start A
               <br />
               Meaningful Conversation
             </h2>
 
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              We'd love to hear from you. Whether you're interested in
+              We&apos;d love to hear from you. Whether you&apos;re interested in
               partnering, volunteering, supporting a programme or making an
               enquiry, our team is always ready to assist.
             </p>
@@ -175,14 +169,14 @@ export default function ContactInformation() {
             </span>
 
             <h2 className="mt-5 text-4xl font-bold leading-tight text-[#1B1815] lg:text-5xl">
-              We'd Love To
+              We&apos;d Love To
               <br />
               Hear From You
             </h2>
 
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Tell us how we can help. Whether it's a general enquiry,
-              partnership, volunteering opportunity or support request, we'll
+              Tell us how we can help. Whether it&apos;s a general enquiry,
+              partnership, volunteering opportunity or support request, we&apos;ll
               connect you with the right member of our team.
             </p>
 

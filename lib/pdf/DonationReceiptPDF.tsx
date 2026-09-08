@@ -31,6 +31,8 @@ export default function DonationReceiptPDF({
 
         {/* Header */}
         <View style={styles.header}>
+          {/* @react-pdf/renderer's Image renders into a PDF and has no alt prop */}
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <Image
             src={`${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`}
             style={styles.logo}

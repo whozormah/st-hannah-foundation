@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import PaystackButton from "@/components/paystack/PaystackButton";
 import InternationalGivingCard from "./InternationalGivingCard";
 
@@ -18,13 +18,10 @@ export default function DonationFormFields({
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState("NGN");
-  const [purpose, setPurpose] = useState("");
-
-  useEffect(() => {
-    if (programName) {
-      setPurpose(programName);
-    }
-  }, [programName]);
+  // Seeded from the prop on mount. The modal that supplies programName
+  // unmounts while closed, so reopening it for another programme remounts
+  // this form and re-seeds the purpose.
+  const [purpose, setPurpose] = useState(programName ?? "");
 
   const currencySymbol =
     currency === "USD"

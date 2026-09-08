@@ -12,24 +12,19 @@ import GalleryLightbox from "@/components/sections/gallery/GalleryLightbox";
 import GalleryIntro from "@/components/sections/gallery/GalleryIntro";
 import GalleryFilters from "@/components/sections/gallery/GalleryFilters";
 import GalleryFeatured from "@/components/sections/gallery/GalleryFeatured";
+
+import galleryData from "@/public/data/gallery.json";
 interface GalleryItem {
   image: string;
   category: string;
   title: string;
 }
 
+const galleryItems: GalleryItem[] = galleryData;
+
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
-
-  useEffect(() => {
-    fetch("/data/gallery.json")
-      .then((res) => res.json())
-      .then((data) => setGalleryItems(data))
-      .catch((err) => console.error(err));
-  }, []);
-
   const categories = [
     "All",
     ...Array.from(new Set(galleryItems.map((item) => item.category))),
@@ -76,29 +71,9 @@ export default function GalleryPage() {
         image="/headers/gallery.jpg"
       />
       <GalleryStats />
-      <FeaturedEvents />
       <GalleryIntro />
       <GalleryFeatured />
-      <section id="gallery" className="bg-white pb-24">
-        <div className="container-custom text-center max-w-4xl">
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
-            Moments That Matter
-          </span>
-
-          <h2 className="text-4xl md:text-5xl font-bold mt-4">
-            A Visual Journey Of Impact
-          </h2>
-
-          <p className="mt-6 text-lg text-gray-600 leading-8">
-            Every image tells a story of compassion, service, empowerment and
-            hope. Explore the moments that reflect the lives touched and
-            communities strengthened through our programmes and outreach
-            initiatives.
-          </p>
-        </div>
-      </section>
-
-      <section className="pb-24 bg-white">
+      <section id="gallery" className="pb-24 bg-white">
         <div className="container-custom">
           <GalleryFilters
             categories={categories}
@@ -132,6 +107,7 @@ export default function GalleryPage() {
         }
       />
 
+      <FeaturedEvents />
       <VideoHighlights />
       <GalleryCTA />
     </>

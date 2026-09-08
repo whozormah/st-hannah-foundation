@@ -1,21 +1,15 @@
-"use client";
 
-import { useEffect, useState } from "react";
+import benefitsData from "@/public/data/volunteer-benefits.json";
 
 interface Benefit {
   title: string;
   description: string;
 }
 
-export default function VolunteerBenefits() {
-  const [benefits, setBenefits] = useState<Benefit[]>([]);
+const benefits: Benefit[] = benefitsData;
 
-  useEffect(() => {
-    fetch("/data/volunteer-benefits.json")
-      .then((res) => res.json())
-      .then((data) => setBenefits(data))
-      .catch(console.error);
-  }, []);
+export default function VolunteerBenefits() {
+
 
   return (
     <section className="py-28 bg-white">

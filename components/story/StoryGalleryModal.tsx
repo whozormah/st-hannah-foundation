@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import StoryImageViewer from "./StoryImageViewer";
 
@@ -87,9 +88,11 @@ export default function StoryGalleryModal({
                   : "border-transparent opacity-70 hover:opacity-100"
               }`}
             >
-              <img
+              <Image
                 src={image}
                 alt={`${storyName}-${index}`}
+                width={112}
+                height={80}
                 className="h-20 w-28 object-cover"
               />
             </button>

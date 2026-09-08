@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import {
   Heart,
@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 
 import DonationModal from "@/components/shared/DonationModal";
+
+import campaigns from "@/public/data/campaigns.json";
 
 interface CampaignData {
   id: number;
@@ -29,28 +31,13 @@ interface CampaignData {
   featured: boolean;
 }
 
+const campaign: CampaignData | undefined = (campaigns as CampaignData[]).find(
+  (item) => item.featured,
+);
+
 export default function ImpactFeaturedStory() {
-  const [campaign, setCampaign] = useState<CampaignData | null>(null);
   const [showDonationModal, setShowDonationModal] = useState(false);
 
-  useEffect(() => {
-    fetch("/data/campaigns.json")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to load campaign");
-        }
-
-        return res.json();
-      })
-      .then((data: CampaignData[]) => {
-        const featured = data.find((campaign) => campaign.featured);
-
-        if (featured) {
-          setCampaign(featured);
-        }
-      })
-      .catch(console.error);
-  }, []);
 
   if (!campaign) return null;
 
@@ -124,7 +111,7 @@ export default function ImpactFeaturedStory() {
 
                 <p className="text-lg italic leading-9 text-gray-700">
                   Every transformed life reminds us that compassion has the
-                  power to rewrite someone's future.
+                  power to rewrite someone&apos;s future.
                 </p>
               </div>
               <div className="mt-10 space-y-7">

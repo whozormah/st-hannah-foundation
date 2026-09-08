@@ -36,7 +36,7 @@ export default function PartnerModal({ isOpen, onClose }: PartnerModalProps) {
                 <h2 className="text-3xl font-bold">Become A Partner</h2>
 
                 <p className="text-gray-500 mt-2">
-                  Let's work together to create lasting impact and transform
+                  Let&apos;s work together to create lasting impact and transform
                   lives.
                 </p>
               </div>

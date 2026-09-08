@@ -1,3 +1,18 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Partnerships",
+  description:
+    "Partner with St. Hannah Foundation. Corporate, institutional and community partnerships that scale impact across Nigeria.",
+  alternates: { canonical: "/partnerships" },
+  openGraph: {
+    title: "Partnerships | St. Hannah Foundation",
+    description:
+      "Partner with St. Hannah Foundation. Corporate, institutional and community partnerships that scale impact across Nigeria.",
+    url: "/partnerships",
+  },
+};
+
 import PageHeader from "@/components/shared/PageHeader";
 import PartnershipBenefits from "@/components/sections/partnerships/PartnershipBenefits";
 import PartnershipTypes from "@/components/sections/partnerships/PartnershipTypes";

@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 
 import InKindDonationModal from "@/components/shared/in-kind/InKindDonationModal";
+
+import allPrograms from "@/public/data/programs.json";
 
 interface Program {
   slug: string;
@@ -11,21 +13,12 @@ interface Program {
   excerpt: string;
 }
 
+const programs: Program[] = allPrograms.filter(
+  (item) => item.slug !== "community-outreach",
+);
+
 export default function SupportCategories() {
   const [isInKindModalOpen, setIsInKindModalOpen] = useState(false);
-
-  const [programs, setPrograms] = useState<Program[]>([]);
-
-  useEffect(() => {
-    fetch("/data/programs.json")
-      .then((res) => res.json())
-      .then((data) =>
-        setPrograms(
-          data.filter((item: Program) => item.slug !== "community-outreach"),
-        ),
-      )
-      .catch((err) => console.error(err));
-  }, []);
 
   return (
     <>

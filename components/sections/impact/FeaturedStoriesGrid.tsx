@@ -1,9 +1,8 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+
+import allStories from "@/public/data/impact-stories/stories.json";
 
 interface Story {
   slug: string;
@@ -14,18 +13,11 @@ interface Story {
   featured: boolean;
 }
 
+const stories: Story[] = (allStories as Story[]).filter(
+  (story) => story.featured,
+);
+
 export default function FeaturedStoriesGrid() {
-  const [stories, setStories] = useState<Story[]>([]);
-
-  useEffect(() => {
-    fetch("/data/impact-stories/stories.json")
-      .then((res) => res.json())
-      .then((data: Story[]) =>
-        setStories(data.filter((story) => story.featured)),
-      )
-      .catch(console.error);
-  }, []);
-
   return (
     <section className="bg-white py-28">
       <div className="container-custom">

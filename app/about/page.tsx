@@ -1,3 +1,18 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Learn about St. Hannah Foundation, our mission, vision, governance and the people restoring hope and empowering communities across Nigeria.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About Us | St. Hannah Foundation",
+    description:
+      "Learn about St. Hannah Foundation, our mission, vision, governance and the people restoring hope and empowering communities across Nigeria.",
+    url: "/about",
+  },
+};
+
 import PageHeader from "@/components/shared/PageHeader";
 
 import LeadershipPreview from "@/components/sections/LeadershipPreview";

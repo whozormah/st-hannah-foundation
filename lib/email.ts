@@ -11,21 +11,40 @@ import {
 import { formatCurrency, formatDate } from "./formatter";
 import { generateReceiptNumber } from "./receipt";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+/**
+ * Resolved lazily, never at module scope: importing this file must stay free of
+ * side effects so `next build` can collect page data for the routes that use it
+ * without the production environment variables being present.
+ */
+function getEmailConfig() {
+  const apiKey = process.env.RESEND_API_KEY;
+  const fromEmail = process.env.FROM_EMAIL;
+  const donationEmail = process.env.DONATION_EMAIL;
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-  "http://localhost:3000";
+  if (!apiKey) {
+    throw new Error("RESEND_API_KEY environment variable is not configured.");
+  }
 
-const FROM_EMAIL = process.env.FROM_EMAIL;
-const DONATION_EMAIL = process.env.DONATION_EMAIL;
+  if (!fromEmail) {
+    throw new Error("FROM_EMAIL environment variable is not configured.");
+  }
 
-if (!FROM_EMAIL) {
-  throw new Error("FROM_EMAIL environment variable is not configured.");
+  if (!donationEmail) {
+    throw new Error("DONATION_EMAIL environment variable is not configured.");
+  }
+
+  return {
+    resend: new Resend(apiKey),
+    fromEmail,
+    donationEmail,
+  };
 }
 
-if (!DONATION_EMAIL) {
-  throw new Error("DONATION_EMAIL environment variable is not configured.");
+function getSiteUrl() {
+  return (
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
+    "http://localhost:3000"
+  );
 }
 
 interface DonationEmailProps {
@@ -47,13 +66,15 @@ export async function sendDonationEmails({
   purpose,
   reference,
 }: DonationEmailProps) {
+  const { resend, fromEmail, donationEmail } = getEmailConfig();
+
   const receiptNumber = generateReceiptNumber(reference);
 
   const formattedAmount = formatCurrency(amount, currency);
 
   const formattedDate = formatDate(new Date());
 
-  const receiptUrl = `${SITE_URL}/donate/receipt/${reference}`;
+  const receiptUrl = `${getSiteUrl()}/donate/receipt/${reference}`;
 
   const donorEmail = await render(
     DonationReceipt({
@@ -79,15 +100,15 @@ export async function sendDonationEmails({
   );
 
   await resend.emails.send({
-    from: FROM_EMAIL!,
+    from: fromEmail,
     to: email,
     subject: "Your Official Donation Receipt | St. Hannah Foundation",
     html: donorEmail,
   });
 
   await resend.emails.send({
-    from: FROM_EMAIL!,
-    to: DONATION_EMAIL!,
+    from: fromEmail,
+    to: donationEmail,
     subject: `New Donation Received • ${formattedAmount}`,
     html: foundationEmail,
   });
@@ -100,6 +121,8 @@ interface InternationalInterestEmailProps {
 export async function sendInternationalInterestEmails({
   email,
 }: InternationalInterestEmailProps) {
+  const { resend, fromEmail, donationEmail } = getEmailConfig();
+
   const formattedDate = formatDate(new Date());
 
   const donorEmail = await render(
@@ -117,7 +140,7 @@ export async function sendInternationalInterestEmails({
   );
 
   await resend.emails.send({
-    from: FROM_EMAIL!,
+    from: fromEmail,
     to: email,
     subject:
       "You're on the List • International Giving | St. Hannah Foundation",
@@ -125,8 +148,8 @@ export async function sendInternationalInterestEmails({
   });
 
   await resend.emails.send({
-    from: FROM_EMAIL!,
-    to: DONATION_EMAIL!,
+    from: fromEmail,
+    to: donationEmail,
     subject: "🌍 New International Giving Interest",
     html: foundationEmail,
   });

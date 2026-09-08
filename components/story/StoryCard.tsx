@@ -74,7 +74,7 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
 
             <div className="relative">
               <div className="absolute -left-6 -top-16 text-[180px] font-serif leading-none text-[#D9A441]/10">
-                "
+                &quot;
               </div>
 
               <div className="relative border-l-4 border-[#D9A441] pl-8">
@@ -100,12 +100,12 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
               </span>
 
               <h3 className="mt-6 text-3xl font-bold leading-tight">
-                Help Rewrite Esther's Story
+                Help Rewrite Esther&apos;s Story
               </h3>
 
               <p className="mt-5 leading-8 text-white/90">
                 Every gift helps provide education, healthcare, protection and
-                renewed hope for vulnerable children and families like Esther's.
+                renewed hope for vulnerable children and families like Esther&apos;s.
               </p>
 
               <div className="mt-8 space-y-3 text-sm">
@@ -129,7 +129,7 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
                 onClick={onDonate}
                 className="mt-10 w-full rounded-2xl bg-white px-6 py-4 text-lg font-bold text-[#844204] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
-                Support Esther's Story
+                Support Esther&apos;s Story
               </button>
             </div>
           </div>

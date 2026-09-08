@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { X } from "lucide-react";
 
 import StepOne from "./StepOne";
@@ -24,6 +24,7 @@ export default function InKindDonationModal({
 }: InKindDonationModalProps) {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
+  const [reference, setReference] = useState("");
 
   const [formData, setFormData] = useState<InKindDonationData>({
     fullName: "",
@@ -51,14 +52,6 @@ export default function InKindDonationModal({
 
     acknowledgeDonation: "No",
   });
-  useEffect(() => {
-    if (isOpen && initialCategory) {
-      setFormData((prev) => ({
-        ...prev,
-        category: initialCategory,
-      }));
-    }
-  }, [initialCategory, isOpen]);
 
   if (!isOpen) return null;
 
@@ -142,6 +135,10 @@ export default function InKindDonationModal({
 
     console.log(formData);
 
+    // Minted here, in the event handler, so it is created once per submission
+    // rather than recalculated on every render of the success screen.
+    setReference("SHF-" + Date.now().toString().slice(-6));
+
     setSubmitted(true);
   };
 
@@ -191,7 +188,7 @@ export default function InKindDonationModal({
 
         <div className="flex justify-between items-start mb-10">
           <div>
-            <h1 className="text-4xl font-bold">Donate Items & Materials</h1>
+            <h2 className="text-4xl font-bold">Donate Items &amp; Materials</h2>
 
             <p className="text-gray-600 mt-3 max-w-2xl">
               Support our mission through food items, clothing, educational
@@ -281,7 +278,9 @@ export default function InKindDonationModal({
           </>
         )}
 
-        {submitted && <SuccessScreen onClose={handleClose} />}
+        {submitted && (
+          <SuccessScreen onClose={handleClose} reference={reference} />
+        )}
       </div>
     </div>
   );

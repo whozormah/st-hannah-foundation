@@ -26,7 +26,7 @@ export default function InternationalInterest({
     <Html>
       <Head />
 
-      <Preview>You're on the list for International Giving updates</Preview>
+      <Preview>You&apos;re on the list for International Giving updates</Preview>
 
       <Body style={styles.body}>
         <Container style={styles.container}>
@@ -44,12 +44,12 @@ export default function InternationalInterest({
             </Text>
 
             <Text style={styles.paragraph}>
-              We've successfully added your email address to our International
+              We&apos;ve successfully added your email address to our International
               Giving notification list.
             </Text>
 
             <Text style={styles.paragraph}>
-              As soon as international donations become available, you'll be
+              As soon as international donations become available, you&apos;ll be
               among the first to know.
             </Text>
 
@@ -106,14 +106,14 @@ export default function InternationalInterest({
               </Text>
 
               <Text style={styles.paragraph}>
-                Once international giving becomes available, we'll notify you
+                Once international giving becomes available, we&apos;ll notify you
                 immediately with everything you need to complete your donation
                 securely.
               </Text>
 
               <Text style={styles.paragraph}>
                 Your generosity will help us restore hope, strengthen families,
-                support children's education and transform vulnerable
+                support children&apos;s education and transform vulnerable
                 communities.
               </Text>
             </Section>

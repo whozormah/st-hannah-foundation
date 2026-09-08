@@ -1,5 +1,3 @@
-"use client";
-
 import {
   Search,
   HeartHandshake,
@@ -55,7 +53,7 @@ export default function ProgramsProcess() {
           <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
 
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
-            Lasting transformation doesn't happen overnight. Every programme
+            Lasting transformation doesn&apos;t happen overnight. Every programme
             follows a deliberate process designed to meet immediate needs while
             creating opportunities for sustainable growth.
           </p>
@@ -143,8 +141,8 @@ export default function ProgramsProcess() {
 
           <p className="mt-8 text-lg leading-9 text-gray-600">
             By listening first, responding intentionally and investing in
-            long-term empowerment, we create programmes that don't simply solve
-            today's challenges—they help communities build a stronger tomorrow.
+            long-term empowerment, we create programmes that don&apos;t simply solve
+            today&apos;s challenges—they help communities build a stronger tomorrow.
           </p>
         </div>
       </div>

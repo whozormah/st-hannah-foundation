@@ -1,9 +1,8 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+
+import storiesData from "@/public/data/impact-stories/stories.json";
 
 interface Story {
   slug: string;
@@ -13,16 +12,9 @@ interface Story {
   excerpt: string;
 }
 
+const stories: Story[] = storiesData;
+
 export default function ImpactStories() {
-  const [stories, setStories] = useState<Story[]>([]);
-
-  useEffect(() => {
-    fetch("/data/impact-stories/stories.json")
-      .then((res) => res.json())
-      .then((data) => setStories(data))
-      .catch((err) => console.error(err));
-  }, []);
-
   return (
     <section className="py-28 bg-white">
       <div className="container-custom">

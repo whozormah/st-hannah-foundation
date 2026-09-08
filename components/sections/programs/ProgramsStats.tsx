@@ -1,6 +1,5 @@
-"use client";
 
-import { useEffect, useState } from "react";
+import siteStats from "@/public/data/stats.json";
 
 interface ProgramsStatsData {
   yearsOfCompassion: string;
@@ -9,19 +8,9 @@ interface ProgramsStatsData {
   countriesRepresented: string;
 }
 
-interface StatsData {
-  programs: ProgramsStatsData;
-}
+const statsData: ProgramsStatsData = siteStats.programs;
 
 export default function ProgramsStats() {
-  const [statsData, setStatsData] = useState<ProgramsStatsData | null>(null);
-
-  useEffect(() => {
-    fetch("/data/stats.json")
-      .then((res) => res.json())
-      .then((data: StatsData) => setStatsData(data.programs))
-      .catch((err) => console.error(err));
-  }, []);
 
   const stats = [
     {

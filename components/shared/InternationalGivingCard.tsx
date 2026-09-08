@@ -62,7 +62,7 @@ export default function InternationalGivingCard() {
         <CheckCircle2 size={60} className="mx-auto text-green-600" />
 
         <h3 className="mt-6 text-3xl font-bold text-green-700">
-          You're On The List!
+          You&apos;re On The List!
         </h3>
 
         <p className="mt-5 text-gray-700 leading-8 max-w-xl mx-auto">
@@ -70,7 +70,7 @@ export default function InternationalGivingCard() {
         </p>
 
         <p className="mt-3 text-gray-600 leading-8 max-w-xl mx-auto">
-          We'll notify you as soon as international donations in
+          We&apos;ll notify you as soon as international donations in
           <strong> USD, GBP and EUR </strong>
           become available.
         </p>

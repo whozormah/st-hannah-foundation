@@ -12,6 +12,11 @@ import "swiper/css/pagination";
 export default function Hero() {
   return (
     <section>
+      <h1 className="sr-only">
+        St. Hannah Foundation — Restoring Hope, Empowering Lives and
+        Transforming Communities
+      </h1>
+
       <Swiper
         modules={[Pagination, Autoplay]}
         pagination={{ clickable: true }}
@@ -33,7 +38,6 @@ export default function Hero() {
             >
               {/* Overlay */}{" "}
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/40" />
-              ```
               {/* Content */}
               <div className="relative z-10 container-custom">
                 <div className="max-w-3xl text-white">
@@ -41,9 +45,9 @@ export default function Hero() {
                     Serving Widows, Children & Families
                   </span>
 
-                  <h1 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                  <h2 className="mt-6 text-4xl md:text-6xl lg:text-7xl font-bold leading-tight">
                     {slide.title}
-                  </h1>
+                  </h2>
 
                   <p className="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl leading-relaxed">
                     {slide.description}

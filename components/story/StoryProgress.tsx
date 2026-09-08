@@ -1,5 +1,3 @@
-"use client";
-
 interface StoryProgressProps {
   current: number;
   total: number;

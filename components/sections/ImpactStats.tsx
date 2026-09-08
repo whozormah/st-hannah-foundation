@@ -1,7 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { HeartHandshake, Users, GraduationCap, HandHeart } from "lucide-react";
+
+import siteStats from "@/public/data/stats.json";
 
 interface StatsData {
   childrenReached: string;
@@ -11,16 +10,7 @@ interface StatsData {
 }
 
 export default function ImpactStats() {
-  const [statsData, setStatsData] = useState<StatsData | null>(null);
-
-  useEffect(() => {
-    fetch("/data/stats.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setStatsData(data.homepage);
-      })
-      .catch((err) => console.error(err));
-  }, []);
+  const statsData: StatsData = siteStats.homepage;
 
   const stats = [
     {
@@ -55,7 +45,6 @@ export default function ImpactStats() {
           <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
             Impact At A Glance{" "}
           </span>
-          ```
           <h2 className="text-4xl md:text-5xl font-bold text-[#1B1815] mt-4">
             Impact That Changes Lives
           </h2>

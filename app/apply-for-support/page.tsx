@@ -1,3 +1,18 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Apply For Support",
+  description:
+    "Apply for assistance from St. Hannah Foundation. Learn who can apply, what is required and how the review process works.",
+  alternates: { canonical: "/apply-for-support" },
+  openGraph: {
+    title: "Apply For Support | St. Hannah Foundation",
+    description:
+      "Apply for assistance from St. Hannah Foundation. Learn who can apply, what is required and how the review process works.",
+    url: "/apply-for-support",
+  },
+};
+
 import PageHeader from "@/components/shared/PageHeader";
 
 import SupportCategories from "@/components/sections/apply/SupportCategories";

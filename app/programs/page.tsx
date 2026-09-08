@@ -1,3 +1,18 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Our Programmes",
+  description:
+    "Explore our programmes: education support, widow empowerment, medical aid, family support, financial aid and community outreach.",
+  alternates: { canonical: "/programs" },
+  openGraph: {
+    title: "Our Programmes | St. Hannah Foundation",
+    description:
+      "Explore our programmes: education support, widow empowerment, medical aid, family support, financial aid and community outreach.",
+    url: "/programs",
+  },
+};
+
 import PageHeader from "@/components/shared/PageHeader";
 
 import ProgramsStats from "@/components/sections/programs/ProgramsStats";

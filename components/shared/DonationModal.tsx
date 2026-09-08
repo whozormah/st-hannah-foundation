@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { X, Gift, CreditCard } from "lucide-react";
 
-import InKindDonationModal from "./InKindDonationModal";
+import InKindDonationModal from "./in-kind/InKindDonationModal";
 import DonationFormModal from "./DonationFormModal";
 
 interface DonationModalProps {

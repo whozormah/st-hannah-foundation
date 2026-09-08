@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import DonationModal from "@/components/shared/DonationModal";
@@ -10,18 +10,13 @@ import StoryNavigation from "@/components/story/StoryNavigation";
 import StoryProgress from "@/components/story/StoryProgress";
 
 import { useStoryCarousel } from "@/hooks/useStoryCarousel";
+import storiesData from "@/public/data/campaigns.json";
 import { Story } from "@/types/story";
 
-export default function FeaturedCampaign() {
-  const [stories, setStories] = useState<Story[]>([]);
-  const [showDonationModal, setShowDonationModal] = useState(false);
+const stories: Story[] = storiesData;
 
-  useEffect(() => {
-    fetch("/data/campaigns.json")
-      .then((res) => res.json())
-      .then((data) => setStories(data))
-      .catch(console.error);
-  }, []);
+export default function FeaturedCampaign() {
+  const [showDonationModal, setShowDonationModal] = useState(false);
 
   const { current, currentStory, next, previous } = useStoryCarousel(stories);
 

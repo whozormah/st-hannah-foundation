@@ -1,7 +1,6 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
+
+import founderData from "@/public/data/homepage/founder.json";
 
 interface FounderData {
   badge: string;
@@ -14,15 +13,10 @@ interface FounderData {
   message: string[];
 }
 
-export default function AboutFounder() {
-  const [founder, setFounder] = useState<FounderData | null>(null);
+const founder: FounderData | null = founderData;
 
-  useEffect(() => {
-    fetch("/data/homepage/founder.json")
-      .then((res) => res.json())
-      .then((data) => setFounder(data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function AboutFounder() {
+
 
   if (!founder) return null;
 
@@ -67,7 +61,7 @@ export default function AboutFounder() {
             {/* Floating Quote Card */}
 
             <div className="absolute -bottom-10 -right-10 max-w-sm rounded-[28px] border border-[#D9A441]/20 bg-white p-8 shadow-2xl">
-              <span className="text-6xl font-serif text-[#D9A441]/20">"</span>
+              <span className="text-6xl font-serif text-[#D9A441]/20">&quot;</span>
 
               <p className="-mt-5 italic leading-8 text-gray-600">
                 {founder.quote}
@@ -112,7 +106,7 @@ export default function AboutFounder() {
               <div className="mt-6 h-px w-16 bg-[#D9A441]" />
 
               <p className="mt-6 italic leading-8 text-gray-600">
-                "{founder.quote}"
+                &quot;{founder.quote}&quot;
               </p>
             </div>
           </div>

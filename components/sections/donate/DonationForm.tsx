@@ -1,5 +1,3 @@
-"use client";
-
 import DonationFormFields from "@/components/shared/DonationFormFields";
 
 export default function DonationForm() {

@@ -1,3 +1,18 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Volunteer With Us",
+  description:
+    "Give your time and skills. Discover volunteer opportunities and apply to serve with St. Hannah Foundation.",
+  alternates: { canonical: "/volunteer" },
+  openGraph: {
+    title: "Volunteer With Us | St. Hannah Foundation",
+    description:
+      "Give your time and skills. Discover volunteer opportunities and apply to serve with St. Hannah Foundation.",
+    url: "/volunteer",
+  },
+};
+
 import PageHeader from "@/components/shared/PageHeader";
 
 import VolunteerOpportunities from "@/components/sections/volunteer/VolunteerOpportunities";

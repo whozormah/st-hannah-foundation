@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useMemo } from "react";
+
 import { InKindDonationData } from "./types";
 
 interface StepTwoProps {
@@ -6,6 +10,20 @@ interface StepTwoProps {
 }
 
 export default function StepTwo({ formData, setFormData }: StepTwoProps) {
+  // Derived from the selected file rather than rebuilt on every render:
+  // the inline version leaked a fresh object URL on each keystroke in this step.
+  const previewUrl = useMemo(
+    () => (formData.image ? URL.createObjectURL(formData.image) : null),
+    [formData.image],
+  );
+
+  // Release the URL once it is replaced or the step unmounts.
+  useEffect(() => {
+    if (!previewUrl) return;
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [previewUrl]);
+
   return (
     <div className="bg-white rounded-[24px] border border-gray-100 p-8 shadow-sm">
       <div className="mb-8">
@@ -125,10 +143,13 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
             className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
             required
           />
-          {formData.image && (
+          {previewUrl && (
+            // A local object URL for a file the donor just picked; next/image
+            // cannot optimise blob: sources.
+            // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={URL.createObjectURL(formData.image)}
-              alt="Preview"
+              src={previewUrl}
+              alt="Preview of the item you are donating"
               className="mt-4 h-48 w-full object-cover rounded-xl border"
             />
           )}

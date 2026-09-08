@@ -1,21 +1,15 @@
-"use client";
 
-import { useEffect, useState } from "react";
+import opportunitiesData from "@/public/data/volunteer-opportunities.json";
 
 interface Opportunity {
   title: string;
   description: string;
 }
 
-export default function VolunteerOpportunities() {
-  const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
+const opportunities: Opportunity[] = opportunitiesData;
 
-  useEffect(() => {
-    fetch("/data/volunteer-opportunities.json")
-      .then((res) => res.json())
-      .then((data) => setOpportunities(data))
-      .catch((err) => console.error(err));
-  }, []);
+export default function VolunteerOpportunities() {
+
 
   return (
     <section className="py-28 bg-[#FAF7F2]">
@@ -27,7 +21,6 @@ export default function VolunteerOpportunities() {
           <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
             Volunteer Opportunities{" "}
           </span>
-          ```
           <h2 className="text-5xl font-bold mt-4">
             Find A Place To Make An Impact
           </h2>

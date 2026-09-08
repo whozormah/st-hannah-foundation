@@ -11,7 +11,7 @@ export default function PartnershipCTA() {
       <section className="py-28 bg-[#844204] text-white">
         <div className="container-custom text-center">
           <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
-            Let's Work Together
+            Let&apos;s Work Together
           </span>
 
           <h2 className="text-5xl md:text-6xl font-bold mt-6">

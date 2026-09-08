@@ -1,29 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import DonationModal from "@/components/shared/DonationModal";
+import programsData from "@/public/data/programs.json";
 
 interface Program {
+  slug: string;
   title: string;
-  image: string;
-  description: string;
-  link: string;
+  heroImage: string;
+  excerpt: string;
 }
 
+const programs: Program[] = programsData;
+
 export default function Causes() {
-  const [programs, setPrograms] = useState<Program[]>([]);
   const [isDonationOpen, setIsDonationOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState("");
-
-  useEffect(() => {
-    fetch("/data/programs/programs.json")
-      .then((res) => res.json())
-      .then((data) => setPrograms(data))
-      .catch((err) => console.error(err));
-  }, []);
 
   const openDonationModal = (programTitle: string) => {
     setSelectedProgram(programTitle);
@@ -55,16 +50,16 @@ export default function Causes() {
           {/* Programs Grid */}
 
           <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
-            {programs.map((program, index) => (
+            {programs.map((program) => (
               <div
-                key={index}
+                key={program.slug}
                 className="group bg-white rounded-[28px] overflow-hidden border border-[#D9A441]/20 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
               >
                 {/* Image */}
 
                 <div className="relative h-64 overflow-hidden">
                   <Image
-                    src={program.image}
+                    src={program.heroImage}
                     alt={program.title}
                     fill
                     className="object-cover group-hover:scale-105 transition duration-500"
@@ -83,7 +78,7 @@ export default function Causes() {
 
                 <div className="p-6">
                   <p className="text-gray-600 leading-7 mb-6">
-                    {program.description}
+                    {program.excerpt}
                   </p>
 
                   <div className="flex flex-col gap-3">
@@ -95,7 +90,7 @@ export default function Causes() {
                     </button>
 
                     <Link
-                      href={program.link}
+                      href={`/programs/${program.slug}`}
                       className="flex items-center justify-center gap-2 border border-[#844204] text-[#844204] hover:bg-[#844204] hover:text-white py-3 rounded-xl font-medium transition-all duration-300"
                     >
                       Learn More

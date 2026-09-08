@@ -1,3 +1,18 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Donate",
+  description:
+    "Support our work with a secure online donation, in-kind gifts of items and materials, or a sponsorship commitment.",
+  alternates: { canonical: "/donate" },
+  openGraph: {
+    title: "Donate | St. Hannah Foundation",
+    description:
+      "Support our work with a secure online donation, in-kind gifts of items and materials, or a sponsorship commitment.",
+    url: "/donate",
+  },
+};
+
 import PageHeader from "@/components/shared/PageHeader";
 
 import DonationImpact from "@/components/sections/donate/DonationImpact";

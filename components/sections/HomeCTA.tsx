@@ -67,7 +67,7 @@ export default function ImpactCTA() {
 
             <div className="mx-auto mt-12 max-w-3xl">
               <p className="text-3xl font-light italic leading-relaxed text-white/90">
-                "Hope grows wherever compassion becomes action."
+                &quot;Hope grows wherever compassion becomes action.&quot;
               </p>
 
               <p className="mt-5 text-sm uppercase tracking-[4px] text-[#F5D27A]">
