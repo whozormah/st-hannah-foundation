@@ -10,12 +10,13 @@ export default function Step1PersonalInfo() {
       <div className="grid md:grid-cols-2 gap-6">
         <input
           type="text"
-          placeholder="Full Name"
+          name="fullName"
+            placeholder="Full Name"
           className="w-full p-4 border rounded-xl"
         />
 
-        <select className="w-full p-4 border rounded-xl">
-          <option>Gender</option>
+        <select name="gender" className="w-full p-4 border rounded-xl">
+          <option value="">Gender</option>
           <option>Male</option>
           <option>Female</option>
         </select>
@@ -25,36 +26,43 @@ export default function Step1PersonalInfo() {
             Date Of Birth
           </label>
 
-          <input type="date" className="w-full p-4 border rounded-xl" />
+          <input
+            type="date"
+            name="dateOfBirth"
+            className="w-full p-4 border rounded-xl"
+          />
         </div>
 
         <input
           type="text"
-          placeholder="Nationality"
+          name="nationality"
+            placeholder="Nationality"
           className="w-full p-4 border rounded-xl"
         />
 
         <input
           type="tel"
-          placeholder="Phone Number"
+          name="phone"
+            placeholder="Phone Number"
           className="w-full p-4 border rounded-xl"
         />
 
         <input
           type="email"
-          placeholder="Email Address"
+          name="email"
+            placeholder="Email Address"
           className="w-full p-4 border rounded-xl"
         />
 
-        <select className="w-full p-4 border rounded-xl">
-          <option>Preferred Contact Method</option>
+        <select name="contactMethod" className="w-full p-4 border rounded-xl">
+          <option value="">Preferred Contact Method</option>
           <option>Phone Call</option>
           <option>WhatsApp</option>
           <option>Email</option>
         </select>
 
-        <select className="w-full p-4 border rounded-xl">
-          <option>How Did You Hear About St. Hannah Foundation?</option>
+        <select name="referralSource" className="w-full p-4 border rounded-xl">
+          <option value="">How Did You Hear About St. Hannah Foundation?</option>
           <option>Friend / Family</option>
           <option>Church</option>
           <option>Community Leader</option>
@@ -66,7 +74,8 @@ export default function Step1PersonalInfo() {
 
         <input
           type="text"
-          placeholder="National ID Number (Optional)"
+          name="nationalId"
+            placeholder="National ID Number (Optional)"
           className="w-full p-4 border rounded-xl md:col-span-2"
         />
       </div>

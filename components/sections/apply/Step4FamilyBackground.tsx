@@ -16,12 +16,13 @@ export default function Step4FamilyBackground() {
         <div className="grid md:grid-cols-2 gap-6">
           <input
             type="text"
+            name="occupation"
             placeholder="Occupation"
             className="w-full p-4 border rounded-xl"
           />
 
-          <select className="w-full p-4 border rounded-xl">
-            <option>Marital Status</option>
+          <select name="maritalStatus" className="w-full p-4 border rounded-xl">
+            <option value="">Marital Status</option>
 
             <option>Single</option>
 
@@ -34,8 +35,8 @@ export default function Step4FamilyBackground() {
             <option>Separated</option>
           </select>
 
-          <select className="w-full p-4 border rounded-xl">
-            <option>Primary Source Of Income</option>
+          <select name="incomeSource" className="w-full p-4 border rounded-xl">
+            <option value="">Primary Source Of Income</option>
 
             <option>Employment</option>
 
@@ -54,12 +55,14 @@ export default function Step4FamilyBackground() {
 
           <input
             type="text"
+            name="incomeSourceOther"
             placeholder="If Other, Describe Source Of Income"
             className="w-full p-4 border rounded-xl"
           />
 
           <input
             type="number"
+            name="monthlyIncome"
             placeholder="Estimated Monthly Income (Optional)"
             className="w-full p-4 border rounded-xl md:col-span-2"
           />
@@ -72,18 +75,20 @@ export default function Step4FamilyBackground() {
         <div className="grid md:grid-cols-2 gap-6">
           <input
             type="number"
+            name="children"
             placeholder="Number Of Children"
             className="w-full p-4 border rounded-xl"
           />
 
           <input
             type="number"
+            name="dependents"
             placeholder="Number Of Dependents"
             className="w-full p-4 border rounded-xl"
           />
 
-          <select className="w-full p-4 border rounded-xl">
-            <option>Are You The Primary Provider For Your Household?</option>
+          <select name="primaryProvider" className="w-full p-4 border rounded-xl">
+            <option value="">Are You The Primary Provider For Your Household?</option>
 
             <option>Yes</option>
 

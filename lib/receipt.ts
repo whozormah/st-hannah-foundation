@@ -1,11 +1,24 @@
+function datePart(date = new Date()) {
+  const yyyy = date.getFullYear();
+
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+
+  const dd = String(date.getDate()).padStart(2, "0");
+
+  return `${yyyy}${mm}${dd}`;
+}
+
 export function generateReceiptNumber(reference: string) {
-  const today = new Date();
+  return `SHF-${datePart()}-${reference.slice(-6).toUpperCase()}`;
+}
 
-  const yyyy = today.getFullYear();
+/**
+ * Reference for submissions that have no payment provider behind them.
+ * Called from route handlers only, so the randomness stays on the server and
+ * the value a submitter is shown is the one recorded in the notification.
+ */
+export function generateReferenceNumber(prefix = "SHF") {
+  const random = Math.random().toString(36).slice(2, 8).toUpperCase();
 
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-
-  const dd = String(today.getDate()).padStart(2, "0");
-
-  return `SHF-${yyyy}${mm}${dd}-${reference.slice(-6).toUpperCase()}`;
+  return `${prefix}-${datePart()}-${random}`;
 }

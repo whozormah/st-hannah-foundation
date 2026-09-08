@@ -71,7 +71,11 @@ export default function Step6ReviewSubmit() {
 
         <div className="space-y-5">
           <label className="flex gap-4 items-start">
-            <input type="checkbox" className="mt-1" />
+            <input
+              type="checkbox"
+              name="declarationTrue"
+              className="mt-1"
+            />
 
             <span className="text-gray-700">
               I certify that the information provided in this application is
@@ -80,7 +84,11 @@ export default function Step6ReviewSubmit() {
           </label>
 
           <label className="flex gap-4 items-start">
-            <input type="checkbox" className="mt-1" />
+            <input
+              type="checkbox"
+              name="declarationNoGuarantee"
+              className="mt-1"
+            />
 
             <span className="text-gray-700">
               I understand that submission of this application does not
@@ -90,7 +98,11 @@ export default function Step6ReviewSubmit() {
           </label>
 
           <label className="flex gap-4 items-start">
-            <input type="checkbox" className="mt-1" />
+            <input
+              type="checkbox"
+              name="declarationContact"
+              className="mt-1"
+            />
 
             <span className="text-gray-700">
               I consent to being contacted by St. Hannah Foundation regarding
@@ -99,7 +111,11 @@ export default function Step6ReviewSubmit() {
           </label>
 
           <label className="flex gap-4 items-start">
-            <input type="checkbox" className="mt-1" />
+            <input
+              type="checkbox"
+              name="declarationDataUse"
+              className="mt-1"
+            />
 
             <span className="text-gray-700">
               I consent to the processing of my information for application

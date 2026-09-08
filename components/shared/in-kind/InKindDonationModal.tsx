@@ -25,6 +25,8 @@ export default function InKindDonationModal({
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [reference, setReference] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const [formData, setFormData] = useState<InKindDonationData>({
     fullName: "",
@@ -130,16 +132,45 @@ export default function InKindDonationModal({
     setStep((prev) => prev - 1);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!validateStep()) return;
 
-    console.log(formData);
+    setSubmitting(true);
+    setSubmitError("");
 
-    // Minted here, in the event handler, so it is created once per submission
-    // rather than recalculated on every render of the success screen.
-    setReference("SHF-" + Date.now().toString().slice(-6));
+    try {
+      // The image is deliberately not sent: there is no file storage
+      // configured, and the Foundation asks for photographs by reply.
+      const { image, ...submission } = formData;
+      void image;
 
-    setSubmitted(true);
+      const response = await fetch("/api/in-kind-donation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(submission),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        setSubmitError(
+          result.message ?? "Something went wrong. Please try again.",
+        );
+
+        return;
+      }
+
+      // Comes back from the server so the donor and the Foundation are
+      // looking at the same reference.
+      setReference(result.reference);
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "We could not reach the server. Please check your connection and try again.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleClose = () => {
@@ -245,6 +276,15 @@ export default function InKindDonationModal({
               <StepFour formData={formData} setFormData={setFormData} />
             )}
 
+            {submitError && (
+              <p
+                role="alert"
+                className="mt-8 rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-red-700"
+              >
+                {submitError}
+              </p>
+            )}
+
             {/* Navigation */}
 
             <div className="flex justify-between mt-10">
@@ -269,9 +309,10 @@ export default function InKindDonationModal({
               ) : (
                 <button
                   onClick={handleSubmit}
-                  className="bg-brand text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-dark transition"
+                  disabled={submitting}
+                  className="bg-brand text-white px-8 py-4 rounded-xl font-semibold transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Submit Donation Offer
+                  {submitting ? "Submitting…" : "Submit Donation Offer"}
                 </button>
               )}
             </div>

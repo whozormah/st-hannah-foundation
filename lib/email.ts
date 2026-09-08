@@ -6,7 +6,16 @@ import {
   FoundationNotification,
   InternationalInterest,
   FoundationInternationalInterest,
+  InKindDonation,
+  FoundationInKindDonation,
+  VolunteerApplication,
+  FoundationVolunteerApplication,
+  AidApplication,
+  FoundationAidApplication,
 } from "@/emails";
+import type { InKindDonationDetails } from "@/emails/FoundationInKindDonation";
+import type { VolunteerApplicationDetails } from "@/emails/FoundationVolunteerApplication";
+import type { AidApplicationDetails } from "@/emails/FoundationAidApplication";
 
 import { formatCurrency, formatDate } from "./formatter";
 import { generateReceiptNumber } from "./receipt";
@@ -37,7 +46,27 @@ function getEmailConfig() {
     resend: new Resend(apiKey),
     fromEmail,
     donationEmail,
+    // Optional dedicated inboxes; they fall back to the address already
+    // configured so no extra setup is needed to start receiving submissions.
+    volunteerEmail: process.env.VOLUNTEER_EMAIL || donationEmail,
+    applicationsEmail: process.env.APPLICATIONS_EMAIL || donationEmail,
   };
+}
+
+/**
+ * Resend resolves with { data, error } instead of rejecting, so an unchecked
+ * call reports success even when nothing was delivered. Every send goes
+ * through here so a failure actually surfaces to the caller.
+ */
+async function deliver(
+  resend: Resend,
+  payload: Parameters<Resend["emails"]["send"]>[0],
+) {
+  const { error } = await resend.emails.send(payload);
+
+  if (error) {
+    throw new Error(`Email delivery failed: ${error.message}`);
+  }
 }
 
 function getSiteUrl() {
@@ -99,14 +128,14 @@ export async function sendDonationEmails({
     }),
   );
 
-  await resend.emails.send({
+  await deliver(resend, {
     from: fromEmail,
     to: email,
     subject: "Your Official Donation Receipt | St. Hannah Foundation",
     html: donorEmail,
   });
 
-  await resend.emails.send({
+  await deliver(resend, {
     from: fromEmail,
     to: donationEmail,
     subject: `New Donation Received • ${formattedAmount}`,
@@ -139,7 +168,7 @@ export async function sendInternationalInterestEmails({
     }),
   );
 
-  await resend.emails.send({
+  await deliver(resend, {
     from: fromEmail,
     to: email,
     subject:
@@ -147,10 +176,130 @@ export async function sendInternationalInterestEmails({
     html: donorEmail,
   });
 
-  await resend.emails.send({
+  await deliver(resend, {
     from: fromEmail,
     to: donationEmail,
     subject: "🌍 New International Giving Interest",
+    html: foundationEmail,
+  });
+}
+
+export async function sendInKindDonationEmails(
+  details: InKindDonationDetails & { reference: string },
+) {
+  const { resend, fromEmail, donationEmail } = getEmailConfig();
+
+  const formattedDate = formatDate(new Date());
+
+  const donorEmail = await render(
+    InKindDonation({
+      name: details.fullName,
+      category: details.category,
+      description: details.description,
+      reference: details.reference,
+      date: formattedDate,
+    }),
+  );
+
+  const foundationEmail = await render(
+    FoundationInKindDonation({
+      ...details,
+      date: formattedDate,
+    }),
+  );
+
+  await deliver(resend, {
+    from: fromEmail,
+    to: details.email,
+    subject: "We\'ve Received Your Donation Offer | St. Hannah Foundation",
+    html: donorEmail,
+  });
+
+  await deliver(resend, {
+    from: fromEmail,
+    to: donationEmail,
+    replyTo: details.email,
+    subject: `New In-Kind Donation Offer • ${details.category}`,
+    html: foundationEmail,
+  });
+}
+
+export async function sendVolunteerApplicationEmails(
+  details: VolunteerApplicationDetails & { reference: string },
+) {
+  const { resend, fromEmail, volunteerEmail } = getEmailConfig();
+
+  const formattedDate = formatDate(new Date());
+
+  const applicantEmail = await render(
+    VolunteerApplication({
+      name: details.fullName,
+      areaOfInterest: details.areaOfInterest,
+      reference: details.reference,
+      date: formattedDate,
+    }),
+  );
+
+  const foundationEmail = await render(
+    FoundationVolunteerApplication({
+      ...details,
+      date: formattedDate,
+    }),
+  );
+
+  await deliver(resend, {
+    from: fromEmail,
+    to: details.email,
+    subject: "We\'ve Received Your Volunteer Application | St. Hannah Foundation",
+    html: applicantEmail,
+  });
+
+  await deliver(resend, {
+    from: fromEmail,
+    to: volunteerEmail,
+    replyTo: details.email,
+    subject: `New Volunteer Application • ${details.fullName}`,
+    html: foundationEmail,
+  });
+}
+
+export async function sendAidApplicationEmails(
+  details: AidApplicationDetails,
+  reference: string,
+) {
+  const { resend, fromEmail, applicationsEmail } = getEmailConfig();
+
+  const formattedDate = formatDate(new Date());
+
+  const applicantEmail = await render(
+    AidApplication({
+      name: details.fullName,
+      supportType: details.supportType,
+      reference,
+      date: formattedDate,
+    }),
+  );
+
+  const foundationEmail = await render(
+    FoundationAidApplication({
+      details,
+      reference,
+      date: formattedDate,
+    }),
+  );
+
+  await deliver(resend, {
+    from: fromEmail,
+    to: details.email,
+    subject: "We\'ve Received Your Support Application | St. Hannah Foundation",
+    html: applicantEmail,
+  });
+
+  await deliver(resend, {
+    from: fromEmail,
+    to: applicationsEmail,
+    replyTo: details.email,
+    subject: `New Support Application • ${details.supportType || "General"}`,
     html: foundationEmail,
   });
 }

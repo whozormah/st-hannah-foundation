@@ -8,8 +8,8 @@ export default function Step3SupportRequest() {
         support is important at this time.
       </p>
       <div className="space-y-6">
-        <select className="w-full p-4 border rounded-xl">
-          <option>Type Of Support Needed</option>
+        <select name="supportType" className="w-full p-4 border rounded-xl">
+          <option value="">Type Of Support Needed</option>
 
           <option>Education Support</option>
 
@@ -28,8 +28,8 @@ export default function Step3SupportRequest() {
           <option>Other</option>
         </select>
 
-        <select className="w-full p-4 border rounded-xl">
-          <option>How Urgent Is Your Request?</option>
+        <select name="urgency" className="w-full p-4 border rounded-xl">
+          <option value="">How Urgent Is Your Request?</option>
 
           <option>Emergency (Immediate Assistance Needed)</option>
 
@@ -40,8 +40,8 @@ export default function Step3SupportRequest() {
           <option>General Assistance</option>
         </select>
 
-        <select className="w-full p-4 border rounded-xl">
-          <option>Have You Applied For Similar Support Elsewhere?</option>
+        <select name="appliedElsewhere" className="w-full p-4 border rounded-xl">
+          <option value="">Have You Applied For Similar Support Elsewhere?</option>
 
           <option>Yes</option>
 
@@ -50,25 +50,29 @@ export default function Step3SupportRequest() {
 
         <input
           type="text"
-          placeholder="If Other, Please Describe The Support Needed"
+          name="supportTypeOther"
+            placeholder="If Other, Please Describe The Support Needed"
           className="w-full p-4 border rounded-xl"
         />
 
         <textarea
           rows={4}
-          placeholder="Briefly Explain The Type Of Support You Are Requesting"
+          name="supportSummary"
+            placeholder="Briefly Explain The Type Of Support You Are Requesting"
           className="w-full p-4 border rounded-xl"
         />
 
         <textarea
           rows={5}
-          placeholder="What specific challenge or need are you currently facing?"
+          name="challenge"
+            placeholder="What specific challenge or need are you currently facing?"
           className="w-full p-4 border rounded-xl"
         />
 
         <textarea
           rows={4}
-          placeholder="How will this support improve your situation?"
+          name="expectedImpact"
+            placeholder="How will this support improve your situation?"
           className="w-full p-4 border rounded-xl"
         />
       </div>
