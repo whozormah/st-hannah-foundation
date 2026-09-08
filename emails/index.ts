@@ -12,3 +12,8 @@ export { default as FoundationVolunteerApplication } from "./FoundationVolunteer
 
 export { default as AidApplication } from "./AidApplication";
 export { default as FoundationAidApplication } from "./FoundationAidApplication";
+
+export { default as ContactEnquiry } from "./ContactEnquiry";
+export { default as FoundationContactEnquiry } from "./FoundationContactEnquiry";
+
+export { default as FoundationNewsletterSignup } from "./FoundationNewsletterSignup";

@@ -9,6 +9,46 @@ import DonationModal from "@/components/shared/DonationModal";
 
 export default function Footer() {
   const [showDonationModal, setShowDonationModal] = useState(false);
+  const [subscribeState, setSubscribeState] = useState<
+    "idle" | "sending" | "done"
+  >("idle");
+  const [subscribeMessage, setSubscribeMessage] = useState("");
+
+  // The number committed in site-settings.json is a placeholder, so the tel:
+  // link and the number itself are hidden until a real one is configured.
+  const hasRealPhone = /[1-9]/.test(settings.phone.replace(/^\+?\d{1,4}/, ""));
+
+  const handleSubscribe = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const email = String(new FormData(form).get("email") ?? "");
+
+    setSubscribeState("sending");
+    setSubscribeMessage("");
+
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const result = await response.json();
+
+      setSubscribeMessage(result.message);
+
+      if (result.success) {
+        setSubscribeState("done");
+        form.reset();
+      } else {
+        setSubscribeState("idle");
+      }
+    } catch {
+      setSubscribeMessage("Something went wrong. Please try again later.");
+      setSubscribeState("idle");
+    }
+  };
 
   return (
     <>
@@ -32,8 +72,7 @@ export default function Footer() {
               </p>
 
               <form
-                action="YOUR_FORMSPREE_ENDPOINT"
-                method="POST"
+                onSubmit={handleSubscribe}
                 className="mt-10 flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto"
               >
                 <input
@@ -46,11 +85,25 @@ export default function Footer() {
 
                 <button
                   type="submit"
-                  className="bg-brand hover:bg-brand-light px-8 py-4 rounded-xl font-semibold transition"
+                  disabled={subscribeState === "sending"}
+                  className="rounded-xl bg-brand px-8 py-4 font-semibold transition hover:bg-brand-light disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Subscribe
+                  {subscribeState === "sending" ? "Sending…" : "Subscribe"}
                 </button>
               </form>
+
+              {subscribeMessage && (
+                <p
+                  role="status"
+                  className={`mt-5 ${
+                    subscribeState === "done"
+                      ? "text-accent-soft"
+                      : "text-red-300"
+                  }`}
+                >
+                  {subscribeMessage}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -190,18 +243,20 @@ export default function Footer() {
 
                 {/* Phone */}
 
-                <div>
-                  <p className="text-accent text-sm uppercase tracking-wider">
-                    Phone
-                  </p>
+                {hasRealPhone && (
+                  <div>
+                    <p className="text-accent text-sm uppercase tracking-wider">
+                      Phone
+                    </p>
 
-                  <a
-                    href={`tel:${settings?.phone}`}
-                    className="text-gray-300 hover:text-white transition"
-                  >
-                    {settings?.phone}
-                  </a>
-                </div>
+                    <a
+                      href={`tel:${settings.phone.replace(/\s/g, "")}`}
+                      className="text-gray-300 transition hover:text-white"
+                    >
+                      {settings.phone}
+                    </a>
+                  </div>
+                )}
 
                 {/* Nigeria Office */}
 

@@ -12,10 +12,14 @@ import {
   FoundationVolunteerApplication,
   AidApplication,
   FoundationAidApplication,
+  ContactEnquiry,
+  FoundationContactEnquiry,
+  FoundationNewsletterSignup,
 } from "@/emails";
 import type { InKindDonationDetails } from "@/emails/FoundationInKindDonation";
 import type { VolunteerApplicationDetails } from "@/emails/FoundationVolunteerApplication";
 import type { AidApplicationDetails } from "@/emails/FoundationAidApplication";
+import type { ContactEnquiryDetails } from "@/emails/FoundationContactEnquiry";
 
 import { formatCurrency, formatDate } from "./formatter";
 import { generateReceiptNumber } from "./receipt";
@@ -50,6 +54,7 @@ function getEmailConfig() {
     // configured so no extra setup is needed to start receiving submissions.
     volunteerEmail: process.env.VOLUNTEER_EMAIL || donationEmail,
     applicationsEmail: process.env.APPLICATIONS_EMAIL || donationEmail,
+    contactEmail: process.env.CONTACT_EMAIL || donationEmail,
   };
 }
 
@@ -301,5 +306,63 @@ export async function sendAidApplicationEmails(
     replyTo: details.email,
     subject: `New Support Application • ${details.supportType || "General"}`,
     html: foundationEmail,
+  });
+}
+
+export async function sendContactEnquiryEmails(
+  details: ContactEnquiryDetails & { reference: string },
+) {
+  const { resend, fromEmail, contactEmail } = getEmailConfig();
+
+  const formattedDate = formatDate(new Date());
+
+  const senderEmail = await render(
+    ContactEnquiry({
+      name: details.name,
+      subject: details.subject,
+      reference: details.reference,
+      date: formattedDate,
+    }),
+  );
+
+  const foundationEmail = await render(
+    FoundationContactEnquiry({
+      ...details,
+      date: formattedDate,
+    }),
+  );
+
+  await deliver(resend, {
+    from: fromEmail,
+    to: details.email,
+    subject: "We\'ve Received Your Message | St. Hannah Foundation",
+    html: senderEmail,
+  });
+
+  await deliver(resend, {
+    from: fromEmail,
+    to: contactEmail,
+    replyTo: details.email,
+    subject: `${details.enquiry} • ${details.subject}`,
+    html: foundationEmail,
+  });
+}
+
+export async function sendNewsletterSignupEmail(email: string) {
+  const { resend, fromEmail, contactEmail } = getEmailConfig();
+
+  const html = await render(
+    FoundationNewsletterSignup({
+      email,
+      date: formatDate(new Date()),
+    }),
+  );
+
+  await deliver(resend, {
+    from: fromEmail,
+    to: contactEmail,
+    replyTo: email,
+    subject: "New Newsletter Subscriber",
+    html,
   });
 }

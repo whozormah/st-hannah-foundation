@@ -41,22 +41,18 @@ export default function ContactFAQ() {
   ];
 
   return (
-    <section className="py-32 bg-white">
+    <section className="bg-white py-24">
       <div className="container-custom">
         {/* Header */}
 
-        <div className="mx-auto mb-20 max-w-4xl text-center">
-          <span className="font-semibold uppercase tracking-[6px] text-brand">
+        <div className="mb-12 max-w-2xl">
+          <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
             Frequently Asked Questions
           </span>
 
-          <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-ink">
-            Answers To The{" "}
-            <br />
-            Questions We Hear Most
+          <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
+            Answers to the questions we hear most
           </h2>
-
-          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-accent" />
 
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
             We&apos;ve answered some of the most common questions about our
@@ -67,7 +63,7 @@ export default function ContactFAQ() {
 
         {/* FAQ */}
 
-        <div className="mx-auto max-w-5xl space-y-6">
+        <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div
               key={faq.question}
@@ -113,12 +109,12 @@ export default function ContactFAQ() {
 
         {/* Bottom Card */}
 
-        <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-brand p-12 text-center text-white shadow-2xl">
+        <div className="mx-auto mt-16 max-w-4xl rounded-[32px] bg-brand p-10 text-center text-white shadow-2xl">
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-white/10">
             <MessageCircle size={38} />
           </div>
 
-          <h3 className="mt-8 text-4xl font-bold">Still Need Help?</h3>
+          <h3 className="mt-8 text-3xl font-bold">Still need help?</h3>
 
           <p className="mx-auto mt-6 max-w-3xl text-lg leading-9 text-white/90">
             If you couldn&apos;t find the answer you were looking for, our team is
@@ -127,10 +123,10 @@ export default function ContactFAQ() {
           </p>
 
           <Link
-            href="/contact"
+            href="#contact-form"
             className="group mt-10 inline-flex items-center gap-3 rounded-full bg-white px-10 py-5 font-semibold text-brand transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
-            Contact Our Team
+            Send us a message
             <ArrowRight
               size={18}
               className="transition-transform duration-300 group-hover:translate-x-2"
