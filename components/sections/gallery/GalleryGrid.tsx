@@ -1,14 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
-
-import GalleryCard from "./GalleryCard";
-
 interface GalleryItem {
   image: string;
   category: string;
   title: string;
 }
+
+import GalleryCard from "./GalleryCard";
 
 interface GalleryGridProps {
   images: GalleryItem[];
@@ -18,55 +16,34 @@ interface GalleryGridProps {
 export default function GalleryGrid({ images, onOpen }: GalleryGridProps) {
   if (!images.length) {
     return (
-      <div className="py-32 text-center">
-        <h3 className="text-3xl font-bold text-ink">
-          No Images Available
-        </h3>
+      <div className="rounded-[24px] border border-dashed border-accent/40 py-24 text-center">
+        <p className="text-xl font-bold text-ink">
+          No photographs in this category yet
+        </p>
 
-        <p className="mt-4 text-gray-700">
-          Images for this category will appear here.
+        <p className="mt-3 text-gray-700">
+          Choose another programme area to keep browsing.
         </p>
       </div>
     );
   }
 
   return (
-    <motion.div
-      layout
-      className="grid auto-rows-[340px] gap-8 md:grid-cols-2 xl:grid-cols-3"
-    >
+    // A single aspect ratio across every tile. The previous grid mixed
+    // auto-rows-[340px] with children forced to 720px and 500px, so tiles
+    // overflowed their rows.
+    <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-5 xl:grid-cols-4">
       {images.map((item, index) => (
-        <motion.div
-          key={`${item.title}-${index}`}
-          layout
-          className={
-            index === 0
-              ? "h-[720px] md:col-span-2 md:row-span-2"
-              : index % 5 === 0
-                ? "h-[500px]"
-                : "h-[340px]"
-          }
-          initial={{
-            opacity: 0,
-            y: 40,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.45,
-            delay: index * 0.04,
-          }}
-        >
+        <li key={`${item.image}-${index}`}>
           <GalleryCard
             image={item.image}
-            title={item.title}
             category={item.category}
+            position={index + 1}
+            total={images.length}
             onClick={() => onOpen(index)}
           />
-        </motion.div>
+        </li>
       ))}
-    </motion.div>
+    </ul>
   );
 }

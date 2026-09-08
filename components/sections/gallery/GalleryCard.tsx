@@ -1,60 +1,58 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { Expand } from "lucide-react";
 
 interface GalleryCardProps {
   image: string;
-  title: string;
   category: string;
+  position: number;
+  total: number;
   onClick: () => void;
 }
 
 export default function GalleryCard({
   image,
-  title,
   category,
+  position,
+  total,
   onClick,
 }: GalleryCardProps) {
   return (
     <button
       onClick={onClick}
-      className="group relative h-full w-full overflow-hidden rounded-[36px] text-left shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+      // The titles in gallery.json repeat for every photograph in a category
+      // ("Widow Empowerment Program" twenty times), so the card is labelled by
+      // category and position instead of stacking the same caption over and
+      // over. The full label is what assistive tech announces.
+      aria-label={`Open ${category} photograph ${position} of ${total}`}
+      className="group relative block aspect-[4/3] w-full overflow-hidden rounded-[20px] bg-cream shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
     >
       <Image
         src={image}
-        alt={title}
+        alt=""
         fill
-        className="object-cover transition-all duration-700 group-hover:scale-110"
+        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
       />
 
-      {/* Overlay */}
+      <span
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+      />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-transparent opacity-80 transition-all duration-500 group-hover:opacity-100" />
-
-      {/* Category */}
-
-      <div className="absolute left-7 top-7">
-        <span className="rounded-full bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[3px] text-brand backdrop-blur-md">
+      <span
+        aria-hidden
+        className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-3 opacity-0 transition-all duration-500 group-hover:opacity-100"
+      >
+        <span className="text-left text-sm font-semibold uppercase tracking-[2px] text-white">
           {category}
         </span>
-      </div>
 
-      {/* Bottom */}
-
-      <div className="absolute inset-x-0 bottom-0 translate-y-3 p-8 text-white transition-all duration-500 group-hover:translate-y-0">
-        <h3 className="max-w-sm text-3xl font-bold leading-tight">{title}</h3>
-
-        <div className="mt-6 flex items-center justify-between">
-          <p className="text-sm uppercase tracking-[3px] text-white/80">
-            View Story
-          </p>
-
-          <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-all duration-500 group-hover:rotate-45 group-hover:bg-accent">
-            <ArrowUpRight size={22} />
-          </div>
-        </div>
-      </div>
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md">
+          <Expand size={16} />
+        </span>
+      </span>
     </button>
   );
 }

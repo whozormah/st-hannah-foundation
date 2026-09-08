@@ -1,8 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
 
 interface GalleryItem {
   image: string;
@@ -25,86 +25,96 @@ export default function GalleryLightbox({
   onNext,
   onPrevious,
 }: GalleryLightboxProps) {
-  if (current === null || !images.length) return null;
+  const open = current !== null && images.length > 0;
 
-  const image = images[current];
+  // The page behind a full-screen viewer should not scroll with it.
+  useEffect(() => {
+    if (!open) return;
+
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [open]);
+
+  if (!open || current === null) return null;
+
+  const item = images[current];
 
   return (
-    <AnimatePresence>
-      <motion.div
-        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-xl"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={onClose}
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${item.category} photograph ${current + 1} of ${images.length}`}
+      className="fixed inset-0 z-[9999] flex flex-col bg-black/95 backdrop-blur-xl"
+      onClick={onClose}
+    >
+      {/* Bar */}
+
+      <div
+        className="flex items-center justify-between gap-4 px-5 py-5 text-white sm:px-8"
+        onClick={(event) => event.stopPropagation()}
       >
-        {/* Close */}
+        <div className="min-w-0">
+          <p className="truncate text-sm font-semibold uppercase tracking-[3px] text-accent">
+            {item.category}
+          </p>
 
-        <button aria-label="Close"
-          onClick={(e) => {
-            e.stopPropagation();
-            onClose();
-          }}
-          className="absolute right-8 top-8 z-50 rounded-full bg-white/10 p-3 text-white backdrop-blur-md transition hover:bg-white/20"
+          <p className="mt-1 text-sm text-white/60">
+            {current + 1} of {images.length}
+          </p>
+        </div>
+
+        <button
+          aria-label="Close"
+          onClick={onClose}
+          className="shrink-0 rounded-full bg-white/10 p-3 transition hover:bg-white/20"
         >
-          <X size={28} />
+          <X size={24} />
+        </button>
+      </div>
+
+      {/* Image */}
+
+      <div
+        className="relative flex-1 px-4 pb-6 sm:px-8"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <Image
+          key={item.image}
+          src={item.image}
+          alt={`${item.category} photograph ${current + 1} of ${images.length}`}
+          fill
+          sizes="100vw"
+          className="object-contain p-2"
+          priority
+        />
+      </div>
+
+      {/* Controls sit below the image rather than over it, so they never
+          cover the photograph on narrow screens. */}
+      <div
+        className="flex items-center justify-center gap-4 pb-8 text-white"
+        onClick={(event) => event.stopPropagation()}
+      >
+        <button
+          aria-label="Previous"
+          onClick={onPrevious}
+          className="rounded-full bg-white/10 p-4 transition hover:bg-white/20"
+        >
+          <ChevronLeft size={26} />
         </button>
 
-        {/* Previous */}
-
-        <button aria-label="Previous"
-          onClick={(e) => {
-            e.stopPropagation();
-            onPrevious();
-          }}
-          className="absolute left-8 rounded-full bg-white/10 p-4 text-white backdrop-blur-md transition hover:bg-white/20"
+        <button
+          aria-label="Next"
+          onClick={onNext}
+          className="rounded-full bg-white/10 p-4 transition hover:bg-white/20"
         >
-          <ChevronLeft size={34} />
+          <ChevronRight size={26} />
         </button>
-
-        {/* Next */}
-
-        <button aria-label="Next"
-          onClick={(e) => {
-            e.stopPropagation();
-            onNext();
-          }}
-          className="absolute right-8 rounded-full bg-white/10 p-4 text-white backdrop-blur-md transition hover:bg-white/20"
-        >
-          <ChevronRight size={34} />
-        </button>
-
-        {/* Content */}
-
-        <motion.div
-          layoutId={image.image}
-          className="w-full max-w-7xl px-8"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div className="relative h-[75vh] overflow-hidden rounded-[32px]">
-            <Image
-              src={image.image}
-              alt={image.title}
-              fill
-              className="object-contain"
-            />
-          </div>
-
-          <div className="mt-8 text-center">
-            <span className="rounded-full bg-accent/20 px-5 py-2 text-xs font-semibold uppercase tracking-[3px] text-accent">
-              {image.category}
-            </span>
-
-            <h2 className="mt-6 text-4xl font-bold text-white">
-              {image.title}
-            </h2>
-
-            <p className="mt-4 text-gray-400">
-              Image {current + 1} of {images.length}
-            </p>
-          </div>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+      </div>
+    </div>
   );
 }

@@ -1,41 +1,45 @@
-export default function GalleryStats() {
-  const stats = [
-    {
-      number: "500+",
-      label: "Photos",
-    },
-    {
-      number: "120+",
-      label: "Outreach Events",
-    },
-    {
-      number: "25+",
-      label: "Communities",
-    },
-    {
-      number: "10+",
-      label: "Years of Impact",
-    },
-  ];
+import galleryData from "@/public/data/gallery.json";
+import siteStats from "@/public/data/stats.json";
 
+const photographs = galleryData.length;
+const areas = new Set(galleryData.map((item) => item.category)).size;
+
+// Counted from the gallery itself, or taken from stats.json. The previous
+// figures (500+ photos, 120+ outreach events, 25+ communities) were hardcoded
+// and contradicted both.
+const stats = [
+  { number: String(photographs), label: "Photographs" },
+  { number: String(areas), label: "Programme areas" },
+  { number: siteStats.gallery.outreachEvents, label: "Outreach events" },
+  { number: siteStats.gallery.yearsOfService, label: "Years of service" },
+];
+
+export default function GalleryStats() {
   return (
-    <section className="bg-cream py-20">
+    <section className="bg-cream py-16">
       <div className="container-custom">
-        <div className="grid gap-8 rounded-[36px] border border-accent/10 bg-white p-12 shadow-xl md:grid-cols-2 xl:grid-cols-4">
+        <dl className="grid gap-8 rounded-[28px] border border-accent/15 bg-white px-10 py-10 shadow-sm sm:grid-cols-2 xl:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
-              <h3 className="text-5xl font-bold text-brand">
-                {stat.number}
-              </h3>
+              <dt className="sr-only">{stat.label}</dt>
 
-              <div className="mx-auto my-5 h-px w-12 bg-accent" />
+              <dd>
+                <span className="block text-4xl font-bold text-brand md:text-5xl">
+                  {stat.number}
+                </span>
 
-              <p className="text-sm font-semibold uppercase tracking-[3px] text-gray-500">
-                {stat.label}
-              </p>
+                <span
+                  aria-hidden
+                  className="mx-auto my-4 block h-px w-10 bg-accent"
+                />
+
+                <span className="text-sm font-semibold uppercase tracking-[3px] text-gray-500">
+                  {stat.label}
+                </span>
+              </dd>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   );

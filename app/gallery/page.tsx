@@ -1,19 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import PageHeader from "@/components/shared/PageHeader";
+import GalleryStats from "@/components/sections/gallery/GalleryStats";
+import GalleryFilters from "@/components/sections/gallery/GalleryFilters";
+import GalleryGrid from "@/components/sections/gallery/GalleryGrid";
+import GalleryLightbox from "@/components/sections/gallery/GalleryLightbox";
 import FeaturedEvents from "@/components/sections/gallery/FeaturedEvents";
 import VideoHighlights from "@/components/sections/gallery/VideoHighlights";
 import GalleryCTA from "@/components/sections/gallery/GalleryCTA";
-import GalleryStats from "@/components/sections/gallery/GalleryStats";
-import GalleryGrid from "@/components/sections/gallery/GalleryGrid";
-import GalleryLightbox from "@/components/sections/gallery/GalleryLightbox";
-import GalleryIntro from "@/components/sections/gallery/GalleryIntro";
-import GalleryFilters from "@/components/sections/gallery/GalleryFilters";
-import GalleryFeatured from "@/components/sections/gallery/GalleryFeatured";
 
 import galleryData from "@/public/data/gallery.json";
+
 interface GalleryItem {
   image: string;
   category: string;
@@ -22,93 +21,116 @@ interface GalleryItem {
 
 const galleryItems: GalleryItem[] = galleryData;
 
+const categories = [
+  { name: "All", count: galleryItems.length },
+  ...Array.from(new Set(galleryItems.map((item) => item.category))).map(
+    (name) => ({
+      name,
+      count: galleryItems.filter((item) => item.category === name).length,
+    }),
+  ),
+];
+
 export default function GalleryPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const categories = [
-    "All",
-    ...Array.from(new Set(galleryItems.map((item) => item.category))),
-  ];
 
-  const filteredImages =
-    activeCategory === "All"
-      ? galleryItems
-      : galleryItems.filter((item) => item.category === activeCategory);
+  const filteredImages = useMemo(
+    () =>
+      activeCategory === "All"
+        ? galleryItems
+        : galleryItems.filter((item) => item.category === activeCategory),
+    [activeCategory],
+  );
+
+  const total = filteredImages.length;
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (selectedImage === null) return;
+    if (selectedImage === null) return;
 
-      if (e.key === "Escape") {
-        setSelectedImage(null);
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedImage(null);
+
+      if (event.key === "ArrowRight") {
+        setSelectedImage((prev) => ((prev ?? 0) + 1) % total);
       }
 
-      if (e.key === "ArrowRight") {
-        setSelectedImage(
-          selectedImage === filteredImages.length - 1 ? 0 : selectedImage + 1,
-        );
-      }
-
-      if (e.key === "ArrowLeft") {
-        setSelectedImage(
-          selectedImage === 0 ? filteredImages.length - 1 : selectedImage - 1,
-        );
+      if (event.key === "ArrowLeft") {
+        setSelectedImage((prev) => ((prev ?? 0) - 1 + total) % total);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
 
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedImage, filteredImages.length]);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedImage, total]);
 
   return (
     <>
       <PageHeader
         title="Gallery"
-        subtitle="Explore moments of hope, compassion, empowerment and transformation captured through the work of St. Hannah Foundation."
+        subtitle="Moments of hope, compassion and transformation captured through the work of St. Hannah Foundation."
         image="/headers/gallery.jpg"
       />
-      <GalleryStats />
-      <GalleryIntro />
-      <GalleryFeatured />
-      <section id="gallery" className="pb-24 bg-white">
-        <div className="container-custom">
-          <GalleryFilters
-            categories={categories}
-            activeCategory={activeCategory}
-            onSelect={(category) => {
-              setActiveCategory(category);
-              setSelectedImage(null);
-            }}
-          />
 
-          <GalleryGrid images={filteredImages} onOpen={setSelectedImage} />
+      <GalleryStats />
+
+      {/* The photographs are the page, so they come straight after the header
+          rather than behind an intro and a second hero image. */}
+      <section id="gallery" className="bg-white py-20">
+        <div className="container-custom">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
+                Moments That Matter
+              </span>
+
+              <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
+                A visual journey of impact
+              </h2>
+
+              <p className="mt-5 text-lg leading-9 text-gray-700">
+                Browse the work by programme area. Select any photograph to view
+                it full size.
+              </p>
+            </div>
+
+            <p className="shrink-0 text-gray-500">
+              Showing {total} of {galleryItems.length} photographs
+            </p>
+          </div>
+
+          <div className="mt-10">
+            <GalleryFilters
+              categories={categories}
+              activeCategory={activeCategory}
+              onSelect={(category) => {
+                setActiveCategory(category);
+                setSelectedImage(null);
+              }}
+            />
+          </div>
+
+          <div className="mt-10">
+            <GalleryGrid images={filteredImages} onOpen={setSelectedImage} />
+          </div>
         </div>
       </section>
+
       <GalleryLightbox
         images={filteredImages}
         current={selectedImage}
         onClose={() => setSelectedImage(null)}
-        onNext={() =>
-          setSelectedImage(
-            selectedImage === filteredImages.length - 1
-              ? 0
-              : (selectedImage ?? 0) + 1,
-          )
-        }
+        onNext={() => setSelectedImage((prev) => ((prev ?? 0) + 1) % total)}
         onPrevious={() =>
-          setSelectedImage(
-            selectedImage === 0
-              ? filteredImages.length - 1
-              : (selectedImage ?? 0) - 1,
-          )
+          setSelectedImage((prev) => ((prev ?? 0) - 1 + total) % total)
         }
       />
 
       <FeaturedEvents />
+
       <VideoHighlights />
+
       <GalleryCTA />
     </>
   );

@@ -9,7 +9,7 @@ export default function GalleryCTA() {
         <span className="uppercase tracking-[5px] text-accent font-semibold">
           Inspired By What You See?{" "}
         </span>
-        <h2 className="text-5xl md:text-6xl font-bold mt-6 leading-tight">
+        <h2 className="mt-6 text-3xl font-bold leading-tight md:text-5xl">
           Together We Can Create{" "}
           <br />
           Even More Stories Of Hope

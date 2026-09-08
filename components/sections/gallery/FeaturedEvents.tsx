@@ -17,30 +17,30 @@ export default function FeaturedEvents() {
 
 
   return (
-    <section className="py-24 bg-cream">
+    <section className="bg-white py-24">
       {" "}
       <div className="container-custom">
         {" "}
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          {" "}
-          <span className="uppercase tracking-[5px] text-brand font-semibold">
-            Featured Events{" "}
+        <div className="mb-12 max-w-2xl">
+          <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
+            Behind The Photographs
           </span>
-          <h2 className="text-5xl font-bold mt-4">
-            Impact Beyond The Pictures
+
+          <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
+            The programmes these moments come from
           </h2>
-          <p className="mt-6 text-lg text-gray-700 leading-8">
-            Explore some of the key programmes and outreach initiatives that
-            continue to transform lives and strengthen communities.
+
+          <p className="mt-5 text-lg leading-9 text-gray-700">
+            Each photograph belongs to a programme still running today.
           </p>
         </div>
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {events.map((event) => (
             <div
               key={event.title}
-              className="bg-white rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl transition"
+              className="overflow-hidden rounded-[24px] border border-accent/15 bg-white shadow-sm transition hover:shadow-xl"
             >
-              <div className="relative h-[260px]">
+              <div className="relative aspect-[16/10]">
                 <Image
                   src={event.image}
                   alt={event.title}

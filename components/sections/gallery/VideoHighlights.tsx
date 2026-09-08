@@ -12,62 +12,97 @@ interface VideoItem {
   link: string;
 }
 
-const videos: VideoItem[] = videosData;
+// Every entry in video-highlights.json currently points at
+// "https://youtube.com", the site's home page rather than a video. Publishing
+// a Watch button that lands nowhere is worse than not publishing it, so only
+// entries with a real video URL are shown, and the section hides itself when
+// none qualify. Fill in the links and the cards return on their own.
+function isPlayableVideo(link: string) {
+  try {
+    const url = new URL(link);
+    const host = url.hostname.replace(/^www\./, "");
+
+    if (host === "youtube.com" || host === "m.youtube.com") {
+      return url.searchParams.has("v") || url.pathname.startsWith("/embed/");
+    }
+
+    if (host === "youtu.be") return url.pathname.length > 1;
+
+    if (host === "vimeo.com") return url.pathname.length > 1;
+
+    return url.pathname.length > 1;
+  } catch {
+    return false;
+  }
+}
+
+const videos: VideoItem[] = (videosData as VideoItem[]).filter((video) =>
+  isPlayableVideo(video.link),
+);
 
 export default function VideoHighlights() {
-
+  if (!videos.length) return null;
 
   return (
-    <section className="py-28 bg-cream">
-      {" "}
+    <section className="bg-cream py-24">
       <div className="container-custom">
-        {" "}
-        <div className="text-center max-w-4xl mx-auto mb-16">
-          {" "}
-          <span className="uppercase tracking-[5px] text-brand font-semibold">
-            Stories In Motion{" "}
+        <div className="max-w-2xl">
+          <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
+            Stories In Motion
           </span>
-          <h2 className="text-5xl font-bold mt-4">Experience The Impact</h2>
-          <p className="mt-6 text-lg text-gray-700 leading-8">
-            Watch stories of hope, transformation and community impact through
-            the lives of the people and communities we serve.
+
+          <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
+            Experience the impact
+          </h2>
+
+          <p className="mt-5 text-lg leading-9 text-gray-700">
+            Watch the work through the lives of the people and communities we
+            serve.
           </p>
         </div>
-        <div className="grid lg:grid-cols-3 gap-8">
+
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {videos.map((video) => (
             <Link
               key={video.title}
               href={video.link}
               target="_blank"
-              className="bg-white rounded-[32px] overflow-hidden shadow-sm hover:shadow-xl transition group"
+              rel="noopener noreferrer"
+              className="group overflow-hidden rounded-[24px] bg-white shadow-sm transition hover:shadow-xl"
             >
-              <div className="relative h-[260px]">
+              <div className="relative aspect-[16/10]">
                 <Image
                   src={video.thumbnail}
-                  alt={video.title}
+                  alt=""
                   fill
-                  className="object-cover group-hover:scale-105 transition duration-500"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition duration-500 group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                  <PlayCircle size={70} className="text-white" />
-                </div>
+                <span
+                  aria-hidden
+                  className="absolute inset-0 flex items-center justify-center bg-black/30"
+                >
+                  <PlayCircle size={62} className="text-white" />
+                </span>
               </div>
 
-              <div className="p-8">
-                <span className="text-brand uppercase tracking-[3px] font-semibold">
+              <div className="p-7">
+                <span className="text-sm font-semibold uppercase tracking-[3px] text-brand">
                   {video.category}
                 </span>
 
-                <h3 className="text-2xl font-bold mt-3">{video.title}</h3>
+                <h3 className="mt-3 text-xl font-bold text-ink">
+                  {video.title}
+                </h3>
 
-                <p className="mt-4 text-gray-700 leading-7">
+                <p className="mt-3 leading-8 text-gray-700">
                   {video.description}
                 </p>
 
-                <div className="mt-6 text-brand font-semibold">
-                  Watch Story →
-                </div>
+                <span className="mt-5 inline-block font-semibold text-brand">
+                  Watch story →
+                </span>
               </div>
             </Link>
           ))}
