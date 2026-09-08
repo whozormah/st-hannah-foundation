@@ -6,100 +6,123 @@ import { Menu, X, ChevronDown, Heart } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 
+interface NavLink {
+  name: string;
+  href: string;
+}
+
+interface NavGroup {
+  name: string;
+  intro?: string;
+  links: NavLink[];
+}
+
+/* One definition drives both the desktop bar and the mobile drawer. They were
+   maintained as two hardcoded lists and had already drifted: Team was missing
+   from the desktop bar, Volunteer was missing from the mobile list, and Apply
+   For Support appeared in it twice. */
+const PRIMARY: NavLink[] = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Programs", href: "/programs" },
+];
+
+const GROUPS: NavGroup[] = [
+  {
+    name: "Impact",
+    intro: "Stories, moments and lives transformed through our mission.",
+    links: [
+      { name: "Impact Stories", href: "/impact-stories" },
+      { name: "Gallery", href: "/gallery" },
+    ],
+  },
+  {
+    name: "Get Involved",
+    intro: "Join the mission.",
+    links: [
+      { name: "Volunteer", href: "/volunteer" },
+      { name: "Become A Partner", href: "/partnerships" },
+      { name: "Apply For Support", href: "/apply-for-support" },
+    ],
+  },
+];
+
+const SECONDARY: NavLink[] = [
+  { name: "Team", href: "/team" },
+  { name: "Contact", href: "/contact" },
+];
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [moreOpen, setMoreOpen] = useState(false);
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
 
   const pathname = usePathname();
+  const navRef = useRef<HTMLDivElement>(null);
 
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  // A section stays marked while you are inside it: /programs/education-support
+  // used to leave "Programs" unhighlighted because the check was exact.
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 
-  /* ----------------------------
-     Close dropdown on outside click
-  ----------------------------- */
+  const isGroupActive = (group: NavGroup) =>
+    group.links.some((link) => isActive(link.href));
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Navigating away should not leave a menu hanging open. Done on the click
+  // rather than as an effect on pathname, so no cascading render.
+  const closeMenus = () => {
+    setOpenGroup(null);
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setMoreOpen(false);
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setOpenGroup(null);
       }
     };
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+
+      setOpenGroup(null);
+      setIsOpen(false);
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
-  /* ----------------------------
-     Navbar Scroll Effect
-  ----------------------------- */
-
+  // The page behind the mobile drawer should not scroll with it.
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    if (!isOpen) return;
 
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll);
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      document.body.style.overflow = previous;
     };
-  }, []);
+  }, [isOpen]);
 
-  /* ----------------------------
-     Navigation
-  ----------------------------- */
-
-  const primaryLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Programs", href: "/programs" },
-  ];
-
-  const impactLinks = [
-    {
-      name: "Impact Stories",
-      href: "/impact-stories",
-    },
-    {
-      name: "Gallery",
-      href: "/gallery",
-    },
-  ];
-
-  const getInvolvedLinks = [
-    {
-      name: "Volunteer",
-      href: "/volunteer",
-    },
-    {
-      name: "Become A Partner",
-      href: "/partnerships",
-    },
-    {
-      name: "Apply For Support",
-      href: "/apply-for-support",
-    },
-  ];
-
-  const secondaryLinks = [
-    {
-      name: "Team",
-      href: "/team",
-    },
-    {
-      name: "Contact",
-      href: "/contact",
-    },
-  ];
+  const linkClass = (href: string) =>
+    `relative pb-2 font-medium transition-all duration-300 ${
+      isActive(href) ? "text-brand" : "text-[#3A3A3A] hover:text-brand"
+    }`;
 
   return (
     <>
@@ -118,9 +141,9 @@ export default function Navbar() {
           >
             {/* Logo */}
 
-            <Link href="/" className="flex items-center gap-4">
-              <div
-                className={`relative transition-all duration-500 ${
+            <Link href="/" onClick={closeMenus} className="flex items-center gap-4">
+              <span
+                className={`relative block transition-all duration-500 ${
                   scrolled ? "h-11 w-11" : "h-14 w-14"
                 }`}
               >
@@ -128,11 +151,12 @@ export default function Navbar() {
                   src="/logo.png"
                   alt="St. Hannah Foundation"
                   fill
+                  sizes="56px"
                   className="object-contain"
                 />
-              </div>
+              </span>
 
-              <div>
+              <span>
                 <span
                   className={`block font-bold leading-tight text-brand transition-all duration-500 ${
                     scrolled ? "text-lg" : "text-2xl"
@@ -142,136 +166,132 @@ export default function Navbar() {
                   <span className="block text-[#A86A1A]">Foundation</span>
                 </span>
 
-                <p className="hidden lg:block text-[11px] uppercase tracking-[2px] text-gray-500">
+                <span className="hidden text-[11px] uppercase tracking-[2px] text-gray-500 lg:block">
                   Empowering Communities
-                </p>
-              </div>
+                </span>
+              </span>
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* Desktop navigation */}
 
-            <nav className="hidden lg:flex items-center gap-10">
-              {primaryLinks.map((link) => (
+            <nav
+              ref={navRef}
+              aria-label="Main"
+              className="hidden items-center gap-9 lg:flex"
+            >
+              {PRIMARY.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`relative pb-2 font-medium transition-all duration-300 ${
-                    pathname === link.href
-                      ? "text-brand"
-                      : "text-[#3A3A3A] hover:text-brand"
-                  }`}
+                  onClick={closeMenus}
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  className={linkClass(link.href)}
                 >
                   {link.name}
 
-                  {pathname === link.href && (
-                    <span className="absolute bottom-0 left-0 h-[2px] w-full rounded-full bg-accent" />
+                  {isActive(link.href) && (
+                    <span
+                      aria-hidden
+                      className="absolute bottom-0 left-0 h-[2px] w-full rounded-full bg-accent"
+                    />
                   )}
                 </Link>
               ))}
 
-              {/* Impact */}
+              {GROUPS.map((group) => {
+                const open = openGroup === group.name;
 
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setMoreOpen(!moreOpen)}
-                  className="flex items-center gap-2 pb-2 font-medium text-[#3A3A3A] transition hover:text-brand"
-                >
-                  Impact
-                  <ChevronDown
-                    size={16}
-                    className={`transition ${moreOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
-
-                {moreOpen && (
-                  <div
-                    className={`absolute right-0 top-full mt-5 w-72 overflow-hidden rounded-[28px] border bg-white shadow-2xl transition-all duration-300 ${
-                      moreOpen
-                        ? "visible translate-y-0 opacity-100"
-                        : "invisible -translate-y-2 opacity-0"
-                    }`}
-                  >
-                    <div className="border-b bg-cream p-6">
-                      <h4 className="font-bold text-brand">Our Impact</h4>
-
-                      <p className="mt-2 text-sm leading-6 text-gray-500">
-                        Explore the stories, moments and lives transformed
-                        through our mission.
-                      </p>
-                    </div>
-
-                    {impactLinks.map((link) => (
-                      <Link
-                        key={link.name}
-                        href={link.href}
-                        onClick={() => setMoreOpen(false)}
-                        className="block px-7 py-5 transition hover:bg-cream"
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-
-                    <div className="border-t bg-cream p-5">
-                      <Link
-                        href="/impact-stories"
-                        className="font-semibold text-brand"
-                      >
-                        View Our Impact →
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Get Involved */}
-
-              <div className="group relative">
-                <button className="flex items-center gap-2 pb-2 font-medium text-[#3A3A3A] transition hover:text-brand">
-                  Get Involved
-                  <ChevronDown size={16} />
-                </button>
-
-                <div className="absolute right-0 top-full invisible mt-5 w-72 overflow-hidden rounded-[28px] border bg-white opacity-0 shadow-2xl transition-all duration-300 group-hover:visible group-hover:opacity-100">
-                  <div className="border-b bg-cream p-6">
-                    <h4 className="font-bold text-brand">
-                      Join The Mission
-                    </h4>
-                  </div>
-
-                  {getInvolvedLinks.map((link) => (
-                    <Link
-                      key={link.name}
-                      href={link.href}
-                      className="block px-7 py-5 transition hover:bg-cream"
+                return (
+                  <div key={group.name} className="relative">
+                    {/* Both menus open on click. "Get Involved" opened on
+                        hover only, so it could not be reached by keyboard and
+                        was unreliable on touch, which hid Volunteer, Become A
+                        Partner and Apply For Support. */}
+                    <button
+                      onClick={() => setOpenGroup(open ? null : group.name)}
+                      aria-expanded={open}
+                      aria-haspopup="true"
+                      className={`flex items-center gap-2 pb-2 font-medium transition ${
+                        open || isGroupActive(group)
+                          ? "text-brand"
+                          : "text-[#3A3A3A] hover:text-brand"
+                      }`}
                     >
-                      {link.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
+                      {group.name}
 
-              {secondaryLinks.map((link) => (
+                      <ChevronDown
+                        size={16}
+                        aria-hidden
+                        className={`transition-transform duration-300 ${
+                          open ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    <div
+                      hidden={!open}
+                      className="absolute left-1/2 top-full z-50 mt-5 w-72 -translate-x-1/2 overflow-hidden rounded-[24px] border border-accent/15 bg-white shadow-2xl"
+                    >
+                        {group.intro && (
+                          <div className="border-b bg-cream px-6 py-5">
+                            <p className="font-bold text-brand">
+                              {group.name}
+                            </p>
+
+                            <p className="mt-2 text-sm leading-6 text-gray-600">
+                              {group.intro}
+                            </p>
+                          </div>
+                        )}
+
+                        <ul>
+                          {group.links.map((link) => (
+                            <li key={link.name}>
+                              <Link
+                                href={link.href}
+                                onClick={closeMenus}
+                                aria-current={
+                                  isActive(link.href) ? "page" : undefined
+                                }
+                                className={`block px-6 py-4 transition hover:bg-cream ${
+                                  isActive(link.href)
+                                    ? "font-semibold text-brand"
+                                    : ""
+                                }`}
+                              >
+                                {link.name}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {SECONDARY.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`relative pb-2 font-medium transition-all duration-300 ${
-                    pathname === link.href
-                      ? "text-brand"
-                      : "text-[#3A3A3A] hover:text-brand"
-                  }`}
+                  onClick={closeMenus}
+                  aria-current={isActive(link.href) ? "page" : undefined}
+                  className={linkClass(link.href)}
                 >
                   {link.name}
 
-                  {pathname === link.href && (
-                    <span className="absolute -bottom-[6px] left-1/2 h-[3px] w-8 -translate-x-1/2 rounded-full bg-accent" />
+                  {isActive(link.href) && (
+                    <span
+                      aria-hidden
+                      className="absolute bottom-0 left-0 h-[2px] w-full rounded-full bg-accent"
+                    />
                   )}
                 </Link>
               ))}
             </nav>
 
-            {/* Desktop Buttons */}
+            {/* Desktop actions */}
 
-            <div className="hidden lg:flex items-center gap-4">
+            <div className="hidden items-center gap-4 lg:flex">
               <Link
                 href="/volunteer"
                 className="rounded-xl border border-brand/20 px-6 py-3 font-semibold text-brand transition-all duration-300 hover:border-brand hover:bg-cream"
@@ -281,21 +301,22 @@ export default function Navbar() {
 
               <Link
                 href="/donate"
-                className="group rounded-xl bg-brand px-7 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-light hover:shadow-2xl"
+                className="group rounded-xl bg-brand px-7 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-brand-light hover:shadow-2xl"
               >
                 <span className="flex items-center gap-2">
                   <Heart
                     size={18}
-                    className="animate-pulse text-[#FFD77A] transition-transform duration-300 group-hover:scale-125"
+                    aria-hidden
+                    className="text-[#FFD77A] transition-transform duration-300 group-hover:scale-125"
                   />
                   Donate Now
                 </span>
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
-
-            <button aria-label="Open menu"
+            <button
+              aria-label="Open menu"
+              aria-expanded={isOpen}
               onClick={() => setIsOpen(true)}
               className="rounded-xl p-2 transition hover:bg-cream lg:hidden"
             >
@@ -305,27 +326,34 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile drawer */}
 
       {isOpen && (
-        <div className="fixed inset-0 z-[100] overflow-y-auto bg-white/95 backdrop-blur-xl">
-          <div className="flex justify-between items-center p-6 border-b">
-            <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+          className="fixed inset-0 z-[100] overflow-y-auto bg-white"
+        >
+          <div className="flex items-center justify-between border-b p-6">
+            <span className="flex items-center gap-3">
+              <span className="relative block h-10 w-10">
                 <Image
                   src="/logo.png"
-                  alt="St. Hannah Foundation"
+                  alt=""
                   fill
+                  sizes="40px"
                   className="object-contain"
                 />
-              </div>
+              </span>
 
               <span className="font-bold text-brand">
                 St. Hannah Foundation
               </span>
-            </div>
+            </span>
 
-            <button aria-label="Close"
+            <button
+              aria-label="Close"
               onClick={() => setIsOpen(false)}
               className="rounded-xl p-2 transition hover:bg-cream"
             >
@@ -333,113 +361,87 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="flex flex-col px-8 py-8">
-            <div className="bg-cream p-6 rounded-2xl mb-8">
-              <h3 className="font-bold text-lg">
-                Together We Can Change Lives
-              </h3>
+          <nav aria-label="Main" className="px-6 py-6">
+            <ul className="flex flex-col">
+              {PRIMARY.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    onClick={closeMenus}
+                    aria-current={isActive(link.href) ? "page" : undefined}
+                    className={`block border-b py-4 text-lg ${
+                      isActive(link.href) ? "font-semibold text-brand" : ""
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
 
-              <p className="text-gray-700 mt-2 text-sm leading-6">
-                Join us in empowering widows, supporting families, providing
-                educational opportunities and transforming communities.
-              </p>
-            </div>
-            <Link
-              href="/"
-              onClick={() => setIsOpen(false)}
-              className="py-5 border-b"
-            >
-              Home
-            </Link>
+              {GROUPS.map((group) => (
+                <li key={group.name} className="py-4">
+                  <p className="text-sm font-semibold uppercase tracking-[3px] text-brand">
+                    {group.name}
+                  </p>
 
-            <Link
-              href="/about"
-              onClick={() => setIsOpen(false)}
-              className="py-5 border-b"
-            >
-              About
-            </Link>
+                  <ul className="mt-1">
+                    {group.links.map((link) => (
+                      <li key={link.name}>
+                        <Link
+                          href={link.href}
+                          onClick={closeMenus}
+                          aria-current={
+                            isActive(link.href) ? "page" : undefined
+                          }
+                          className={`block border-b py-4 text-lg ${
+                            isActive(link.href)
+                              ? "font-semibold text-brand"
+                              : ""
+                          }`}
+                        >
+                          {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
 
-            <Link
-              href="/programs"
-              onClick={() => setIsOpen(false)}
-              className="py-5 border-b"
-            >
-              Programs
-            </Link>
+              {SECONDARY.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    onClick={closeMenus}
+                    aria-current={isActive(link.href) ? "page" : undefined}
+                    className={`block border-b py-4 text-lg ${
+                      isActive(link.href) ? "font-semibold text-brand" : ""
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-            <Link
-              href="/impact-stories"
-              onClick={() => setIsOpen(false)}
-              className="py-5 border-b"
-            >
-              Stories
-            </Link>
-
-            <Link
-              href="/gallery"
-              onClick={() => setIsOpen(false)}
-              className="py-5 border-b"
-            >
-              Gallery
-            </Link>
-
-            <Link
-              href="/team"
-              onClick={() => setIsOpen(false)}
-              className="py-5 border-b"
-            >
-              Team
-            </Link>
-
-            <Link
-              href="/apply-for-support"
-              onClick={() => setIsOpen(false)}
-              className="py-5 border-b"
-            >
-              Apply For Support
-            </Link>
-
-            <Link
-              href="/contact"
-              onClick={() => setIsOpen(false)}
-              className="py-5 border-b"
-            >
-              Contact
-            </Link>
-            <Link
-              href="/partnerships"
-              onClick={() => setIsOpen(false)}
-              className="border-b border-gray-100 py-5 text-lg font-medium transition hover:text-brand"
-            >
-              Become A Partner
-            </Link>
-
-            <div className="flex flex-col gap-4 mt-8">
-              <Link
-                href="/apply-for-support"
-                onClick={() => setIsOpen(false)}
-                className="bg-cream text-center py-4 rounded-xl font-semibold"
-              >
-                Apply For Support
-              </Link>
-              <Link
-                href="/volunteer"
-                onClick={() => setIsOpen(false)}
-                className="py-5 border-b"
-              >
-                Volunteer
-              </Link>
-
+            <div className="mt-8 flex flex-col gap-3">
               <Link
                 href="/donate"
-                onClick={() => setIsOpen(false)}
-                className="bg-brand text-white text-center py-4 rounded-xl font-semibold"
+                onClick={closeMenus}
+                className="flex items-center justify-center gap-2 rounded-xl bg-brand px-6 py-4 font-semibold text-white"
               >
-                Donate
+                <Heart size={18} aria-hidden />
+                Donate Now
+              </Link>
+
+              <Link
+                href="/volunteer"
+                onClick={closeMenus}
+                className="rounded-xl border border-brand px-6 py-4 text-center font-semibold text-brand"
+              >
+                Volunteer With Us
               </Link>
             </div>
-          </div>
+          </nav>
         </div>
       )}
     </>
