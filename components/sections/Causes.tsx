@@ -14,7 +14,10 @@ interface Program {
   excerpt: string;
 }
 
-const programs: Program[] = programsData;
+const ALL_PROGRAMMES = programsData.length;
+
+// A homepage teaser; /programs carries the full list.
+const programs: Program[] = programsData.slice(0, 4);
 
 export default function Causes() {
   const [isDonationOpen, setIsDonationOpen] = useState(false);
@@ -27,29 +30,42 @@ export default function Causes() {
 
   return (
     <>
-      <section className="py-28 bg-white">
+      <section className="bg-white py-24">
         <div className="container-custom">
           {/* Header */}
 
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <span className="uppercase tracking-[5px] text-brand font-semibold">
-              Our Programs
-            </span>
+          <div className="mb-12 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
+                Our Programmes
+              </span>
 
-            <h2 className="text-4xl md:text-5xl font-bold mt-4 text-ink">
-              Creating Opportunities. Restoring Hope.
-            </h2>
+              <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
+                Creating opportunities. Restoring hope.
+              </h2>
 
-            <p className="mt-6 text-gray-700 text-lg leading-8">
-              Through targeted interventions and sustainable initiatives, we
-              provide support, empowerment and opportunities that help
-              individuals, families and communities thrive.
-            </p>
+              <p className="mt-5 text-lg leading-9 text-gray-700">
+                Targeted, sustainable initiatives that help individuals,
+                families and communities thrive.
+              </p>
+            </div>
+
+            <Link
+              href="/programs"
+              className="group inline-flex shrink-0 items-center gap-3 rounded-full border border-brand px-7 py-3 font-semibold text-brand transition-all duration-300 hover:bg-brand hover:text-white"
+            >
+              All {ALL_PROGRAMMES} programmes
+              <ArrowRight
+                size={18}
+                aria-hidden
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </Link>
           </div>
 
           {/* Programs Grid */}
 
-          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {programs.map((program) => (
               <div
                 key={program.slug}
@@ -102,17 +118,6 @@ export default function Causes() {
             ))}
           </div>
 
-          {/* Bottom CTA */}
-
-          <div className="text-center mt-16">
-            <Link
-              href="/programs"
-              className="inline-flex items-center gap-3 bg-accent hover:bg-[#c8922f] text-black px-8 py-4 rounded-xl font-semibold transition-all duration-300"
-            >
-              Explore All Programs
-              <ArrowRight size={20} />
-            </Link>
-          </div>
         </div>
       </section>
 

@@ -35,16 +35,16 @@ export default function ProgramsProcess() {
   ];
 
   return (
-    <section className="bg-white py-32">
+    <section className="bg-white py-24">
       <div className="container-custom">
         {/* Heading */}
 
         <div className="mx-auto mb-20 max-w-4xl text-center">
-          <span className="font-semibold uppercase tracking-[6px] text-brand">
+          <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
             Our Process
           </span>
 
-          <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
+          <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
             How We Create{" "}
             <br />
             Lasting Impact
@@ -57,32 +57,6 @@ export default function ProgramsProcess() {
             follows a deliberate process designed to meet immediate needs while
             creating opportunities for sustainable growth.
           </p>
-        </div>
-
-        {/* Banner */}
-
-        <div className="relative mb-20 overflow-hidden rounded-[40px] bg-gradient-to-r from-brand via-[#9A5A12] to-[#B27425] px-12 py-16 text-center text-white shadow-2xl">
-          <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
-
-          <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
-
-          <div className="relative">
-            <span className="uppercase tracking-[5px] text-[#F4D06F]">
-              Our Philosophy
-            </span>
-
-            <h3 className="mt-5 text-4xl font-bold">
-              Listen.
-              <span className="text-[#F4D06F]"> Support.</span>
-              <span className="text-white"> Empower.</span>
-              <span className="text-[#F4D06F]"> Transform.</span>
-            </h3>
-
-            <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-white/85">
-              We believe meaningful change happens when compassion is combined
-              with intentional action, accountability and long-term commitment.
-            </p>
-          </div>
         </div>
 
         {/* Process */}
@@ -126,26 +100,7 @@ export default function ProgramsProcess() {
           })}
         </div>
 
-        {/* Closing */}
-
-        <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-cream p-14 text-center">
-          <span className="uppercase tracking-[5px] text-brand">
-            Why Our Process Works
-          </span>
-
-          <h3 className="mt-5 text-4xl font-bold text-ink">
-            Sustainable Change Is Built Step By Step
-          </h3>
-
-          <div className="mx-auto mt-6 h-[3px] w-20 rounded-full bg-accent" />
-
-          <p className="mt-8 text-lg leading-9 text-gray-700">
-            By listening first, responding intentionally and investing in
-            long-term empowerment, we create programmes that don&apos;t simply solve
-            today&apos;s challenges—they help communities build a stronger tomorrow.
-          </p>
-        </div>
-      </div>
+              </div>
     </section>
   );
 }

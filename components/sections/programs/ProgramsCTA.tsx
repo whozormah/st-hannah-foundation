@@ -12,7 +12,7 @@ export default function ProgramsCTA() {
   return (
     <>
       {" "}
-      <section className="py-32 bg-brand text-white relative overflow-hidden">
+      <section className="py-24 bg-brand text-white relative overflow-hidden">
         {" "}
         <div className="absolute inset-0 opacity-10">
           {" "}

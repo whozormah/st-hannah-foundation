@@ -45,16 +45,16 @@ export default function ProgramsGetInvolved() {
 
   return (
     <>
-      <section className="bg-cream py-32">
+      <section className="bg-cream py-24">
         <div className="container-custom">
           {/* Heading */}
 
           <div className="mx-auto mb-20 max-w-4xl text-center">
-            <span className="font-semibold uppercase tracking-[6px] text-brand">
+            <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
               Get Involved
             </span>
 
-            <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
+            <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
               Be Part Of{" "}
               <br />
               Something Bigger
@@ -67,32 +67,6 @@ export default function ProgramsGetInvolved() {
               more individuals, strengthen more families and create lasting
               impact across communities.
             </p>
-          </div>
-
-          {/* Banner */}
-
-          <div className="relative mb-20 overflow-hidden rounded-[40px] bg-gradient-to-r from-brand via-[#9A5A12] to-[#B27425] px-12 py-16 text-white shadow-2xl">
-            <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
-
-            <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
-
-            <div className="relative mx-auto max-w-4xl text-center">
-              <span className="uppercase tracking-[5px] text-[#F4D06F]">
-                Join The Mission
-              </span>
-
-              <h3 className="mt-5 text-4xl font-bold">
-                Small Acts Of Kindness{" "}
-                <br />
-                Create Extraordinary Impact
-              </h3>
-
-              <p className="mt-8 text-lg leading-9 text-white/85">
-                Whether you choose to give, volunteer, partner or seek support,
-                every connection strengthens our mission of restoring hope and
-                empowering communities.
-              </p>
-            </div>
           </div>
 
           {/* Cards */}
@@ -167,27 +141,7 @@ export default function ProgramsGetInvolved() {
             })}
           </div>
 
-          {/* Closing */}
-
-          <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-white p-14 text-center shadow-xl">
-            <span className="uppercase tracking-[5px] text-brand">
-              Together We Can
-            </span>
-
-            <h3 className="mt-5 text-4xl font-bold text-ink">
-              Every Contribution Creates A Brighter Tomorrow
-            </h3>
-
-            <div className="mx-auto mt-6 h-[3px] w-20 rounded-full bg-accent" />
-
-            <p className="mt-8 text-lg leading-9 text-gray-700">
-              Lasting transformation happens when compassionate people come
-              together. Your support, whether through giving, volunteering or
-              partnership, enables us to reach more families, empower more
-              children and strengthen more communities.
-            </p>
-          </div>
-        </div>
+                  </div>
       </section>
 
       <DonationModal
