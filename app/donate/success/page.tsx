@@ -95,7 +95,7 @@ export default function DonationSuccessPage() {
         </span>
 
         <h1 className="text-5xl font-bold mt-4 leading-tight">
-          Thank You For
+          Thank You For{" "}
           <br />
           Your Generosity
         </h1>

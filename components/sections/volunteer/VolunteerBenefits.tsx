@@ -20,7 +20,7 @@ export default function VolunteerBenefits() {
           </span>
 
           <h2 className="mt-4 text-5xl font-bold">
-            More Than Service.
+            More Than Service.{" "}
             <br />A Journey Of Growth & Impact.
           </h2>
 

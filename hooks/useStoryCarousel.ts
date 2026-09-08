@@ -5,7 +5,8 @@ export function useStoryCarousel(stories: Story[]) {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    if (!stories.length) return;
+    // Nothing to rotate through with a single story, so no timer is started.
+    if (stories.length < 2) return;
 
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % stories.length);

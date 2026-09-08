@@ -27,7 +27,7 @@ export default function FeaturedStoriesGrid() {
           </span>
 
           <h2 className="mt-5 text-5xl font-bold leading-tight text-ink md:text-6xl">
-            Behind Every Number
+            Behind Every Number{" "}
             <br />
             Is A Human Story
           </h2>

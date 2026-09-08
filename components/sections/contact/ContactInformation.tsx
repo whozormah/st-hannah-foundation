@@ -39,7 +39,7 @@ export default function ContactInformation() {
             </span>
 
             <h2 className="mt-5 text-4xl font-bold leading-tight text-ink lg:text-5xl">
-              Let&apos;s Start A
+              Let&apos;s Start A{" "}
               <br />
               Meaningful Conversation
             </h2>
@@ -169,7 +169,7 @@ export default function ContactInformation() {
             </span>
 
             <h2 className="mt-5 text-4xl font-bold leading-tight text-ink lg:text-5xl">
-              We&apos;d Love To
+              We&apos;d Love To{" "}
               <br />
               Hear From You
             </h2>

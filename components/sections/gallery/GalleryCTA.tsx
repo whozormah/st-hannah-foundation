@@ -10,7 +10,7 @@ export default function GalleryCTA() {
           Inspired By What You See?{" "}
         </span>
         <h2 className="text-5xl md:text-6xl font-bold mt-6 leading-tight">
-          Together We Can Create
+          Together We Can Create{" "}
           <br />
           Even More Stories Of Hope
         </h2>

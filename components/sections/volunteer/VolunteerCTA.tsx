@@ -10,9 +10,9 @@ export default function VolunteerCTA() {
           Ready To Make A Difference?{" "}
         </span>
         <h2 className="text-5xl md:text-6xl font-bold mt-6 leading-tight">
-          Your Time.
+          Your Time.{" "}
           <br />
-          Your Skills.
+          Your Skills.{" "}
           <br />
           Your Impact.
         </h2>

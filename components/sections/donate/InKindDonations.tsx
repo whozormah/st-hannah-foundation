@@ -34,7 +34,7 @@ export default function InKindDonations() {
             </span>
 
             <h2 className="text-5xl md:text-6xl font-bold mt-4">
-              Give What You Have.
+              Give What You Have.{" "}
               <br />
               Change A Life.
             </h2>

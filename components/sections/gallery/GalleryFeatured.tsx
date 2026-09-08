@@ -29,7 +29,7 @@ export default function GalleryFeatured() {
                 </span>
 
                 <h2 className="mt-8 text-5xl font-bold leading-tight lg:text-6xl">
-                  Community Outreach
+                  Community Outreach{" "}
                   <br />
                   2026
                 </h2>

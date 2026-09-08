@@ -34,7 +34,7 @@ export default function RelatedStories({
           </span>
 
           <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
-            More Stories
+            More Stories{" "}
             <br />
             That Inspire Hope
           </h2>

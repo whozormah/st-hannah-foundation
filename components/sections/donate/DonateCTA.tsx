@@ -10,9 +10,9 @@ export default function DonateCTA() {
           Your Generosity Matters{" "}
         </span>
         <h2 className="text-5xl md:text-7xl font-bold mt-6 leading-tight">
-          Together We Can
+          Together We Can{" "}
           <br />
-          Restore Hope.
+          Restore Hope.{" "}
           <br />
           Transform Lives.
         </h2>

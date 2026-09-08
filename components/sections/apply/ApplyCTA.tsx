@@ -10,7 +10,7 @@ export default function ApplyCTA() {
           We&apos;re Here To Help{" "}
         </span>
         <h2 className="text-5xl md:text-6xl font-bold mt-6 leading-tight">
-          Every Story Matters.
+          Every Story Matters.{" "}
           <br />
           Every Application Matters.
         </h2>

@@ -31,7 +31,7 @@ export default function ImpactCTA() {
             </span>
 
             <h2 className="mt-6 text-5xl font-bold leading-tight md:text-7xl">
-              The Next Story Of Hope
+              The Next Story Of Hope{" "}
               <br />
               Could Begin With You
             </h2>

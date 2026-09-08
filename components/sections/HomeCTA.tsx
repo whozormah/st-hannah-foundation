@@ -49,7 +49,7 @@ export default function ImpactCTA() {
             </span>
 
             <h2 className="mt-8 text-5xl font-bold leading-tight md:text-7xl">
-              Be The Reason
+              Be The Reason{" "}
               <br />
               Hope Continues
             </h2>

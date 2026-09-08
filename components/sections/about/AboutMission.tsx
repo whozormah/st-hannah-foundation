@@ -12,7 +12,7 @@ export default function AboutMission() {
           </span>
 
           <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
-            Built On Compassion.
+            Built On Compassion.{" "}
             <br />
             Driven By Purpose.
           </h2>

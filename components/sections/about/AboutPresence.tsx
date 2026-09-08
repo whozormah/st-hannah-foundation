@@ -30,7 +30,7 @@ export default function AboutPresence() {
           </span>
 
           <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
-            Serving Communities
+            Serving Communities{" "}
             <br />
             Across Borders
           </h2>

@@ -25,7 +25,7 @@ export default function ProgramsCTA() {
           </span>
 
           <h2 className="text-5xl md:text-7xl font-bold mt-6 leading-tight">
-            Every Life Touched
+            Every Life Touched{" "}
             <br />
             Creates A Ripple Of Hope
           </h2>

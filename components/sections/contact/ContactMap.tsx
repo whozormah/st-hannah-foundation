@@ -12,7 +12,7 @@ export default function ContactMap() {
           </span>
 
           <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-ink">
-            Serving Communities
+            Serving Communities{" "}
             <br />
             Across Continents
           </h2>

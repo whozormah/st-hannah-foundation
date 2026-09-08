@@ -48,7 +48,7 @@ export default function ProgramsAreas() {
           </span>
 
           <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
-            Creating Change Through
+            Creating Change Through{" "}
             <br />
             Purposeful Action
           </h2>
@@ -75,7 +75,7 @@ export default function ProgramsAreas() {
             </span>
 
             <h3 className="mt-5 text-4xl font-bold leading-tight">
-              Every Programme Exists To Restore Hope
+              Every Programme Exists To Restore Hope{" "}
               <br />
               And Create Lasting Change
             </h3>

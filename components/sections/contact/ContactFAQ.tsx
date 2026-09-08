@@ -51,7 +51,7 @@ export default function ContactFAQ() {
           </span>
 
           <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-ink">
-            Answers To The
+            Answers To The{" "}
             <br />
             Questions We Hear Most
           </h2>

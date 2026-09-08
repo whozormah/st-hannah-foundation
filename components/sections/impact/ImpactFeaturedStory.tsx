@@ -53,7 +53,7 @@ export default function ImpactFeaturedStory() {
             </span>
 
             <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
-              A Story That Reminds Us
+              A Story That Reminds Us{" "}
               <br />
               Why Hope Matters
             </h2>

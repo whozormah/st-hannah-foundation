@@ -55,7 +55,7 @@ export default function ProgramsGetInvolved() {
             </span>
 
             <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
-              Be Part Of
+              Be Part Of{" "}
               <br />
               Something Bigger
             </h2>
@@ -82,7 +82,7 @@ export default function ProgramsGetInvolved() {
               </span>
 
               <h3 className="mt-5 text-4xl font-bold">
-                Small Acts Of Kindness
+                Small Acts Of Kindness{" "}
                 <br />
                 Create Extraordinary Impact
               </h3>

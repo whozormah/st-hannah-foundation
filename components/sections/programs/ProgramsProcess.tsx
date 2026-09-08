@@ -45,7 +45,7 @@ export default function ProgramsProcess() {
           </span>
 
           <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
-            How We Create
+            How We Create{" "}
             <br />
             Lasting Impact
           </h2>
