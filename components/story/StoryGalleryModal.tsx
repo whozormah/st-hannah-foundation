@@ -33,7 +33,7 @@ export default function StoryGalleryModal({
 
       <button aria-label="Close"
         onClick={onClose}
-        className="absolute right-8 top-8 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white hover:text-[#844204]"
+        className="absolute right-8 top-8 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white hover:text-brand"
       >
         <X size={24} />
       </button>
@@ -42,7 +42,7 @@ export default function StoryGalleryModal({
 
       <button aria-label="Previous"
         onClick={onPrevious}
-        className="absolute left-6 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-4 text-white transition hover:bg-white hover:text-[#844204]"
+        className="absolute left-6 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-4 text-white transition hover:bg-white hover:text-brand"
       >
         <ChevronLeft size={28} />
       </button>
@@ -51,7 +51,7 @@ export default function StoryGalleryModal({
 
       <button aria-label="Next"
         onClick={onNext}
-        className="absolute right-6 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-4 text-white transition hover:bg-white hover:text-[#844204]"
+        className="absolute right-6 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-4 text-white transition hover:bg-white hover:text-brand"
       >
         <ChevronRight size={28} />
       </button>
@@ -60,7 +60,7 @@ export default function StoryGalleryModal({
         {/* Heading */}
 
         <div className="mb-10 text-center">
-          <span className="uppercase tracking-[5px] text-[#D9A441]">
+          <span className="uppercase tracking-[5px] text-accent">
             Journey Through Images
           </span>
 
@@ -84,7 +84,7 @@ export default function StoryGalleryModal({
               onClick={() => onSelect(index)}
               className={`overflow-hidden rounded-xl border-2 transition ${
                 currentImage === index
-                  ? "border-[#D9A441]"
+                  ? "border-accent"
                   : "border-transparent opacity-70 hover:opacity-100"
               }`}
             >

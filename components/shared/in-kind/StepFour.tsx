@@ -13,7 +13,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
           Delivery Arrangement
         </h2>
 
-        <p className="text-gray-600 mt-2">
+        <p className="text-gray-700 mt-2">
           Help us coordinate the most convenient way to receive your donation.
         </p>
       </div>
@@ -35,7 +35,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                 }))
               }
               placeholder="Enter the address where the donation can be picked up"
-              className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             />
           </div>
 
@@ -52,7 +52,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                   contactMethod: e.target.value,
                 }))
               }
-              className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             >
               <option value="">Select Contact Method</option>
 
@@ -81,7 +81,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                     pickupDate: e.target.value,
                   }))
                 }
-                className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+                className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
               />
             </div>
 
@@ -98,7 +98,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                     pickupTime: e.target.value,
                   }))
                 }
-                className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+                className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
               >
                 <option value="">Select Time</option>
 
@@ -126,7 +126,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                 }))
               }
               placeholder="Gate code, landmark, call before arrival, etc."
-              className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             />
           </div>
         </div>
@@ -149,7 +149,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                   destination: e.target.value,
                 }))
               }
-              className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             >
               <option value="">Select Destination</option>
 
@@ -160,10 +160,10 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
           </div>
 
           {formData.destination === "Lagos Office" && (
-            <div className="bg-[#FAF7F2] rounded-2xl p-6">
+            <div className="bg-cream rounded-2xl p-6">
               <h4 className="font-bold text-lg mb-3">Lagos Delivery Address</h4>
 
-              <p className="text-gray-600 leading-7">
+              <p className="text-gray-700 leading-7">
                 35 Ilaje Road
                 <br />
                 Bariga, Lagos
@@ -174,12 +174,12 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
           )}
 
           {formData.destination === "Chicago Office" && (
-            <div className="bg-[#FAF7F2] rounded-2xl p-6">
+            <div className="bg-cream rounded-2xl p-6">
               <h4 className="font-bold text-lg mb-3">
                 Chicago Delivery Address
               </h4>
 
-              <p className="text-gray-600 leading-7">
+              <p className="text-gray-700 leading-7">
                 4310 S King Dr
                 <br />
                 Unit 3D
@@ -211,7 +211,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
             }
             className={`px-6 py-3 rounded-xl border ${
               formData.acknowledgeDonation === "Yes"
-                ? "bg-[#844204] text-white border-[#844204]"
+                ? "bg-brand text-white border-brand"
                 : "border-gray-300"
             }`}
           >
@@ -228,7 +228,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
             }
             className={`px-6 py-3 rounded-xl border ${
               formData.acknowledgeDonation === "No"
-                ? "bg-[#844204] text-white border-[#844204]"
+                ? "bg-brand text-white border-brand"
                 : "border-gray-300"
             }`}
           >

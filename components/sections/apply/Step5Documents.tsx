@@ -5,7 +5,7 @@ export default function Step5Documents() {
       <h3 className="text-3xl font-bold mb-3">
         Documents & Supporting Information{" "}
       </h3>
-      <p className="text-gray-600 mb-8">
+      <p className="text-gray-700 mb-8">
         Please upload any relevant documents that can help our review team
         understand your application and assess your support request.
       </p>

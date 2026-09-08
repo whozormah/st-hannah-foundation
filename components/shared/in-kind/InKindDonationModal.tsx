@@ -190,7 +190,7 @@ export default function InKindDonationModal({
           <div>
             <h2 className="text-4xl font-bold">Donate Items &amp; Materials</h2>
 
-            <p className="text-gray-600 mt-3 max-w-2xl">
+            <p className="text-gray-700 mt-3 max-w-2xl">
               Support our mission through food items, clothing, educational
               materials, medical supplies, equipment and other resources that
               can positively impact lives and communities.
@@ -219,7 +219,7 @@ export default function InKindDonationModal({
 
               <div className="w-full bg-gray-200 rounded-full h-3">
                 <div
-                  className="bg-[#844204] h-3 rounded-full transition-all duration-300"
+                  className="bg-brand h-3 rounded-full transition-all duration-300"
                   style={{
                     width: `${progress}%`,
                   }}
@@ -262,14 +262,14 @@ export default function InKindDonationModal({
               {step < 4 ? (
                 <button
                   onClick={handleNext}
-                  className="bg-[#844204] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#6d3503] transition"
+                  className="bg-brand text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-dark transition"
                 >
                   Next
                 </button>
               ) : (
                 <button
                   onClick={handleSubmit}
-                  className="bg-[#844204] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#6d3503] transition"
+                  className="bg-brand text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-dark transition"
                 >
                   Submit Donation Offer
                 </button>

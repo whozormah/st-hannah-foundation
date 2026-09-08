@@ -50,12 +50,12 @@ export default function AboutImpactAreas() {
   const approach = ["Listen", "Support", "Empower", "Transform"];
 
   return (
-    <section className="py-32 bg-[#FAF7F2]">
+    <section className="py-32 bg-cream">
       {" "}
       <div className="container-custom">
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-20">
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Our Approach
           </span>
 
@@ -63,7 +63,7 @@ export default function AboutImpactAreas() {
             How We Create Lasting Impact
           </h2>
 
-          <p className="max-w-3xl mx-auto mt-6 text-gray-600 text-lg leading-8">
+          <p className="max-w-3xl mx-auto mt-6 text-gray-700 text-lg leading-8">
             We believe lasting change happens when compassion meets action.
             Every programme, outreach and initiative is designed to meet
             immediate needs while creating pathways for long-term growth,
@@ -77,7 +77,7 @@ export default function AboutImpactAreas() {
               key={step}
               className="bg-white rounded-[28px] p-8 text-center shadow-sm hover:shadow-lg transition-all duration-300"
             >
-              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-[#844204] to-[#A85A12] text-xl font-bold text-white shadow-lg transition-all duration-500 group-hover:scale-110">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-brand to-brand-light text-xl font-bold text-white shadow-lg transition-all duration-500 group-hover:scale-110">
                 {index + 1}
               </div>
 
@@ -93,21 +93,21 @@ export default function AboutImpactAreas() {
             return (
               <div
                 key={area.title}
-                className="group bg-white rounded-[32px] p-8 border border-gray-100 hover:border-[#D9A441]/40 hover:-translate-y-2 hover:shadow-xl transition-all duration-500"
+                className="group bg-white rounded-[32px] p-8 border border-gray-100 hover:border-accent/40 hover:-translate-y-2 hover:shadow-xl transition-all duration-500"
               >
-                <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-[#FFF8EC] transition-all duration-500 group-hover:scale-110 group-hover:bg-[#844204]">
+                <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-cream-warm transition-all duration-500 group-hover:scale-110 group-hover:bg-brand">
                   <Icon
                     size={36}
-                    className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                    className="text-brand transition-all duration-500 group-hover:text-white"
                   />
                 </div>
 
                 <h3 className="text-2xl font-bold">{area.title}</h3>
 
-                <p className="mt-4 text-gray-600 leading-7">
+                <p className="mt-4 text-gray-700 leading-7">
                   {area.description}
                 </p>
-                <div className="mt-8 flex items-center gap-2 font-semibold text-[#844204]">
+                <div className="mt-8 flex items-center gap-2 font-semibold text-brand">
                   Learn More
                   <ArrowRight
                     size={18}
@@ -119,8 +119,8 @@ export default function AboutImpactAreas() {
           })}
         </div>
         {/* Closing Statement */}
-        <div className="mt-24 rounded-[40px] bg-[#844204] px-12 py-16 text-center text-white">
-          <span className="uppercase tracking-[5px] text-[#D9A441]">
+        <div className="mt-24 rounded-[40px] bg-brand px-12 py-16 text-center text-white">
+          <span className="uppercase tracking-[5px] text-accent">
             Our Commitment
           </span>
 

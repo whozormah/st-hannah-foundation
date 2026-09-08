@@ -36,19 +36,19 @@ export default function ImpactStats() {
   ];
 
   return (
-    <section className="py-28 bg-[#FAF7F2]">
+    <section className="py-28 bg-cream">
       {" "}
       <div className="container-custom">
         {" "}
         <div className="text-center mb-20">
           {" "}
-          <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+          <span className="uppercase tracking-[5px] text-accent font-semibold">
             Impact At A Glance{" "}
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1B1815] mt-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-ink mt-4">
             Impact That Changes Lives
           </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto mt-6 text-lg">
+          <p className="text-gray-700 max-w-3xl mx-auto mt-6 text-lg">
             Every initiative, every outreach and every act of generosity
             contributes to building stronger families, restoring dignity and
             creating opportunities for individuals and communities to thrive.
@@ -61,17 +61,17 @@ export default function ImpactStats() {
             return (
               <div
                 key={index}
-                className="bg-white rounded-3xl p-10 text-center border border-[#D9A441]/20 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                className="bg-white rounded-3xl p-10 text-center border border-accent/20 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
               >
-                <div className="w-16 h-16 rounded-2xl bg-[#844204]/10 flex items-center justify-center mx-auto mb-6">
-                  <Icon size={32} className="text-[#844204]" />
+                <div className="w-16 h-16 rounded-2xl bg-brand/10 flex items-center justify-center mx-auto mb-6">
+                  <Icon size={32} className="text-brand" />
                 </div>
 
-                <h3 className="text-4xl md:text-5xl font-bold text-[#844204]">
+                <h3 className="text-4xl md:text-5xl font-bold text-brand">
                   {stat.number}
                 </h3>
 
-                <p className="mt-4 text-gray-600 font-medium">{stat.title}</p>
+                <p className="mt-4 text-gray-700 font-medium">{stat.title}</p>
               </div>
             );
           })}

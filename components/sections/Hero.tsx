@@ -41,7 +41,7 @@ export default function Hero() {
               {/* Content */}
               <div className="relative z-10 container-custom">
                 <div className="max-w-3xl text-white">
-                  <span className="inline-flex items-center bg-[#D9A441] text-black px-5 py-2 rounded-full font-semibold text-sm shadow-lg">
+                  <span className="inline-flex items-center bg-accent text-black px-5 py-2 rounded-full font-semibold text-sm shadow-lg">
                     Serving Widows, Children & Families
                   </span>
 
@@ -56,20 +56,20 @@ export default function Hero() {
                   <div className="mt-10 flex flex-col sm:flex-row gap-4">
                     <Link
                       href="/apply-for-support"
-                      className="bg-[#844204] hover:bg-[#A85A12] hover:scale-105 transition-all duration-300 px-8 py-4 rounded-lg text-center font-semibold shadow-lg"
+                      className="bg-brand hover:bg-brand-light hover:scale-105 transition-all duration-300 px-8 py-4 rounded-lg text-center font-semibold shadow-lg"
                     >
                       Apply For Aid
                     </Link>
 
                     <Link
                       href={slide.buttonLink}
-                      className="bg-[#D9A441] text-black hover:opacity-90 hover:scale-105 transition-all duration-300 px-8 py-4 rounded-lg text-center font-semibold shadow-lg"
+                      className="bg-accent text-black hover:opacity-90 hover:scale-105 transition-all duration-300 px-8 py-4 rounded-lg text-center font-semibold shadow-lg"
                     >
                       {slide.buttonText}
                     </Link>
                   </div>
 
-                  <div className="mt-10 border-l-4 border-[#D9A441] pl-5">
+                  <div className="mt-10 border-l-4 border-accent pl-5">
                     <p className="text-sm md:text-base text-gray-300 italic">
                       Every act of kindness creates hope, restores dignity and
                       transforms lives.

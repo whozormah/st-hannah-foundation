@@ -91,7 +91,7 @@ export default function GalleryLightbox({
           </div>
 
           <div className="mt-8 text-center">
-            <span className="rounded-full bg-[#D9A441]/20 px-5 py-2 text-xs font-semibold uppercase tracking-[3px] text-[#D9A441]">
+            <span className="rounded-full bg-accent/20 px-5 py-2 text-xs font-semibold uppercase tracking-[3px] text-accent">
               {image.category}
             </span>
 

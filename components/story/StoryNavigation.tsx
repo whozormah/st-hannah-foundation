@@ -19,7 +19,7 @@ export default function StoryNavigation({
     <div className="flex items-center justify-between mb-10">
       <button
         onClick={onPrevious}
-        className="group flex items-center gap-2 rounded-full border border-[#D9A441]/20 bg-white px-5 py-3 font-medium text-[#844204] transition-all duration-300 hover:border-[#844204] hover:bg-[#844204] hover:text-white"
+        className="group flex items-center gap-2 rounded-full border border-accent/20 bg-white px-5 py-3 font-medium text-brand transition-all duration-300 hover:border-brand hover:bg-brand hover:text-white"
       >
         <ChevronLeft
           size={18}
@@ -29,20 +29,20 @@ export default function StoryNavigation({
       </button>
 
       <div className="text-center">
-        <p className="text-xs font-semibold uppercase tracking-[4px] text-[#844204]">
+        <p className="text-xs font-semibold uppercase tracking-[4px] text-brand">
           Story
         </p>
 
-        <h3 className="mt-2 text-2xl font-bold text-[#1B1815]">
+        <h3 className="mt-2 text-2xl font-bold text-ink">
           {String(current + 1).padStart(2, "0")}
-          <span className="mx-2 text-[#D9A441]">/</span>
+          <span className="mx-2 text-accent">/</span>
           {String(total).padStart(2, "0")}
         </h3>
       </div>
 
       <button
         onClick={onNext}
-        className="group flex items-center gap-2 rounded-full border border-[#D9A441]/20 bg-white px-5 py-3 font-medium text-[#844204] transition-all duration-300 hover:border-[#844204] hover:bg-[#844204] hover:text-white"
+        className="group flex items-center gap-2 rounded-full border border-accent/20 bg-white px-5 py-3 font-medium text-brand transition-all duration-300 hover:border-brand hover:bg-brand hover:text-white"
       >
         Next
         <ChevronRight

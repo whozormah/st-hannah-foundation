@@ -19,8 +19,8 @@ export default function GalleryFilters({
           onClick={() => onSelect(category)}
           className={`rounded-full px-7 py-3 text-sm font-semibold transition-all duration-300 ${
             activeCategory === category
-              ? "bg-[#844204] text-white shadow-xl"
-              : "border border-gray-200 bg-white text-gray-700 hover:border-[#844204] hover:text-[#844204]"
+              ? "bg-brand text-white shadow-xl"
+              : "border border-gray-200 bg-white text-gray-700 hover:border-brand hover:text-brand"
           }`}
         >
           {category}

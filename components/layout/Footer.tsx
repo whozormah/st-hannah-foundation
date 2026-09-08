@@ -18,7 +18,7 @@ export default function Footer() {
         <div className="border-b border-white/10">
           <div className="container-custom py-20">
             <div className="max-w-4xl mx-auto text-center">
-              <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+              <span className="uppercase tracking-[5px] text-accent font-semibold">
                 Stay Connected
               </span>
 
@@ -46,7 +46,7 @@ export default function Footer() {
 
                 <button
                   type="submit"
-                  className="bg-[#844204] hover:bg-[#A85A12] px-8 py-4 rounded-xl font-semibold transition"
+                  className="bg-brand hover:bg-brand-light px-8 py-4 rounded-xl font-semibold transition"
                 >
                   Subscribe
                 </button>
@@ -76,7 +76,7 @@ export default function Footer() {
                     {settings?.foundationName}
                   </h3>
 
-                  <p className="text-[#D9A441] text-sm">
+                  <p className="text-accent text-sm">
                     Empowering Communities Through Love & Service
                   </p>
                 </div>
@@ -88,7 +88,7 @@ export default function Footer() {
                 initiatives that create lasting impact.
               </p>
 
-              <div className="mt-8 border-l-4 border-[#D9A441] pl-5">
+              <div className="mt-8 border-l-4 border-accent pl-5">
                 <p className="italic text-gray-300 leading-8">
                   &quot;To build a world where every child and family experiences the
                   fullness of their God-given potential.&quot;
@@ -105,7 +105,7 @@ export default function Footer() {
 
                 <button
                   onClick={() => setShowDonationModal(true)}
-                  className="bg-[#844204] hover:bg-[#A85A12] px-6 py-3 rounded-xl font-semibold transition"
+                  className="bg-brand hover:bg-brand-light px-6 py-3 rounded-xl font-semibold transition"
                 >
                   Donate
                 </button>
@@ -148,7 +148,7 @@ export default function Footer() {
                 <li>
                   <button
                     onClick={() => setShowDonationModal(true)}
-                    className="hover:text-[#D9A441] transition"
+                    className="hover:text-accent transition"
                   >
                     Donate
                   </button>
@@ -176,7 +176,7 @@ export default function Footer() {
                 {/* Email */}
 
                 <div>
-                  <p className="text-[#D9A441] text-sm uppercase tracking-wider">
+                  <p className="text-accent text-sm uppercase tracking-wider">
                     Email
                   </p>
 
@@ -191,7 +191,7 @@ export default function Footer() {
                 {/* Phone */}
 
                 <div>
-                  <p className="text-[#D9A441] text-sm uppercase tracking-wider">
+                  <p className="text-accent text-sm uppercase tracking-wider">
                     Phone
                   </p>
 
@@ -206,7 +206,7 @@ export default function Footer() {
                 {/* Nigeria Office */}
 
                 <div>
-                  <p className="text-[#D9A441] text-sm uppercase tracking-wider">
+                  <p className="text-accent text-sm uppercase tracking-wider">
                     Nigeria Office
                   </p>
 
@@ -218,7 +218,7 @@ export default function Footer() {
                 {/* USA Office */}
 
                 <div>
-                  <p className="text-[#D9A441] text-sm uppercase tracking-wider">
+                  <p className="text-accent text-sm uppercase tracking-wider">
                     USA Office
                   </p>
 
@@ -237,7 +237,7 @@ export default function Footer() {
                       href={settings?.socials.facebook}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-[#D9A441] transition"
+                      className="hover:text-accent transition"
                     >
                       Facebook
                     </a>
@@ -246,7 +246,7 @@ export default function Footer() {
                       href={settings?.socials.instagram}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-[#D9A441] transition"
+                      className="hover:text-accent transition"
                     >
                       Instagram
                     </a>
@@ -255,7 +255,7 @@ export default function Footer() {
                       href={settings?.socials.tiktok}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-[#D9A441] transition"
+                      className="hover:text-accent transition"
                     >
                       TikTok
                     </a>
@@ -279,7 +279,7 @@ export default function Footer() {
                 href="https://www.instagram.com/whozormah?igsh=bmJhbW12bjhvMDRp"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#D9A441] hover:text-white transition font-medium"
+                className="text-accent hover:text-white transition font-medium"
               >
                 @whozormah
               </a>

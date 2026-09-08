@@ -20,7 +20,7 @@ export default function AboutGovernance() {
       <div className="container-custom">
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-20">
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Governance & Leadership
           </span>
 
@@ -28,7 +28,7 @@ export default function AboutGovernance() {
             Stewarding The Mission
           </h2>
 
-          <p className="max-w-3xl mx-auto mt-6 text-gray-600 text-lg leading-8">
+          <p className="max-w-3xl mx-auto mt-6 text-gray-700 text-lg leading-8">
             The Governance and Leadership Team provides strategic direction,
             oversight and stewardship for the Foundation, ensuring
             accountability, sustainability and meaningful impact across all
@@ -36,7 +36,7 @@ export default function AboutGovernance() {
           </p>
         </div>
         {/* Message Banner */}
-        <div className="max-w-5xl mx-auto bg-gradient-to-r from-[#844204] to-[#A85A12] rounded-[32px] p-10 md:p-14 mb-20 text-center text-white">
+        <div className="max-w-5xl mx-auto bg-gradient-to-r from-brand to-brand-light rounded-[32px] p-10 md:p-14 mb-20 text-center text-white">
           <h3 className="text-3xl md:text-4xl font-bold">
             Leadership Rooted In Service
           </h3>
@@ -54,7 +54,7 @@ export default function AboutGovernance() {
               key={member.name}
               className={`rounded-[32px] overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${
                 member.role === "President"
-                  ? "bg-white border border-[#D9A441] shadow-xl"
+                  ? "bg-white border border-accent shadow-xl"
                   : "bg-white border border-gray-100"
               }`}
             >
@@ -62,7 +62,7 @@ export default function AboutGovernance() {
 
               <div
                 className={`relative h-[350px] flex items-end justify-center ${
-                  member.role === "President" ? "bg-white" : "bg-[#FAF7F2]"
+                  member.role === "President" ? "bg-white" : "bg-cream"
                 }`}
               >
                 <Image
@@ -78,12 +78,12 @@ export default function AboutGovernance() {
               <div
                 className={`p-8 ${
                   member.role === "President"
-                    ? "bg-gradient-to-br from-[#844204] to-[#A85A12] text-white"
+                    ? "bg-gradient-to-br from-brand to-brand-light text-white"
                     : ""
                 }`}
               >
                 {member.role === "President" && (
-                  <span className="inline-flex items-center px-4 py-2 rounded-full bg-[#D9A441] text-[#140B02] text-xs font-bold mb-5">
+                  <span className="inline-flex items-center px-4 py-2 rounded-full bg-accent text-[#140B02] text-xs font-bold mb-5">
                     Founder & President
                   </span>
                 )}
@@ -91,8 +91,8 @@ export default function AboutGovernance() {
                 <p
                   className={`uppercase tracking-[3px] text-xs font-semibold ${
                     member.role === "President"
-                      ? "text-[#F5D27A]"
-                      : "text-[#844204]"
+                      ? "text-accent-soft"
+                      : "text-brand"
                   }`}
                 >
                   {member.role}
@@ -103,14 +103,14 @@ export default function AboutGovernance() {
                 </h3>
 
                 {member.role === "President" ? (
-                  <div className="mt-6 border-l-4 border-[#D9A441] pl-4">
+                  <div className="mt-6 border-l-4 border-accent pl-4">
                     <p className="italic text-white/90 leading-7">
                       &quot;Transforming lives begins with compassion, commitment and
                       collective action.&quot;
                     </p>
                   </div>
                 ) : (
-                  <p className="mt-5 text-gray-600 text-sm leading-7">
+                  <p className="mt-5 text-gray-700 text-sm leading-7">
                     Helping provide strategic leadership, governance and
                     oversight that strengthens the Foundation&apos;s mission and
                     long-term impact.

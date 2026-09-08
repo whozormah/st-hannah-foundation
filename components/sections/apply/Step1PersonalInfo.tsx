@@ -3,7 +3,7 @@ export default function Step1PersonalInfo() {
     <div>
       {" "}
       <h3 className="text-3xl font-bold mb-3">Personal Information </h3>
-      <p className="text-gray-600 mb-8">
+      <p className="text-gray-700 mb-8">
         Tell us a little about yourself so we can properly assess your
         application and contact you regarding your request.
       </p>

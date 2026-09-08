@@ -134,7 +134,7 @@ export default function Navbar() {
 
               <div>
                 <span
-                  className={`block font-bold leading-tight text-[#844204] transition-all duration-500 ${
+                  className={`block font-bold leading-tight text-brand transition-all duration-500 ${
                     scrolled ? "text-lg" : "text-2xl"
                   }`}
                 >
@@ -157,14 +157,14 @@ export default function Navbar() {
                   href={link.href}
                   className={`relative pb-2 font-medium transition-all duration-300 ${
                     pathname === link.href
-                      ? "text-[#844204]"
-                      : "text-[#3A3A3A] hover:text-[#844204]"
+                      ? "text-brand"
+                      : "text-[#3A3A3A] hover:text-brand"
                   }`}
                 >
                   {link.name}
 
                   {pathname === link.href && (
-                    <span className="absolute bottom-0 left-0 h-[2px] w-full rounded-full bg-[#D9A441]" />
+                    <span className="absolute bottom-0 left-0 h-[2px] w-full rounded-full bg-accent" />
                   )}
                 </Link>
               ))}
@@ -174,7 +174,7 @@ export default function Navbar() {
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setMoreOpen(!moreOpen)}
-                  className="flex items-center gap-2 pb-2 font-medium text-[#3A3A3A] transition hover:text-[#844204]"
+                  className="flex items-center gap-2 pb-2 font-medium text-[#3A3A3A] transition hover:text-brand"
                 >
                   Impact
                   <ChevronDown
@@ -191,8 +191,8 @@ export default function Navbar() {
                         : "invisible -translate-y-2 opacity-0"
                     }`}
                   >
-                    <div className="border-b bg-[#FAF7F2] p-6">
-                      <h4 className="font-bold text-[#844204]">Our Impact</h4>
+                    <div className="border-b bg-cream p-6">
+                      <h4 className="font-bold text-brand">Our Impact</h4>
 
                       <p className="mt-2 text-sm leading-6 text-gray-500">
                         Explore the stories, moments and lives transformed
@@ -205,16 +205,16 @@ export default function Navbar() {
                         key={link.name}
                         href={link.href}
                         onClick={() => setMoreOpen(false)}
-                        className="block px-7 py-5 transition hover:bg-[#FAF7F2]"
+                        className="block px-7 py-5 transition hover:bg-cream"
                       >
                         {link.name}
                       </Link>
                     ))}
 
-                    <div className="border-t bg-[#FAF7F2] p-5">
+                    <div className="border-t bg-cream p-5">
                       <Link
                         href="/impact-stories"
-                        className="font-semibold text-[#844204]"
+                        className="font-semibold text-brand"
                       >
                         View Our Impact →
                       </Link>
@@ -226,14 +226,14 @@ export default function Navbar() {
               {/* Get Involved */}
 
               <div className="group relative">
-                <button className="flex items-center gap-2 pb-2 font-medium text-[#3A3A3A] transition hover:text-[#844204]">
+                <button className="flex items-center gap-2 pb-2 font-medium text-[#3A3A3A] transition hover:text-brand">
                   Get Involved
                   <ChevronDown size={16} />
                 </button>
 
                 <div className="absolute right-0 top-full invisible mt-5 w-72 overflow-hidden rounded-[28px] border bg-white opacity-0 shadow-2xl transition-all duration-300 group-hover:visible group-hover:opacity-100">
-                  <div className="border-b bg-[#FAF7F2] p-6">
-                    <h4 className="font-bold text-[#844204]">
+                  <div className="border-b bg-cream p-6">
+                    <h4 className="font-bold text-brand">
                       Join The Mission
                     </h4>
                   </div>
@@ -242,7 +242,7 @@ export default function Navbar() {
                     <Link
                       key={link.name}
                       href={link.href}
-                      className="block px-7 py-5 transition hover:bg-[#FAF7F2]"
+                      className="block px-7 py-5 transition hover:bg-cream"
                     >
                       {link.name}
                     </Link>
@@ -256,14 +256,14 @@ export default function Navbar() {
                   href={link.href}
                   className={`relative pb-2 font-medium transition-all duration-300 ${
                     pathname === link.href
-                      ? "text-[#844204]"
-                      : "text-[#3A3A3A] hover:text-[#844204]"
+                      ? "text-brand"
+                      : "text-[#3A3A3A] hover:text-brand"
                   }`}
                 >
                   {link.name}
 
                   {pathname === link.href && (
-                    <span className="absolute -bottom-[6px] left-1/2 h-[3px] w-8 -translate-x-1/2 rounded-full bg-[#D9A441]" />
+                    <span className="absolute -bottom-[6px] left-1/2 h-[3px] w-8 -translate-x-1/2 rounded-full bg-accent" />
                   )}
                 </Link>
               ))}
@@ -274,14 +274,14 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-4">
               <Link
                 href="/volunteer"
-                className="rounded-xl border border-[#844204]/20 px-6 py-3 font-semibold text-[#844204] transition-all duration-300 hover:border-[#844204] hover:bg-[#FAF7F2]"
+                className="rounded-xl border border-brand/20 px-6 py-3 font-semibold text-brand transition-all duration-300 hover:border-brand hover:bg-cream"
               >
                 Volunteer
               </Link>
 
               <Link
                 href="/donate"
-                className="group rounded-xl bg-[#844204] px-7 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-[#A85A12] hover:shadow-2xl"
+                className="group rounded-xl bg-brand px-7 py-3 font-semibold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-light hover:shadow-2xl"
               >
                 <span className="flex items-center gap-2">
                   <Heart
@@ -297,7 +297,7 @@ export default function Navbar() {
 
             <button aria-label="Open menu"
               onClick={() => setIsOpen(true)}
-              className="rounded-xl p-2 transition hover:bg-[#FAF7F2] lg:hidden"
+              className="rounded-xl p-2 transition hover:bg-cream lg:hidden"
             >
               <Menu size={30} />
             </button>
@@ -320,26 +320,26 @@ export default function Navbar() {
                 />
               </div>
 
-              <span className="font-bold text-[#844204]">
+              <span className="font-bold text-brand">
                 St. Hannah Foundation
               </span>
             </div>
 
             <button aria-label="Close"
               onClick={() => setIsOpen(false)}
-              className="rounded-xl p-2 transition hover:bg-[#FAF7F2]"
+              className="rounded-xl p-2 transition hover:bg-cream"
             >
               <X size={30} />
             </button>
           </div>
 
           <div className="flex flex-col px-8 py-8">
-            <div className="bg-[#FAF7F2] p-6 rounded-2xl mb-8">
+            <div className="bg-cream p-6 rounded-2xl mb-8">
               <h3 className="font-bold text-lg">
                 Together We Can Change Lives
               </h3>
 
-              <p className="text-gray-600 mt-2 text-sm leading-6">
+              <p className="text-gray-700 mt-2 text-sm leading-6">
                 Join us in empowering widows, supporting families, providing
                 educational opportunities and transforming communities.
               </p>
@@ -410,7 +410,7 @@ export default function Navbar() {
             <Link
               href="/partnerships"
               onClick={() => setIsOpen(false)}
-              className="border-b border-gray-100 py-5 text-lg font-medium transition hover:text-[#844204]"
+              className="border-b border-gray-100 py-5 text-lg font-medium transition hover:text-brand"
             >
               Become A Partner
             </Link>
@@ -419,7 +419,7 @@ export default function Navbar() {
               <Link
                 href="/apply-for-support"
                 onClick={() => setIsOpen(false)}
-                className="bg-[#FAF7F2] text-center py-4 rounded-xl font-semibold"
+                className="bg-cream text-center py-4 rounded-xl font-semibold"
               >
                 Apply For Support
               </Link>
@@ -434,7 +434,7 @@ export default function Navbar() {
               <Link
                 href="/donate"
                 onClick={() => setIsOpen(false)}
-                className="bg-[#844204] text-white text-center py-4 rounded-xl font-semibold"
+                className="bg-brand text-white text-center py-4 rounded-xl font-semibold"
               >
                 Donate
               </Link>

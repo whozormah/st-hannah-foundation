@@ -69,7 +69,7 @@ export default function InternationalGivingCard() {
           Thank you for your interest in supporting St. Hannah Foundation.
         </p>
 
-        <p className="mt-3 text-gray-600 leading-8 max-w-xl mx-auto">
+        <p className="mt-3 text-gray-700 leading-8 max-w-xl mx-auto">
           We&apos;ll notify you as soon as international donations in
           <strong> USD, GBP and EUR </strong>
           become available.
@@ -79,10 +79,10 @@ export default function InternationalGivingCard() {
   }
 
   return (
-    <div className="mt-8 overflow-hidden rounded-[32px] border border-[#D9A441]/20 bg-white shadow-sm">
+    <div className="mt-8 overflow-hidden rounded-[32px] border border-accent/20 bg-white shadow-sm">
       {/* Header */}
 
-      <div className="bg-gradient-to-r from-[#844204] to-[#A86A1F] px-8 py-8 text-white">
+      <div className="bg-gradient-to-r from-brand to-[#A86A1F] px-8 py-8 text-white">
         <div className="flex items-center gap-3">
           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/15">
             <Globe2 size={28} />
@@ -101,22 +101,22 @@ export default function InternationalGivingCard() {
       {/* Body */}
 
       <div className="px-8 py-10">
-        <p className="text-lg font-semibold text-[#1B1815] leading-8">
+        <p className="text-lg font-semibold text-ink leading-8">
           Thank you for your interest in supporting St. Hannah Foundation from
           anywhere in the world.
         </p>
 
-        <p className="mt-5 text-gray-600 leading-8">
+        <p className="mt-5 text-gray-700 leading-8">
           International donations in{" "}
-          <span className="font-semibold text-[#844204]">US Dollar (USD),</span>{" "}
-          <span className="font-semibold text-[#844204]">
+          <span className="font-semibold text-brand">US Dollar (USD),</span>{" "}
+          <span className="font-semibold text-brand">
             British Pound (GBP)
           </span>{" "}
-          and <span className="font-semibold text-[#844204]">Euro (EUR)</span>{" "}
+          and <span className="font-semibold text-brand">Euro (EUR)</span>{" "}
           will be available soon.
         </p>
 
-        <p className="mt-5 text-gray-600 leading-8">
+        <p className="mt-5 text-gray-700 leading-8">
           Join our notification list and be among the first to know when
           international giving becomes available.
         </p>
@@ -124,7 +124,7 @@ export default function InternationalGivingCard() {
         {/* Email */}
 
         <div className="mt-10">
-          <label className="mb-3 block text-sm font-semibold uppercase tracking-wide text-[#844204]">
+          <label className="mb-3 block text-sm font-semibold uppercase tracking-wide text-brand">
             Stay Updated
           </label>
 
@@ -140,14 +140,14 @@ export default function InternationalGivingCard() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
-                className="w-full rounded-2xl border border-gray-200 py-4 pl-14 pr-5 outline-none transition focus:border-[#844204]"
+                className="w-full rounded-2xl border border-gray-200 py-4 pl-14 pr-5 outline-none transition focus:border-brand"
               />
             </div>
 
             <button
               onClick={handleNotifyMe}
               disabled={loading}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-[#844204] px-8 py-4 font-semibold text-white transition hover:bg-[#6d3503] disabled:cursor-not-allowed disabled:opacity-70"
+              className="flex items-center justify-center gap-2 rounded-2xl bg-brand px-8 py-4 font-semibold text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-70"
             >
               {loading ? (
                 <>
@@ -166,15 +166,15 @@ export default function InternationalGivingCard() {
         {/* Supported Currencies */}
 
         <div className="mt-10 flex flex-wrap gap-3">
-          <span className="rounded-full bg-[#FAF7F2] px-4 py-2 text-sm font-semibold text-[#844204]">
+          <span className="rounded-full bg-cream px-4 py-2 text-sm font-semibold text-brand">
             🇺🇸 USD
           </span>
 
-          <span className="rounded-full bg-[#FAF7F2] px-4 py-2 text-sm font-semibold text-[#844204]">
+          <span className="rounded-full bg-cream px-4 py-2 text-sm font-semibold text-brand">
             🇬🇧 GBP
           </span>
 
-          <span className="rounded-full bg-[#FAF7F2] px-4 py-2 text-sm font-semibold text-[#844204]">
+          <span className="rounded-full bg-cream px-4 py-2 text-sm font-semibold text-brand">
             🇪🇺 EUR
           </span>
         </div>

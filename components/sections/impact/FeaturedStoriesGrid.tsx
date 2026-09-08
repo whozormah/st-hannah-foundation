@@ -22,19 +22,19 @@ export default function FeaturedStoriesGrid() {
     <section className="bg-white py-28">
       <div className="container-custom">
         <div className="mx-auto mb-20 max-w-4xl text-center">
-          <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+          <span className="font-semibold uppercase tracking-[6px] text-brand">
             Featured Stories
           </span>
 
-          <h2 className="mt-5 text-5xl font-bold leading-tight text-[#1B1815] md:text-6xl">
+          <h2 className="mt-5 text-5xl font-bold leading-tight text-ink md:text-6xl">
             Behind Every Number
             <br />
             Is A Human Story
           </h2>
 
-          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-accent" />
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
             Every child supported, every widow empowered and every family
             strengthened represents more than a statistic. These stories capture
             the courage, resilience and hope that continue to inspire our
@@ -60,20 +60,20 @@ export default function FeaturedStoriesGrid() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
                 <div className="absolute bottom-5 left-5">
-                  <span className="rounded-full bg-[#D9A441] px-4 py-2 text-xs font-bold uppercase tracking-[3px] text-[#2E1B05]">
+                  <span className="rounded-full bg-accent px-4 py-2 text-xs font-bold uppercase tracking-[3px] text-[#2E1B05]">
                     {story.category}
                   </span>
                 </div>
               </div>
 
               <div className="p-8">
-                <h3 className="text-2xl font-bold leading-tight text-[#1B1815] transition-colors group-hover:text-[#844204]">
+                <h3 className="text-2xl font-bold leading-tight text-ink transition-colors group-hover:text-brand">
                   {story.title}
                 </h3>
 
-                <p className="mt-5 leading-8 text-gray-600">{story.excerpt}</p>
+                <p className="mt-5 leading-8 text-gray-700">{story.excerpt}</p>
 
-                <div className="mt-8 inline-flex items-center gap-2 font-semibold text-[#844204]">
+                <div className="mt-8 inline-flex items-center gap-2 font-semibold text-brand">
                   Read Full Story
                   <ArrowRight
                     size={18}

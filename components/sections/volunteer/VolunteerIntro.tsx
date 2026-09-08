@@ -3,7 +3,7 @@ export default function VolunteerIntro() {
     <section className="py-24 bg-white">
       <div className="container-custom">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Join Our Team
           </span>
 
@@ -11,7 +11,7 @@ export default function VolunteerIntro() {
             Be Part Of Something Meaningful
           </h2>
 
-          <p className="mt-8 text-lg text-gray-600 leading-8">
+          <p className="mt-8 text-lg text-gray-700 leading-8">
             Volunteers are at the heart of everything we do. Through their
             passion, dedication and service, we are able to reach vulnerable
             individuals, support families, empower widows and create lasting

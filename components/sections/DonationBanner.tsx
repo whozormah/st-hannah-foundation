@@ -16,10 +16,10 @@ export default function DonationBanner() {
 
 
   return (
-    <section className="py-28 bg-[#844204]">
+    <section className="py-28 bg-brand">
       <div className="container-custom">
         <div className="max-w-5xl mx-auto text-center text-white">
-          <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+          <span className="uppercase tracking-[5px] text-accent font-semibold">
             Support Our Mission
           </span>
 
@@ -72,14 +72,14 @@ export default function DonationBanner() {
           <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4">
             <Link
               href="/donate"
-              className="bg-[#D9A441] text-black px-8 py-4 rounded-xl font-semibold"
+              className="bg-accent text-black px-8 py-4 rounded-xl font-semibold"
             >
               Donate Now
             </Link>
 
             <Link
               href="/volunteer"
-              className="border border-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-[#844204] transition"
+              className="border border-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-brand transition"
             >
               Become A Volunteer
             </Link>

@@ -21,22 +21,22 @@ export default function AboutFounder() {
   if (!founder) return null;
 
   return (
-    <section className="bg-[#FAF7F2] py-32">
+    <section className="bg-cream py-32">
       <div className="container-custom">
         {/* Section Heading */}
 
         <div className="mx-auto mb-24 max-w-4xl text-center">
-          <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+          <span className="font-semibold uppercase tracking-[6px] text-brand">
             The Vision Behind The Foundation
           </span>
 
-          <h2 className="mt-5 text-5xl font-bold text-[#1B1815] md:text-6xl">
+          <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
             A Story Rooted In Compassion
           </h2>
 
-          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-accent" />
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
             Every movement begins with a story. St. Hannah Foundation was born
             from a deep commitment to serving others, restoring hope and helping
             vulnerable individuals discover new possibilities for their future.
@@ -60,10 +60,10 @@ export default function AboutFounder() {
 
             {/* Floating Quote Card */}
 
-            <div className="absolute -bottom-10 -right-10 max-w-sm rounded-[28px] border border-[#D9A441]/20 bg-white p-8 shadow-2xl">
-              <span className="text-6xl font-serif text-[#D9A441]/20">&quot;</span>
+            <div className="absolute -bottom-10 -right-10 max-w-sm rounded-[28px] border border-accent/20 bg-white p-8 shadow-2xl">
+              <span className="text-6xl font-serif text-accent/20">&quot;</span>
 
-              <p className="-mt-5 italic leading-8 text-gray-600">
+              <p className="-mt-5 italic leading-8 text-gray-700">
                 {founder.quote}
               </p>
             </div>
@@ -72,11 +72,11 @@ export default function AboutFounder() {
           {/* Content */}
 
           <div>
-            <span className="inline-flex rounded-full bg-[#844204]/10 px-5 py-2 text-sm font-semibold text-[#844204]">
+            <span className="inline-flex rounded-full bg-brand/10 px-5 py-2 text-sm font-semibold text-brand">
               {founder.badge}
             </span>
 
-            <h3 className="mt-6 text-5xl font-bold leading-tight text-[#1B1815]">
+            <h3 className="mt-6 text-5xl font-bold leading-tight text-ink">
               {founder.name}
             </h3>
 
@@ -84,9 +84,9 @@ export default function AboutFounder() {
               {founder.position}
             </p>
 
-            <div className="mt-8 h-[3px] w-20 rounded-full bg-[#D9A441]" />
+            <div className="mt-8 h-[3px] w-20 rounded-full bg-accent" />
 
-            <div className="mt-10 space-y-8 text-lg leading-9 text-gray-600">
+            <div className="mt-10 space-y-8 text-lg leading-9 text-gray-700">
               {founder.message.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
@@ -94,8 +94,8 @@ export default function AboutFounder() {
 
             {/* Signature Card */}
 
-            <div className="mt-14 rounded-[30px] border border-[#D9A441]/20 bg-white p-8 shadow-lg">
-              <h4 className="text-2xl font-bold text-[#844204]">
+            <div className="mt-14 rounded-[30px] border border-accent/20 bg-white p-8 shadow-lg">
+              <h4 className="text-2xl font-bold text-brand">
                 {founder.name}
               </h4>
 
@@ -103,9 +103,9 @@ export default function AboutFounder() {
                 {founder.position}
               </p>
 
-              <div className="mt-6 h-px w-16 bg-[#D9A441]" />
+              <div className="mt-6 h-px w-16 bg-accent" />
 
-              <p className="mt-6 italic leading-8 text-gray-600">
+              <p className="mt-6 italic leading-8 text-gray-700">
                 &quot;{founder.quote}&quot;
               </p>
             </div>

@@ -55,18 +55,18 @@ export default function AidApplicationForm() {
         {" "}
         <div
           ref={formRef}
-          className="bg-[#FAF7F2] rounded-[32px] p-10 md:p-14 shadow-sm"
+          className="bg-cream rounded-[32px] p-10 md:p-14 shadow-sm"
         >
           {" "}
           <div className="text-center mb-12">
             {" "}
-            <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+            <span className="uppercase tracking-[5px] text-brand font-semibold">
               Application Form{" "}
             </span>
             <h2 className="text-4xl md:text-5xl font-bold mt-4">
               Support Application Form
             </h2>
-            <p className="mt-6 text-gray-600 leading-8 max-w-3xl mx-auto">
+            <p className="mt-6 text-gray-700 leading-8 max-w-3xl mx-auto">
               Complete the steps below to submit your support request. Please
               provide accurate information to help us review your application
               effectively.
@@ -95,14 +95,14 @@ export default function AidApplicationForm() {
               <button
                 type="button"
                 onClick={nextStep}
-                className="bg-[#844204] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#6d3503] transition"
+                className="bg-brand text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-dark transition"
               >
                 Next Step →
               </button>
             ) : (
               <button
                 type="submit"
-                className="bg-[#844204] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#6d3503] transition"
+                className="bg-brand text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-dark transition"
               >
                 Submit Application
               </button>

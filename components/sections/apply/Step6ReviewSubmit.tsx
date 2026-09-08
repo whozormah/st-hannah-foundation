@@ -3,7 +3,7 @@ export default function Step6ReviewSubmit() {
     <div>
       {" "}
       <h3 className="text-3xl font-bold mb-3">Review & Submit Application </h3>
-      <p className="text-gray-600 mb-8">
+      <p className="text-gray-700 mb-8">
         Please review your application carefully before submission. Ensure all
         information provided is accurate and complete.
       </p>
@@ -39,8 +39,8 @@ export default function Step6ReviewSubmit() {
         </div>
       </div>
       {/* Important Notice */}
-      <div className="bg-white border border-[#D9A441] rounded-[24px] p-8 mb-10">
-        <h4 className="font-bold text-[#844204] mb-4">Important Notice</h4>
+      <div className="bg-white border border-accent rounded-[24px] p-8 mb-10">
+        <h4 className="font-bold text-brand mb-4">Important Notice</h4>
 
         <ul className="space-y-3 text-gray-700 leading-7">
           <li>
@@ -110,7 +110,7 @@ export default function Step6ReviewSubmit() {
         </div>
       </div>
       {/* Encouragement */}
-      <div className="mt-10 bg-[#844204] text-white rounded-[24px] p-8 text-center">
+      <div className="mt-10 bg-brand text-white rounded-[24px] p-8 text-center">
         <h4 className="text-2xl font-bold">Thank You For Reaching Out</h4>
 
         <p className="mt-4 text-white/90 leading-8 max-w-3xl mx-auto">

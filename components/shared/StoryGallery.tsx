@@ -18,7 +18,7 @@ export default function StoryGallery({
         {galleryLink && (
           <Link
             href={galleryLink}
-            className="text-[#844204] font-semibold hover:underline"
+            className="text-brand font-semibold hover:underline"
           >
             View Full Gallery
           </Link>

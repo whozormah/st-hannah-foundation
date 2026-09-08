@@ -30,22 +30,22 @@ export default function SuccessScreen({
           Thank You For Your Generosity
         </h2>
 
-        <p className="text-gray-600 mt-6 leading-8">
+        <p className="text-gray-700 mt-6 leading-8">
           Your donation offer has been received successfully. A member of the
           St. Hannah Foundation team will review your submission and contact you
           shortly regarding the next steps.
         </p>
 
-        <div className="mt-6 bg-[#FAF7F2] p-4 rounded-xl">
+        <div className="mt-6 bg-cream p-4 rounded-xl">
           <p className="text-sm text-gray-500">Reference Number</p>
 
-          <p className="font-bold text-lg text-[#844204]">
+          <p className="font-bold text-lg text-brand">
             {reference}
           </p>
         </div>
         <button
           onClick={onClose}
-          className="mt-10 bg-[#844204] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#6d3503] transition"
+          className="mt-10 bg-brand text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-dark transition"
         >
           Close
         </button>

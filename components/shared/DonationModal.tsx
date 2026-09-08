@@ -39,11 +39,11 @@ export default function DonationModal({
 
             <div className="flex items-center justify-between p-8 border-b">
               <div>
-                <span className="uppercase tracking-[4px] text-[#844204] text-sm font-semibold">
+                <span className="uppercase tracking-[4px] text-brand text-sm font-semibold">
                   St. Hannah Foundation
                 </span>
 
-                <h2 className="text-2xl md:text-3xl font-bold text-[#1B1815] mt-2">
+                <h2 className="text-2xl md:text-3xl font-bold text-ink mt-2">
                   {programName
                     ? `Support ${programName}`
                     : "Make An Impact Today"}
@@ -66,7 +66,7 @@ export default function DonationModal({
             <div className="p-8 space-y-6">
               {/* Donate Online */}
 
-              <div className="bg-[#844204] text-white rounded-3xl p-8">
+              <div className="bg-brand text-white rounded-3xl p-8">
                 <div className="flex items-center gap-3 mb-4">
                   <CreditCard size={24} />
 
@@ -87,7 +87,7 @@ export default function DonationModal({
                       setIsDonationFormOpen(true);
                     }, 250);
                   }}
-                  className="mt-6 w-full bg-white text-[#844204] py-4 rounded-xl font-semibold hover:scale-[1.02] transition-all duration-300"
+                  className="mt-6 w-full bg-white text-brand py-4 rounded-xl font-semibold hover:scale-[1.02] transition-all duration-300"
                 >
                   Donate Online
                 </button>
@@ -95,16 +95,16 @@ export default function DonationModal({
 
               {/* Donate Items */}
 
-              <div className="border border-[#D9A441]/20 rounded-3xl p-8">
+              <div className="border border-accent/20 rounded-3xl p-8">
                 <div className="flex items-center gap-3 mb-4">
-                  <Gift size={24} className="text-[#844204]" />
+                  <Gift size={24} className="text-brand" />
 
-                  <h3 className="text-2xl font-bold text-[#1B1815]">
+                  <h3 className="text-2xl font-bold text-ink">
                     Donate Items & Materials
                   </h3>
                 </div>
 
-                <p className="text-gray-600 leading-7">
+                <p className="text-gray-700 leading-7">
                   Support our mission through food items, educational materials,
                   clothing, medical supplies, equipment and other essential
                   resources that directly impact the lives of beneficiaries.
@@ -118,7 +118,7 @@ export default function DonationModal({
                       setIsInKindOpen(true);
                     }, 250);
                   }}
-                  className="mt-6 w-full border border-[#844204] text-[#844204] py-4 rounded-xl font-semibold hover:bg-[#844204] hover:text-white transition-all duration-300"
+                  className="mt-6 w-full border border-brand text-brand py-4 rounded-xl font-semibold hover:bg-brand hover:text-white transition-all duration-300"
                 >
                   Donate Items Instead
                 </button>
@@ -126,12 +126,12 @@ export default function DonationModal({
 
               {/* Impact */}
 
-              <div className="bg-[#FAF7F2] rounded-3xl p-6 text-center">
-                <h3 className="font-bold text-xl text-[#844204] mb-3">
+              <div className="bg-cream rounded-3xl p-6 text-center">
+                <h3 className="font-bold text-xl text-brand mb-3">
                   Every Gift Creates Impact
                 </h3>
 
-                <p className="text-gray-600 leading-7">
+                <p className="text-gray-700 leading-7">
                   Your support helps provide educational opportunities, widow
                   empowerment, family assistance, medical aid and community
                   outreach programmes that restore hope and transform lives.

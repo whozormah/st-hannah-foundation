@@ -31,7 +31,7 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
           About Your Donation
         </h2>
 
-        <p className="text-gray-600 mt-2">
+        <p className="text-gray-700 mt-2">
           Tell us more about the item(s) you would like to donate.
         </p>
       </div>
@@ -52,7 +52,7 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
                 category: e.target.value,
               }))
             }
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             required
           >
             <option value="">Select Category</option>
@@ -100,7 +100,7 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
               }))
             }
             placeholder="Example: 5 bags of rice, 20 school bags, books, medical supplies, 2 sewing machines..."
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             required
           />
         </div>
@@ -120,7 +120,7 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
               }))
             }
             placeholder="Example: 5 bags, 20 pieces, 2 cartons"
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             required
           />
         </div>
@@ -140,7 +140,7 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
               }))
             }
             placeholder="Example: New, Fairly Used, Excellent Condition, Medium Size"
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             required
           />
           {previewUrl && (
@@ -171,7 +171,7 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
                 image: e.target.files?.[0] || null,
               }))
             }
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             required
           />
 

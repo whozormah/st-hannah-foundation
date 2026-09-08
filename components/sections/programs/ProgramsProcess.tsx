@@ -40,19 +40,19 @@ export default function ProgramsProcess() {
         {/* Heading */}
 
         <div className="mx-auto mb-20 max-w-4xl text-center">
-          <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+          <span className="font-semibold uppercase tracking-[6px] text-brand">
             Our Process
           </span>
 
-          <h2 className="mt-5 text-5xl font-bold text-[#1B1815] md:text-6xl">
+          <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
             How We Create
             <br />
             Lasting Impact
           </h2>
 
-          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-accent" />
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
             Lasting transformation doesn&apos;t happen overnight. Every programme
             follows a deliberate process designed to meet immediate needs while
             creating opportunities for sustainable growth.
@@ -61,7 +61,7 @@ export default function ProgramsProcess() {
 
         {/* Banner */}
 
-        <div className="relative mb-20 overflow-hidden rounded-[40px] bg-gradient-to-r from-[#844204] via-[#9A5A12] to-[#B27425] px-12 py-16 text-center text-white shadow-2xl">
+        <div className="relative mb-20 overflow-hidden rounded-[40px] bg-gradient-to-r from-brand via-[#9A5A12] to-[#B27425] px-12 py-16 text-center text-white shadow-2xl">
           <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
 
           <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
@@ -94,12 +94,12 @@ export default function ProgramsProcess() {
             return (
               <div
                 key={step.title}
-                className="group relative rounded-[36px] border border-gray-100 bg-[#FAF7F2] p-8 shadow-lg transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:shadow-2xl"
+                className="group relative rounded-[36px] border border-gray-100 bg-cream p-8 shadow-lg transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:shadow-2xl"
               >
-                <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-[#FFF8EC] transition-all duration-500 group-hover:scale-110 group-hover:bg-[#844204]">
+                <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-cream-warm transition-all duration-500 group-hover:scale-110 group-hover:bg-brand">
                   <Icon
                     size={36}
-                    className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                    className="text-brand transition-all duration-500 group-hover:text-white"
                   />
                 </div>
 
@@ -110,15 +110,15 @@ export default function ProgramsProcess() {
 
                   <ArrowRight
                     size={18}
-                    className="text-[#D9A441] transition-transform duration-300 group-hover:translate-x-2"
+                    className="text-accent transition-transform duration-300 group-hover:translate-x-2"
                   />
                 </div>
 
-                <h3 className="text-2xl font-bold text-[#1B1815]">
+                <h3 className="text-2xl font-bold text-ink">
                   {step.title}
                 </h3>
 
-                <p className="mt-5 leading-8 text-gray-600">
+                <p className="mt-5 leading-8 text-gray-700">
                   {step.description}
                 </p>
               </div>
@@ -128,18 +128,18 @@ export default function ProgramsProcess() {
 
         {/* Closing */}
 
-        <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-[#FAF7F2] p-14 text-center">
-          <span className="uppercase tracking-[5px] text-[#844204]">
+        <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-cream p-14 text-center">
+          <span className="uppercase tracking-[5px] text-brand">
             Why Our Process Works
           </span>
 
-          <h3 className="mt-5 text-4xl font-bold text-[#1B1815]">
+          <h3 className="mt-5 text-4xl font-bold text-ink">
             Sustainable Change Is Built Step By Step
           </h3>
 
-          <div className="mx-auto mt-6 h-[3px] w-20 rounded-full bg-[#D9A441]" />
+          <div className="mx-auto mt-6 h-[3px] w-20 rounded-full bg-accent" />
 
-          <p className="mt-8 text-lg leading-9 text-gray-600">
+          <p className="mt-8 text-lg leading-9 text-gray-700">
             By listening first, responding intentionally and investing in
             long-term empowerment, we create programmes that don&apos;t simply solve
             today&apos;s challenges—they help communities build a stronger tomorrow.

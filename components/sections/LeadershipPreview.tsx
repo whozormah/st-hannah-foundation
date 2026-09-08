@@ -32,24 +32,24 @@ export default function LeadershipPreview({
       {/* Decorative Background */}
 
       <div className="absolute inset-0">
-        <div className="absolute -top-48 left-0 h-[520px] w-[520px] rounded-full bg-[#FAF7F2]" />
+        <div className="absolute -top-48 left-0 h-[520px] w-[520px] rounded-full bg-cream" />
 
-        <div className="absolute right-0 bottom-0 h-[420px] w-[420px] rounded-full bg-[#FAF7F2]/70" />
+        <div className="absolute right-0 bottom-0 h-[420px] w-[420px] rounded-full bg-cream/70" />
       </div>
 
       <div className="container-custom relative">
         {/* Heading */}
 
         <div className="mx-auto mb-24 max-w-4xl text-center">
-          <span className="uppercase tracking-[6px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[6px] text-brand font-semibold">
             {eyebrow}
           </span>
 
-          <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-[#1B1815]">
+          <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-ink">
             {title}
           </h2>
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
             {description}
           </p>
         </div>
@@ -65,14 +65,14 @@ export default function LeadershipPreview({
                 key={leader.name}
                 className={`group relative overflow-hidden rounded-[34px] bg-white transition-all duration-700 hover:-translate-y-3 ${
                   isFounder
-                    ? "border-2 border-[#D9A441] shadow-[0_25px_70px_rgba(217,164,65,0.18)]"
+                    ? "border-2 border-accent shadow-[0_25px_70px_rgba(217,164,65,0.18)]"
                     : "border border-gray-100 shadow-lg hover:shadow-2xl"
                 }`}
               >
                 {/* Premium Badge */}
                 {isFounder && (
                   <div className="absolute right-6 top-6 z-30">
-                    <div className="flex items-center gap-2 rounded-full bg-[#D9A441] px-4 py-2 text-xs font-bold uppercase tracking-[2px] text-[#2E1B05] shadow-lg">
+                    <div className="flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-xs font-bold uppercase tracking-[2px] text-[#2E1B05] shadow-lg">
                       <Crown size={14} />
                       Founder
                     </div>
@@ -82,8 +82,8 @@ export default function LeadershipPreview({
                 <div
                   className={`relative overflow-hidden ${
                     isFounder
-                      ? "bg-gradient-to-b from-[#F8F1E5] via-[#FAF7F2] to-white"
-                      : "bg-[#FAF7F2]"
+                      ? "bg-gradient-to-b from-[#F8F1E5] via-cream to-white"
+                      : "bg-cream"
                   }`}
                 >
                   {/* Decorative Glow */}
@@ -107,25 +107,25 @@ export default function LeadershipPreview({
 
                   <div
                     className={`h-[2px] w-full ${
-                      isFounder ? "bg-[#D9A441]" : "bg-gray-100"
+                      isFounder ? "bg-accent" : "bg-gray-100"
                     }`}
                   />
                 </div>{" "}
                 {/* Content */}
                 <div className="flex h-[330px] flex-col p-8">
                   {isFounder && (
-                    <span className="inline-flex w-fit items-center rounded-full bg-[#FFF7E8] px-4 py-2 text-xs font-bold uppercase tracking-[3px] text-[#844204]">
+                    <span className="inline-flex w-fit items-center rounded-full bg-[#FFF7E8] px-4 py-2 text-xs font-bold uppercase tracking-[3px] text-brand">
                       Founder & President
                     </span>
                   )}
 
-                  <h3 className="mt-6 text-3xl font-bold leading-tight text-[#1B1815]">
+                  <h3 className="mt-6 text-3xl font-bold leading-tight text-ink">
                     {leader.name}
                   </h3>
 
                   <p
                     className={`mt-2 font-semibold ${
-                      isFounder ? "text-[#844204]" : "text-[#9A6A17]"
+                      isFounder ? "text-brand" : "text-[#9A6A17]"
                     }`}
                   >
                     {leader.role}
@@ -136,10 +136,10 @@ export default function LeadershipPreview({
                   {isFounder ? (
                     <>
                       <div className="mt-6">
-                        <div className="mb-6 h-[2px] w-16 rounded-full bg-[#D9A441]" />
+                        <div className="mb-6 h-[2px] w-16 rounded-full bg-accent" />
 
-                        <blockquote className="relative pl-6 italic leading-8 text-gray-600">
-                          <span className="absolute -left-1 -top-6 text-6xl font-serif text-[#D9A441]/20">
+                        <blockquote className="relative pl-6 italic leading-8 text-gray-700">
+                          <span className="absolute -left-1 -top-6 text-6xl font-serif text-accent/20">
                             &quot;
                           </span>
                           Transforming lives begins with compassion, commitment
@@ -148,7 +148,7 @@ export default function LeadershipPreview({
                       </div>
 
                       <div className="mt-auto pt-8">
-                        <div className="rounded-2xl border border-[#D9A441]/20 bg-[#FFF9F0] p-5">
+                        <div className="rounded-2xl border border-accent/20 bg-[#FFF9F0] p-5">
                           <p className="text-sm leading-7 text-gray-700">
                             Providing visionary leadership and strategic
                             direction while inspiring sustainable impact across
@@ -160,13 +160,13 @@ export default function LeadershipPreview({
                   ) : (
                     <>
                       {leader.bio && (
-                        <p className="mt-6 leading-8 text-gray-600">
+                        <p className="mt-6 leading-8 text-gray-700">
                           {leader.bio}
                         </p>
                       )}
 
                       <div className="mt-auto pt-8">
-                        <div className="h-px w-14 bg-[#D9A441]/50" />
+                        <div className="h-px w-14 bg-accent/50" />
                       </div>
                     </>
                   )}
@@ -182,7 +182,7 @@ export default function LeadershipPreview({
           <div className="mt-20 text-center">
             <Link
               href="/team"
-              className="group inline-flex items-center gap-3 rounded-full bg-[#844204] px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-[#6D3503] hover:shadow-xl"
+              className="group inline-flex items-center gap-3 rounded-full bg-brand px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-brand-dark hover:shadow-xl"
             >
               View Full Leadership Team
               <ArrowRight

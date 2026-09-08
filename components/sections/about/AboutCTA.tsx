@@ -12,20 +12,20 @@ export default function AboutCTA() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[#844204] py-32 text-white">
+      <section className="relative overflow-hidden bg-brand py-32 text-white">
         {/* Background */}
 
         <div className="absolute inset-0">
-          <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-[#D9A441]/10 blur-3xl" />
+          <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-accent/10 blur-3xl" />
 
-          <div className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-[#D9A441]/10 blur-3xl" />
+          <div className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-accent/10 blur-3xl" />
         </div>
 
         <div className="container-custom relative z-10">
           {/* Heading */}
 
           <div className="mx-auto max-w-4xl text-center">
-            <span className="font-semibold uppercase tracking-[6px] text-[#D9A441]">
+            <span className="font-semibold uppercase tracking-[6px] text-accent">
               Become Part Of The Story
             </span>
 
@@ -49,10 +49,10 @@ export default function AboutCTA() {
 
             <button
               onClick={() => setShowDonationModal(true)}
-              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:bg-white/10 hover:shadow-2xl"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
             >
-              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-[#D9A441]/20 bg-[#D9A441]/10">
-                <Heart size={38} className="text-[#D9A441]" />
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-accent/20 bg-accent/10">
+                <Heart size={38} className="text-accent" />
               </div>
 
               <h3 className="mt-8 text-3xl font-bold">Donate</h3>
@@ -62,7 +62,7 @@ export default function AboutCTA() {
                 restore hope and transform lives.
               </p>
 
-              <div className="mt-8 flex items-center gap-2 font-semibold text-[#D9A441]">
+              <div className="mt-8 flex items-center gap-2 font-semibold text-accent">
                 Support A Cause
                 <ArrowRight
                   size={18}
@@ -75,10 +75,10 @@ export default function AboutCTA() {
 
             <a
               href="/volunteer"
-              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:bg-white/10 hover:shadow-2xl"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
             >
-              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-[#D9A441]/20 bg-[#D9A441]/10">
-                <Users size={38} className="text-[#D9A441]" />
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-accent/20 bg-accent/10">
+                <Users size={38} className="text-accent" />
               </div>
 
               <h3 className="mt-8 text-3xl font-bold">Volunteer</h3>
@@ -88,7 +88,7 @@ export default function AboutCTA() {
                 change in the lives of children and families.
               </p>
 
-              <div className="mt-8 flex items-center gap-2 font-semibold text-[#D9A441]">
+              <div className="mt-8 flex items-center gap-2 font-semibold text-accent">
                 Join Our Team
                 <ArrowRight
                   size={18}
@@ -101,10 +101,10 @@ export default function AboutCTA() {
 
             <button
               onClick={() => setShowPartnerModal(true)}
-              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/40 hover:bg-white/10 hover:shadow-2xl"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
             >
-              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-[#D9A441]/20 bg-[#D9A441]/10">
-                <Handshake size={38} className="text-[#D9A441]" />
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-accent/20 bg-accent/10">
+                <Handshake size={38} className="text-accent" />
               </div>
 
               <h3 className="mt-8 text-3xl font-bold">Partner With Us</h3>
@@ -114,7 +114,7 @@ export default function AboutCTA() {
                 and initiatives that expand our impact.
               </p>
 
-              <div className="mt-8 flex items-center gap-2 font-semibold text-[#D9A441]">
+              <div className="mt-8 flex items-center gap-2 font-semibold text-accent">
                 Become A Partner
                 <ArrowRight
                   size={18}

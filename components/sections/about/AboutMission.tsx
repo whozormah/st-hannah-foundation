@@ -7,19 +7,19 @@ export default function AboutMission() {
         {/* Heading */}
 
         <div className="mx-auto mb-24 max-w-4xl text-center">
-          <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+          <span className="font-semibold uppercase tracking-[6px] text-brand">
             Our Story
           </span>
 
-          <h2 className="mt-5 text-5xl font-bold text-[#1B1815] md:text-6xl">
+          <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
             Built On Compassion.
             <br />
             Driven By Purpose.
           </h2>
 
-          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-accent" />
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
             To build a future where every child, family, and community,
             especially those who are overlooked, underserved, and vulnerable,
             has the opportunity to thrive, fulfill their God given potential,
@@ -46,8 +46,8 @@ export default function AboutMission() {
 
             {/* Floating Card */}
 
-            <div className="absolute -bottom-10 -right-10 rounded-[28px] border border-[#D9A441]/20 bg-white p-8 shadow-2xl">
-              <h3 className="text-5xl font-bold text-[#844204]">10+</h3>
+            <div className="absolute -bottom-10 -right-10 rounded-[28px] border border-accent/20 bg-white p-8 shadow-2xl">
+              <h3 className="text-5xl font-bold text-brand">10+</h3>
 
               <p className="mt-2 uppercase tracking-[3px] text-sm text-gray-500">
                 Years of Service
@@ -58,15 +58,15 @@ export default function AboutMission() {
           {/* Right */}
 
           <div>
-            <span className="font-semibold uppercase tracking-[5px] text-[#844204]">
+            <span className="font-semibold uppercase tracking-[5px] text-brand">
               Who We Are
             </span>
 
-            <h3 className="mt-5 text-4xl font-bold text-[#1B1815]">
+            <h3 className="mt-5 text-4xl font-bold text-ink">
               Serving Communities Through Faith, Compassion & Action
             </h3>
 
-            <p className="mt-8 text-lg leading-9 text-gray-600">
+            <p className="mt-8 text-lg leading-9 text-gray-700">
               We believe every individual deserves dignity, opportunity and the
               support needed to thrive. Through education, healthcare,
               empowerment initiatives and humanitarian outreach, we work
@@ -77,12 +77,12 @@ export default function AboutMission() {
             <div className="mt-12 grid gap-8">
               {/* Vision */}
 
-              <div className="rounded-[28px] border border-[#D9A441]/20 bg-[#FAF7F2] p-8">
-                <h4 className="text-2xl font-bold text-[#844204]">
+              <div className="rounded-[28px] border border-accent/20 bg-cream p-8">
+                <h4 className="text-2xl font-bold text-brand">
                   Our Vision
                 </h4>
 
-                <p className="mt-4 leading-8 text-gray-600">
+                <p className="mt-4 leading-8 text-gray-700">
                   To build a world where every child and family, especially the
                   overlooked, underserved and unheard, experiences the fullness
                   of their God-given potential.
@@ -91,12 +91,12 @@ export default function AboutMission() {
 
               {/* Mission */}
 
-              <div className="rounded-[28px] border border-[#D9A441]/20 bg-white p-8 shadow-lg">
-                <h4 className="text-2xl font-bold text-[#844204]">
+              <div className="rounded-[28px] border border-accent/20 bg-white p-8 shadow-lg">
+                <h4 className="text-2xl font-bold text-brand">
                   Our Mission
                 </h4>
 
-                <p className="mt-4 leading-8 text-gray-600">
+                <p className="mt-4 leading-8 text-gray-700">
                   St. Hannah Foundation exists to uplift families and
                   communities across Africa through dignified access to
                   resources, education and community empowerment, igniting hope
@@ -109,10 +109,10 @@ export default function AboutMission() {
 
         {/* Values */}
 
-        <div className="mt-24 rounded-[40px] bg-[#844204] p-14 text-white">
+        <div className="mt-24 rounded-[40px] bg-brand p-14 text-white">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
-              <span className="uppercase tracking-[5px] text-[#D9A441]">
+              <span className="uppercase tracking-[5px] text-accent">
                 Our Values
               </span>
 

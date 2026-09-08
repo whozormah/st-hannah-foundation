@@ -1,6 +1,5 @@
 import Hero from "@/components/sections/Hero";
 import VisionMission from "@/components/sections/VisionMission";
-import FounderMessage from "@/components/sections/FounderMessage";
 import AboutTestimonials from "@/components/sections/about/AboutTestimonials";
 import ImpactStats from "@/components/sections/ImpactStats";
 import FeaturedCampaign from "@/components/sections/FeaturedCampaign";
@@ -18,7 +17,6 @@ export default function HomePage() {
       <Causes />
       <GalleryPreview />
       <ImpactStats />
-      <FounderMessage />
       <FeaturedCampaign />
       <ImpactStories />
       <AboutTestimonials />

@@ -41,19 +41,19 @@ export default function ApplicationProcess() {
   ];
 
   return (
-    <section className="py-28 bg-[#FAF7F2]">
+    <section className="py-28 bg-cream">
       {" "}
       <div className="container-custom">
         {" "}
         <div className="text-center max-w-4xl mx-auto mb-20">
           {" "}
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Application Process{" "}
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mt-4">
             What Happens After You Apply?
           </h2>
-          <p className="mt-6 text-lg text-gray-600 leading-8">
+          <p className="mt-6 text-lg text-gray-700 leading-8">
             Every application is carefully reviewed by our team to ensure
             support reaches those who need it most. The process below outlines
             what you can expect after submitting your request.
@@ -68,17 +68,17 @@ export default function ApplicationProcess() {
                 key={step.title}
                 className="bg-white rounded-[32px] p-8 text-center shadow-sm hover:shadow-lg transition"
               >
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-[#844204]/10 flex items-center justify-center mb-6">
-                  <Icon size={28} className="text-[#844204]" />
+                <div className="w-16 h-16 mx-auto rounded-2xl bg-brand/10 flex items-center justify-center mb-6">
+                  <Icon size={28} className="text-brand" />
                 </div>
 
-                <div className="text-sm font-semibold text-[#844204] mb-3">
+                <div className="text-sm font-semibold text-brand mb-3">
                   STEP {index + 1}
                 </div>
 
                 <h3 className="text-xl font-bold">{step.title}</h3>
 
-                <p className="mt-4 text-gray-600 leading-7 text-sm">
+                <p className="mt-4 text-gray-700 leading-7 text-sm">
                   {step.description}
                 </p>
               </div>

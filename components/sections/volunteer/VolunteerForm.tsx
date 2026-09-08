@@ -1,14 +1,14 @@
 export default function VolunteerForm() {
   return (
-    <section id="volunteer-form" className="py-24 bg-[#FAF7F2]">
+    <section id="volunteer-form" className="py-24 bg-cream">
       <div className="container-custom max-w-4xl">
         <div className="text-center mb-16">
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Apply Today
           </span>
 
           <h2 className="text-5xl font-bold mt-4">Volunteer Application</h2>
-          <p className="max-w-3xl mx-auto mt-6 text-gray-600 leading-8">
+          <p className="max-w-3xl mx-auto mt-6 text-gray-700 leading-8">
             Join our growing network of volunteers and help us create meaningful
             impact in communities through education, empowerment, outreach and
             support programs.
@@ -236,7 +236,7 @@ export default function VolunteerForm() {
 
           {/* Consent */}
 
-          <div className="bg-[#FAF7F2] border rounded-2xl p-6">
+          <div className="bg-cream border rounded-2xl p-6">
             <label className="flex items-start gap-4">
               <input type="checkbox" className="mt-1" />
 
@@ -250,7 +250,7 @@ export default function VolunteerForm() {
 
           <button
             type="submit"
-            className="w-full bg-[#844204] text-white py-5 rounded-xl font-semibold text-lg hover:bg-[#6d3503] transition"
+            className="w-full bg-brand text-white py-5 rounded-xl font-semibold text-lg hover:bg-brand-dark transition"
           >
             Volunteer With Us
           </button>

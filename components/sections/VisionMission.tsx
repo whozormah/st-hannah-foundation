@@ -42,25 +42,25 @@ export default function VisionMission() {
       {/* Decorative Background */}
 
       <div className="absolute inset-0">
-        <div className="absolute -top-56 -left-32 h-[520px] w-[520px] rounded-full bg-[#FAF7F2]" />
+        <div className="absolute -top-56 -left-32 h-[520px] w-[520px] rounded-full bg-cream" />
 
-        <div className="absolute bottom-0 right-0 h-[420px] w-[420px] rounded-full bg-[#FAF7F2]/70" />
+        <div className="absolute bottom-0 right-0 h-[420px] w-[420px] rounded-full bg-cream/70" />
       </div>
 
       <div className="container-custom relative">
         {/* Heading */}
         <div className="mx-auto mb-24 max-w-5xl text-center">
-          <span className="uppercase tracking-[6px] font-semibold text-[#844204]">
+          <span className="uppercase tracking-[6px] font-semibold text-brand">
             {foundation?.badge}
           </span>
 
-          <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-[#1B1815]">
+          <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-ink">
             {foundation?.title}
           </h2>
 
-          <div className="mx-auto mt-8 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+          <div className="mx-auto mt-8 h-[3px] w-24 rounded-full bg-accent" />
 
-          <p className="mx-auto mt-8 max-w-4xl text-lg leading-9 text-gray-600">
+          <p className="mx-auto mt-8 max-w-4xl text-lg leading-9 text-gray-700">
             {foundation?.description}
           </p>
         </div>
@@ -68,28 +68,28 @@ export default function VisionMission() {
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Vision */}
 
-          <div className="group relative overflow-hidden rounded-[36px] border border-[#D9A441]/20 bg-white p-10 shadow-lg transition-all duration-700 hover:-translate-y-2 hover:border-[#D9A441] hover:shadow-2xl">
-            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[#FAF7F2] blur-3xl" />
+          <div className="group relative overflow-hidden rounded-[36px] border border-accent/20 bg-white p-10 shadow-lg transition-all duration-700 hover:-translate-y-2 hover:border-accent hover:shadow-2xl">
+            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-cream blur-3xl" />
 
             <div className="relative">
-              <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-[#844204]/10 transition-all duration-500 group-hover:bg-[#844204]">
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-brand/10 transition-all duration-500 group-hover:bg-brand">
                 <Eye
                   size={36}
-                  className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                  className="text-brand transition-all duration-500 group-hover:text-white"
                 />
               </div>
 
-              <span className="mt-8 block uppercase tracking-[4px] text-sm font-semibold text-[#844204]">
+              <span className="mt-8 block uppercase tracking-[4px] text-sm font-semibold text-brand">
                 Our Vision
               </span>
 
-              <h3 className="mt-4 text-4xl font-bold text-[#1B1815]">
+              <h3 className="mt-4 text-4xl font-bold text-ink">
                 Inspiring Hope.
               </h3>
 
-              <div className="mt-6 h-[2px] w-16 rounded-full bg-[#D9A441]" />
+              <div className="mt-6 h-[2px] w-16 rounded-full bg-accent" />
 
-              <p className="mt-8 text-[17px] leading-9 text-gray-600">
+              <p className="mt-8 text-[17px] leading-9 text-gray-700">
                 {foundation?.vision}
               </p>
             </div>
@@ -97,28 +97,28 @@ export default function VisionMission() {
 
           {/* Mission */}
 
-          <div className="group relative overflow-hidden rounded-[36px] border border-[#D9A441]/20 bg-white p-10 shadow-lg transition-all duration-700 hover:-translate-y-2 hover:border-[#D9A441] hover:shadow-2xl">
-            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-[#FAF7F2] blur-3xl" />
+          <div className="group relative overflow-hidden rounded-[36px] border border-accent/20 bg-white p-10 shadow-lg transition-all duration-700 hover:-translate-y-2 hover:border-accent hover:shadow-2xl">
+            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-cream blur-3xl" />
 
             <div className="relative">
-              <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-[#844204]/10 transition-all duration-500 group-hover:bg-[#844204]">
+              <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-brand/10 transition-all duration-500 group-hover:bg-brand">
                 <Target
                   size={36}
-                  className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                  className="text-brand transition-all duration-500 group-hover:text-white"
                 />
               </div>
 
-              <span className="mt-8 block uppercase tracking-[4px] text-sm font-semibold text-[#844204]">
+              <span className="mt-8 block uppercase tracking-[4px] text-sm font-semibold text-brand">
                 Our Mission
               </span>
 
-              <h3 className="mt-4 text-4xl font-bold text-[#1B1815]">
+              <h3 className="mt-4 text-4xl font-bold text-ink">
                 Transforming Lives.
               </h3>
 
-              <div className="mt-6 h-[2px] w-16 rounded-full bg-[#D9A441]" />
+              <div className="mt-6 h-[2px] w-16 rounded-full bg-accent" />
 
-              <p className="mt-8 text-[17px] leading-9 text-gray-600">
+              <p className="mt-8 text-[17px] leading-9 text-gray-700">
                 {foundation?.mission}
               </p>
             </div>
@@ -127,17 +127,17 @@ export default function VisionMission() {
         {/* Core Values */}
         <div className="mt-28">
           <div className="mx-auto mb-16 max-w-3xl text-center">
-            <span className="uppercase tracking-[6px] font-semibold text-[#844204]">
+            <span className="uppercase tracking-[6px] font-semibold text-brand">
               What Guides Us
             </span>
 
-            <h3 className="mt-5 text-5xl font-bold text-[#1B1815]">
+            <h3 className="mt-5 text-5xl font-bold text-ink">
               Our Core Values
             </h3>
 
-            <div className="mx-auto mt-6 h-[3px] w-20 rounded-full bg-[#D9A441]" />
+            <div className="mx-auto mt-6 h-[3px] w-20 rounded-full bg-accent" />
 
-            <p className="mt-7 text-lg leading-8 text-gray-600">
+            <p className="mt-7 text-lg leading-8 text-gray-700">
               These values define our culture, shape our decisions and inspire
               the way we serve every individual and community.
             </p>
@@ -150,33 +150,33 @@ export default function VisionMission() {
               return (
                 <div
                   key={index}
-                  className="group relative overflow-hidden rounded-[30px] border border-[#D9A441]/15 bg-white p-8 text-center shadow-sm transition-all duration-700 hover:-translate-y-3 hover:border-[#D9A441] hover:shadow-2xl"
+                  className="group relative overflow-hidden rounded-[30px] border border-accent/15 bg-white p-8 text-center shadow-sm transition-all duration-700 hover:-translate-y-3 hover:border-accent hover:shadow-2xl"
                 >
                   {/* Background Glow */}
 
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#FAF7F2] opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-cream opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
 
                   <div className="relative">
                     {/* Icon */}
 
-                    <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#844204]/10 transition-all duration-700 group-hover:rotate-6 group-hover:bg-[#844204]">
+                    <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-brand/10 transition-all duration-700 group-hover:rotate-6 group-hover:bg-brand">
                       {Icon && (
                         <Icon
                           size={34}
-                          className="text-[#844204] transition-all duration-700 group-hover:scale-110 group-hover:text-white"
+                          className="text-brand transition-all duration-700 group-hover:scale-110 group-hover:text-white"
                         />
                       )}
                     </div>
 
                     {/* Title */}
 
-                    <h4 className="mt-8 text-xl font-bold leading-7 text-[#1B1815]">
+                    <h4 className="mt-8 text-xl font-bold leading-7 text-ink">
                       {value.title}
                     </h4>
 
                     {/* Accent */}
 
-                    <div className="mx-auto mt-6 h-[2px] w-10 rounded-full bg-[#D9A441] transition-all duration-700 group-hover:w-16" />
+                    <div className="mx-auto mt-6 h-[2px] w-10 rounded-full bg-accent transition-all duration-700 group-hover:w-16" />
                   </div>
                 </div>
               );

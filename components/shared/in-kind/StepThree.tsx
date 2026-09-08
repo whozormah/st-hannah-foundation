@@ -13,7 +13,7 @@ export default function StepThree({ formData, setFormData }: StepThreeProps) {
           Location & Delivery
         </h2>
 
-        <p className="text-gray-600 mt-2">
+        <p className="text-gray-700 mt-2">
           Tell us where the item is located and how you would like the donation
           to reach us.
         </p>
@@ -35,7 +35,7 @@ export default function StepThree({ formData, setFormData }: StepThreeProps) {
                 location: e.target.value,
               }))
             }
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
           >
             <option value="">Select Location</option>
 
@@ -65,7 +65,7 @@ export default function StepThree({ formData, setFormData }: StepThreeProps) {
                 }))
               }
               placeholder="City, State, Country"
-              className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             />
           </div>
         )}
@@ -88,13 +88,13 @@ export default function StepThree({ formData, setFormData }: StepThreeProps) {
               }
               className={`p-6 rounded-2xl border text-left transition ${
                 formData.deliveryMethod === "Pickup"
-                  ? "border-[#844204] bg-[#FAF7F2]"
+                  ? "border-brand bg-cream"
                   : "border-gray-200"
               }`}
             >
               <h4 className="font-bold text-lg">Arrange Pickup</h4>
 
-              <p className="text-gray-600 mt-2">
+              <p className="text-gray-700 mt-2">
                 Our team will coordinate a pickup from your location.
               </p>
             </button>
@@ -109,13 +109,13 @@ export default function StepThree({ formData, setFormData }: StepThreeProps) {
               }
               className={`p-6 rounded-2xl border text-left transition ${
                 formData.deliveryMethod === "Send"
-                  ? "border-[#844204] bg-[#FAF7F2]"
+                  ? "border-brand bg-cream"
                   : "border-gray-200"
               }`}
             >
               <h4 className="font-bold text-lg">I Will Send The Items</h4>
 
-              <p className="text-gray-600 mt-2">
+              <p className="text-gray-700 mt-2">
                 I prefer to deliver or ship the items myself.
               </p>
             </button>

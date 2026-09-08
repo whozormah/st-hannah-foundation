@@ -12,15 +12,15 @@ export default function ProgramsCTA() {
   return (
     <>
       {" "}
-      <section className="py-32 bg-[#844204] text-white relative overflow-hidden">
+      <section className="py-32 bg-brand text-white relative overflow-hidden">
         {" "}
         <div className="absolute inset-0 opacity-10">
           {" "}
-          <div className="absolute top-0 left-0 w-96 h-96 bg-[#D9A441] rounded-full blur-3xl" />{" "}
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-[#D9A441] rounded-full blur-3xl" />{" "}
+          <div className="absolute top-0 left-0 w-96 h-96 bg-accent rounded-full blur-3xl" />{" "}
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl" />{" "}
         </div>
         <div className="container-custom text-center relative z-10 max-w-5xl">
-          <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+          <span className="uppercase tracking-[5px] text-accent font-semibold">
             A Better Future Starts Today
           </span>
 
@@ -40,14 +40,14 @@ export default function ProgramsCTA() {
           <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
             <button
               onClick={() => setShowDonationModal(true)}
-              className="bg-white text-[#844204] px-8 py-4 rounded-xl font-semibold hover:scale-105 transition"
+              className="bg-white text-brand px-8 py-4 rounded-xl font-semibold hover:scale-105 transition"
             >
               Support The Mission
             </button>
 
             <button
               onClick={() => setShowPartnerModal(true)}
-              className="border border-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-[#844204] transition"
+              className="border border-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-brand transition"
             >
               Become A Partner
             </button>

@@ -24,7 +24,7 @@ export default function GalleryFeatured() {
 
             <div className="absolute inset-0 flex items-center">
               <div className="max-w-3xl px-12 lg:px-20 text-white">
-                <span className="rounded-full bg-[#D9A441]/20 px-5 py-2 text-xs font-semibold uppercase tracking-[4px] text-[#F5D27A] backdrop-blur-md">
+                <span className="rounded-full bg-accent/20 px-5 py-2 text-xs font-semibold uppercase tracking-[4px] text-accent-soft backdrop-blur-md">
                   Featured Collection
                 </span>
 
@@ -48,7 +48,7 @@ export default function GalleryFeatured() {
 
                 <Link
                   href="#gallery"
-                  className="mt-12 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 font-semibold text-[#844204] transition hover:gap-5"
+                  className="mt-12 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 font-semibold text-brand transition hover:gap-5"
                 >
                   Explore Collection
                   <ArrowRight size={18} />

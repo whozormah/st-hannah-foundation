@@ -14,12 +14,12 @@ export default function AboutVolunteers() {
 
 
   return (
-    <section className="py-32 bg-[#FAF7F2]">
+    <section className="py-32 bg-cream">
       <div className="container-custom">
         {/* Header */}
 
         <div className="text-center max-w-4xl mx-auto mb-20">
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Volunteer Leadership Team
           </span>
 
@@ -27,7 +27,7 @@ export default function AboutVolunteers() {
             The Heartbeat Of Our Mission
           </h2>
 
-          <p className="max-w-3xl mx-auto mt-6 text-gray-600 text-lg leading-8">
+          <p className="max-w-3xl mx-auto mt-6 text-gray-700 text-lg leading-8">
             Behind every outreach, intervention and community programme is a
             dedicated team of volunteers whose passion, compassion and service
             help transform lives and strengthen communities.
@@ -36,7 +36,7 @@ export default function AboutVolunteers() {
 
         {/* Message Banner */}
 
-        <div className="relative mx-auto mb-24 max-w-6xl overflow-hidden rounded-[40px] bg-gradient-to-r from-[#844204] via-[#9A5A12] to-[#B27425] px-12 py-16 text-center text-white shadow-2xl">
+        <div className="relative mx-auto mb-24 max-w-6xl overflow-hidden rounded-[40px] bg-gradient-to-r from-brand via-[#9A5A12] to-[#B27425] px-12 py-16 text-center text-white shadow-2xl">
           <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
 
           <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
@@ -57,7 +57,7 @@ export default function AboutVolunteers() {
           {volunteers.map((volunteer) => (
             <div
               key={volunteer.name}
-              className="group overflow-hidden rounded-[36px] border border-gray-100 bg-white shadow-lg transition-all duration-500 hover:-translate-y-3 hover:border-[#D9A441]/30 hover:shadow-2xl"
+              className="group overflow-hidden rounded-[36px] border border-gray-100 bg-white shadow-lg transition-all duration-500 hover:-translate-y-3 hover:border-accent/30 hover:shadow-2xl"
             >
               <div className="relative h-[350px] bg-white flex items-end justify-center">
                 <Image
@@ -69,7 +69,7 @@ export default function AboutVolunteers() {
               </div>
 
               <div className="p-8 text-center">
-                <span className="inline-flex rounded-full bg-[#844204]/10 px-5 py-2 text-xs font-semibold uppercase tracking-[3px] text-[#844204]">
+                <span className="inline-flex rounded-full bg-brand/10 px-5 py-2 text-xs font-semibold uppercase tracking-[3px] text-brand">
                   Volunteer Leader
                 </span>
 
@@ -81,7 +81,7 @@ export default function AboutVolunteers() {
                   {volunteer.role}
                 </p>
 
-                <div className="mx-auto mt-8 h-[3px] w-16 rounded-full bg-[#D9A441]" />
+                <div className="mx-auto mt-8 h-[3px] w-16 rounded-full bg-accent" />
 
                 <p className="mt-6 italic leading-7 text-gray-500">
                   &quot;Serving others is one of the greatest ways to create lasting
@@ -92,11 +92,11 @@ export default function AboutVolunteers() {
           ))}
         </div>
         <div className="mt-24 text-center">
-          <h3 className="text-4xl font-bold text-[#1B1815]">
+          <h3 className="text-4xl font-bold text-ink">
             Join Our Volunteer Family
           </h3>
 
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-600">
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-700">
             Whether you have a few hours each month or want to make long-term
             impact, there is a place for you to serve with St. Hannah
             Foundation.
@@ -104,7 +104,7 @@ export default function AboutVolunteers() {
 
           <a
             href="/volunteer"
-            className="mt-10 inline-flex items-center rounded-full bg-[#844204] px-8 py-4 font-semibold text-white transition hover:bg-[#6D3503]"
+            className="mt-10 inline-flex items-center rounded-full bg-brand px-8 py-4 font-semibold text-white transition hover:bg-brand-dark"
           >
             Become A Volunteer
           </a>

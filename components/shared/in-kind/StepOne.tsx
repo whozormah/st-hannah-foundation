@@ -11,7 +11,7 @@ export default function StepOne({ formData, setFormData }: StepOneProps) {
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-gray-900">About You</h2>
 
-        <p className="text-gray-600 mt-2">
+        <p className="text-gray-700 mt-2">
           Please provide your contact information so we can coordinate your
           donation.
         </p>
@@ -35,7 +35,7 @@ export default function StepOne({ formData, setFormData }: StepOneProps) {
               }))
             }
             placeholder="Enter your full name"
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             required
           />
         </div>
@@ -57,7 +57,7 @@ export default function StepOne({ formData, setFormData }: StepOneProps) {
               }))
             }
             placeholder="Enter your email address"
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             required
           />
         </div>
@@ -79,7 +79,7 @@ export default function StepOne({ formData, setFormData }: StepOneProps) {
               }))
             }
             placeholder="+2348012345678"
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
             required
           />
 

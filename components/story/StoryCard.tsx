@@ -47,15 +47,15 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
         {/* RIGHT */}
 
         <div className="pt-6">
-          <span className="inline-flex rounded-full border border-[#D9A441]/20 bg-[#844204]/10 px-6 py-3 text-sm font-semibold text-[#844204]">
+          <span className="inline-flex rounded-full border border-accent/20 bg-brand/10 px-6 py-3 text-sm font-semibold text-brand">
             {story.tagline}
           </span>
 
-          <h2 className="mt-8 max-w-4xl text-6xl font-bold leading-tight text-[#1B1815]">
+          <h2 className="mt-8 max-w-4xl text-6xl font-bold leading-tight text-ink">
             {story.headline}
           </h2>
 
-          <div className="mt-8 h-1 w-24 rounded-full bg-[#D9A441]" />
+          <div className="mt-8 h-1 w-24 rounded-full bg-accent" />
 
           <div className="mt-14 space-y-10 text-[20px] leading-10 text-gray-700">
             {story.description.map((paragraph, index) => (
@@ -73,20 +73,20 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
             {/* Quote */}
 
             <div className="relative">
-              <div className="absolute -left-6 -top-16 text-[180px] font-serif leading-none text-[#D9A441]/10">
+              <div className="absolute -left-6 -top-16 text-[180px] font-serif leading-none text-accent/10">
                 &quot;
               </div>
 
-              <div className="relative border-l-4 border-[#D9A441] pl-8">
-                <span className="text-sm font-semibold uppercase tracking-[4px] text-[#844204]">
+              <div className="relative border-l-4 border-accent pl-8">
+                <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
                   Why This Story Matters
                 </span>
 
-                <h3 className="mt-6 text-4xl font-bold leading-tight text-[#1B1815]">
+                <h3 className="mt-6 text-4xl font-bold leading-tight text-ink">
                   {story.whyStoryMattersTitle}
                 </h3>
 
-                <p className="mt-8 text-xl leading-10 text-gray-600">
+                <p className="mt-8 text-xl leading-10 text-gray-700">
                   {story.whyStoryMatters}
                 </p>
               </div>
@@ -94,7 +94,7 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
 
             {/* Donation Card */}
 
-            <div className="overflow-hidden rounded-[32px] bg-gradient-to-br from-[#844204] via-[#95520F] to-[#B8741C] p-9 text-white shadow-[0_30px_70px_rgba(0,0,0,.18)]">
+            <div className="overflow-hidden rounded-[32px] bg-gradient-to-br from-brand via-[#95520F] to-[#B8741C] p-9 text-white shadow-[0_30px_70px_rgba(0,0,0,.18)]">
               <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[4px] backdrop-blur">
                 Hope Begins With You
               </span>
@@ -110,24 +110,24 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
 
               <div className="mt-8 space-y-3 text-sm">
                 <div className="flex items-center gap-3">
-                  <span className="text-[#F5D27A]">✓</span>
+                  <span className="text-accent-soft">✓</span>
                   <span>100% Secure Donation</span>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span className="text-[#F5D27A]">✓</span>
+                  <span className="text-accent-soft">✓</span>
                   <span>Instant Donation Receipt</span>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span className="text-[#F5D27A]">✓</span>
+                  <span className="text-accent-soft">✓</span>
                   <span>Every Gift Makes A Difference</span>
                 </div>
               </div>
 
               <button
                 onClick={onDonate}
-                className="mt-10 w-full rounded-2xl bg-white px-6 py-4 text-lg font-bold text-[#844204] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="mt-10 w-full rounded-2xl bg-white px-6 py-4 text-lg font-bold text-brand transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 Support Esther&apos;s Story
               </button>

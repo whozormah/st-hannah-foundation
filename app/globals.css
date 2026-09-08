@@ -10,6 +10,17 @@
   --font-display:
     var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman", serif;
 
+  /* Brand palette. These were repeated as raw hex in ~800 utility classes,
+     so a colour change meant a site-wide find-and-replace. */
+  --color-brand: #844204;
+  --color-brand-dark: #6d3503;
+  --color-brand-light: #a85a12;
+  --color-accent: #d9a441;
+  --color-accent-soft: #f5d27a;
+  --color-cream: #faf7f2;
+  --color-cream-warm: #fff8ec;
+  --color-ink: #1b1815;
+
   /* Type scale, raised for readability.
      Body and caption sizes gain the most (the site read small); display sizes
      are left close to where they were so existing layouts still hold. */

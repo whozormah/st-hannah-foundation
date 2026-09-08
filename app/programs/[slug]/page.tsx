@@ -66,7 +66,7 @@ export default async function ProgramPage({ params }: PageProps) {
         <h1 className="text-4xl font-bold">Programme Not Found </h1>
         <Link
           href="/programs"
-          className="inline-block mt-8 bg-[#844204] text-white px-8 py-4 rounded-xl"
+          className="inline-block mt-8 bg-brand text-white px-8 py-4 rounded-xl"
         >
           Back To Programmes
         </Link>
@@ -91,7 +91,7 @@ export default async function ProgramPage({ params }: PageProps) {
 
         <div className="absolute inset-0 flex items-center">
           <div className="container-custom text-white">
-            <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+            <span className="uppercase tracking-[5px] text-accent font-semibold">
               Programme Area
             </span>
 
@@ -110,7 +110,7 @@ export default async function ProgramPage({ params }: PageProps) {
 
       <section className="py-28 bg-white">
         <div className="container-custom max-w-5xl">
-          <span className="uppercase tracking-[4px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[4px] text-brand font-semibold">
             Why This Matters
           </span>
 
@@ -118,15 +118,15 @@ export default async function ProgramPage({ params }: PageProps) {
             The Need We Are Addressing
           </h2>
 
-          <p className="mt-8 text-lg text-gray-600 leading-9">{program.why}</p>
+          <p className="mt-8 text-lg text-gray-700 leading-9">{program.why}</p>
         </div>
       </section>
 
       {/* Approach */}
 
-      <section className="py-28 bg-[#FAF7F2]">
+      <section className="py-28 bg-cream">
         <div className="container-custom max-w-5xl">
-          <span className="uppercase tracking-[4px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[4px] text-brand font-semibold">
             Our Approach
           </span>
 
@@ -134,7 +134,7 @@ export default async function ProgramPage({ params }: PageProps) {
             How We Respond
           </h2>
 
-          <p className="mt-8 text-lg text-gray-600 leading-9">
+          <p className="mt-8 text-lg text-gray-700 leading-9">
             {program.approach}
           </p>
         </div>
@@ -150,7 +150,7 @@ export default async function ProgramPage({ params }: PageProps) {
 
               <div className="mt-8 space-y-4">
                 {program.activities.map((activity) => (
-                  <div key={activity} className="bg-[#FAF7F2] rounded-2xl p-5">
+                  <div key={activity} className="bg-cream rounded-2xl p-5">
                     {activity}
                   </div>
                 ))}
@@ -164,7 +164,7 @@ export default async function ProgramPage({ params }: PageProps) {
                 {program.beneficiaries.map((beneficiary) => (
                   <div
                     key={beneficiary}
-                    className="bg-[#FAF7F2] rounded-2xl p-5"
+                    className="bg-cream rounded-2xl p-5"
                   >
                     {beneficiary}
                   </div>
@@ -177,9 +177,9 @@ export default async function ProgramPage({ params }: PageProps) {
 
       {/* Impact */}
 
-      <section className="py-28 bg-[#FAF7F2]">
+      <section className="py-28 bg-cream">
         <div className="container-custom max-w-5xl text-center">
-          <span className="uppercase tracking-[4px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[4px] text-brand font-semibold">
             Expected Impact
           </span>
 
@@ -187,7 +187,7 @@ export default async function ProgramPage({ params }: PageProps) {
             Creating Lasting Change
           </h2>
 
-          <p className="mt-8 text-lg text-gray-600 leading-9">
+          <p className="mt-8 text-lg text-gray-700 leading-9">
             {program.impact}
           </p>
         </div>
@@ -195,7 +195,7 @@ export default async function ProgramPage({ params }: PageProps) {
 
       {/* CTA */}
 
-      <section className="py-28 bg-[#844204] text-white">
+      <section className="py-28 bg-brand text-white">
         <div className="container-custom max-w-4xl text-center">
           <h2 className="text-4xl md:text-6xl font-bold">{program.ctaTitle}</h2>
 
@@ -205,7 +205,7 @@ export default async function ProgramPage({ params }: PageProps) {
 
           <Link
             href="/contact"
-            className="inline-block mt-10 bg-white text-[#844204] px-8 py-4 rounded-xl font-semibold hover:scale-105 transition"
+            className="inline-block mt-10 bg-white text-brand px-8 py-4 rounded-xl font-semibold hover:scale-105 transition"
           >
             Get Involved
           </Link>

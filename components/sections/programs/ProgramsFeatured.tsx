@@ -20,19 +20,19 @@ export default function ProgramsFeatured() {
         {/* Heading */}
 
         <div className="mx-auto mb-24 max-w-4xl text-center">
-          <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+          <span className="font-semibold uppercase tracking-[6px] text-brand">
             Featured Programmes
           </span>
 
-          <h2 className="mt-5 text-5xl font-bold text-[#1B1815] md:text-6xl">
+          <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
             Stories Of Hope.
             <br />
             Programmes That Transform Lives.
           </h2>
 
-          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-accent" />
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
             Every programme is intentionally designed to restore dignity,
             strengthen communities and create opportunities that produce lasting
             impact.
@@ -62,7 +62,7 @@ export default function ProgramsFeatured() {
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
-                  <div className="absolute bottom-8 left-8 rounded-full bg-white/90 px-5 py-2 text-sm font-semibold uppercase tracking-[3px] text-[#844204] backdrop-blur-md">
+                  <div className="absolute bottom-8 left-8 rounded-full bg-white/90 px-5 py-2 text-sm font-semibold uppercase tracking-[3px] text-brand backdrop-blur-md">
                     Featured Programme
                   </div>
                 </div>
@@ -71,24 +71,24 @@ export default function ProgramsFeatured() {
               {/* Content */}
 
               <div>
-                <span className="font-semibold uppercase tracking-[5px] text-[#844204]">
+                <span className="font-semibold uppercase tracking-[5px] text-brand">
                   Programme Area
                 </span>
 
-                <h3 className="mt-5 text-5xl font-bold leading-tight text-[#1B1815]">
+                <h3 className="mt-5 text-5xl font-bold leading-tight text-ink">
                   {program.title}
                 </h3>
 
-                <div className="mt-6 h-[3px] w-20 rounded-full bg-[#D9A441]" />
+                <div className="mt-6 h-[3px] w-20 rounded-full bg-accent" />
 
-                <p className="mt-8 text-lg leading-9 text-gray-600">
+                <p className="mt-8 text-lg leading-9 text-gray-700">
                   {program.excerpt}
                 </p>
 
                 {/* Quote Card */}
 
-                <div className="mt-10 rounded-[28px] border border-[#D9A441]/20 bg-[#FAF7F2] p-8">
-                  <p className="italic leading-8 text-gray-600">
+                <div className="mt-10 rounded-[28px] border border-accent/20 bg-cream p-8">
+                  <p className="italic leading-8 text-gray-700">
                     Every life transformed through this programme is a reminder
                     that compassion, when combined with action, creates lasting
                     change.
@@ -97,7 +97,7 @@ export default function ProgramsFeatured() {
 
                 <Link
                   href={`/programs/${program.slug}`}
-                  className="group mt-10 inline-flex items-center gap-3 rounded-full bg-[#844204] px-8 py-4 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#6D3503] hover:shadow-xl"
+                  className="group mt-10 inline-flex items-center gap-3 rounded-full bg-brand px-8 py-4 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-brand-dark hover:shadow-xl"
                 >
                   Learn More
                   <ArrowRight
@@ -112,16 +112,16 @@ export default function ProgramsFeatured() {
 
         {/* Bottom CTA */}
 
-        <div className="mt-28 rounded-[40px] bg-[#FAF7F2] px-12 py-16 text-center">
-          <span className="uppercase tracking-[5px] text-[#844204]">
+        <div className="mt-28 rounded-[40px] bg-cream px-12 py-16 text-center">
+          <span className="uppercase tracking-[5px] text-brand">
             Explore More
           </span>
 
-          <h3 className="mt-5 text-4xl font-bold text-[#1B1815]">
+          <h3 className="mt-5 text-4xl font-bold text-ink">
             Discover Every Programme Making A Difference
           </h3>
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
             From education and healthcare to humanitarian relief and economic
             empowerment, our programmes are creating opportunities and changing
             lives every day.
@@ -129,7 +129,7 @@ export default function ProgramsFeatured() {
 
           <Link
             href="/programs"
-            className="group mt-10 inline-flex items-center gap-3 rounded-full border-2 border-[#844204] px-8 py-4 font-semibold text-[#844204] transition-all duration-300 hover:bg-[#844204] hover:text-white"
+            className="group mt-10 inline-flex items-center gap-3 rounded-full border-2 border-brand px-8 py-4 font-semibold text-brand transition-all duration-300 hover:bg-brand hover:text-white"
           >
             Explore All Programmes
             <ArrowRight

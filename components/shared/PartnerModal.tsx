@@ -124,7 +124,7 @@ export default function PartnerModal({ isOpen, onClose }: PartnerModalProps) {
                 <button
                   type="button"
                   onClick={() => setSubmitted(true)}
-                  className="w-full bg-[#844204] text-white py-5 rounded-xl font-semibold text-lg hover:bg-[#6d3503] transition"
+                  className="w-full bg-brand text-white py-5 rounded-xl font-semibold text-lg hover:bg-brand-dark transition"
                 >
                   Submit Partnership Request
                 </button>
@@ -139,7 +139,7 @@ export default function PartnerModal({ isOpen, onClose }: PartnerModalProps) {
 
             <h2 className="text-4xl font-bold mt-8">Thank You</h2>
 
-            <p className="text-gray-600 mt-6 leading-8 max-w-xl mx-auto">
+            <p className="text-gray-700 mt-6 leading-8 max-w-xl mx-auto">
               Your partnership request has been received successfully. A member
               of St. Hannah Foundation will contact you shortly to discuss
               collaboration opportunities.
@@ -147,7 +147,7 @@ export default function PartnerModal({ isOpen, onClose }: PartnerModalProps) {
 
             <button
               onClick={handleClose}
-              className="mt-10 bg-[#844204] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#6d3503] transition"
+              className="mt-10 bg-brand text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-dark transition"
             >
               Close
             </button>

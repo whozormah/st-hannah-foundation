@@ -17,19 +17,19 @@ export default function FeaturedEvents() {
 
 
   return (
-    <section className="py-24 bg-[#FAF7F2]">
+    <section className="py-24 bg-cream">
       {" "}
       <div className="container-custom">
         {" "}
         <div className="text-center max-w-4xl mx-auto mb-16">
           {" "}
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Featured Events{" "}
           </span>
           <h2 className="text-5xl font-bold mt-4">
             Impact Beyond The Pictures
           </h2>
-          <p className="mt-6 text-lg text-gray-600 leading-8">
+          <p className="mt-6 text-lg text-gray-700 leading-8">
             Explore some of the key programmes and outreach initiatives that
             continue to transform lives and strengthen communities.
           </p>
@@ -50,18 +50,18 @@ export default function FeaturedEvents() {
               </div>
 
               <div className="p-8">
-                <span className="text-[#844204] font-semibold uppercase tracking-[3px]">
+                <span className="text-brand font-semibold uppercase tracking-[3px]">
                   {event.category}
                 </span>
 
                 <h3 className="text-2xl font-bold mt-3">{event.title}</h3>
 
-                <p className="mt-4 text-gray-600 leading-7">
+                <p className="mt-4 text-gray-700 leading-7">
                   {event.description}
                 </p>
                 <Link
                   href={event.link}
-                  className="inline-flex items-center mt-6 text-[#844204] font-semibold hover:gap-3 transition-all"
+                  className="inline-flex items-center mt-6 text-brand font-semibold hover:gap-3 transition-all"
                 >
                   Learn More →
                 </Link>

@@ -5,7 +5,7 @@ export default function Step4FamilyBackground() {
       <h3 className="text-3xl font-bold mb-3">
         Family & Background Information{" "}
       </h3>
-      <p className="text-gray-600 mb-8">
+      <p className="text-gray-700 mb-8">
         This information helps us better understand your household situation,
         financial circumstances and support needs.
       </p>

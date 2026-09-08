@@ -121,7 +121,7 @@ export default async function StoryPage({
 
         <div className="absolute inset-0 flex items-center">
           <div className="container-custom text-white max-w-5xl">
-            <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+            <span className="uppercase tracking-[5px] text-accent font-semibold">
               {story.category}
             </span>
 
@@ -141,19 +141,19 @@ export default async function StoryPage({
       <section className="py-20 bg-white">
         <div className="container-custom max-w-6xl">
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-[#FAF7F2] p-8 rounded-[24px]">
+            <div className="bg-cream p-8 rounded-[24px]">
               <p className="text-gray-500 mb-2">Date</p>
 
               <h3 className="font-bold text-xl">{story.date}</h3>
             </div>
 
-            <div className="bg-[#FAF7F2] p-8 rounded-[24px]">
+            <div className="bg-cream p-8 rounded-[24px]">
               <p className="text-gray-500 mb-2">Location</p>
 
               <h3 className="font-bold text-xl">{story.location}</h3>
             </div>
 
-            <div className="bg-[#FAF7F2] p-8 rounded-[24px]">
+            <div className="bg-cream p-8 rounded-[24px]">
               <p className="text-gray-500 mb-2">Beneficiaries</p>
 
               <h3 className="font-bold text-xl">{story.beneficiaries}</h3>
@@ -170,7 +170,7 @@ export default async function StoryPage({
             <div>
               <h2 className="text-4xl font-bold mb-6">The Challenge</h2>
 
-              <p className="text-gray-600 leading-9 text-lg">
+              <p className="text-gray-700 leading-9 text-lg">
                 {story.challenge}
               </p>
             </div>
@@ -178,7 +178,7 @@ export default async function StoryPage({
             <div>
               <h2 className="text-4xl font-bold mb-6">Our Response</h2>
 
-              <p className="text-gray-600 leading-9 text-lg">
+              <p className="text-gray-700 leading-9 text-lg">
                 {story.response}
               </p>
             </div>
@@ -186,7 +186,7 @@ export default async function StoryPage({
             <div>
               <h2 className="text-4xl font-bold mb-6">Impact Created</h2>
 
-              <p className="text-gray-600 leading-9 text-lg">{story.impact}</p>
+              <p className="text-gray-700 leading-9 text-lg">{story.impact}</p>
             </div>
           </div>
 
@@ -205,7 +205,7 @@ export default async function StoryPage({
           {story.images && story.images.length > 0 && (
             <section className="mt-24">
               <div className="mb-10">
-                <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+                <span className="uppercase tracking-[5px] text-brand font-semibold">
                   Impact Gallery
                 </span>
 
@@ -213,7 +213,7 @@ export default async function StoryPage({
                   Moments From The Programme
                 </h2>
 
-                <p className="text-gray-600 mt-4 max-w-3xl leading-8">
+                <p className="text-gray-700 mt-4 max-w-3xl leading-8">
                   Explore photographs captured during the programme and witness
                   the lives touched through this initiative.
                 </p>
@@ -240,12 +240,12 @@ export default async function StoryPage({
           {/* Quote */}
 
           {story.quote && (
-            <div className="mt-24 bg-[#FAF7F2] p-10 md:p-14 rounded-[32px] border-l-4 border-[#844204]">
+            <div className="mt-24 bg-cream p-10 md:p-14 rounded-[32px] border-l-4 border-brand">
               <p className="text-2xl italic leading-10 text-gray-700">
                 &quot;{story.quote.text}&quot;
               </p>
 
-              <p className="mt-8 font-bold text-[#844204] text-lg">
+              <p className="mt-8 font-bold text-brand text-lg">
                 {story.quote.author}
               </p>
             </div>

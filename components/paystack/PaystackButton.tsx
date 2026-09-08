@@ -68,7 +68,7 @@ export default function PaystackButton({
       disabled={!isValid}
       className={`w-full py-5 rounded-xl font-semibold text-lg transition ${
         isValid
-          ? "bg-[#844204] hover:bg-[#6d3503] text-white"
+          ? "bg-brand hover:bg-brand-dark text-white"
           : "bg-gray-300 text-gray-500 cursor-not-allowed"
       }`}
     >

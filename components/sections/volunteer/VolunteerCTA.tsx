@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function VolunteerCTA() {
   return (
-    <section className="py-32 bg-[#844204] text-white">
+    <section className="py-32 bg-brand text-white">
       {" "}
       <div className="container-custom max-w-6xl text-center">
         {" "}
-        <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+        <span className="uppercase tracking-[5px] text-accent font-semibold">
           Ready To Make A Difference?{" "}
         </span>
         <h2 className="text-5xl md:text-6xl font-bold mt-6 leading-tight">
@@ -25,11 +25,11 @@ export default function VolunteerCTA() {
         <div className="grid md:grid-cols-3 gap-6 mt-16">
           <Link
             href="#volunteer-form"
-            className="bg-white text-[#844204] rounded-[24px] p-8 hover:scale-105 transition"
+            className="bg-white text-brand rounded-[24px] p-8 hover:scale-105 transition"
           >
             <h3 className="text-2xl font-bold">Apply Now</h3>
 
-            <p className="mt-3 text-gray-600 leading-7">
+            <p className="mt-3 text-gray-700 leading-7">
               Complete the volunteer application form and join our growing
               network of changemakers.
             </p>
@@ -37,11 +37,11 @@ export default function VolunteerCTA() {
 
           <Link
             href="/programs"
-            className="bg-white text-[#844204] rounded-[24px] p-8 hover:scale-105 transition"
+            className="bg-white text-brand rounded-[24px] p-8 hover:scale-105 transition"
           >
             <h3 className="text-2xl font-bold">Explore Programmes</h3>
 
-            <p className="mt-3 text-gray-600 leading-7">
+            <p className="mt-3 text-gray-700 leading-7">
               Discover the initiatives and projects where volunteers help create
               meaningful impact.
             </p>
@@ -49,11 +49,11 @@ export default function VolunteerCTA() {
 
           <Link
             href="/contact"
-            className="bg-white text-[#844204] rounded-[24px] p-8 hover:scale-105 transition"
+            className="bg-white text-brand rounded-[24px] p-8 hover:scale-105 transition"
           >
             <h3 className="text-2xl font-bold">Contact Our Team</h3>
 
-            <p className="mt-3 text-gray-600 leading-7">
+            <p className="mt-3 text-gray-700 leading-7">
               Have questions about volunteering? Our team would be happy to
               assist you.
             </p>

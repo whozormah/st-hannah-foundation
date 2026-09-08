@@ -11,10 +11,10 @@ export default function PartnershipTypes() {
   ];
 
   return (
-    <section className="py-24 bg-[#FAF7F2]">
+    <section className="py-24 bg-cream">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Partnership Opportunities
           </span>
 

@@ -25,19 +25,19 @@ export default function AboutPresence() {
         {/* Heading */}
 
         <div className="mx-auto mb-24 max-w-4xl text-center">
-          <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+          <span className="font-semibold uppercase tracking-[6px] text-brand">
             Our Presence
           </span>
 
-          <h2 className="mt-5 text-5xl font-bold text-[#1B1815] md:text-6xl">
+          <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
             Serving Communities
             <br />
             Across Borders
           </h2>
 
-          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-accent" />
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
             While our heart is rooted in Africa, our partnerships and support
             network extend beyond borders, enabling us to reach more lives and
             strengthen communities through global collaboration.
@@ -46,7 +46,7 @@ export default function AboutPresence() {
 
         {/* Presence Banner */}
 
-        <div className="relative mb-20 overflow-hidden rounded-[40px] bg-gradient-to-r from-[#844204] via-[#9A5A12] to-[#B27425] px-12 py-16 text-white shadow-2xl">
+        <div className="relative mb-20 overflow-hidden rounded-[40px] bg-gradient-to-r from-brand via-[#9A5A12] to-[#B27425] px-12 py-16 text-white shadow-2xl">
           <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
 
           <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
@@ -74,13 +74,13 @@ export default function AboutPresence() {
           {offices.map((office) => (
             <div
               key={office.country}
-              className="group rounded-[36px] border border-gray-100 bg-[#FAF7F2] p-10 transition-all duration-500 hover:-translate-y-2 hover:border-[#D9A441]/30 hover:shadow-2xl"
+              className="group rounded-[36px] border border-gray-100 bg-cream p-10 transition-all duration-500 hover:-translate-y-2 hover:border-accent/30 hover:shadow-2xl"
             >
               <div className="flex items-center gap-5">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#844204]/10 transition-all duration-500 group-hover:bg-[#844204]">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand/10 transition-all duration-500 group-hover:bg-brand">
                   <MapPin
                     size={30}
-                    className="text-[#844204] transition-all duration-500 group-hover:text-white"
+                    className="text-brand transition-all duration-500 group-hover:text-white"
                   />
                 </div>
 
@@ -89,15 +89,15 @@ export default function AboutPresence() {
                     {office.country}
                   </p>
 
-                  <h3 className="mt-2 text-3xl font-bold text-[#1B1815]">
+                  <h3 className="mt-2 text-3xl font-bold text-ink">
                     {office.title}
                   </h3>
                 </div>
               </div>
 
-              <div className="mt-8 h-[3px] w-16 rounded-full bg-[#D9A441]" />
+              <div className="mt-8 h-[3px] w-16 rounded-full bg-accent" />
 
-              <div className="mt-8 space-y-2 text-lg leading-8 text-gray-600">
+              <div className="mt-8 space-y-2 text-lg leading-8 text-gray-700">
                 {office.address.map((line) => (
                   <p key={line}>{line}</p>
                 ))}
@@ -109,11 +109,11 @@ export default function AboutPresence() {
         {/* Closing */}
 
         <div className="mx-auto mt-24 max-w-4xl text-center">
-          <h3 className="text-4xl font-bold text-[#1B1815]">
+          <h3 className="text-4xl font-bold text-ink">
             Expanding Our Reach, One Community At A Time
           </h3>
 
-          <p className="mt-6 text-lg leading-9 text-gray-600">
+          <p className="mt-6 text-lg leading-9 text-gray-700">
             Every new partnership, volunteer and supporter enables us to extend
             hope further, serve more families and create lasting impact across
             communities both locally and internationally.

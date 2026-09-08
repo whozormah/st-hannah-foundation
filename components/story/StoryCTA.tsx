@@ -11,7 +11,7 @@ interface StoryCTAProps {
 
 export default function StoryCTA({ name, videoLink, onDonate }: StoryCTAProps) {
   return (
-    <div className="mt-16 overflow-hidden rounded-[36px] bg-gradient-to-br from-[#844204] via-[#915111] to-[#A86A1F] p-10 text-white shadow-2xl">
+    <div className="mt-16 overflow-hidden rounded-[36px] bg-gradient-to-br from-brand via-[#915111] to-[#A86A1F] p-10 text-white shadow-2xl">
       <span className="uppercase tracking-[4px] text-sm font-semibold text-white/80">
         Every Gift Creates Impact
       </span>
@@ -28,7 +28,7 @@ export default function StoryCTA({ name, videoLink, onDonate }: StoryCTAProps) {
       <div className="mt-10 flex flex-col gap-4 sm:flex-row">
         <button
           onClick={onDonate}
-          className="rounded-2xl bg-white px-8 py-4 font-semibold text-[#844204] transition-all duration-300 hover:scale-[1.03]"
+          className="rounded-2xl bg-white px-8 py-4 font-semibold text-brand transition-all duration-300 hover:scale-[1.03]"
         >
           Support {name}
         </button>
@@ -37,7 +37,7 @@ export default function StoryCTA({ name, videoLink, onDonate }: StoryCTAProps) {
           <Link
             href={videoLink}
             target="_blank"
-            className="group flex items-center justify-center gap-2 rounded-2xl border border-white/30 px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-white hover:text-[#844204]"
+            className="group flex items-center justify-center gap-2 rounded-2xl border border-white/30 px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-white hover:text-brand"
           >
             Watch Story
             <ArrowRight

@@ -3,7 +3,7 @@ export default function Step3SupportRequest() {
     <div>
       {" "}
       <h3 className="text-3xl font-bold mb-3">Support Request </h3>
-      <p className="text-gray-600 mb-8">
+      <p className="text-gray-700 mb-8">
         Help us understand the type of assistance you require and why this
         support is important at this time.
       </p>

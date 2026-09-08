@@ -49,15 +49,15 @@ export default function StoryVisualPanel({
         {/* CONTENT */}
 
         <div className="bg-white px-10 py-10">
-          <span className="text-xs font-semibold uppercase tracking-[5px] text-[#844204]">
+          <span className="text-xs font-semibold uppercase tracking-[5px] text-brand">
             Story of Hope
           </span>
 
-          <h2 className="mt-4 text-4xl font-bold text-[#1B1815]">
+          <h2 className="mt-4 text-4xl font-bold text-ink">
             {story.name}
           </h2>
 
-          <p className="mt-2 text-lg text-[#844204]">{story.tagline}</p>
+          <p className="mt-2 text-lg text-brand">{story.tagline}</p>
 
           <div className="mt-8 h-px w-full bg-[#E8E1D8]" />
 
@@ -67,15 +67,15 @@ export default function StoryVisualPanel({
             onClick={onGalleryOpen}
             className="group mt-10 w-full text-left"
           >
-            <span className="text-xs font-semibold uppercase tracking-[4px] text-[#844204]">
+            <span className="text-xs font-semibold uppercase tracking-[4px] text-brand">
               Moments That Matter
             </span>
 
-            <h3 className="mt-3 text-2xl font-bold text-[#1B1815]">
+            <h3 className="mt-3 text-2xl font-bold text-ink">
               Explore The Journey
             </h3>
 
-            <p className="mt-4 leading-8 text-gray-600">
+            <p className="mt-4 leading-8 text-gray-700">
               Every photograph captures another chapter of resilience,
               compassion and hope.
             </p>
@@ -114,12 +114,12 @@ export default function StoryVisualPanel({
 
             <div className="mt-6 flex items-center justify-between">
               <div>
-                <p className="text-sm uppercase tracking-[3px] text-[#844204]">
+                <p className="text-sm uppercase tracking-[3px] text-brand">
                   {imageCount} Photos
                 </p>
               </div>
 
-              <div className="flex items-center gap-3 rounded-full bg-[#844204] px-7 py-4 font-semibold text-white transition-all duration-300 group-hover:translate-x-1">
+              <div className="flex items-center gap-3 rounded-full bg-brand px-7 py-4 font-semibold text-white transition-all duration-300 group-hover:translate-x-1">
                 Explore
                 <ArrowRight size={18} />
               </div>

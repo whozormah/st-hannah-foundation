@@ -3,20 +3,20 @@ import { Heart, Users, Handshake, ArrowRight } from "lucide-react";
 
 export default function ContactCTA() {
   return (
-    <section className="relative overflow-hidden bg-[#844204] py-32 text-white">
+    <section className="relative overflow-hidden bg-brand py-32 text-white">
       {/* Background Glow */}
 
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute -top-20 -left-20 h-96 w-96 rounded-full bg-[#D9A441] blur-3xl" />
+        <div className="absolute -top-20 -left-20 h-96 w-96 rounded-full bg-accent blur-3xl" />
 
-        <div className="absolute -bottom-20 -right-20 h-96 w-96 rounded-full bg-[#D9A441] blur-3xl" />
+        <div className="absolute -bottom-20 -right-20 h-96 w-96 rounded-full bg-accent blur-3xl" />
       </div>
 
       <div className="container-custom relative z-10">
         {/* Heading */}
 
         <div className="mx-auto max-w-5xl text-center">
-          <span className="font-semibold uppercase tracking-[6px] text-[#D9A441]">
+          <span className="font-semibold uppercase tracking-[6px] text-accent">
             Join The Mission
           </span>
 
@@ -82,7 +82,7 @@ export default function ContactCTA() {
         <div className="mt-20 flex flex-col items-center justify-center gap-5 sm:flex-row">
           <Link
             href="/donate"
-            className="group inline-flex items-center gap-3 rounded-full bg-white px-10 py-5 font-semibold text-[#844204] transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+            className="group inline-flex items-center gap-3 rounded-full bg-white px-10 py-5 font-semibold text-brand transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
           >
             Donate Today
             <ArrowRight
@@ -93,7 +93,7 @@ export default function ContactCTA() {
 
           <Link
             href="/volunteer"
-            className="group inline-flex items-center gap-3 rounded-full border border-white/30 px-10 py-5 font-semibold transition-all duration-300 hover:border-white hover:bg-white hover:text-[#844204]"
+            className="group inline-flex items-center gap-3 rounded-full border border-white/30 px-10 py-5 font-semibold transition-all duration-300 hover:border-white hover:bg-white hover:text-brand"
           >
             Become A Volunteer
             <ArrowRight

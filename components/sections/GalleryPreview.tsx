@@ -41,15 +41,15 @@ export default function GalleryPreview() {
 
         <div className="mb-16 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <span className="font-semibold uppercase tracking-[4px] text-[#844204]">
+            <span className="font-semibold uppercase tracking-[4px] text-brand">
               Moments Of Impact
             </span>
 
-            <h2 className="mt-4 text-4xl font-bold text-[#1B1815] md:text-5xl">
+            <h2 className="mt-4 text-4xl font-bold text-ink md:text-5xl">
               Moments That Tell Our Story
             </h2>
 
-            <p className="mt-6 text-lg leading-9 text-gray-600">
+            <p className="mt-6 text-lg leading-9 text-gray-700">
               Every photograph records a life touched and a community
               strengthened. Browse the work by programme area, or open the full
               gallery.
@@ -58,7 +58,7 @@ export default function GalleryPreview() {
 
           <Link
             href="/gallery"
-            className="inline-flex shrink-0 items-center gap-3 rounded-full bg-[#844204] px-8 py-4 font-semibold text-white transition-all duration-300 hover:gap-5 hover:bg-[#6d3503]"
+            className="inline-flex shrink-0 items-center gap-3 rounded-full bg-brand px-8 py-4 font-semibold text-white transition-all duration-300 hover:gap-5 hover:bg-brand-dark"
           >
             View Full Gallery
             <ArrowUpRight size={20} />
@@ -83,7 +83,7 @@ export default function GalleryPreview() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
 
             <div className="absolute inset-x-8 bottom-8 text-white">
-              <span className="text-sm font-semibold uppercase tracking-[3px] text-[#F5D27A]">
+              <span className="text-sm font-semibold uppercase tracking-[3px] text-accent-soft">
                 {photographLabel(lead.count)}
               </span>
 
@@ -92,7 +92,7 @@ export default function GalleryPreview() {
               </h3>
             </div>
 
-            <div className="absolute right-8 top-8 flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-[#844204] transition-transform duration-300 group-hover:scale-110">
+            <div className="absolute right-8 top-8 flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-brand transition-transform duration-300 group-hover:scale-110">
               <ArrowUpRight size={22} />
             </div>
           </Link>
@@ -115,7 +115,7 @@ export default function GalleryPreview() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
                 <div className="absolute inset-x-6 bottom-6 text-white">
-                  <span className="text-sm font-semibold uppercase tracking-[3px] text-[#F5D27A]">
+                  <span className="text-sm font-semibold uppercase tracking-[3px] text-accent-soft">
                     {photographLabel(area.count)}
                   </span>
 
@@ -146,7 +146,7 @@ export default function GalleryPreview() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
               <div className="absolute inset-x-6 bottom-6 text-white">
-                <span className="text-sm font-semibold uppercase tracking-[3px] text-[#F5D27A]">
+                <span className="text-sm font-semibold uppercase tracking-[3px] text-accent-soft">
                   {photographLabel(area.count)}
                 </span>
 
@@ -162,7 +162,7 @@ export default function GalleryPreview() {
             <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-white/10 blur-3xl" />
 
             <div className="relative">
-              <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[3px] text-[#F5D27A]">
+              <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[3px] text-accent-soft">
                 <Camera size={16} />
                 The Full Gallery
               </span>
@@ -181,7 +181,7 @@ export default function GalleryPreview() {
                 </p>
               </div>
 
-              <span className="shrink-0 rounded-full bg-white px-6 py-3 font-semibold text-[#844204] transition-transform duration-300 group-hover:translate-x-1">
+              <span className="shrink-0 rounded-full bg-white px-6 py-3 font-semibold text-brand transition-transform duration-300 group-hover:translate-x-1">
                 Explore
               </span>
             </div>

@@ -35,7 +35,7 @@ export default function GalleryCard({
       {/* Category */}
 
       <div className="absolute left-7 top-7">
-        <span className="rounded-full bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[3px] text-[#844204] backdrop-blur-md">
+        <span className="rounded-full bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[3px] text-brand backdrop-blur-md">
           {category}
         </span>
       </div>
@@ -50,7 +50,7 @@ export default function GalleryCard({
             View Story
           </p>
 
-          <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-all duration-500 group-hover:rotate-45 group-hover:bg-[#D9A441]">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md transition-all duration-500 group-hover:rotate-45 group-hover:bg-accent">
             <ArrowUpRight size={22} />
           </div>
         </div>

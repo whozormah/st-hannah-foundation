@@ -19,11 +19,11 @@ export default function GalleryGrid({ images, onOpen }: GalleryGridProps) {
   if (!images.length) {
     return (
       <div className="py-32 text-center">
-        <h3 className="text-3xl font-bold text-[#1B1815]">
+        <h3 className="text-3xl font-bold text-ink">
           No Images Available
         </h3>
 
-        <p className="mt-4 text-gray-600">
+        <p className="mt-4 text-gray-700">
           Images for this category will appear here.
         </p>
       </div>

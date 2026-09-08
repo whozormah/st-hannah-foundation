@@ -20,13 +20,13 @@ const data: DonationImpactData = donationImpact;
 
 export default function DonationImpact() {
   return (
-    <section className="py-28 bg-[#FAF7F2]">
+    <section className="py-28 bg-cream">
       {" "}
       <div className="container-custom">
         {/* Header */}
 
         <div className="text-center max-w-4xl mx-auto mb-20">
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Your Impact
           </span>
 
@@ -34,7 +34,7 @@ export default function DonationImpact() {
             Every Gift Creates A Ripple Of Hope
           </h2>
 
-          <p className="mt-6 text-lg text-gray-600 leading-8">
+          <p className="mt-6 text-lg text-gray-700 leading-8">
             Every donation contributes directly to programmes and initiatives
             that empower individuals, strengthen families and create
             opportunities for sustainable growth and transformation.
@@ -49,11 +49,11 @@ export default function DonationImpact() {
               key={stat.label}
               className="bg-white rounded-[32px] p-8 text-center shadow-sm hover:shadow-lg transition"
             >
-              <h3 className="text-5xl font-bold text-[#844204]">
+              <h3 className="text-5xl font-bold text-brand">
                 {stat.number}
               </h3>
 
-              <p className="mt-4 text-gray-600 leading-7">{stat.label}</p>
+              <p className="mt-4 text-gray-700 leading-7">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -61,7 +61,7 @@ export default function DonationImpact() {
         {/* Support Areas */}
 
         <div className="text-center max-w-4xl mx-auto mb-16">
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Support Areas
           </span>
 
@@ -69,7 +69,7 @@ export default function DonationImpact() {
             Transforming Generosity Into Impact
           </h2>
 
-          <p className="mt-6 text-lg text-gray-600 leading-8">
+          <p className="mt-6 text-lg text-gray-700 leading-8">
             Your generosity enables us to continue delivering life-changing
             programmes that uplift individuals, support families and strengthen
             communities.
@@ -82,13 +82,13 @@ export default function DonationImpact() {
               key={cause.title}
               className="bg-white rounded-[32px] p-8 shadow-sm hover:shadow-xl transition"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#844204]/10 flex items-center justify-center mb-6">
-                <div className="w-6 h-6 rounded-full bg-[#844204]" />
+              <div className="w-14 h-14 rounded-2xl bg-brand/10 flex items-center justify-center mb-6">
+                <div className="w-6 h-6 rounded-full bg-brand" />
               </div>
 
               <h3 className="text-2xl font-bold">{cause.title}</h3>
 
-              <p className="mt-4 text-gray-600 leading-7">
+              <p className="mt-4 text-gray-700 leading-7">
                 {cause.description}
               </p>
             </div>
@@ -98,7 +98,7 @@ export default function DonationImpact() {
         {/* Donation Promise */}
 
         <div className="mt-24 bg-white rounded-[32px] p-10 md:p-14 text-center shadow-sm">
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Our Commitment
           </span>
 
@@ -106,7 +106,7 @@ export default function DonationImpact() {
             Stewarding Every Gift With Integrity
           </h3>
 
-          <p className="max-w-4xl mx-auto mt-6 text-gray-600 leading-8">
+          <p className="max-w-4xl mx-auto mt-6 text-gray-700 leading-8">
             We are committed to ensuring that every donation is used
             responsibly, transparently and strategically to create measurable
             impact. Through accountability, stewardship and compassionate

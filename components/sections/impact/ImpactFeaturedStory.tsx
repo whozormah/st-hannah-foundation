@@ -48,19 +48,19 @@ export default function ImpactFeaturedStory() {
           {/* Header */}
 
           <div className="mx-auto mb-20 max-w-4xl text-center">
-            <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+            <span className="font-semibold uppercase tracking-[6px] text-brand">
               Featured Story
             </span>
 
-            <h2 className="mt-5 text-5xl font-bold text-[#1B1815] md:text-6xl">
+            <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
               A Story That Reminds Us
               <br />
               Why Hope Matters
             </h2>
 
-            <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+            <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-accent" />
 
-            <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+            <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
               Behind every programme is a person. Behind every statistic is a
               story. Meet one of the lives that represents the heart of our
               mission.
@@ -82,7 +82,7 @@ export default function ImpactFeaturedStory() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
                 <div className="absolute bottom-8 left-8">
-                  <span className="rounded-full bg-[#D9A441] px-5 py-2 text-xs font-bold uppercase tracking-[3px] text-[#2E1B05]">
+                  <span className="rounded-full bg-accent px-5 py-2 text-xs font-bold uppercase tracking-[3px] text-[#2E1B05]">
                     {campaign.tagline}
                   </span>
                 </div>
@@ -92,22 +92,22 @@ export default function ImpactFeaturedStory() {
             {/* Content */}
 
             <div>
-              <span className="font-semibold uppercase tracking-[5px] text-[#844204]">
+              <span className="font-semibold uppercase tracking-[5px] text-brand">
                 {campaign.tagline}
               </span>
-              <h3 className="mt-5 text-5xl font-bold leading-tight text-[#1B1815]">
+              <h3 className="mt-5 text-5xl font-bold leading-tight text-ink">
                 {campaign.headline}
               </h3>
-              <div className="mt-6 h-[3px] w-20 rounded-full bg-[#D9A441]" />
-              <div className="mt-8 flex items-center gap-3 text-[#844204]">
+              <div className="mt-6 h-[3px] w-20 rounded-full bg-accent" />
+              <div className="mt-8 flex items-center gap-3 text-brand">
                 <Calendar size={18} />
 
                 <span className="font-semibold">
                   {campaign.name} • {campaign.age} Years Old
                 </span>
               </div>
-              <div className="mt-10 rounded-[32px] border border-[#D9A441]/20 bg-[#FFF8EC] p-8">
-                <Quote size={34} className="mb-5 text-[#D9A441]" />
+              <div className="mt-10 rounded-[32px] border border-accent/20 bg-cream-warm p-8">
+                <Quote size={34} className="mb-5 text-accent" />
 
                 <p className="text-lg italic leading-9 text-gray-700">
                   Every transformed life reminds us that compassion has the
@@ -116,14 +116,14 @@ export default function ImpactFeaturedStory() {
               </div>
               <div className="mt-10 space-y-7">
                 {campaign.description.map((paragraph, index) => (
-                  <p key={index} className="leading-9 text-gray-600">
+                  <p key={index} className="leading-9 text-gray-700">
                     {paragraph}
                   </p>
                 ))}
               </div>
               {/* Needs */}
               <div className="mt-12">
-                <h4 className="text-2xl font-bold text-[#1B1815]">
+                <h4 className="text-2xl font-bold text-ink">
                   Current Areas Of Support
                 </h4>
 
@@ -131,7 +131,7 @@ export default function ImpactFeaturedStory() {
                   {campaign.needs.map((need) => (
                     <div
                       key={need}
-                      className="inline-flex items-center gap-2 rounded-full bg-[#FAF7F2] px-5 py-3 text-sm font-semibold text-[#844204]"
+                      className="inline-flex items-center gap-2 rounded-full bg-cream px-5 py-3 text-sm font-semibold text-brand"
                     >
                       <CheckCircle2 size={16} />
 
@@ -141,25 +141,25 @@ export default function ImpactFeaturedStory() {
                 </div>
               </div>{" "}
               {/* Why It Matters */}
-              <div className="mt-12 rounded-[36px] border border-[#D9A441]/20 bg-[#FAF7F2] p-10">
-                <span className="font-semibold uppercase tracking-[4px] text-[#844204]">
+              <div className="mt-12 rounded-[36px] border border-accent/20 bg-cream p-10">
+                <span className="font-semibold uppercase tracking-[4px] text-brand">
                   Why This Story Matters
                 </span>
 
-                <h4 className="mt-4 text-3xl font-bold text-[#1B1815]">
+                <h4 className="mt-4 text-3xl font-bold text-ink">
                   {campaign.whyStoryMattersTitle}
                 </h4>
 
-                <div className="mt-5 h-[3px] w-16 rounded-full bg-[#D9A441]" />
+                <div className="mt-5 h-[3px] w-16 rounded-full bg-accent" />
 
-                <p className="mt-8 leading-9 text-gray-600">
+                <p className="mt-8 leading-9 text-gray-700">
                   {campaign.whyStoryMatters}
                 </p>
 
                 <div className="mt-10 flex flex-wrap gap-5">
                   <button
                     onClick={() => setShowDonationModal(true)}
-                    className="group inline-flex items-center gap-3 rounded-full bg-[#844204] px-8 py-4 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#6D3503] hover:shadow-xl"
+                    className="group inline-flex items-center gap-3 rounded-full bg-brand px-8 py-4 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-brand-dark hover:shadow-xl"
                   >
                     <Heart size={18} />
                     Help Create More Stories
@@ -174,7 +174,7 @@ export default function ImpactFeaturedStory() {
                       href={campaign.videoLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group inline-flex items-center gap-3 rounded-full border-2 border-[#844204] px-8 py-4 font-semibold text-[#844204] transition-all duration-300 hover:bg-[#844204] hover:text-white"
+                      className="group inline-flex items-center gap-3 rounded-full border-2 border-brand px-8 py-4 font-semibold text-brand transition-all duration-300 hover:bg-brand hover:text-white"
                     >
                       <PlayCircle size={18} />
                       Watch Story
@@ -194,11 +194,11 @@ export default function ImpactFeaturedStory() {
           {campaign.gallery.length > 0 && (
             <div className="mt-28">
               <div className="mb-12 text-center">
-                <span className="font-semibold uppercase tracking-[5px] text-[#844204]">
+                <span className="font-semibold uppercase tracking-[5px] text-brand">
                   Photo Highlights
                 </span>
 
-                <h3 className="mt-4 text-4xl font-bold text-[#1B1815]">
+                <h3 className="mt-4 text-4xl font-bold text-ink">
                   Moments That Inspire Hope
                 </h3>
               </div>

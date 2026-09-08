@@ -18,17 +18,17 @@ export default function VideoHighlights() {
 
 
   return (
-    <section className="py-28 bg-[#FAF7F2]">
+    <section className="py-28 bg-cream">
       {" "}
       <div className="container-custom">
         {" "}
         <div className="text-center max-w-4xl mx-auto mb-16">
           {" "}
-          <span className="uppercase tracking-[5px] text-[#844204] font-semibold">
+          <span className="uppercase tracking-[5px] text-brand font-semibold">
             Stories In Motion{" "}
           </span>
           <h2 className="text-5xl font-bold mt-4">Experience The Impact</h2>
-          <p className="mt-6 text-lg text-gray-600 leading-8">
+          <p className="mt-6 text-lg text-gray-700 leading-8">
             Watch stories of hope, transformation and community impact through
             the lives of the people and communities we serve.
           </p>
@@ -55,17 +55,17 @@ export default function VideoHighlights() {
               </div>
 
               <div className="p-8">
-                <span className="text-[#844204] uppercase tracking-[3px] font-semibold">
+                <span className="text-brand uppercase tracking-[3px] font-semibold">
                   {video.category}
                 </span>
 
                 <h3 className="text-2xl font-bold mt-3">{video.title}</h3>
 
-                <p className="mt-4 text-gray-600 leading-7">
+                <p className="mt-4 text-gray-700 leading-7">
                   {video.description}
                 </p>
 
-                <div className="mt-6 text-[#844204] font-semibold">
+                <div className="mt-6 text-brand font-semibold">
                   Watch Story →
                 </div>
               </div>

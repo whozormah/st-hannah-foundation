@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function StoryDonationCTA({ program }: { program: string }) {
   return (
-    <section className="py-24 bg-[#844204] text-white">
+    <section className="py-24 bg-brand text-white">
       <div className="container-custom text-center max-w-4xl">
-        <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+        <span className="uppercase tracking-[5px] text-accent font-semibold">
           Continue The Impact
         </span>
 
@@ -20,7 +20,7 @@ export default function StoryDonationCTA({ program }: { program: string }) {
         <div className="mt-12 flex flex-wrap justify-center gap-4">
           <Link
             href="/donate"
-            className="bg-white text-[#844204] px-8 py-4 rounded-xl font-semibold"
+            className="bg-white text-brand px-8 py-4 rounded-xl font-semibold"
           >
             Support {program}
           </Link>

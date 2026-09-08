@@ -2,9 +2,9 @@ import Link from "next/link";
 
 export default function TeamCTA() {
   return (
-    <section className="py-28 bg-[#844204] text-white">
+    <section className="py-28 bg-brand text-white">
       <div className="container-custom text-center">
-        <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+        <span className="uppercase tracking-[5px] text-accent font-semibold">
           Join Our Team
         </span>
 
@@ -19,7 +19,7 @@ export default function TeamCTA() {
         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
           <Link
             href="/volunteer"
-            className="bg-white text-[#844204] px-8 py-4 rounded-xl font-semibold"
+            className="bg-white text-brand px-8 py-4 rounded-xl font-semibold"
           >
             Become A Volunteer
           </Link>

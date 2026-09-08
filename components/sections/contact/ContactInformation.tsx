@@ -33,18 +33,18 @@ export default function ContactInformation() {
         <div className="grid gap-12 lg:grid-cols-1 xl:grid-cols-[430px_minmax(0,1fr)]">
           {/* Contact Information */}
 
-          <div className="min-w-0 rounded-[40px] bg-[#FAF7F2] p-8 lg:p-10">
-            <span className="font-semibold uppercase tracking-[5px] text-[#844204]">
+          <div className="min-w-0 rounded-[40px] bg-cream p-8 lg:p-10">
+            <span className="font-semibold uppercase tracking-[5px] text-brand">
               Contact Information
             </span>
 
-            <h2 className="mt-5 text-4xl font-bold leading-tight text-[#1B1815] lg:text-5xl">
+            <h2 className="mt-5 text-4xl font-bold leading-tight text-ink lg:text-5xl">
               Let&apos;s Start A
               <br />
               Meaningful Conversation
             </h2>
 
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-gray-700">
               We&apos;d love to hear from you. Whether you&apos;re interested in
               partnering, volunteering, supporting a programme or making an
               enquiry, our team is always ready to assist.
@@ -54,14 +54,14 @@ export default function ContactInformation() {
               {/* Email */}
 
               <div className="flex items-start gap-5 rounded-[28px] bg-white p-6 shadow-sm">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#FFF8EC]">
-                  <Mail size={28} className="text-[#844204]" />
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-cream-warm">
+                  <Mail size={28} className="text-brand" />
                 </div>
 
                 <div className="min-w-0 flex-1">
                   <h3 className="text-xl font-bold">Email Address</h3>
 
-                  <p className="mt-2 break-all text-gray-600">
+                  <p className="mt-2 break-all text-gray-700">
                     {settings?.email}
                   </p>
                 </div>
@@ -70,14 +70,14 @@ export default function ContactInformation() {
               {/* Phone */}
 
               <div className="flex items-start gap-5 rounded-[28px] bg-white p-6 shadow-sm">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#FFF8EC]">
-                  <Phone size={28} className="text-[#844204]" />
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-cream-warm">
+                  <Phone size={28} className="text-brand" />
                 </div>
 
                 <div className="min-w-0 flex-1">
                   <h3 className="text-xl font-bold">Phone Number</h3>
 
-                  <p className="mt-2 break-all text-gray-600">
+                  <p className="mt-2 break-all text-gray-700">
                     {settings?.phone}
                   </p>
                 </div>
@@ -86,14 +86,14 @@ export default function ContactInformation() {
               {/* Nigeria */}
 
               <div className="flex items-start gap-5 rounded-[28px] bg-white p-6 shadow-sm">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#FFF8EC]">
-                  <MapPin size={28} className="text-[#844204]" />
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-cream-warm">
+                  <MapPin size={28} className="text-brand" />
                 </div>
 
                 <div className="min-w-0 flex-1">
                   <h3 className="text-xl font-bold">Nigeria Office</h3>
 
-                  <p className="mt-2 break-words leading-7 text-gray-600">
+                  <p className="mt-2 break-words leading-7 text-gray-700">
                     {settings?.nigeriaOffice.address}
                   </p>
                 </div>
@@ -102,14 +102,14 @@ export default function ContactInformation() {
               {/* USA */}
 
               <div className="flex items-start gap-5 rounded-[28px] bg-white p-6 shadow-sm">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#FFF8EC]">
-                  <MapPin size={28} className="text-[#844204]" />
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-cream-warm">
+                  <MapPin size={28} className="text-brand" />
                 </div>
 
                 <div className="min-w-0 flex-1">
                   <h3 className="text-xl font-bold">United States Office</h3>
 
-                  <p className="mt-2 break-words leading-7 text-gray-600">
+                  <p className="mt-2 break-words leading-7 text-gray-700">
                     {settings?.usaOffice.address}
                   </p>
                 </div>
@@ -118,14 +118,14 @@ export default function ContactInformation() {
               {/* Response */}
 
               <div className="flex items-start gap-5 rounded-[28px] bg-white p-6 shadow-sm">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[#FFF8EC]">
-                  <Clock size={28} className="text-[#844204]" />
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-cream-warm">
+                  <Clock size={28} className="text-brand" />
                 </div>
 
                 <div className="min-w-0 flex-1">
                   <h3 className="text-xl font-bold">Response Time</h3>
 
-                  <p className="mt-2 text-gray-600">
+                  <p className="mt-2 text-gray-700">
                     We typically respond within 24–48 hours.
                   </p>
                 </div>
@@ -134,7 +134,7 @@ export default function ContactInformation() {
 
             {/* WhatsApp Card */}
 
-            <div className="mt-10 rounded-[32px] bg-[#844204] p-8 text-white">
+            <div className="mt-10 rounded-[32px] bg-brand p-8 text-white">
               <div className="flex items-center gap-4">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10">
                   <MessageCircle size={28} />
@@ -151,7 +151,7 @@ export default function ContactInformation() {
                 href={`https://wa.me/${settings?.phone?.replace(/\D/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex items-center rounded-full bg-white px-8 py-4 font-semibold text-[#844204] transition-all duration-300 hover:scale-105"
+                className="mt-8 inline-flex items-center rounded-full bg-white px-8 py-4 font-semibold text-brand transition-all duration-300 hover:scale-105"
               >
                 Chat On WhatsApp
               </a>
@@ -164,17 +164,17 @@ export default function ContactInformation() {
             id="contact-form"
             className="min-w-0 rounded-[40px] border border-gray-100 bg-white p-8 shadow-xl lg:p-10"
           >
-            <span className="font-semibold uppercase tracking-[5px] text-[#844204]">
+            <span className="font-semibold uppercase tracking-[5px] text-brand">
               Send A Message
             </span>
 
-            <h2 className="mt-5 text-4xl font-bold leading-tight text-[#1B1815] lg:text-5xl">
+            <h2 className="mt-5 text-4xl font-bold leading-tight text-ink lg:text-5xl">
               We&apos;d Love To
               <br />
               Hear From You
             </h2>
 
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-gray-700">
               Tell us how we can help. Whether it&apos;s a general enquiry,
               partnership, volunteering opportunity or support request, we&apos;ll
               connect you with the right member of our team.
@@ -196,7 +196,7 @@ export default function ContactInformation() {
                     name="name"
                     required
                     placeholder="John Doe"
-                    className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white"
+                    className="w-full rounded-2xl border border-gray-200 bg-cream p-5 focus:border-brand focus:bg-white"
                   />
                 </div>
 
@@ -210,7 +210,7 @@ export default function ContactInformation() {
                     name="email"
                     required
                     placeholder="john@example.com"
-                    className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white"
+                    className="w-full rounded-2xl border border-gray-200 bg-cream p-5 focus:border-brand focus:bg-white"
                   />
                 </div>
               </div>
@@ -223,7 +223,7 @@ export default function ContactInformation() {
                   name="subject"
                   required
                   placeholder="How can we help?"
-                  className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white"
+                  className="w-full rounded-2xl border border-gray-200 bg-cream p-5 focus:border-brand focus:bg-white"
                 />
               </div>
 
@@ -234,7 +234,7 @@ export default function ContactInformation() {
 
                 <select
                   name="enquiry"
-                  className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white"
+                  className="w-full rounded-2xl border border-gray-200 bg-cream p-5 focus:border-brand focus:bg-white"
                 >
                   <option>General Enquiry</option>
                   <option>Volunteer Application</option>
@@ -255,13 +255,13 @@ export default function ContactInformation() {
                   name="message"
                   required
                   placeholder="Tell us about your enquiry..."
-                  className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white"
+                  className="w-full rounded-2xl border border-gray-200 bg-cream p-5 focus:border-brand focus:bg-white"
                 />
               </div>
 
               <button
                 type="submit"
-                className="group inline-flex items-center gap-3 rounded-full bg-[#844204] px-10 py-5 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-[#6D3503] hover:shadow-xl"
+                className="group inline-flex items-center gap-3 rounded-full bg-brand px-10 py-5 font-semibold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-brand-dark hover:shadow-xl"
               >
                 Send Message
                 <ArrowRight

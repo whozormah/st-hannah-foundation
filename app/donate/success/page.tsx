@@ -44,15 +44,15 @@ export default function DonationSuccessPage() {
 
   if (loading) {
     return (
-      <section className="min-h-screen flex items-center justify-center bg-[#FAF7F2]">
+      <section className="min-h-screen flex items-center justify-center bg-cream">
         <div className="text-center">
-          <div className="w-14 h-14 border-4 border-[#844204]/20 border-t-[#844204] rounded-full animate-spin mx-auto" />
+          <div className="w-14 h-14 border-4 border-brand/20 border-t-[#844204] rounded-full animate-spin mx-auto" />
 
-          <h2 className="mt-6 text-2xl font-bold text-[#844204]">
+          <h2 className="mt-6 text-2xl font-bold text-brand">
             Verifying Your Donation...
           </h2>
 
-          <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-gray-700">
             Please wait while we confirm your payment.
           </p>
         </div>
@@ -62,13 +62,13 @@ export default function DonationSuccessPage() {
 
   if (!verified) {
     return (
-      <section className="min-h-screen flex items-center justify-center bg-[#FAF7F2] px-6">
+      <section className="min-h-screen flex items-center justify-center bg-cream px-6">
         <div className="bg-white rounded-[32px] shadow-xl p-10 max-w-xl w-full text-center">
-          <h1 className="text-4xl font-bold text-[#844204]">
+          <h1 className="text-4xl font-bold text-brand">
             Payment Verification Failed
           </h1>
 
-          <p className="mt-6 text-gray-600 leading-8">
+          <p className="mt-6 text-gray-700 leading-8">
             We couldn&apos;t verify your donation at this time. If your account has
             been debited, please contact the Foundation and we&apos;ll gladly assist
             you.
@@ -76,7 +76,7 @@ export default function DonationSuccessPage() {
 
           <Link
             href="/contact"
-            className="inline-block mt-8 bg-[#844204] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#6d3503] transition"
+            className="inline-block mt-8 bg-brand text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-dark transition"
           >
             Contact Us
           </Link>
@@ -86,11 +86,11 @@ export default function DonationSuccessPage() {
   }
 
   return (
-    <section className="min-h-screen bg-[#FAF7F2] flex items-center justify-center px-6 py-24">
+    <section className="min-h-screen bg-cream flex items-center justify-center px-6 py-24">
       <div className="bg-white rounded-[36px] shadow-2xl max-w-3xl w-full p-12 text-center">
         <CheckCircle2 size={90} className="mx-auto text-green-600" />
 
-        <span className="uppercase tracking-[5px] text-[#844204] font-semibold block mt-8">
+        <span className="uppercase tracking-[5px] text-brand font-semibold block mt-8">
           Donation Successful
         </span>
 
@@ -100,14 +100,14 @@ export default function DonationSuccessPage() {
           Your Generosity
         </h1>
 
-        <p className="mt-8 text-lg text-gray-600 leading-8">
+        <p className="mt-8 text-lg text-gray-700 leading-8">
           Your generous contribution will help provide educational
           opportunities, empower widows, strengthen families, support medical
           outreach and restore hope to vulnerable communities.
         </p>
 
-        <div className="bg-[#FAF7F2] rounded-3xl p-8 mt-10">
-          <h3 className="text-2xl font-bold text-[#844204]">
+        <div className="bg-cream rounded-3xl p-8 mt-10">
+          <h3 className="text-2xl font-bold text-brand">
             Because of You...
           </h3>
 
@@ -128,7 +128,7 @@ export default function DonationSuccessPage() {
 
         <div className="mt-12">
           <div className="bg-amber-50 border border-amber-200 rounded-2xl p-6 text-left max-w-2xl mx-auto">
-            <h3 className="text-xl font-bold text-[#844204]">
+            <h3 className="text-xl font-bold text-brand">
               What happens next?
             </h3>
 
@@ -158,14 +158,14 @@ export default function DonationSuccessPage() {
                 new URLSearchParams(window.location.search).get("reference") ??
                 ""
               }`}
-              className="bg-[#844204] text-white px-8 py-4 rounded-xl font-semibold hover:bg-[#6d3503] transition text-center"
+              className="bg-brand text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-dark transition text-center"
             >
               Download Receipt
             </a>
 
             <Link
               href="/programs"
-              className="border border-[#844204] text-[#844204] px-8 py-4 rounded-xl font-semibold hover:bg-[#844204] hover:text-white transition text-center"
+              className="border border-brand text-brand px-8 py-4 rounded-xl font-semibold hover:bg-brand hover:text-white transition text-center"
             >
               Explore Our Programmes
             </Link>

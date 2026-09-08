@@ -29,7 +29,7 @@ export default function PageHeader({
         {/* Breadcrumb */}
 
         <div className="flex flex-wrap items-center text-white/80 text-sm mb-8">
-          <Link href="/" className="hover:text-[#D9A441] transition">
+          <Link href="/" className="hover:text-accent transition">
             Home
           </Link>
 
@@ -39,7 +39,7 @@ export default function PageHeader({
 
               <Link
                 href={parentHref}
-                className="hover:text-[#D9A441] transition"
+                className="hover:text-accent transition"
               >
                 {parentTitle}
               </Link>
@@ -48,12 +48,12 @@ export default function PageHeader({
 
           <span className="mx-3">/</span>
 
-          <span className="text-[#D9A441]">{title}</span>
+          <span className="text-accent">{title}</span>
         </div>
 
         {/* Label */}
 
-        <span className="uppercase tracking-[6px] text-[#D9A441] font-semibold">
+        <span className="uppercase tracking-[6px] text-accent font-semibold">
           ST. HANNAH FOUNDATION
         </span>
 
@@ -65,7 +65,7 @@ export default function PageHeader({
 
         {/* Divider */}
 
-        <div className="w-24 h-1 bg-[#D9A441] mt-8 rounded-full" />
+        <div className="w-24 h-1 bg-accent mt-8 rounded-full" />
 
         {/* Subtitle */}
 

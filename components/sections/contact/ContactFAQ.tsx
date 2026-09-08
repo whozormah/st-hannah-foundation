@@ -46,19 +46,19 @@ export default function ContactFAQ() {
         {/* Header */}
 
         <div className="mx-auto mb-20 max-w-4xl text-center">
-          <span className="font-semibold uppercase tracking-[6px] text-[#844204]">
+          <span className="font-semibold uppercase tracking-[6px] text-brand">
             Frequently Asked Questions
           </span>
 
-          <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-[#1B1815]">
+          <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-ink">
             Answers To The
             <br />
             Questions We Hear Most
           </h2>
 
-          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-[#D9A441]" />
+          <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-accent" />
 
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
             We&apos;ve answered some of the most common questions about our
             programmes, partnerships, volunteering opportunities and support
             services.
@@ -71,21 +71,21 @@ export default function ContactFAQ() {
           {faqs.map((faq, index) => (
             <div
               key={faq.question}
-              className="group overflow-hidden rounded-[32px] border border-gray-100 bg-[#FAF7F2] transition-all duration-300 hover:border-[#D9A441]/30 hover:shadow-xl"
+              className="group overflow-hidden rounded-[32px] border border-gray-100 bg-cream transition-all duration-300 hover:border-accent/30 hover:shadow-xl"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="flex w-full items-center justify-between p-8 text-left"
               >
-                <h3 className="pr-6 text-xl font-bold leading-8 text-[#1B1815]">
+                <h3 className="pr-6 text-xl font-bold leading-8 text-ink">
                   {faq.question}
                 </h3>
 
                 <div
                   className={`flex h-12 w-12 items-center justify-center rounded-full bg-white transition-all duration-300 ${
                     openIndex === index
-                      ? "rotate-180 bg-[#844204] text-white"
-                      : "text-[#844204]"
+                      ? "rotate-180 bg-brand text-white"
+                      : "text-brand"
                   }`}
                 >
                   <ChevronDown size={22} />
@@ -99,9 +99,9 @@ export default function ContactFAQ() {
               >
                 <div className="overflow-hidden">
                   <div className="px-8 pb-8">
-                    <div className="mb-6 h-[2px] w-16 rounded-full bg-[#D9A441]" />
+                    <div className="mb-6 h-[2px] w-16 rounded-full bg-accent" />
 
-                    <p className="text-lg leading-9 text-gray-600">
+                    <p className="text-lg leading-9 text-gray-700">
                       {faq.answer}
                     </p>
                   </div>
@@ -113,7 +113,7 @@ export default function ContactFAQ() {
 
         {/* Bottom Card */}
 
-        <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-[#844204] p-12 text-center text-white shadow-2xl">
+        <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-brand p-12 text-center text-white shadow-2xl">
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-white/10">
             <MessageCircle size={38} />
           </div>
@@ -128,7 +128,7 @@ export default function ContactFAQ() {
 
           <Link
             href="/contact"
-            className="group mt-10 inline-flex items-center gap-3 rounded-full bg-white px-10 py-5 font-semibold text-[#844204] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+            className="group mt-10 inline-flex items-center gap-3 rounded-full bg-white px-10 py-5 font-semibold text-brand transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
             Contact Our Team
             <ArrowRight

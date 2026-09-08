@@ -8,9 +8,9 @@ export default function PartnershipCTA() {
 
   return (
     <>
-      <section className="py-28 bg-[#844204] text-white">
+      <section className="py-28 bg-brand text-white">
         <div className="container-custom text-center">
-          <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+          <span className="uppercase tracking-[5px] text-accent font-semibold">
             Let&apos;s Work Together
           </span>
 
@@ -26,7 +26,7 @@ export default function PartnershipCTA() {
 
           <button
             onClick={() => setIsOpen(true)}
-            className="mt-10 bg-white text-[#844204] px-8 py-4 rounded-xl font-semibold"
+            className="mt-10 bg-white text-brand px-8 py-4 rounded-xl font-semibold"
           >
             Start A Partnership
           </button>

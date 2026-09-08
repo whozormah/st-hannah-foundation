@@ -19,7 +19,7 @@ export default function ApplicationProgress({
   return (
     <div className="mb-12">
       <div className="flex justify-between mb-4">
-        <span className="font-semibold text-[#844204]">
+        <span className="font-semibold text-brand">
           Step {currentStep} of {steps.length}
         </span>
 
@@ -28,7 +28,7 @@ export default function ApplicationProgress({
 
       <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
         <div
-          className="h-full bg-[#844204] transition-all duration-300"
+          className="h-full bg-brand transition-all duration-300"
           style={{ width: `${progress}%` }}
         />
       </div>
@@ -38,7 +38,7 @@ export default function ApplicationProgress({
           <div
             key={step}
             className={`text-center text-xs font-medium ${
-              currentStep >= index + 1 ? "text-[#844204]" : "text-gray-400"
+              currentStep >= index + 1 ? "text-brand" : "text-gray-400"
             }`}
           >
             {step}

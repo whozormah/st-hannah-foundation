@@ -2,11 +2,11 @@ import Link from "next/link";
 
 export default function ApplyCTA() {
   return (
-    <section className="py-32 bg-[#844204] text-white">
+    <section className="py-32 bg-brand text-white">
       {" "}
       <div className="container-custom text-center max-w-5xl">
         {" "}
-        <span className="uppercase tracking-[5px] text-[#D9A441] font-semibold">
+        <span className="uppercase tracking-[5px] text-accent font-semibold">
           We&apos;re Here To Help{" "}
         </span>
         <h2 className="text-5xl md:text-6xl font-bold mt-6 leading-tight">
@@ -23,14 +23,14 @@ export default function ApplyCTA() {
         <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12">
           <Link
             href="/contact"
-            className="bg-white text-[#844204] px-8 py-4 rounded-xl font-semibold hover:scale-105 transition"
+            className="bg-white text-brand px-8 py-4 rounded-xl font-semibold hover:scale-105 transition"
           >
             Contact Our Team
           </Link>
 
           <Link
             href="/programs"
-            className="border border-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-[#844204] transition"
+            className="border border-white px-8 py-4 rounded-xl font-semibold hover:bg-white hover:text-brand transition"
           >
             Explore Our Programmes
           </Link>

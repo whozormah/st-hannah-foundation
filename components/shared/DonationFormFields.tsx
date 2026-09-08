@@ -60,8 +60,8 @@ export default function DonationFormFields({
               onClick={() => setAmount(value)}
               className={`rounded-xl p-5 border transition font-bold ${
                 amount === value
-                  ? "bg-[#844204] text-white border-[#844204]"
-                  : "bg-white border-gray-200 hover:border-[#844204]"
+                  ? "bg-brand text-white border-brand"
+                  : "bg-white border-gray-200 hover:border-brand"
               }`}
             >
               {currencySymbol}
@@ -72,7 +72,7 @@ export default function DonationFormFields({
           <button
             type="button"
             onClick={handleCustomAmount}
-            className="bg-white border border-gray-200 rounded-xl p-5 hover:border-[#844204] transition font-bold"
+            className="bg-white border border-gray-200 rounded-xl p-5 hover:border-brand transition font-bold"
           >
             {currency === "NGN"
               ? "₦1,500,000+"
@@ -94,7 +94,7 @@ export default function DonationFormFields({
             required
             minLength={3}
             onChange={(e) => setName(e.target.value)}
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
           />
 
           <input
@@ -103,7 +103,7 @@ export default function DonationFormFields({
             value={email}
             required
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
           />
 
           <input
@@ -111,12 +111,12 @@ export default function DonationFormFields({
             placeholder="Phone Number"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
           />
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <select className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]">
+          <select className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand">
             <option>Donation Type</option>
 
             <option>One-Time Donation</option>
@@ -130,7 +130,7 @@ export default function DonationFormFields({
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
             required
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
           >
             <option value="">Select Donation Purpose</option>
 
@@ -153,7 +153,7 @@ export default function DonationFormFields({
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}
             required
-            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
           >
             <option value="NGN">NGN</option>
             <option value="USD">USD</option>
@@ -170,13 +170,13 @@ export default function DonationFormFields({
           required
           min="1"
           onChange={(e) => setAmount(e.target.value)}
-          className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
+          className="w-full p-4 border border-gray-200 rounded-xl focus:border-brand"
         />
 
-        <div className="bg-[#844204]/5 border border-[#844204]/10 rounded-2xl p-6">
+        <div className="bg-brand/5 border border-brand/10 rounded-2xl p-6">
           <h3 className="font-bold text-lg">Ready To Make An Impact?</h3>
 
-          <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-gray-700">
             Your contribution helps us support widows, empower families, sponsor
             education, strengthen communities and restore hope where it is
             needed most.
@@ -197,7 +197,7 @@ export default function DonationFormFields({
         )}
       </form>
 
-      <div className="grid md:grid-cols-2 gap-4 mt-10 text-sm text-gray-600">
+      <div className="grid md:grid-cols-2 gap-4 mt-10 text-sm text-gray-700">
         <div>✓ Secure SSL Encrypted Transactions</div>
 
         <div>✓ Trusted Paystack Payment Gateway</div>
