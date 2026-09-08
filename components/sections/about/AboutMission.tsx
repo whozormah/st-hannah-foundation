@@ -1,17 +1,20 @@
 import Image from "next/image";
 
+import foundation from "@/public/data/homepage/foundation.json";
+import coreValues from "@/public/data/homepage/core-values.json";
+
 export default function AboutMission() {
   return (
-    <section className="bg-white py-32">
+    <section className="bg-white py-24">
       <div className="container-custom">
         {/* Heading */}
 
-        <div className="mx-auto mb-24 max-w-4xl text-center">
+        <div className="mx-auto mb-16 max-w-4xl text-center">
           <span className="font-semibold uppercase tracking-[6px] text-brand">
             Our Story
           </span>
 
-          <h2 className="mt-5 text-5xl font-bold text-ink md:text-6xl">
+          <h2 className="mt-5 text-3xl font-bold text-ink md:text-5xl">
             Built On Compassion.{" "}
             <br />
             Driven By Purpose.
@@ -20,11 +23,7 @@ export default function AboutMission() {
           <div className="mx-auto mt-6 h-[3px] w-24 rounded-full bg-accent" />
 
           <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
-            To build a future where every child, family, and community,
-            especially those who are overlooked, underserved, and vulnerable,
-            has the opportunity to thrive, fulfill their God given potential,
-            and create a legacy of hope, dignity, and lasting transformation for
-            generations to come.
+            {foundation.description}
           </p>
         </div>
 
@@ -83,9 +82,7 @@ export default function AboutMission() {
                 </h4>
 
                 <p className="mt-4 leading-8 text-gray-700">
-                  To build a world where every child and family, especially the
-                  overlooked, underserved and unheard, experiences the fullness
-                  of their God-given potential.
+                  {foundation.vision}
                 </p>
               </div>
 
@@ -97,10 +94,7 @@ export default function AboutMission() {
                 </h4>
 
                 <p className="mt-4 leading-8 text-gray-700">
-                  St. Hannah Foundation exists to uplift families and
-                  communities across Africa through dignified access to
-                  resources, education and community empowerment, igniting hope
-                  and restoring the power of possibility.
+                  {foundation.mission}
                 </p>
               </div>
             </div>
@@ -128,19 +122,12 @@ export default function AboutMission() {
             </div>
 
             <div className="grid grid-cols-2 gap-5">
-              {[
-                "Compassion",
-                "Integrity",
-                "Service",
-                "Excellence",
-                "Accountability",
-                "Community Impact",
-              ].map((value) => (
+              {coreValues.map((value) => (
                 <div
-                  key={value}
+                  key={value.title}
                   className="rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-sm"
                 >
-                  <p className="font-semibold">{value}</p>
+                  <p className="font-semibold">{value.title}</p>
                 </div>
               ))}
             </div>
