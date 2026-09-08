@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Check, ShieldCheck } from "lucide-react";
 
 import { Story } from "@/types/story";
 
@@ -18,23 +19,23 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
 
   const galleryImages = [story.heroImage, ...(story.gallery ?? [])];
 
-  const nextImage = () => {
+  // First name only, so the appeal reads naturally for whichever story is
+  // featured rather than being written for one person.
+  const firstName = story.name.split(" ")[0];
+
+  const nextImage = () =>
     setCurrentImage((prev) =>
       prev === galleryImages.length - 1 ? 0 : prev + 1,
     );
-  };
 
-  const previousImage = () => {
+  const previousImage = () =>
     setCurrentImage((prev) =>
       prev === 0 ? galleryImages.length - 1 : prev - 1,
     );
-  };
 
   return (
     <>
-      <div className="grid items-start gap-24 xl:grid-cols-[560px_1fr]">
-        {/* LEFT */}
-
+      <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,440px)_1fr] xl:gap-16">
         <StoryVisualPanel
           story={story}
           imageCount={galleryImages.length}
@@ -44,101 +45,94 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
           }}
         />
 
-        {/* RIGHT */}
-
-        <div className="pt-6">
-          <span className="inline-flex rounded-full border border-accent/20 bg-brand/10 px-6 py-3 text-sm font-semibold text-brand">
-            {story.tagline}
-          </span>
-
-          <h2 className="mt-8 max-w-4xl text-6xl font-bold leading-tight text-ink">
+        <div>
+          {/* The one heading for this section; the panel and cards below it
+              sit underneath in the outline rather than competing with it. */}
+          <h2 className="text-4xl font-bold leading-tight text-ink md:text-5xl">
             {story.headline}
           </h2>
 
-          <div className="mt-8 h-1 w-24 rounded-full bg-accent" />
+          <div className="mt-6 h-1 w-20 rounded-full bg-accent" />
 
-          <div className="mt-14 space-y-10 text-[20px] leading-10 text-gray-700">
-            {story.description.map((paragraph, index) => (
-              <p key={index} className="max-w-4xl">
-                {paragraph}
-              </p>
+          <div className="mt-8 space-y-6 text-lg leading-9 text-gray-700">
+            {story.description.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
             ))}
           </div>
 
-          {/* Editorial Quote */}
-
-          {/* Why Story Matters + Donation */}
-
-          <div className="mt-20 grid gap-10 xl:grid-cols-[1.2fr_420px] items-start">
-            {/* Quote */}
-
-            <div className="relative">
-              <div className="absolute -left-6 -top-16 text-[180px] font-serif leading-none text-accent/10">
-                &quot;
-              </div>
-
-              <div className="relative border-l-4 border-accent pl-8">
-                <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
-                  Why This Story Matters
-                </span>
-
-                <h3 className="mt-6 text-4xl font-bold leading-tight text-ink">
-                  {story.whyStoryMattersTitle}
-                </h3>
-
-                <p className="mt-8 text-xl leading-10 text-gray-700">
-                  {story.whyStoryMatters}
-                </p>
-              </div>
-            </div>
-
-            {/* Donation Card */}
-
-            <div className="overflow-hidden rounded-[32px] bg-gradient-to-br from-brand via-[#95520F] to-[#B8741C] p-9 text-white shadow-[0_30px_70px_rgba(0,0,0,.18)]">
-              <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[4px] backdrop-blur">
-                Hope Begins With You
-              </span>
-
-              <h3 className="mt-6 text-3xl font-bold leading-tight">
-                Help Rewrite Esther&apos;s Story
+          {story.needs?.length > 0 && (
+            <div className="mt-10 rounded-[24px] border border-accent/25 bg-white p-7">
+              <h3 className="text-sm font-semibold uppercase tracking-[3px] text-brand">
+                What {firstName} needs
               </h3>
 
-              <p className="mt-5 leading-8 text-white/90">
-                Every gift helps provide education, healthcare, protection and
-                renewed hope for vulnerable children and families like Esther&apos;s.
-              </p>
+              <ul className="mt-5 flex flex-wrap gap-3">
+                {story.needs.map((need) => (
+                  <li
+                    key={need}
+                    className="inline-flex items-center gap-2 rounded-full bg-cream px-4 py-2 font-medium text-ink"
+                  >
+                    <Check size={16} className="text-brand" aria-hidden />
+                    {need}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-              <div className="mt-8 space-y-3 text-sm">
-                <div className="flex items-center gap-3">
-                  <span className="text-accent-soft">✓</span>
-                  <span>100% Secure Donation</span>
-                </div>
+          {/* Why this story matters */}
 
-                <div className="flex items-center gap-3">
-                  <span className="text-accent-soft">✓</span>
-                  <span>Instant Donation Receipt</span>
-                </div>
+          <blockquote className="mt-12 border-l-4 border-accent pl-7">
+            <p className="text-sm font-semibold uppercase tracking-[3px] text-brand">
+              Why this story matters
+            </p>
 
-                <div className="flex items-center gap-3">
-                  <span className="text-accent-soft">✓</span>
-                  <span>Every Gift Makes A Difference</span>
-                </div>
+            <h3 className="mt-4 text-2xl font-bold leading-tight text-ink md:text-3xl">
+              {story.whyStoryMattersTitle}
+            </h3>
+
+            <p className="mt-5 text-lg leading-9 text-gray-700">
+              {story.whyStoryMatters}
+            </p>
+          </blockquote>
+
+          {/* Appeal */}
+
+          <div className="mt-12 overflow-hidden rounded-[28px] bg-gradient-to-br from-brand via-[#95520F] to-[#B8741C] p-8 text-white shadow-[0_24px_60px_rgba(0,0,0,.16)] md:p-10">
+            <div className="grid items-center gap-8 md:grid-cols-[1fr_auto]">
+              <div>
+                <h3 className="text-2xl font-bold leading-tight md:text-3xl">
+                  Help rewrite {firstName}&apos;s story
+                </h3>
+
+                <p className="mt-4 max-w-xl leading-9 text-white/90">
+                  Every gift helps provide education, healthcare, protection and
+                  renewed hope for families in the same circumstances.
+                </p>
+
+                <ul className="mt-6 flex flex-wrap gap-x-7 gap-y-3 text-sm text-white/90">
+                  <li className="inline-flex items-center gap-2">
+                    <ShieldCheck size={16} aria-hidden />
+                    Secure payment
+                  </li>
+
+                  <li className="inline-flex items-center gap-2">
+                    <Check size={16} aria-hidden />
+                    Instant receipt
+                  </li>
+                </ul>
               </div>
 
               <button
                 onClick={onDonate}
-                className="mt-10 w-full rounded-2xl bg-white px-6 py-4 text-lg font-bold text-brand transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="w-full rounded-2xl bg-white px-8 py-4 text-lg font-bold text-brand transition-all duration-300 hover:-translate-y-1 hover:shadow-xl md:w-auto"
               >
-                Support Esther&apos;s Story
+                Donate
               </button>
             </div>
           </div>
         </div>
       </div>
-
-      {/* CTA */}
-
-      {/* Gallery */}
 
       <StoryGalleryModal
         isOpen={galleryOpen}

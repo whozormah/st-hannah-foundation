@@ -24,7 +24,7 @@ export default function FeaturedCampaign() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-cream py-36">
+      <section className="relative overflow-hidden bg-cream py-24">
         {/* Decorative Background */}
 
         <div className="absolute inset-0">
@@ -36,26 +36,20 @@ export default function FeaturedCampaign() {
         </div>
 
         <div className="container-custom relative">
-          {/* Header */}
+          {/* A lean intro: the story's own headline below is the section
+              heading, so this no longer stacks a second full-height header. */}
+          <div className="max-w-2xl">
+            <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
+              Stories of Hope
+            </span>
 
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center rounded-full border border-accent/30 bg-white px-6 py-3 shadow-sm">
-              <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
-                Stories of Hope
-              </span>
-            </div>
-
-            <h2 className="mt-8 text-4xl font-bold leading-tight text-ink md:text-5xl">
-              The People Behind The Programmes
-            </h2>
-
-            <div className="mx-auto mt-8 h-1 w-28 rounded-full bg-accent" />
-
-            <p className="mx-auto mt-8 text-lg leading-9 text-gray-700">
+            <p className="mt-4 text-lg leading-9 text-gray-700">
               Every programme begins with someone&apos;s real circumstances.
               This is one of them, told in full.
             </p>
           </div>
+
+          <div className="mt-14" />
 
           {/* Navigation only earns its place when there is more than one
               story to move between; campaigns.json currently holds one. */}
@@ -71,8 +65,6 @@ export default function FeaturedCampaign() {
               <StoryProgress current={current} total={stories.length} />
             </div>
           )}
-
-          <div className="mt-16" />
 
           <AnimatePresence mode="wait">
             <motion.div

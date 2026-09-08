@@ -68,8 +68,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
-      <body className={`${inter.variable} ${playfair.variable}`}>
+    // The font variables must live on <html>: --font-sans and --font-display
+    // are declared on :root, and a custom property is substituted where it is
+    // declared, so referencing variables defined on <body> would resolve to
+    // nothing and silently fall back to the system stack.
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${playfair.variable}`}
+    >
+      <body>
         <Navbar />
 
         <main>{children}</main>

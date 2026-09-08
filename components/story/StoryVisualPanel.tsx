@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight, Images } from "lucide-react";
 
 import { Story } from "@/types/story";
 
@@ -17,116 +16,80 @@ export default function StoryVisualPanel({
   imageCount,
   onGalleryOpen,
 }: StoryVisualPanelProps) {
-  const galleryPreview = story.gallery?.slice(0, 3) ?? [];
+  const preview = story.gallery?.slice(0, 3) ?? [];
 
   return (
-    <div className="sticky top-28">
-      <div className="overflow-hidden rounded-[40px] bg-white shadow-[0_30px_80px_rgba(0,0,0,.08)]">
-        {/* HERO IMAGE */}
+    <div className="lg:sticky lg:top-28">
+      <figure className="overflow-hidden rounded-[32px] bg-white shadow-[0_24px_60px_rgba(0,0,0,.10)]">
+        <div className="relative aspect-[4/5] w-full">
+          <Image
+            src={story.heroImage}
+            alt={`${story.name}, photographed for her story`}
+            fill
+            priority
+            sizes="(max-width: 1024px) 100vw, 440px"
+            className="object-cover"
+          />
 
-        <div className="relative overflow-hidden">
-          <motion.div
-            animate={{
-              scale: [1, 1.04, 1],
-            }}
-            transition={{
-              duration: 16,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="relative h-[720px]"
-          >
-            <Image
-              src={story.heroImage}
-              alt={story.name}
-              fill
-              priority
-              className="object-cover"
-            />
-          </motion.div>
-        </div>
-
-        {/* CONTENT */}
-
-        <div className="bg-white px-10 py-10">
-          <span className="text-xs font-semibold uppercase tracking-[5px] text-brand">
-            Story of Hope
-          </span>
-
-          <h2 className="mt-4 text-4xl font-bold text-ink">
-            {story.name}
-          </h2>
-
-          <p className="mt-2 text-lg text-brand">{story.tagline}</p>
-
-          <div className="mt-8 h-px w-full bg-[#E8E1D8]" />
-
-          {/* Journey */}
-
-          <button
-            onClick={onGalleryOpen}
-            className="group mt-10 w-full text-left"
-          >
-            <span className="text-xs font-semibold uppercase tracking-[4px] text-brand">
-              Moments That Matter
-            </span>
-
-            <h3 className="mt-3 text-2xl font-bold text-ink">
-              Explore The Journey
-            </h3>
-
-            <p className="mt-4 leading-8 text-gray-700">
-              Every photograph captures another chapter of resilience,
-              compassion and hope.
+          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-7 pt-16">
+            <p className="text-2xl font-bold text-white">
+              {story.name}
+              {story.age ? (
+                <span className="ml-2 text-lg font-medium text-white/70">
+                  {story.age}
+                </span>
+              ) : null}
             </p>
 
-            {/* Floating Photos */}
-
-            <div className="relative mt-12 h-44">
-              {galleryPreview.map((image, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{
-                    y: -12,
-                    rotate: index === 0 ? -8 : index === 1 ? 0 : 8,
-                  }}
-                  className={`absolute overflow-hidden rounded-[22px]
-                  border-4 border-white shadow-2xl
-
-                  ${
-                    index === 0
-                      ? "left-2 top-8 h-36 w-28 rotate-[-10deg]"
-                      : index === 1
-                        ? "left-1/2 top-0 h-40 w-32 -translate-x-1/2"
-                        : "right-2 top-8 h-36 w-28 rotate-[10deg]"
-                  }
-                  `}
-                >
-                  <Image
-                    src={image}
-                    alt=""
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="mt-6 flex items-center justify-between">
-              <div>
-                <p className="text-sm uppercase tracking-[3px] text-brand">
-                  {imageCount} Photos
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3 rounded-full bg-brand px-7 py-4 font-semibold text-white transition-all duration-300 group-hover:translate-x-1">
-                Explore
-                <ArrowRight size={18} />
-              </div>
-            </div>
-          </button>
+            <p className="mt-1 text-sm font-semibold uppercase tracking-[3px] text-accent-soft">
+              {story.tagline}
+            </p>
+          </div>
         </div>
-      </div>
+
+        {preview.length > 0 && (
+          <figcaption>
+            <button
+              onClick={onGalleryOpen}
+              className="group w-full px-7 py-7 text-left"
+            >
+              <span className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[3px] text-brand">
+                <Images size={16} aria-hidden />
+                {imageCount} photographs
+              </span>
+
+              <span className="mt-5 flex gap-3">
+                {preview.map((image, index) => (
+                  <span
+                    key={image}
+                    className="relative h-20 flex-1 overflow-hidden rounded-xl"
+                  >
+                    <Image
+                      src={image}
+                      alt=""
+                      fill
+                      sizes="140px"
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+
+                    {index === preview.length - 1 &&
+                      imageCount > preview.length && (
+                        <span className="absolute inset-0 flex items-center justify-center bg-black/55 text-sm font-bold text-white">
+                          +{imageCount - preview.length}
+                        </span>
+                      )}
+                  </span>
+                ))}
+              </span>
+
+              <span className="mt-6 flex items-center gap-2 font-semibold text-brand transition-all group-hover:gap-4">
+                See the full story in pictures
+                <ArrowRight size={18} aria-hidden />
+              </span>
+            </button>
+          </figcaption>
+        )}
+      </figure>
     </div>
   );
 }
