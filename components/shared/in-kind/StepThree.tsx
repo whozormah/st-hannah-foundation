@@ -35,7 +35,7 @@ export default function StepThree({ formData, setFormData }: StepThreeProps) {
                 location: e.target.value,
               }))
             }
-            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
           >
             <option value="">Select Location</option>
 
@@ -65,7 +65,7 @@ export default function StepThree({ formData, setFormData }: StepThreeProps) {
                 }))
               }
               placeholder="City, State, Country"
-              className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
             />
           </div>
         )}

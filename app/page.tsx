@@ -15,13 +15,13 @@ export default function HomePage() {
     <>
       <Hero />
       <VisionMission />
-      <FounderMessage />
       <Causes />
-      <FeaturedCampaign />
-      <AboutTestimonials />
-      <ImpactStats />
-      <ImpactStories />
       <GalleryPreview />
+      <ImpactStats />
+      <FounderMessage />
+      <FeaturedCampaign />
+      <ImpactStories />
+      <AboutTestimonials />
       <LeadershipPreview />
       <HomeCTA />
     </>

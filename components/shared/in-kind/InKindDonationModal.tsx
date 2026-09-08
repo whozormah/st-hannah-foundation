@@ -197,7 +197,7 @@ export default function InKindDonationModal({
             </p>
           </div>
 
-          <button onClick={handleClose} className="hover:scale-110 transition">
+          <button aria-label="Close" onClick={handleClose} className="hover:scale-110 transition">
             <X size={32} />
           </button>
         </div>

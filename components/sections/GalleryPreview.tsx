@@ -1,207 +1,189 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Camera } from "lucide-react";
 
-const galleryItems = [
-  {
-    image: "/gallery/gallery1.jpeg",
-    title: "Bringing Hope To Communities",
-    category: "Featured Moment",
-    href: "/gallery",
-  },
-  {
-    image: "/gallery/gallery2.jpeg",
-    title: "Empowering Young Minds",
-    category: "Education",
-    href: "/gallery",
-  },
-  {
-    image: "/gallery/gallery3.jpg",
-    title: "Restoring Health & Hope",
-    category: "Healthcare",
-    href: "/gallery",
-  },
-  {
-    image: "/gallery/gallery4.jpg",
-    title: "Together We Thrive",
-    category: "Community",
-    href: "/gallery",
-  },
-  {
-    image: "/gallery/gallery5.jpg",
-    title: "Changing Lives Daily",
-    category: "Empowerment",
-    href: "/gallery",
-  },
-];
+import galleryData from "@/public/data/gallery.json";
+
+interface GalleryItem {
+  image: string;
+  category: string;
+  title: string;
+}
+
+const items: GalleryItem[] = galleryData;
+
+// One tile per programme area, largest collection first. Built from the
+// gallery data itself so new photographs appear here without a code change.
+const areas = Array.from(new Set(items.map((item) => item.category)))
+  .map((category) => {
+    const photographs = items.filter((item) => item.category === category);
+
+    return {
+      category,
+      count: photographs.length,
+      cover: photographs[0].image,
+      title: photographs[0].title,
+    };
+  })
+  .sort((a, b) => b.count - a.count);
+
+const [lead, ...supporting] = areas;
+
+function photographLabel(count: number) {
+  return `${count} ${count === 1 ? "photograph" : "photographs"}`;
+}
 
 export default function GalleryPreview() {
   return (
-    <section className="bg-white py-32">
+    <section className="bg-white py-28">
       <div className="container-custom">
         {/* Header */}
 
-        <div className="mx-auto mb-20 max-w-4xl text-center">
-          <span className="font-semibold uppercase tracking-[5px] text-[#844204]">
-            Moments Of Impact
-          </span>
+        <div className="mb-16 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <span className="font-semibold uppercase tracking-[4px] text-[#844204]">
+              Moments Of Impact
+            </span>
 
-          <h2 className="mt-4 text-5xl font-bold text-[#1B1815]">
-            Moments That Tell Our Story
-          </h2>
+            <h2 className="mt-4 text-4xl font-bold text-[#1B1815] md:text-5xl">
+              Moments That Tell Our Story
+            </h2>
 
-          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-600">
-            Every photograph tells the story of a life touched, a community
-            strengthened and a future filled with hope. These moments reflect
-            the heart of our mission and the people who inspire it every day.
-          </p>
-        </div>
-
-        {/* Gallery */}
-
-        <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
-          {/* Hero */}
+            <p className="mt-6 text-lg leading-9 text-gray-600">
+              Every photograph records a life touched and a community
+              strengthened. Browse the work by programme area, or open the full
+              gallery.
+            </p>
+          </div>
 
           <Link
             href="/gallery"
-            className="group relative block h-[620px] overflow-hidden rounded-[40px]"
+            className="inline-flex shrink-0 items-center gap-3 rounded-full bg-[#844204] px-8 py-4 font-semibold text-white transition-all duration-300 hover:gap-5 hover:bg-[#6d3503]"
+          >
+            View Full Gallery
+            <ArrowUpRight size={20} />
+          </Link>
+        </div>
+
+        {/* Lead area + two supporting areas */}
+
+        <div className="grid gap-6 lg:grid-cols-[1.7fr_1fr]">
+          <Link
+            href="/gallery"
+            className="group relative block h-[420px] overflow-hidden rounded-[36px] lg:h-[560px]"
           >
             <Image
-              src={galleryItems[0].image}
-              alt={galleryItems[0].title}
+              src={lead.cover}
+              alt={lead.title}
               fill
-              className="object-cover transition-all duration-1000 group-hover:scale-110"
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              className="object-cover transition-transform duration-1000 group-hover:scale-105"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
 
-            {/* Floating Stats */}
-
-            <div className="absolute right-8 top-8 rounded-2xl border border-white/20 bg-white/10 px-7 py-5 text-white backdrop-blur-xl">
-              <h3 className="text-4xl font-bold">12,000+</h3>
-
-              <p className="mt-1 text-xs uppercase tracking-[3px] text-white/80">
-                Lives Reached
-              </p>
-            </div>
-
-            {/* Caption */}
-
-            <div className="absolute bottom-8 left-8 max-w-lg text-white">
-              <span className="text-xs uppercase tracking-[4px] text-[#F5D27A]">
-                {galleryItems[0].category}
+            <div className="absolute inset-x-8 bottom-8 text-white">
+              <span className="text-sm font-semibold uppercase tracking-[3px] text-[#F5D27A]">
+                {photographLabel(lead.count)}
               </span>
 
-              <h3 className="mt-3 text-4xl font-bold leading-tight">
-                {galleryItems[0].title}
+              <h3 className="mt-3 text-3xl font-bold leading-tight md:text-4xl">
+                {lead.category}
               </h3>
-
-              <p className="mt-4 leading-8 text-white/90">
-                Every outreach represents compassion in action and lives
-                transformed through hope.
-              </p>
             </div>
 
-            <div className="absolute right-8 bottom-8 flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#844204] transition-transform duration-300 group-hover:scale-110">
+            <div className="absolute right-8 top-8 flex h-14 w-14 items-center justify-center rounded-full bg-white/95 text-[#844204] transition-transform duration-300 group-hover:scale-110">
               <ArrowUpRight size={22} />
             </div>
           </Link>
 
-          {/* Right */}
-
           <div className="flex flex-col gap-6">
-            {galleryItems.slice(1, 3).map((item) => (
+            {supporting.slice(0, 2).map((area) => (
               <Link
-                key={item.title}
+                key={area.category}
                 href="/gallery"
-                className="group relative block h-[298px] overflow-hidden rounded-[32px]"
+                className="group relative block h-[240px] overflow-hidden rounded-[28px] lg:h-[268px]"
               >
                 <Image
-                  src={item.image}
-                  alt={item.title}
+                  src={area.cover}
+                  alt={area.title}
                   fill
-                  className="object-cover transition-all duration-1000 group-hover:scale-110"
+                  sizes="(max-width: 1024px) 100vw, 35vw"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
-                <div className="absolute bottom-6 left-6 text-white">
-                  <p className="text-xs uppercase tracking-[3px] text-[#F5D27A]">
-                    {item.category}
-                  </p>
+                <div className="absolute inset-x-6 bottom-6 text-white">
+                  <span className="text-sm font-semibold uppercase tracking-[3px] text-[#F5D27A]">
+                    {photographLabel(area.count)}
+                  </span>
 
-                  <h4 className="mt-2 text-2xl font-bold">{item.title}</h4>
+                  <h3 className="mt-2 text-2xl font-bold">{area.category}</h3>
                 </div>
               </Link>
             ))}
           </div>
         </div>
 
-        {/* Bottom */}
+        {/* Remaining areas + gallery card */}
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1fr_1.2fr]">
-          {galleryItems.slice(3).map((item) => (
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1.4fr]">
+          {supporting.slice(2, 3).map((area) => (
             <Link
-              key={item.title}
+              key={area.category}
               href="/gallery"
-              className="group relative block h-[300px] overflow-hidden rounded-[32px]"
+              className="group relative block h-[260px] overflow-hidden rounded-[28px]"
             >
               <Image
-                src={item.image}
-                alt={item.title}
+                src={area.cover}
+                alt={area.title}
                 fill
-                className="object-cover transition-all duration-1000 group-hover:scale-110"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
-              <div className="absolute bottom-6 left-6 text-white">
-                <p className="text-xs uppercase tracking-[3px] text-[#F5D27A]">
-                  {item.category}
-                </p>
+              <div className="absolute inset-x-6 bottom-6 text-white">
+                <span className="text-sm font-semibold uppercase tracking-[3px] text-[#F5D27A]">
+                  {photographLabel(area.count)}
+                </span>
 
-                <h4 className="mt-2 text-2xl font-bold">{item.title}</h4>
+                <h3 className="mt-2 text-2xl font-bold">{area.category}</h3>
               </div>
             </Link>
           ))}
 
-          {/* Gallery Card */}
-
           <Link
             href="/gallery"
-            className="group relative overflow-hidden rounded-[36px] bg-gradient-to-br from-[#6F3403] via-[#95520F] to-[#C17A1B] p-10 text-white transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
+            className="group relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-[28px] bg-gradient-to-br from-[#6F3403] via-[#95520F] to-[#C17A1B] p-10 text-white transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
           >
             <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-white/10 blur-3xl" />
 
-            <div className="relative flex h-full flex-col justify-between">
+            <div className="relative">
+              <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[3px] text-[#F5D27A]">
+                <Camera size={16} />
+                The Full Gallery
+              </span>
+
+              <h3 className="mt-4 text-3xl font-bold leading-tight md:text-4xl">
+                Every Picture Tells A Story
+              </h3>
+            </div>
+
+            <div className="relative mt-8 flex items-end justify-between gap-6">
               <div>
-                <span className="text-xs font-semibold uppercase tracking-[4px] text-[#F5D27A]">
-                  Gallery
-                </span>
+                <p className="text-5xl font-bold">{items.length}</p>
 
-                <h3 className="mt-4 text-4xl font-bold leading-tight">
-                  Every Picture
-                  <br />
-                  Tells A Story
-                </h3>
-
-                <p className="mt-6 leading-8 text-white/90">
-                  Discover hundreds of moments capturing hope, resilience,
-                  compassion and transformation across our communities.
+                <p className="mt-2 text-white/80">
+                  Photographs across {areas.length} programme areas
                 </p>
               </div>
 
-              <div className="mt-10 flex items-end justify-between">
-                <div>
-                  <h2 className="text-6xl font-bold">500+</h2>
-
-                  <p className="mt-2 text-white/80">Moments Captured</p>
-                </div>
-
-                <div className="rounded-full bg-white px-6 py-3 font-semibold text-[#844204] transition-transform duration-300 group-hover:translate-x-1">
-                  Explore →
-                </div>
-              </div>
+              <span className="shrink-0 rounded-full bg-white px-6 py-3 font-semibold text-[#844204] transition-transform duration-300 group-hover:translate-x-1">
+                Explore
+              </span>
             </div>
           </Link>
         </div>

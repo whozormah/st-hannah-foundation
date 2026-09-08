@@ -196,7 +196,7 @@ export default function ContactInformation() {
                     name="name"
                     required
                     placeholder="John Doe"
-                    className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white focus:outline-none"
+                    className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white"
                   />
                 </div>
 
@@ -210,7 +210,7 @@ export default function ContactInformation() {
                     name="email"
                     required
                     placeholder="john@example.com"
-                    className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white focus:outline-none"
+                    className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white"
                   />
                 </div>
               </div>
@@ -223,7 +223,7 @@ export default function ContactInformation() {
                   name="subject"
                   required
                   placeholder="How can we help?"
-                  className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white focus:outline-none"
+                  className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white"
                 />
               </div>
 
@@ -234,7 +234,7 @@ export default function ContactInformation() {
 
                 <select
                   name="enquiry"
-                  className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white focus:outline-none"
+                  className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white"
                 >
                   <option>General Enquiry</option>
                   <option>Volunteer Application</option>
@@ -255,7 +255,7 @@ export default function ContactInformation() {
                   name="message"
                   required
                   placeholder="Tell us about your enquiry..."
-                  className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white focus:outline-none"
+                  className="w-full rounded-2xl border border-gray-200 bg-[#FAF7F2] p-5 focus:border-[#844204] focus:bg-white"
                 />
               </div>
 

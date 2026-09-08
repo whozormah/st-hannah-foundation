@@ -56,7 +56,7 @@ export default function DonationModal({
                 </p>
               </div>
 
-              <button onClick={onClose} className="hover:scale-110 transition">
+              <button aria-label="Close" onClick={onClose} className="hover:scale-110 transition">
                 <X size={28} />
               </button>
             </div>

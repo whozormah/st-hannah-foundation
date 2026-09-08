@@ -295,7 +295,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Button */}
 
-            <button
+            <button aria-label="Open menu"
               onClick={() => setIsOpen(true)}
               className="rounded-xl p-2 transition hover:bg-[#FAF7F2] lg:hidden"
             >
@@ -325,7 +325,7 @@ export default function Navbar() {
               </span>
             </div>
 
-            <button
+            <button aria-label="Close"
               onClick={() => setIsOpen(false)}
               className="rounded-xl p-2 transition hover:bg-[#FAF7F2]"
             >

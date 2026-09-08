@@ -35,7 +35,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                 }))
               }
               placeholder="Enter the address where the donation can be picked up"
-              className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
             />
           </div>
 
@@ -52,7 +52,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                   contactMethod: e.target.value,
                 }))
               }
-              className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
             >
               <option value="">Select Contact Method</option>
 
@@ -81,7 +81,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                     pickupDate: e.target.value,
                   }))
                 }
-                className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+                className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
               />
             </div>
 
@@ -98,7 +98,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                     pickupTime: e.target.value,
                   }))
                 }
-                className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+                className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
               >
                 <option value="">Select Time</option>
 
@@ -126,7 +126,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                 }))
               }
               placeholder="Gate code, landmark, call before arrival, etc."
-              className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
             />
           </div>
         </div>
@@ -149,7 +149,7 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
                   destination: e.target.value,
                 }))
               }
-              className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+              className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
             >
               <option value="">Select Destination</option>
 

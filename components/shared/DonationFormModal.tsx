@@ -48,7 +48,7 @@ export default function DonationFormModal({
             )}
           </div>
 
-          <button
+          <button aria-label="Close"
             onClick={onClose}
             className="rounded-full p-2 hover:bg-gray-100 transition"
           >

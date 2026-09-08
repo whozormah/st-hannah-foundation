@@ -31,7 +31,7 @@ export default function StoryGalleryModal({
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md">
       {/* Close */}
 
-      <button
+      <button aria-label="Close"
         onClick={onClose}
         className="absolute right-8 top-8 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white hover:text-[#844204]"
       >
@@ -40,7 +40,7 @@ export default function StoryGalleryModal({
 
       {/* Previous */}
 
-      <button
+      <button aria-label="Previous"
         onClick={onPrevious}
         className="absolute left-6 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-4 text-white transition hover:bg-white hover:text-[#844204]"
       >
@@ -49,7 +49,7 @@ export default function StoryGalleryModal({
 
       {/* Next */}
 
-      <button
+      <button aria-label="Next"
         onClick={onNext}
         className="absolute right-6 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/10 p-4 text-white transition hover:bg-white hover:text-[#844204]"
       >

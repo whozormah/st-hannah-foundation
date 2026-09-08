@@ -40,7 +40,7 @@ export default function GalleryLightbox({
       >
         {/* Close */}
 
-        <button
+        <button aria-label="Close"
           onClick={(e) => {
             e.stopPropagation();
             onClose();
@@ -52,7 +52,7 @@ export default function GalleryLightbox({
 
         {/* Previous */}
 
-        <button
+        <button aria-label="Previous"
           onClick={(e) => {
             e.stopPropagation();
             onPrevious();
@@ -64,7 +64,7 @@ export default function GalleryLightbox({
 
         {/* Next */}
 
-        <button
+        <button aria-label="Next"
           onClick={(e) => {
             e.stopPropagation();
             onNext();

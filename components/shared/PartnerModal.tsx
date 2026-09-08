@@ -41,7 +41,7 @@ export default function PartnerModal({ isOpen, onClose }: PartnerModalProps) {
                 </p>
               </div>
 
-              <button
+              <button aria-label="Close"
                 onClick={handleClose}
                 className="hover:scale-110 transition"
               >

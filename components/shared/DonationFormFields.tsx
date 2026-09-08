@@ -94,7 +94,7 @@ export default function DonationFormFields({
             required
             minLength={3}
             onChange={(e) => setName(e.target.value)}
-            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
           />
 
           <input
@@ -103,7 +103,7 @@ export default function DonationFormFields({
             value={email}
             required
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
           />
 
           <input
@@ -111,12 +111,12 @@ export default function DonationFormFields({
             placeholder="Phone Number"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
           />
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <select className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]">
+          <select className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]">
             <option>Donation Type</option>
 
             <option>One-Time Donation</option>
@@ -130,7 +130,7 @@ export default function DonationFormFields({
             value={purpose}
             onChange={(e) => setPurpose(e.target.value)}
             required
-            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
           >
             <option value="">Select Donation Purpose</option>
 
@@ -153,7 +153,7 @@ export default function DonationFormFields({
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}
             required
-            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
           >
             <option value="NGN">NGN</option>
             <option value="USD">USD</option>
@@ -170,7 +170,7 @@ export default function DonationFormFields({
           required
           min="1"
           onChange={(e) => setAmount(e.target.value)}
-          className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+          className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
         />
 
         <div className="bg-[#844204]/5 border border-[#844204]/10 rounded-2xl p-6">

@@ -35,7 +35,7 @@ export default function StepOne({ formData, setFormData }: StepOneProps) {
               }))
             }
             placeholder="Enter your full name"
-            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
             required
           />
         </div>
@@ -57,7 +57,7 @@ export default function StepOne({ formData, setFormData }: StepOneProps) {
               }))
             }
             placeholder="Enter your email address"
-            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
             required
           />
         </div>
@@ -79,7 +79,7 @@ export default function StepOne({ formData, setFormData }: StepOneProps) {
               }))
             }
             placeholder="+2348012345678"
-            className="w-full p-4 border border-gray-200 rounded-xl focus:outline-none focus:border-[#844204]"
+            className="w-full p-4 border border-gray-200 rounded-xl focus:border-[#844204]"
             required
           />
 
