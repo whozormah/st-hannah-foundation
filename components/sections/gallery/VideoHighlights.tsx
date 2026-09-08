@@ -44,7 +44,7 @@ export default function VideoHighlights() {
   if (!videos.length) return null;
 
   return (
-    <section className="bg-cream py-24">
+    <section className="bg-cream py-14 md:py-24">
       <div className="container-custom">
         <div className="max-w-2xl">
           <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">

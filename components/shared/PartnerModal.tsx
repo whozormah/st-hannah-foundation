@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { X, CheckCircle } from "lucide-react";
 
 interface PartnerModalProps {
@@ -9,6 +11,8 @@ interface PartnerModalProps {
 }
 
 export default function PartnerModal({ isOpen, onClose }: PartnerModalProps) {
+  useBodyScrollLock(isOpen);
+
   const [submitted, setSubmitted] = useState(false);
 
   if (!isOpen) return null;

@@ -36,7 +36,7 @@ export default function AboutGovernance() {
           </p>
         </div>
         {/* Message Banner */}
-        <div className="max-w-5xl mx-auto bg-gradient-to-r from-brand to-brand-light rounded-[32px] p-10 md:p-14 mb-20 text-center text-white">
+        <div className="max-w-5xl mx-auto bg-gradient-to-r from-brand to-brand-light rounded-[32px] p-6 sm:p-10 md:p-14 mb-20 text-center text-white">
           <h3 className="text-3xl md:text-4xl font-bold">
             Leadership Rooted In Service
           </h3>

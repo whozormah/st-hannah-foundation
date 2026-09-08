@@ -119,7 +119,7 @@ export default function AboutImpactAreas() {
           })}
         </div>
         {/* Closing Statement */}
-        <div className="mt-24 rounded-[40px] bg-brand px-12 py-16 text-center text-white">
+        <div className="mt-24 rounded-[40px] bg-brand px-6 md:px-12 py-16 text-center text-white">
           <span className="uppercase tracking-[5px] text-accent">
             Our Commitment
           </span>

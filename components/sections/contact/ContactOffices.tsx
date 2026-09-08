@@ -21,7 +21,7 @@ const mapQuery = encodeURIComponent(contact.nigeria);
 
 export default function ContactOffices() {
   return (
-    <section id="offices" className="bg-cream py-24">
+    <section id="offices" className="bg-cream py-14 md:py-24">
       <div className="container-custom">
         <div className="max-w-2xl">
           <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">

@@ -7,7 +7,7 @@ export default function TeamIntro() {
             People Behind The Mission
           </span>
 
-          <h2 className="text-5xl font-bold mt-4">Serving With Purpose</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mt-4">Serving With Purpose</h2>
 
           <p className="mt-8 text-lg text-gray-700 leading-8">
             Behind every outreach, educational initiative and community

@@ -12,7 +12,10 @@ interface Story {
   excerpt: string;
 }
 
-const stories: Story[] = storiesData;
+const allStories: Story[] = storiesData;
+
+// Teaser; /impact-stories carries the full index.
+const stories = allStories.slice(0, 3);
 
 export default function ImpactStories() {
   return (

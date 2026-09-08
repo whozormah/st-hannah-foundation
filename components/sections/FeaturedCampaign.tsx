@@ -24,7 +24,7 @@ export default function FeaturedCampaign() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-cream py-24">
+      <section className="relative overflow-hidden bg-cream py-14 md:py-24">
         {/* Decorative Background */}
 
         <div className="absolute inset-0">

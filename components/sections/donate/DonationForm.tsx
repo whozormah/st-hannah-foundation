@@ -9,7 +9,7 @@ export default function DonationForm() {
             Donate Online
           </span>
 
-          <h2 className="text-5xl font-bold mt-4">Donate Now</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mt-4">Donate Now</h2>
 
           <p className="max-w-2xl mx-auto mt-6 text-gray-700 leading-8">
             Your generosity helps us restore hope, empower families, support
@@ -18,7 +18,7 @@ export default function DonationForm() {
           </p>
         </div>
 
-        <div className="bg-cream rounded-[32px] p-10 md:p-14 shadow-sm">
+        <div className="bg-cream rounded-[32px] p-6 sm:p-10 md:p-14 shadow-sm">
           <DonationFormFields />
         </div>
       </div>

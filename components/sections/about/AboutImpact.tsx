@@ -38,9 +38,9 @@ export default function AboutImpact() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-cream rounded-[24px] p-10 text-center"
+              className="bg-cream rounded-[24px] p-6 sm:p-10 text-center"
             >
-              <h3 className="text-5xl font-bold text-brand">
+              <h3 className="text-3xl md:text-5xl font-bold text-brand">
                 {stat.number}
               </h3>
 

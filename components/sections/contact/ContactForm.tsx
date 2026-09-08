@@ -60,7 +60,7 @@ export default function ContactForm() {
 
   if (status === "sent") {
     return (
-      <div className="flex min-h-[420px] flex-col items-center justify-center rounded-[32px] border border-gray-100 bg-white p-10 text-center shadow-xl">
+      <div className="flex min-h-[420px] flex-col items-center justify-center rounded-[32px] border border-gray-100 bg-white p-6 sm:p-10 text-center shadow-xl">
         <CheckCircle2 size={64} className="text-green-600" aria-hidden />
 
         <h2 className="mt-8 text-3xl font-bold text-ink">

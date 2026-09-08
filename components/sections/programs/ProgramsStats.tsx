@@ -39,16 +39,16 @@ export default function ProgramsStats() {
             Program Impact
           </span>
 
-          <h2 className="text-5xl font-bold mt-4">Impact In Numbers</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mt-4">Impact In Numbers</h2>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="bg-cream rounded-[32px] p-10 text-center"
+              className="bg-cream rounded-[32px] p-6 sm:p-10 text-center"
             >
-              <h3 className="text-5xl font-bold text-brand">
+              <h3 className="text-3xl md:text-5xl font-bold text-brand">
                 {stat.number}
               </h3>
 

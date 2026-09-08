@@ -21,7 +21,7 @@ export default function VolunteerOpportunities() {
           <span className="uppercase tracking-[5px] text-brand font-semibold">
             Volunteer Opportunities{" "}
           </span>
-          <h2 className="text-5xl font-bold mt-4">
+          <h2 className="text-3xl md:text-5xl font-bold mt-4">
             Find A Place To Make An Impact
           </h2>
           <p className="mt-6 text-lg text-gray-700 leading-8">

@@ -36,7 +36,7 @@ export default function AboutVolunteers() {
 
         {/* Message Banner */}
 
-        <div className="relative mx-auto mb-24 max-w-6xl overflow-hidden rounded-[40px] bg-gradient-to-r from-brand via-[#9A5A12] to-[#B27425] px-12 py-16 text-center text-white shadow-2xl">
+        <div className="relative mx-auto mb-24 max-w-6xl overflow-hidden rounded-[40px] bg-gradient-to-r from-brand via-[#9A5A12] to-[#B27425] px-6 md:px-12 py-16 text-center text-white shadow-2xl">
           <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
 
           <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />

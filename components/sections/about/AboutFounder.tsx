@@ -21,7 +21,7 @@ export default function AboutFounder() {
   if (!founder) return null;
 
   return (
-    <section className="bg-cream py-32">
+    <section className="bg-cream py-16 md:py-24">
       <div className="container-custom">
         {/* Section Heading */}
 
@@ -43,12 +43,12 @@ export default function AboutFounder() {
           </p>
         </div>
 
-        <div className="grid items-center gap-20 lg:grid-cols-2">
+        <div className="grid items-center gap-10 md:gap-20 lg:grid-cols-2">
           {/* Image */}
 
           <div className="relative">
             <div className="overflow-hidden rounded-[40px] bg-white shadow-2xl">
-              <div className="relative h-[760px]">
+              <div className="relative h-[420px] sm:h-[560px] lg:h-[760px]">
                 <Image
                   src={founder.image}
                   alt={founder.name}
@@ -60,7 +60,7 @@ export default function AboutFounder() {
 
             {/* Floating Quote Card */}
 
-            <div className="absolute -bottom-10 -right-10 max-w-sm rounded-[28px] border border-accent/20 bg-white p-8 shadow-2xl">
+            <div className="absolute -bottom-6 right-4 max-w-sm rounded-[28px] border border-accent/20 bg-white p-6 shadow-2xl sm:p-8 lg:-bottom-10 lg:-right-10">
               <span className="text-6xl font-serif text-accent/20">&quot;</span>
 
               <p className="-mt-5 italic leading-8 text-gray-700">
@@ -76,7 +76,7 @@ export default function AboutFounder() {
               {founder.badge}
             </span>
 
-            <h3 className="mt-6 text-5xl font-bold leading-tight text-ink">
+            <h3 className="mt-6 text-3xl md:text-5xl font-bold leading-tight text-ink">
               {founder.name}
             </h3>
 

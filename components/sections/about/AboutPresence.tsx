@@ -20,7 +20,7 @@ export default function AboutPresence() {
   ];
 
   return (
-    <section className="bg-white py-32">
+    <section className="bg-white py-16 md:py-24">
       <div className="container-custom">
         {/* Heading */}
 
@@ -46,7 +46,7 @@ export default function AboutPresence() {
 
         {/* Presence Banner */}
 
-        <div className="relative mb-20 overflow-hidden rounded-[40px] bg-gradient-to-r from-brand via-[#9A5A12] to-[#B27425] px-12 py-16 text-white shadow-2xl">
+        <div className="relative mb-20 overflow-hidden rounded-[40px] bg-gradient-to-r from-brand via-[#9A5A12] to-[#B27425] px-6 md:px-12 py-16 text-white shadow-2xl">
           <div className="absolute -left-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
 
           <div className="absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
@@ -74,7 +74,7 @@ export default function AboutPresence() {
           {offices.map((office) => (
             <div
               key={office.country}
-              className="group rounded-[36px] border border-gray-100 bg-cream p-10 transition-all duration-500 hover:-translate-y-2 hover:border-accent/30 hover:shadow-2xl"
+              className="group rounded-[36px] border border-gray-100 bg-cream p-6 sm:p-10 transition-all duration-500 hover:-translate-y-2 hover:border-accent/30 hover:shadow-2xl"
             >
               <div className="flex items-center gap-5">
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand/10 transition-all duration-500 group-hover:bg-brand">

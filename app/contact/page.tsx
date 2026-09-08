@@ -16,7 +16,7 @@ export default function ContactPage() {
 
       {/* Details and form sit side by side: the page's job is to get someone
           in touch, so nothing comes between the two things that do that. */}
-      <section className="bg-white py-24">
+      <section className="bg-white py-14 md:py-24">
         <div className="container-custom">
           <div className="grid items-start gap-8 lg:grid-cols-[400px_minmax(0,1fr)] xl:gap-12">
             <ContactDetails />

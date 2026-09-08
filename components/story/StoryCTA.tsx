@@ -11,7 +11,7 @@ interface StoryCTAProps {
 
 export default function StoryCTA({ name, videoLink, onDonate }: StoryCTAProps) {
   return (
-    <div className="mt-16 overflow-hidden rounded-[36px] bg-gradient-to-br from-brand via-[#915111] to-[#A86A1F] p-10 text-white shadow-2xl">
+    <div className="mt-16 overflow-hidden rounded-[36px] bg-gradient-to-br from-brand via-[#915111] to-[#A86A1F] p-6 sm:p-10 text-white shadow-2xl">
       <span className="uppercase tracking-[4px] text-sm font-semibold text-white/80">
         Every Gift Creates Impact
       </span>

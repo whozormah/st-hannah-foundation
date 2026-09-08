@@ -26,7 +26,7 @@ export default function PartnershipImpact() {
             Impact Created
           </span>
 
-          <h2 className="text-5xl font-bold mt-4">
+          <h2 className="text-3xl md:text-5xl font-bold mt-4">
             What We Can Achieve Together
           </h2>
         </div>
@@ -37,7 +37,7 @@ export default function PartnershipImpact() {
               key={stat.label}
               className="bg-cream rounded-[28px] p-8 text-center"
             >
-              <h3 className="text-5xl font-bold text-brand">
+              <h3 className="text-3xl md:text-5xl font-bold text-brand">
                 {stat.number}
               </h3>
 

@@ -63,7 +63,7 @@ export default function DonationSuccessPage() {
   if (!verified) {
     return (
       <section className="min-h-screen flex items-center justify-center bg-cream px-6">
-        <div className="bg-white rounded-[32px] shadow-xl p-10 max-w-xl w-full text-center">
+        <div className="bg-white rounded-[32px] shadow-xl p-6 sm:p-10 max-w-xl w-full text-center">
           <h1 className="text-4xl font-bold text-brand">
             Payment Verification Failed
           </h1>
@@ -86,15 +86,15 @@ export default function DonationSuccessPage() {
   }
 
   return (
-    <section className="min-h-screen bg-cream flex items-center justify-center px-6 py-24">
-      <div className="bg-white rounded-[36px] shadow-2xl max-w-3xl w-full p-12 text-center">
+    <section className="min-h-screen bg-cream flex items-center justify-center px-6 py-14 md:py-24">
+      <div className="bg-white rounded-[36px] shadow-2xl max-w-3xl w-full p-6 md:p-12 text-center">
         <CheckCircle2 size={90} className="mx-auto text-green-600" />
 
         <span className="uppercase tracking-[5px] text-brand font-semibold block mt-8">
           Donation Successful
         </span>
 
-        <h1 className="text-5xl font-bold mt-4 leading-tight">
+        <h1 className="text-3xl md:text-5xl font-bold mt-4 leading-tight">
           Thank You For{" "}
           <br />
           Your Generosity

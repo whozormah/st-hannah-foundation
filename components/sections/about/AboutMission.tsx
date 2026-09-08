@@ -5,7 +5,7 @@ import coreValues from "@/public/data/homepage/core-values.json";
 
 export default function AboutMission() {
   return (
-    <section className="bg-white py-24">
+    <section className="bg-white py-14 md:py-24">
       <div className="container-custom">
         {/* Heading */}
 
@@ -29,11 +29,11 @@ export default function AboutMission() {
 
         {/* Story */}
 
-        <div className="grid items-center gap-20 lg:grid-cols-2">
+        <div className="grid items-center gap-10 md:gap-20 lg:grid-cols-2">
           {/* Left */}
 
           <div className="relative">
-            <div className="relative h-[650px] overflow-hidden rounded-[40px]">
+            <div className="relative h-[380px] sm:h-[500px] lg:h-[650px] overflow-hidden rounded-[40px]">
               <Image
                 src="/about/story.jpg"
                 alt="About St. Hannah Foundation"
@@ -45,8 +45,8 @@ export default function AboutMission() {
 
             {/* Floating Card */}
 
-            <div className="absolute -bottom-10 -right-10 rounded-[28px] border border-accent/20 bg-white p-8 shadow-2xl">
-              <h3 className="text-5xl font-bold text-brand">10+</h3>
+            <div className="absolute -bottom-6 right-4 rounded-[28px] border border-accent/20 bg-white p-6 shadow-2xl sm:p-8 lg:-bottom-10 lg:-right-10">
+              <h3 className="text-3xl md:text-5xl font-bold text-brand">10+</h3>
 
               <p className="mt-2 uppercase tracking-[3px] text-sm text-gray-500">
                 Years of Service
@@ -103,7 +103,7 @@ export default function AboutMission() {
 
         {/* Values */}
 
-        <div className="mt-24 rounded-[40px] bg-brand p-14 text-white">
+        <div className="mt-24 rounded-[40px] bg-brand p-7 md:p-14 text-white">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>
               <span className="uppercase tracking-[5px] text-accent">

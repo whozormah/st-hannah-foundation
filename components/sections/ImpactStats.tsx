@@ -61,7 +61,7 @@ export default function ImpactStats() {
             return (
               <div
                 key={index}
-                className="bg-white rounded-3xl p-10 text-center border border-accent/20 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                className="bg-white rounded-3xl p-6 sm:p-10 text-center border border-accent/20 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
               >
                 <div className="w-16 h-16 rounded-2xl bg-brand/10 flex items-center justify-center mx-auto mb-6">
                   <Icon size={32} className="text-brand" />

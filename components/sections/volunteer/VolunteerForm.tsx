@@ -47,7 +47,7 @@ export default function VolunteerForm() {
     return (
       <section id="volunteer-form" className="py-24 bg-cream">
         <div className="container-custom max-w-3xl">
-          <div className="rounded-[32px] bg-white p-12 text-center shadow-sm">
+          <div className="rounded-[32px] bg-white p-6 md:p-12 text-center shadow-sm">
             <h2 className="text-4xl font-bold text-brand">
               Thank You For Stepping Forward
             </h2>
@@ -74,7 +74,7 @@ export default function VolunteerForm() {
             Apply Today
           </span>
 
-          <h2 className="text-5xl font-bold mt-4">Volunteer Application</h2>
+          <h2 className="text-3xl md:text-5xl font-bold mt-4">Volunteer Application</h2>
           <p className="max-w-3xl mx-auto mt-6 text-gray-700 leading-8">
             Join our growing network of volunteers and help us create meaningful
             impact in communities through education, empowerment, outreach and
@@ -84,7 +84,7 @@ export default function VolunteerForm() {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-10 rounded-[32px] shadow-sm space-y-8"
+          className="bg-white p-6 sm:p-10 rounded-[32px] shadow-sm space-y-8"
         >
           {/* Personal Information */}
 

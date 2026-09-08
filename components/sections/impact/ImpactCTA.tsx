@@ -13,7 +13,7 @@ export default function ImpactCTA() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-brand py-24 text-white">
+      <section className="relative overflow-hidden bg-brand py-14 md:py-24 text-white">
         {/* Background Glow */}
 
         <div aria-hidden className="pointer-events-none absolute inset-0">
@@ -52,7 +52,7 @@ export default function ImpactCTA() {
 
             <button
               onClick={() => setIsDonateOpen(true)}
-              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-6 sm:p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
             >
               <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-accent/10 transition-all duration-500 group-hover:bg-accent">
                 <Heart
@@ -81,7 +81,7 @@ export default function ImpactCTA() {
 
             <Link
               href="/volunteer"
-              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-6 sm:p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
             >
               <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-accent/10 transition-all duration-500 group-hover:bg-accent">
                 <Users
@@ -110,7 +110,7 @@ export default function ImpactCTA() {
 
             <button
               onClick={() => setIsPartnerOpen(true)}
-              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-6 sm:p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
             >
               <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-accent/10 transition-all duration-500 group-hover:bg-accent">
                 <Handshake

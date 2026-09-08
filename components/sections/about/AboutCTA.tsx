@@ -12,7 +12,7 @@ export default function AboutCTA() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-brand py-32 text-white">
+      <section className="relative overflow-hidden bg-brand py-16 md:py-24 text-white">
         {/* Background */}
 
         <div className="absolute inset-0">
@@ -49,7 +49,7 @@ export default function AboutCTA() {
 
             <button
               onClick={() => setShowDonationModal(true)}
-              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-6 sm:p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
             >
               <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-accent/20 bg-accent/10">
                 <Heart size={38} className="text-accent" />
@@ -75,7 +75,7 @@ export default function AboutCTA() {
 
             <a
               href="/volunteer"
-              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-6 sm:p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
             >
               <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-accent/20 bg-accent/10">
                 <Users size={38} className="text-accent" />
@@ -101,7 +101,7 @@ export default function AboutCTA() {
 
             <button
               onClick={() => setShowPartnerModal(true)}
-              className="group rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
+              className="group rounded-[36px] border border-white/10 bg-white/5 p-6 sm:p-10 text-left backdrop-blur-md transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-2xl"
             >
               <div className="flex h-20 w-20 items-center justify-center rounded-3xl border border-accent/20 bg-accent/10">
                 <Handshake size={38} className="text-accent" />

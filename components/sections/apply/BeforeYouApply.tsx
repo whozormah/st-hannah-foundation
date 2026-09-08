@@ -32,7 +32,7 @@ export default function BeforeYouApply() {
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Important Notes */}
 
-          <div className="bg-cream rounded-[32px] p-10">
+          <div className="bg-cream rounded-[32px] p-6 sm:p-10">
             <div className="flex items-center gap-4 mb-8">
               <div className="w-14 h-14 rounded-2xl bg-brand/10 flex items-center justify-center">
                 <AlertCircle className="text-brand" size={28} />
@@ -54,7 +54,7 @@ export default function BeforeYouApply() {
 
           {/* Required Information */}
 
-          <div className="bg-cream rounded-[32px] p-10">
+          <div className="bg-cream rounded-[32px] p-6 sm:p-10">
             <div className="flex items-center gap-4 mb-8">
               <div className="w-14 h-14 rounded-2xl bg-brand/10 flex items-center justify-center">
                 <FileText className="text-brand" size={28} />
@@ -75,7 +75,7 @@ export default function BeforeYouApply() {
           </div>
         </div>
 
-        <div className="mt-12 bg-brand text-white rounded-[32px] p-10 text-center">
+        <div className="mt-12 bg-brand text-white rounded-[32px] p-6 sm:p-10 text-center">
           <h3 className="text-3xl font-bold">Every Application Matters</h3>
 
           <p className="mt-4 max-w-3xl mx-auto leading-8 text-white/90">

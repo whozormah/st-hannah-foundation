@@ -45,7 +45,7 @@ export default function ProgramsGetInvolved() {
 
   return (
     <>
-      <section className="bg-cream py-24">
+      <section className="bg-cream py-14 md:py-24">
         <div className="container-custom">
           {/* Heading */}
 

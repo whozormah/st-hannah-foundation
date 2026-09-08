@@ -35,7 +35,7 @@ function photographLabel(count: number) {
 
 export default function GalleryPreview() {
   return (
-    <section className="bg-white py-28">
+    <section className="bg-white py-14 md:py-24">
       <div className="container-custom">
         {/* Header */}
 
@@ -157,7 +157,7 @@ export default function GalleryPreview() {
 
           <Link
             href="/gallery"
-            className="group relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-[28px] bg-gradient-to-br from-[#6F3403] via-[#95520F] to-[#C17A1B] p-10 text-white transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
+            className="group relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-[28px] bg-gradient-to-br from-[#6F3403] via-[#95520F] to-[#C17A1B] p-6 sm:p-10 text-white transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl"
           >
             <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-white/10 blur-3xl" />
 

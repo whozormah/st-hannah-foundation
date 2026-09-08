@@ -17,7 +17,7 @@ export default function PageHeader({
   parentHref,
 }: PageHeaderProps) {
   return (
-    <section className="relative min-h-[500px] md:min-h-[600px] flex items-center overflow-hidden">
+    <section className="relative flex min-h-[360px] items-center overflow-hidden sm:min-h-[460px] md:min-h-[600px]">
       {/* Background Image */}
 
       <Image src={image} alt={title} fill priority className="object-cover" />
@@ -25,7 +25,7 @@ export default function PageHeader({
       <div className="absolute inset-0 bg-black/60" />
       {/* Decorative Gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/60" />
-      <div className="container-custom relative z-10 py-32">
+      <div className="container-custom relative z-10 py-16 md:py-24">
         {/* Breadcrumb */}
 
         <div className="flex flex-wrap items-center text-white/80 text-sm mb-8">

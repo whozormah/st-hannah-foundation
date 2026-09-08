@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { X, Gift, CreditCard } from "lucide-react";
 
 import InKindDonationModal from "./in-kind/InKindDonationModal";
@@ -20,6 +22,8 @@ export default function DonationModal({
   const [isInKindOpen, setIsInKindOpen] = useState(false);
   const [isDonationFormOpen, setIsDonationFormOpen] = useState(false);
 
+  useBodyScrollLock(isOpen || isDonationFormOpen || isInKindOpen);
+
   if (!isOpen && !isDonationFormOpen) return null;
 
   return (
@@ -28,16 +32,16 @@ export default function DonationModal({
 
       {isOpen && (
         <div
-          className="fixed inset-0 z-[99999] bg-black/70 backdrop-blur-sm flex items-center justify-center px-6 py-10"
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/70 px-4 py-6 backdrop-blur-sm sm:px-6 sm:py-10"
           onClick={onClose}
         >
           <div
-            className="bg-white rounded-[32px] w-[76vw] max-w-[900px] max-h-[90vh] overflow-y-auto shadow-2xl animate-in fade-in zoom-in duration-300"
+            className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-[24px] bg-white shadow-2xl animate-in fade-in zoom-in duration-300 sm:rounded-[32px]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
 
-            <div className="flex items-center justify-between p-8 border-b">
+            <div className="flex items-start justify-between gap-4 border-b p-6 sm:p-8">
               <div>
                 <span className="uppercase tracking-[4px] text-brand text-sm font-semibold">
                   St. Hannah Foundation
@@ -63,10 +67,10 @@ export default function DonationModal({
 
             {/* Body */}
 
-            <div className="p-8 space-y-6">
+            <div className="space-y-5 p-6 sm:p-8">
               {/* Donate Online */}
 
-              <div className="bg-brand text-white rounded-3xl p-8">
+              <div className="rounded-3xl bg-brand p-6 text-white sm:p-8">
                 <div className="flex items-center gap-3 mb-4">
                   <CreditCard size={24} />
 
@@ -95,7 +99,7 @@ export default function DonationModal({
 
               {/* Donate Items */}
 
-              <div className="border border-accent/20 rounded-3xl p-8">
+              <div className="rounded-3xl border border-accent/20 p-6 sm:p-8">
                 <div className="flex items-center gap-3 mb-4">
                   <Gift size={24} className="text-brand" />
 

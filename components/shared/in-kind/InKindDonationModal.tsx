@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { X } from "lucide-react";
 
 import StepOne from "./StepOne";
@@ -22,6 +24,8 @@ export default function InKindDonationModal({
   onClose,
   initialCategory = "",
 }: InKindDonationModalProps) {
+  useBodyScrollLock(isOpen);
+
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [reference, setReference] = useState("");

@@ -12,7 +12,11 @@ interface Leader {
   bio?: string;
 }
 
-const leaders: Leader[] = governance;
+const allLeaders: Leader[] = governance;
+
+// A preview with a "meet the team" link; /team lists everyone. Rendering all
+// six here cost six phone screens on the homepage.
+const leaders = allLeaders.slice(0, 3);
 
 interface LeadershipPreviewProps {
   eyebrow?: string;
@@ -28,7 +32,7 @@ export default function LeadershipPreview({
   showButton = true,
 }: LeadershipPreviewProps) {
   return (
-    <section className="relative overflow-hidden bg-white py-32">
+    <section className="relative overflow-hidden bg-white py-16 md:py-24">
       {/* Decorative Background */}
 
       <div className="absolute inset-0">

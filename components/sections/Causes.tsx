@@ -30,7 +30,7 @@ export default function Causes() {
 
   return (
     <>
-      <section className="bg-white py-24">
+      <section className="bg-white py-14 md:py-24">
         <div className="container-custom">
           {/* Header */}
 

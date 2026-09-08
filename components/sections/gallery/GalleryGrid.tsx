@@ -16,7 +16,7 @@ interface GalleryGridProps {
 export default function GalleryGrid({ images, onOpen }: GalleryGridProps) {
   if (!images.length) {
     return (
-      <div className="rounded-[24px] border border-dashed border-accent/40 py-24 text-center">
+      <div className="rounded-[24px] border border-dashed border-accent/40 py-14 md:py-24 text-center">
         <p className="text-xl font-bold text-ink">
           No photographs in this category yet
         </p>

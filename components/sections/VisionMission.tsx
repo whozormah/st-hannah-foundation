@@ -46,7 +46,7 @@ const VALUE_ICONS: Record<string, LucideIcon> = {
 
 export default function VisionMission() {
   return (
-    <section className="relative overflow-hidden bg-white py-24">
+    <section className="relative overflow-hidden bg-white py-14 md:py-24">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -left-32 -top-56 h-[520px] w-[520px] rounded-full bg-cream" />
 

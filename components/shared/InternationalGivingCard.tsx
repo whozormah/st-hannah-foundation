@@ -58,7 +58,7 @@ export default function InternationalGivingCard() {
 
   if (success) {
     return (
-      <div className="mt-8 rounded-[32px] border border-green-200 bg-green-50 p-10 text-center">
+      <div className="mt-8 rounded-[32px] border border-green-200 bg-green-50 p-6 sm:p-10 text-center">
         <CheckCircle2 size={60} className="mx-auto text-green-600" />
 
         <h3 className="mt-6 text-3xl font-bold text-green-700">

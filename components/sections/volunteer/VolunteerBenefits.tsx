@@ -19,7 +19,7 @@ export default function VolunteerBenefits() {
             Why Volunteer With Us
           </span>
 
-          <h2 className="mt-4 text-5xl font-bold">
+          <h2 className="mt-4 text-3xl md:text-5xl font-bold">
             More Than Service.{" "}
             <br />A Journey Of Growth & Impact.
           </h2>

@@ -109,7 +109,7 @@ export default function Footer() {
         </div>
         {/* Main Footer */}
 
-        <div className="container-custom py-24">
+        <div className="container-custom py-14 md:py-24">
           <div className="grid lg:grid-cols-12 gap-12">
             {/* Foundation Info */}
 
@@ -172,22 +172,52 @@ export default function Footer() {
 
               <ul className="space-y-4 text-gray-300">
                 <li>
-                  <Link href="/">Home</Link>
+                  <Link
+                    href="/"
+                    className="block py-2.5 transition hover:text-white"
+                  >
+                    Home
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/about">About Us</Link>
+                  <Link
+                    href="/about"
+                    className="block py-2.5 transition hover:text-white"
+                  >
+                    About Us
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/programs">Programs</Link>
+                  <Link
+                    href="/programs"
+                    className="block py-2.5 transition hover:text-white"
+                  >
+                    Programs
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/impact-stories">Impact Stories</Link>
+                  <Link
+                    href="/impact-stories"
+                    className="block py-2.5 transition hover:text-white"
+                  >
+                    Impact Stories
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/gallery">Gallery</Link>
+                  <Link
+                    href="/gallery"
+                    className="block py-2.5 transition hover:text-white"
+                  >
+                    Gallery
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/team">Leadership</Link>
+                  <Link
+                    href="/team"
+                    className="block py-2.5 transition hover:text-white"
+                  >
+                    Leadership
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -208,15 +238,30 @@ export default function Footer() {
                 </li>
 
                 <li>
-                  <Link href="/volunteer">Volunteer</Link>
+                  <Link
+                    href="/volunteer"
+                    className="block py-2.5 transition hover:text-white"
+                  >
+                    Volunteer
+                  </Link>
                 </li>
 
                 <li>
-                  <Link href="/contact">Partner With Us</Link>
+                  <Link
+                    href="/contact"
+                    className="block py-2.5 transition hover:text-white"
+                  >
+                    Partner With Us
+                  </Link>
                 </li>
 
                 <li>
-                  <Link href="/apply-for-support">Apply For Support</Link>
+                  <Link
+                    href="/apply-for-support"
+                    className="block py-2.5 transition hover:text-white"
+                  >
+                    Apply For Support
+                  </Link>
                 </li>
               </ul>
             </div>

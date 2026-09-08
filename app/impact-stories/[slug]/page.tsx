@@ -240,7 +240,7 @@ export default async function StoryPage({
           {/* Quote */}
 
           {story.quote && (
-            <div className="mt-24 bg-cream p-10 md:p-14 rounded-[32px] border-l-4 border-brand">
+            <div className="mt-24 bg-cream p-6 sm:p-10 md:p-14 rounded-[32px] border-l-4 border-brand">
               <p className="text-2xl italic leading-10 text-gray-700">
                 &quot;{story.quote.text}&quot;
               </p>

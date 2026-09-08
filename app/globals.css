@@ -56,6 +56,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Several sections position decorative circles with negative offsets, which
+   pushed the document wider than the viewport and let phones scroll sideways.
+   `clip` rather than `hidden`: hidden on html/body would break the sticky
+   header. */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   background: var(--background);
   color: var(--dark);

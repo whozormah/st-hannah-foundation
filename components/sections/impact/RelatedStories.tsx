@@ -24,7 +24,7 @@ export default function RelatedStories({
   if (!stories.length) return null;
 
   return (
-    <section className="bg-cream py-32">
+    <section className="bg-cream py-16 md:py-24">
       <div className="container-custom">
         {/* Heading */}
 
@@ -96,7 +96,7 @@ export default function RelatedStories({
 
         {/* Bottom */}
 
-        <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-white p-14 text-center shadow-xl">
+        <div className="mx-auto mt-24 max-w-5xl rounded-[40px] bg-white p-7 md:p-14 text-center shadow-xl">
           <span className="uppercase tracking-[5px] text-brand">
             More Than Stories
           </span>

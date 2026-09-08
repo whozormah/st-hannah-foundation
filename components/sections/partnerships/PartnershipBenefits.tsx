@@ -7,7 +7,7 @@ export default function PartnershipBenefits() {
             Why Partner With Us
           </span>
 
-          <h2 className="text-5xl font-bold mt-4">
+          <h2 className="text-3xl md:text-5xl font-bold mt-4">
             Together We Can Reach More Lives
           </h2>
 

@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import StoryImageViewer from "./StoryImageViewer";
 
@@ -25,6 +27,8 @@ export default function StoryGalleryModal({
   onPrevious,
   onSelect,
 }: StoryGalleryModalProps) {
+  useBodyScrollLock(isOpen);
+
   if (!isOpen) return null;
 
   return (

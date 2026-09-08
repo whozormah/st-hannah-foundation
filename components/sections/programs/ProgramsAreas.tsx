@@ -42,7 +42,7 @@ const programs: Program[] = programsData;
 
 export default function ProgramsAreas() {
   return (
-    <section className="bg-cream py-24">
+    <section className="bg-cream py-14 md:py-24">
       <div className="container-custom">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">

@@ -7,7 +7,7 @@ export default function VolunteerIntro() {
             Join Our Team
           </span>
 
-          <h2 className="text-5xl font-bold mt-4">
+          <h2 className="text-3xl md:text-5xl font-bold mt-4">
             Be Part Of Something Meaningful
           </h2>
 

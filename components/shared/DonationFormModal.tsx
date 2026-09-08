@@ -1,6 +1,8 @@
 "use client";
 
 import { X } from "lucide-react";
+
+import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import DonationFormFields from "./DonationFormFields";
 
 interface DonationFormModalProps {
@@ -14,6 +16,8 @@ export default function DonationFormModal({
   onClose,
   programName,
 }: DonationFormModalProps) {
+  useBodyScrollLock(isOpen);
+
   if (!isOpen) return null;
 
   return (

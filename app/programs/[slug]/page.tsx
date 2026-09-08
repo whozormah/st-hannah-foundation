@@ -61,7 +61,7 @@ export default async function ProgramPage({ params }: PageProps) {
 
   if (!program) {
     return (
-      <div className="container-custom py-32 text-center">
+      <div className="container-custom py-16 md:py-24 text-center">
         {" "}
         <h1 className="text-4xl font-bold">Programme Not Found </h1>
         <Link
@@ -78,7 +78,7 @@ export default async function ProgramPage({ params }: PageProps) {
     <>
       {/* Hero */}
 
-      <section className="relative h-[70vh] min-h-[600px] overflow-hidden">
+      <section className="relative h-[60vh] min-h-[380px] md:min-h-[600px] overflow-hidden">
         <Image
           src={program.heroImage}
           alt={program.title}
@@ -144,7 +144,7 @@ export default async function ProgramPage({ params }: PageProps) {
 
       <section className="py-28 bg-white">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-16">
             <div>
               <h3 className="text-3xl font-bold">Key Activities</h3>
 

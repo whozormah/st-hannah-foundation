@@ -14,7 +14,7 @@ export default function ImpactCTA() {
   return (
     <>
       {" "}
-      <section className="relative overflow-hidden bg-[#6F3403] py-36 text-white">
+      <section className="relative overflow-hidden bg-[#6F3403] py-16 md:py-28 text-white">
         {/* Background */}
 
         <div className="absolute inset-0 overflow-hidden">
@@ -83,7 +83,7 @@ export default function ImpactCTA() {
 
             <button
               onClick={() => setShowDonationModal(true)}
-              className="group relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-[0_35px_80px_rgba(0,0,0,.18)]"
+              className="group relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 p-6 sm:p-10 text-left backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-[0_35px_80px_rgba(0,0,0,.18)]"
             >
               <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-accent/10 blur-3xl transition-all duration-500 group-hover:scale-150" />
 
@@ -123,7 +123,7 @@ export default function ImpactCTA() {
 
             <Link
               href="/volunteer"
-              className="group relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-[0_35px_80px_rgba(0,0,0,.18)]"
+              className="group relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 p-6 sm:p-10 text-left backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-[0_35px_80px_rgba(0,0,0,.18)]"
             >
               <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-accent/10 blur-3xl transition-all duration-500 group-hover:scale-150" />
 
@@ -162,7 +162,7 @@ export default function ImpactCTA() {
 
             <button
               onClick={() => setShowPartnerModal(true)}
-              className="group relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 p-10 text-left backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-[0_35px_80px_rgba(0,0,0,.18)]"
+              className="group relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 p-6 sm:p-10 text-left backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-accent/40 hover:bg-white/10 hover:shadow-[0_35px_80px_rgba(0,0,0,.18)]"
             >
               <div className="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-accent/10 blur-3xl transition-all duration-500 group-hover:scale-150" />
 

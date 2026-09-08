@@ -36,7 +36,7 @@ export default function AboutFounder() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-20 items-center">
           {/* Founder Image */}
 
           <div className="group relative">
@@ -49,7 +49,7 @@ export default function AboutFounder() {
             <div className="absolute inset-0 rounded-[36px] border border-accent/20 transition-all duration-700 group-hover:border-accent group-hover:scale-[1.01]" />
 
             <div className="relative overflow-hidden rounded-[36px] bg-cream shadow-xl transition-all duration-700 group-hover:shadow-2xl">
-              <div className="relative h-[760px]">
+              <div className="relative h-[420px] sm:h-[560px] lg:h-[760px]">
                 <Image
                   src={founder.image}
                   alt={founder.name}

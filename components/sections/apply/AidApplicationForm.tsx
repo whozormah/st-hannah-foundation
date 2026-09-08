@@ -73,9 +73,9 @@ export default function AidApplicationForm() {
 
   if (status === "sent") {
     return (
-      <section className="bg-white py-24">
+      <section className="bg-white py-14 md:py-24">
         <div className="container-custom max-w-3xl">
-          <div className="rounded-[32px] bg-cream p-12 text-center shadow-sm">
+          <div className="rounded-[32px] bg-cream p-6 md:p-12 text-center shadow-sm">
             <h2 className="text-4xl font-bold text-brand">
               Your Application Has Been Received
             </h2>
@@ -136,7 +136,7 @@ export default function AidApplicationForm() {
         {" "}
         <div
           ref={formRef}
-          className="bg-cream rounded-[32px] p-10 md:p-14 shadow-sm"
+          className="bg-cream rounded-[32px] p-6 sm:p-10 md:p-14 shadow-sm"
         >
           {" "}
           <div className="text-center mb-12">

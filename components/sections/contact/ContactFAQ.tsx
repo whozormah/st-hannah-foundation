@@ -41,7 +41,7 @@ export default function ContactFAQ() {
   ];
 
   return (
-    <section className="bg-white py-24">
+    <section className="bg-white py-14 md:py-24">
       <div className="container-custom">
         {/* Header */}
 
@@ -109,7 +109,7 @@ export default function ContactFAQ() {
 
         {/* Bottom Card */}
 
-        <div className="mx-auto mt-16 max-w-4xl rounded-[32px] bg-brand p-10 text-center text-white shadow-2xl">
+        <div className="mx-auto mt-16 max-w-4xl rounded-[32px] bg-brand p-6 sm:p-10 text-center text-white shadow-2xl">
           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-white/10">
             <MessageCircle size={38} />
           </div>

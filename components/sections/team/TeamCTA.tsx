@@ -8,7 +8,7 @@ export default function TeamCTA() {
           Join Our Team
         </span>
 
-        <h2 className="text-5xl font-bold mt-6">Become Part Of The Mission</h2>
+        <h2 className="text-3xl md:text-5xl font-bold mt-6">Become Part Of The Mission</h2>
 
         <p className="max-w-3xl mx-auto mt-8 text-lg leading-8">
           We believe meaningful change happens when passionate people come

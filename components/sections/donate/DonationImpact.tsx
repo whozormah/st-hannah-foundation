@@ -49,7 +49,7 @@ export default function DonationImpact() {
               key={stat.label}
               className="bg-white rounded-[32px] p-8 text-center shadow-sm hover:shadow-lg transition"
             >
-              <h3 className="text-5xl font-bold text-brand">
+              <h3 className="text-3xl md:text-5xl font-bold text-brand">
                 {stat.number}
               </h3>
 
@@ -97,7 +97,7 @@ export default function DonationImpact() {
 
         {/* Donation Promise */}
 
-        <div className="mt-24 bg-white rounded-[32px] p-10 md:p-14 text-center shadow-sm">
+        <div className="mt-24 bg-white rounded-[32px] p-6 sm:p-10 md:p-14 text-center shadow-sm">
           <span className="uppercase tracking-[5px] text-brand font-semibold">
             Our Commitment
           </span>

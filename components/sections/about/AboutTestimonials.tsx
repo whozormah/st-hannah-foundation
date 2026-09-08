@@ -23,7 +23,7 @@ export default function Testimonials() {
   if (!testimonials.length) return null;
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#2E1B05] via-brand-dark to-brand py-28">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#2E1B05] via-brand-dark to-brand py-14 md:py-24">
       {/* Decorative wash */}
 
       <div aria-hidden className="pointer-events-none absolute inset-0">
