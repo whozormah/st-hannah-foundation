@@ -5,10 +5,10 @@
     "age": 34,
     "tagline": "Restoring Hope",
     "headline": "Every Child Deserves A Future",
-    "heroImage": "/campaigns/esther/esther-main.png",
+    "heroImage": "/campaigns/esther/esther-main.jpg",
     "gallery": [
-      "/campaigns/esther/esther-1.png",
-      "/campaigns/esther/esther-2.png"
+      "/campaigns/esther/esther-1.jpg",
+      "/campaigns/esther/esther-2.jpg"
     ],
 
     "description": [

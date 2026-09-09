@@ -10,7 +10,7 @@ export default function ImpactStoriesPage() {
       <PageHeader
         title="Impact Stories"
         subtitle="Stories of hope, resilience and transformation from the communities we serve."
-        image="/impact/featured-story.png"
+        image="/impact/featured-story.jpg"
       />
 
       <ImpactNumbers />

@@ -25,7 +25,7 @@ export default function PartnershipsPage() {
       <PageHeader
         title="Become A Partner"
         subtitle="Partner with St. Hannah Foundation to create lasting impact through education support, widow empowerment, family assistance, community outreach and sustainable development initiatives."
-        image="/causes/business.png"
+        image="/causes/business.jpg"
       />
 
       <PartnershipBenefits />
