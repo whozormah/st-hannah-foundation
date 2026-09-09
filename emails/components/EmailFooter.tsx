@@ -1,4 +1,5 @@
 import { Hr, Img, Link, Section, Text } from "@react-email/components";
+import settings from "@/public/data/site-settings.json";
 import { colors } from "../styles";
 
 const logoUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/logo.png`;
@@ -74,7 +75,7 @@ export default function EmailFooter() {
         </Link>
 
         <Link
-          href="mailto:support@sthannahfoundation.org"
+          href={`mailto:${settings.email}`}
           style={{
             color: colors.primary,
             textDecoration: "none",
