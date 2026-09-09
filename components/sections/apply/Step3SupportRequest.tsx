@@ -8,8 +8,13 @@ export default function Step3SupportRequest() {
         support is important at this time.
       </p>
       <div className="space-y-6">
-        <select name="supportType" className="w-full p-4 border rounded-xl">
-          <option value="">Type Of Support Needed</option>
+        <div>
+          <label htmlFor="apply-supportType" className="mb-2 block font-semibold">
+            Type Of Support Needed
+          </label>
+
+          <select id="apply-supportType" name="supportType" className="w-full p-4 border rounded-xl">
+          <option value="">Please select</option>
 
           <option>Education Support</option>
 
@@ -27,9 +32,15 @@ export default function Step3SupportRequest() {
 
           <option>Other</option>
         </select>
+        </div>
 
-        <select name="urgency" className="w-full p-4 border rounded-xl">
-          <option value="">How Urgent Is Your Request?</option>
+        <div>
+          <label htmlFor="apply-urgency" className="mb-2 block font-semibold">
+            How Urgent Is Your Request?
+          </label>
+
+          <select id="apply-urgency" name="urgency" className="w-full p-4 border rounded-xl">
+          <option value="">Please select</option>
 
           <option>Emergency (Immediate Assistance Needed)</option>
 
@@ -39,42 +50,73 @@ export default function Step3SupportRequest() {
 
           <option>General Assistance</option>
         </select>
+        </div>
 
-        <select name="appliedElsewhere" className="w-full p-4 border rounded-xl">
-          <option value="">Have You Applied For Similar Support Elsewhere?</option>
+        <div>
+          <label htmlFor="apply-appliedElsewhere" className="mb-2 block font-semibold">
+            Have You Applied For Similar Support Elsewhere?
+          </label>
+
+          <select id="apply-appliedElsewhere" name="appliedElsewhere" className="w-full p-4 border rounded-xl">
+          <option value="">Please select</option>
 
           <option>Yes</option>
 
           <option>No</option>
         </select>
+        </div>
 
-        <input
+        <div>
+          <label htmlFor="apply-supportTypeOther" className="mb-2 block font-semibold">
+            If Other, Please Describe The Support Needed
+          </label>
+
+          <input id="apply-supportTypeOther"
           type="text"
           name="supportTypeOther"
             placeholder="If Other, Please Describe The Support Needed"
           className="w-full p-4 border rounded-xl"
-        />
+          />
+        </div>
 
-        <textarea
+        <div>
+          <label htmlFor="apply-supportSummary" className="mb-2 block font-semibold">
+            Briefly Explain The Type Of Support You Are Requesting
+          </label>
+
+          <textarea id="apply-supportSummary"
           rows={4}
           name="supportSummary"
             placeholder="Briefly Explain The Type Of Support You Are Requesting"
           className="w-full p-4 border rounded-xl"
-        />
+          />
+        </div>
 
-        <textarea
+        <div>
+          <label htmlFor="apply-challenge" className="mb-2 block font-semibold">
+            What specific challenge or need are you currently facing?
+          </label>
+
+          <textarea id="apply-challenge"
           rows={5}
           name="challenge"
             placeholder="What specific challenge or need are you currently facing?"
           className="w-full p-4 border rounded-xl"
-        />
+          />
+        </div>
 
-        <textarea
+        <div>
+          <label htmlFor="apply-expectedImpact" className="mb-2 block font-semibold">
+            How will this support improve your situation?
+          </label>
+
+          <textarea id="apply-expectedImpact"
           rows={4}
           name="expectedImpact"
             placeholder="How will this support improve your situation?"
           className="w-full p-4 border rounded-xl"
-        />
+          />
+        </div>
       </div>
     </div>
   );

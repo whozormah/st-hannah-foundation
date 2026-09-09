@@ -21,11 +21,11 @@ export default function StepOne({ formData, setFormData }: StepOneProps) {
         {/* Full Name */}
 
         <div>
-          <label className="block font-semibold mb-2">
+          <label htmlFor="stepone-what-is-your-full-name" className="block font-semibold mb-2">
             What is your full name? *
           </label>
 
-          <input
+          <input id="stepone-what-is-your-full-name"
             type="text"
             value={formData.fullName}
             onChange={(e) =>
@@ -43,11 +43,11 @@ export default function StepOne({ formData, setFormData }: StepOneProps) {
         {/* Email */}
 
         <div>
-          <label className="block font-semibold mb-2">
+          <label htmlFor="stepone-what-is-your-email-address" className="block font-semibold mb-2">
             What is your email address? *
           </label>
 
-          <input
+          <input id="stepone-what-is-your-email-address"
             type="email"
             value={formData.email}
             onChange={(e) =>
@@ -65,11 +65,11 @@ export default function StepOne({ formData, setFormData }: StepOneProps) {
         {/* Phone */}
 
         <div>
-          <label className="block font-semibold mb-2">
+          <label htmlFor="stepone-what-is-the-best-phone-number-to" className="block font-semibold mb-2">
             What is the best phone number to reach you? *
           </label>
 
-          <input
+          <input id="stepone-what-is-the-best-phone-number-to"
             type="tel"
             value={formData.phone}
             onChange={(e) =>

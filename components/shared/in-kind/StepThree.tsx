@@ -23,11 +23,11 @@ export default function StepThree({ formData, setFormData }: StepThreeProps) {
         {/* Item Location */}
 
         <div>
-          <label className="block font-semibold mb-2">
+          <label htmlFor="stepthree-where-are-the-item-s-currently-l" className="block font-semibold mb-2">
             Where are the item(s) currently located? *
           </label>
 
-          <select
+          <select id="stepthree-where-are-the-item-s-currently-l"
             value={formData.location}
             onChange={(e) =>
               setFormData((prev) => ({
@@ -51,11 +51,11 @@ export default function StepThree({ formData, setFormData }: StepThreeProps) {
 
         {formData.location === "Other" && (
           <div>
-            <label className="block font-semibold mb-2">
-              Specify Your Location *
-            </label>
+            <label htmlFor="stepthree-specify-your-location" className="block font-semibold mb-2">
+            Specify Your Location *
+          </label>
 
-            <input
+            <input id="stepthree-specify-your-location"
               type="text"
               value={formData.customLocation}
               onChange={(e) =>

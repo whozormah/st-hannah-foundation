@@ -15,11 +15,14 @@ import {
   ContactEnquiry,
   FoundationContactEnquiry,
   FoundationNewsletterSignup,
+  PartnershipEnquiry,
+  FoundationPartnershipEnquiry,
 } from "@/emails";
 import type { InKindDonationDetails } from "@/emails/FoundationInKindDonation";
 import type { VolunteerApplicationDetails } from "@/emails/FoundationVolunteerApplication";
 import type { AidApplicationDetails } from "@/emails/FoundationAidApplication";
 import type { ContactEnquiryDetails } from "@/emails/FoundationContactEnquiry";
+import type { PartnershipEnquiryDetails } from "@/emails/FoundationPartnershipEnquiry";
 
 import { formatCurrency, formatDate } from "./formatter";
 import { generateReceiptNumber } from "./receipt";
@@ -364,5 +367,41 @@ export async function sendNewsletterSignupEmail(email: string) {
     replyTo: email,
     subject: "New Newsletter Subscriber",
     html,
+  });
+}
+
+export async function sendPartnershipEnquiryEmails(
+  details: PartnershipEnquiryDetails & { reference: string },
+) {
+  const { resend, fromEmail, contactEmail } = getEmailConfig();
+
+  const formattedDate = formatDate(new Date());
+
+  const senderEmail = await render(
+    PartnershipEnquiry({
+      contactPerson: details.contactPerson,
+      organisation: details.organisation,
+      reference: details.reference,
+      date: formattedDate,
+    }),
+  );
+
+  const foundationEmail = await render(
+    FoundationPartnershipEnquiry({ ...details, date: formattedDate }),
+  );
+
+  await deliver(resend, {
+    from: fromEmail,
+    to: details.email,
+    subject: "We\'ve Received Your Partnership Enquiry | St. Hannah Foundation",
+    html: senderEmail,
+  });
+
+  await deliver(resend, {
+    from: fromEmail,
+    to: contactEmail,
+    replyTo: details.email,
+    subject: `Partnership Enquiry • ${details.organisation}`,
+    html: foundationEmail,
   });
 }

@@ -17,3 +17,6 @@ export { default as ContactEnquiry } from "./ContactEnquiry";
 export { default as FoundationContactEnquiry } from "./FoundationContactEnquiry";
 
 export { default as FoundationNewsletterSignup } from "./FoundationNewsletterSignup";
+
+export { default as PartnershipEnquiry } from "./PartnershipEnquiry";
+export { default as FoundationPartnershipEnquiry } from "./FoundationPartnershipEnquiry";

@@ -75,6 +75,20 @@ const GROUPS: { title: string; fields: [string, string][] }[] = [
       ["children", "Number Of Children"],
       ["dependents", "Number Of Dependents"],
       ["primaryProvider", "Primary Provider"],
+      ["householdSize", "Household Size"],
+      ["specialNeedsDependents", "Dependents With Special Needs"],
+      ["specialNeedsDetail", "Special Needs Detail"],
+      ["elderlyRelatives", "Responsible For Elderly Relatives"],
+    ],
+  },
+  {
+    title: "History & Narrative",
+    fields: [
+      ["previousSupport", "Received Support Before"],
+      ["previousSupportDetail", "Previous Support Detail"],
+      ["situationNarrative", "Current Situation"],
+      ["stepsTaken", "Steps Already Taken"],
+      ["additionalInformation", "Additional Information"],
     ],
   },
 ];

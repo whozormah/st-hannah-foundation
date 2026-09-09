@@ -138,6 +138,7 @@ export default function InternationalGivingCard() {
 
               <input
                 type="email"
+                aria-label="Email address for international giving updates"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"

@@ -23,6 +23,10 @@ const FIELDS = [
   "supportSummary", "challenge", "expectedImpact",
   "occupation", "maritalStatus", "incomeSource", "incomeSourceOther",
   "monthlyIncome", "children", "dependents", "primaryProvider",
+  "householdSize", "specialNeedsDependents", "specialNeedsDetail",
+  "elderlyRelatives",
+  "previousSupport", "previousSupportDetail", "situationNarrative",
+  "stepsTaken", "additionalInformation",
 ];
 
 export async function POST(request: NextRequest) {

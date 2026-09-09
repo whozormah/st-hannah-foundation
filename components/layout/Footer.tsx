@@ -75,10 +75,16 @@ export default function Footer() {
                 onSubmit={handleSubscribe}
                 className="mt-10 flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto"
               >
+                <label htmlFor="newsletter-email" className="sr-only">
+                  Email address
+                </label>
+
                 <input
+                  id="newsletter-email"
                   type="email"
                   name="email"
                   required
+                  autoComplete="email"
                   placeholder="Enter your email address"
                   className="flex-1 px-6 py-4 rounded-xl bg-white text-black outline-none"
                 />

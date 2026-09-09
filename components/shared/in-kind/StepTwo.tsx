@@ -40,11 +40,11 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
         {/* Category */}
 
         <div>
-          <label className="block font-semibold mb-2">
+          <label htmlFor="steptwo-donation-category" className="block font-semibold mb-2">
             Donation Category *
           </label>
 
-          <select
+          <select id="steptwo-donation-category"
             value={formData.category}
             onChange={(e) =>
               setFormData((prev) => ({
@@ -86,11 +86,11 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
         {/* Description */}
 
         <div>
-          <label className="block font-semibold mb-2">
+          <label htmlFor="steptwo-describe-the-item-s" className="block font-semibold mb-2">
             Describe The Item(s) *
           </label>
 
-          <textarea
+          <textarea id="steptwo-describe-the-item-s"
             rows={5}
             value={formData.description}
             onChange={(e) =>
@@ -108,9 +108,11 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
         {/* Quantity */}
 
         <div>
-          <label className="block font-semibold mb-2">Quantity *</label>
+          <label htmlFor="steptwo-quantity" className="block font-semibold mb-2">
+            Quantity *
+          </label>
 
-          <input
+          <input id="steptwo-quantity"
             type="text"
             value={formData.quantity}
             onChange={(e) =>
@@ -128,9 +130,11 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
         {/* Condition */}
 
         <div>
-          <label className="block font-semibold mb-2">Size / Condition *</label>
+          <label htmlFor="steptwo-size-condition" className="block font-semibold mb-2">
+            Size / Condition *
+          </label>
 
-          <input
+          <input id="steptwo-size-condition"
             type="text"
             value={formData.condition}
             onChange={(e) =>
@@ -158,11 +162,11 @@ export default function StepTwo({ formData, setFormData }: StepTwoProps) {
         {/* Image Upload */}
 
         <div>
-          <label className="block font-semibold mb-2">
+          <label htmlFor="steptwo-upload-item-image" className="block font-semibold mb-2">
             Upload Item Image *
           </label>
 
-          <input
+          <input id="steptwo-upload-item-image"
             type="file"
             accept="image/*"
             onChange={(e) =>

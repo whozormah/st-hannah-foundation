@@ -9,45 +9,80 @@ export default function Step2ResidentialInfo() {
         possible support interventions.
       </p>
       <div className="space-y-6">
-        <input
+        <div>
+          <label htmlFor="apply-address" className="mb-2 block font-semibold">
+            Residential Address
+          </label>
+
+          <input id="apply-address"
           type="text"
           name="address"
             placeholder="Residential Address"
           className="w-full p-4 border rounded-xl"
-        />
+          />
+        </div>
 
         <div className="grid md:grid-cols-2 gap-6">
-          <input
+          <div>
+            <label htmlFor="apply-state" className="mb-2 block font-semibold">
+              State
+            </label>
+
+            <input id="apply-state"
             type="text"
             name="state"
             placeholder="State"
             className="w-full p-4 border rounded-xl"
-          />
+            />
+          </div>
 
-          <input
+          <div>
+            <label htmlFor="apply-lga" className="mb-2 block font-semibold">
+              Local Government Area (LGA)
+            </label>
+
+            <input id="apply-lga"
             type="text"
             name="lga"
             placeholder="Local Government Area (LGA)"
             className="w-full p-4 border rounded-xl"
-          />
+            />
+          </div>
 
-          <input
+          <div>
+            <label htmlFor="apply-landmark" className="mb-2 block font-semibold">
+              Nearest Landmark
+            </label>
+
+            <input id="apply-landmark"
             type="text"
             name="landmark"
             placeholder="Nearest Landmark"
             className="w-full p-4 border rounded-xl"
-          />
+            />
+          </div>
 
-          <input
+          <div>
+            <label htmlFor="apply-durationAtAddress" className="mb-2 block font-semibold">
+              How Long Have You Lived Here?
+            </label>
+
+            <input id="apply-durationAtAddress"
             type="text"
             name="durationAtAddress"
             placeholder="How Long Have You Lived Here?"
             className="w-full p-4 border rounded-xl"
-          />
+            />
+          </div>
         </div>
 
-        <select name="housingStatus" className="w-full p-4 border rounded-xl">
-          <option value="">Housing Status</option>
+        <div>
+          <label htmlFor="apply-housingStatus" className="mb-2 block font-semibold">
+            Housing Status
+          </label>
+
+          <select id="apply-housingStatus" name="housingStatus" className="w-full p-4 border rounded-xl">
+          <option value="">Please select</option>
 
           <option>Owner Occupier</option>
 
@@ -59,20 +94,33 @@ export default function Step2ResidentialInfo() {
 
           <option>Other</option>
         </select>
+        </div>
 
-        <textarea
+        <div>
+          <label htmlFor="apply-livingConditions" className="mb-2 block font-semibold">
+            Briefly Describe Your Current Living Conditions
+          </label>
+
+          <textarea id="apply-livingConditions"
           rows={4}
           name="livingConditions"
             placeholder="Briefly Describe Your Current Living Conditions"
           className="w-full p-4 border rounded-xl"
-        />
+          />
+        </div>
 
-        <textarea
+        <div>
+          <label htmlFor="apply-housingChallenges" className="mb-2 block font-semibold">
+            Are there any housing, safety or environmental challenges affecting your household?
+          </label>
+
+          <textarea id="apply-housingChallenges"
           rows={4}
           name="housingChallenges"
             placeholder="Are there any housing, safety or environmental challenges affecting your household?"
           className="w-full p-4 border rounded-xl"
-        />
+          />
+        </div>
       </div>
     </div>
   );

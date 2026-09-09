@@ -14,7 +14,12 @@ export default function Step5Documents() {
         <h4 className="text-xl font-bold mb-4">Applicant Photograph</h4>
 
         <div className="bg-white border rounded-2xl p-6">
-          <input type="file" accept=".jpg,.jpeg,.png" className="w-full" />
+          <input
+            type="file"
+            aria-label="Applicant photograph"
+            accept=".jpg,.jpeg,.png"
+            className="w-full"
+          />
 
           <p className="text-sm text-gray-500 mt-3">
             Upload a recent passport photograph or clear picture of yourself.
@@ -28,6 +33,7 @@ export default function Step5Documents() {
 
         <input
           type="file"
+          aria-label="Supporting documents"
           multiple
           accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
           className="w-full p-4 border rounded-xl bg-white"
@@ -44,21 +50,32 @@ export default function Step5Documents() {
         <h4 className="text-xl font-bold mb-4">Previous Support Information</h4>
 
         <div className="space-y-6">
-          <select className="w-full p-4 border rounded-xl">
-            <option>
+          <div>
+            <label htmlFor="apply-previousSupport" className="mb-2 block font-semibold">
               Have You Received Support From St. Hannah Foundation Before?
-            </option>
+            </label>
+
+            <select id="apply-previousSupport" name="previousSupport" className="w-full p-4 border rounded-xl">
+            <option value="">Please select</option>
 
             <option>Yes</option>
 
             <option>No</option>
           </select>
+          </div>
 
-          <textarea
+          <div>
+            <label htmlFor="apply-previousSupportDetail" className="mb-2 block font-semibold">
+              If Yes, Please Describe The Support Received And When You Received It
+            </label>
+
+            <textarea id="apply-previousSupportDetail"
             rows={4}
+            name="previousSupportDetail"
             placeholder="If Yes, Please Describe The Support Received And When You Received It"
             className="w-full p-4 border rounded-xl"
-          />
+            />
+          </div>
         </div>
       </div>
       {/* Supporting Narrative */}
@@ -66,19 +83,36 @@ export default function Step5Documents() {
         <h4 className="text-xl font-bold mb-4">Supporting Narrative</h4>
 
         <div className="space-y-6">
-          <textarea
+          <div>
+            <label htmlFor="apply-situationNarrative" className="mb-2 block font-semibold">
+              Please tell us about your current situation, the challenges you are facing and how this support will help improve your circumstances.
+            </label>
+
+            <textarea id="apply-situationNarrative"
             rows={6}
+            name="situationNarrative"
             placeholder="Please tell us about your current situation, the challenges you are facing and how this support will help improve your circumstances."
             className="w-full p-4 border rounded-xl"
-          />
+            />
+          </div>
 
-          <textarea
+          <div>
+            <label htmlFor="apply-stepsTaken" className="mb-2 block font-semibold">
+              What steps have you already taken to address this situation?
+            </label>
+
+            <textarea id="apply-stepsTaken"
             rows={5}
+            name="stepsTaken"
             placeholder="What steps have you already taken to address this situation?"
             className="w-full p-4 border rounded-xl"
-          />
+            />
+          </div>
 
           <textarea
+            name="additionalInformation"
+            aria-label="Additional information for the review team"
+            
             rows={5}
             placeholder="Is there any additional information you would like the review team to know?"
             className="w-full p-4 border rounded-xl"

@@ -10,10 +10,62 @@ interface PartnerModalProps {
   onClose: () => void;
 }
 
+const PARTNERSHIP_TYPES = [
+  "Corporate Partnership",
+  "NGO Partnership",
+  "Church Partnership",
+  "Community Partnership",
+  "Sponsor A Program",
+  "Sponsor A Beneficiary",
+  "Volunteer Partnership",
+  "Media Partnership",
+  "Other",
+];
+
+const fieldClass =
+  "w-full rounded-xl border border-gray-200 bg-white p-4 transition focus:border-brand";
+
 export default function PartnerModal({ isOpen, onClose }: PartnerModalProps) {
   useBodyScrollLock(isOpen);
 
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    setSending(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/partnership", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        setError(result.message ?? "Something went wrong. Please try again.");
+
+        return;
+      }
+
+      form.reset();
+      setSubmitted(true);
+    } catch {
+      setError(
+        "We could not reach the server. Please check your connection and try again.",
+      );
+    } finally {
+      setSending(false);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -55,82 +107,165 @@ export default function PartnerModal({ isOpen, onClose }: PartnerModalProps) {
 
             {/* Form */}
 
-            <div className="p-8">
-              <form className="space-y-6">
-                <input
-                  type="text"
-                  placeholder="Organization / Company Name"
-                  className="w-full p-4 border rounded-xl"
-                />
-
-                <input
-                  type="text"
-                  placeholder="Contact Person"
-                  className="w-full p-4 border rounded-xl"
-                />
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <input
-                    type="email"
-                    placeholder="Email Address"
-                    className="w-full p-4 border rounded-xl"
-                  />
+            <div className="p-6 sm:p-8">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label htmlFor="p-org" className="mb-2 block font-semibold">
+                    Organisation / company name
+                  </label>
 
                   <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    className="w-full p-4 border rounded-xl"
+                    id="p-org"
+                    type="text"
+                    name="organisation"
+                    required
+                    autoComplete="organization"
+                    className={fieldClass}
                   />
                 </div>
 
-                <input
-                  type="text"
-                  placeholder="Country / Location"
-                  className="w-full p-4 border rounded-xl"
-                />
+                <div>
+                  <label
+                    htmlFor="p-contact"
+                    className="mb-2 block font-semibold"
+                  >
+                    Contact person
+                  </label>
 
-                <select className="w-full p-4 border rounded-xl">
-                  <option>Select Partnership Type</option>
+                  <input
+                    id="p-contact"
+                    type="text"
+                    name="contactPerson"
+                    required
+                    autoComplete="name"
+                    className={fieldClass}
+                  />
+                </div>
 
-                  <option>Corporate Partnership</option>
+                <div className="grid gap-5 md:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="p-email"
+                      className="mb-2 block font-semibold"
+                    >
+                      Email address
+                    </label>
 
-                  <option>NGO Partnership</option>
+                    <input
+                      id="p-email"
+                      type="email"
+                      name="email"
+                      required
+                      autoComplete="email"
+                      className={fieldClass}
+                    />
+                  </div>
 
-                  <option>Church Partnership</option>
+                  <div>
+                    <label
+                      htmlFor="p-phone"
+                      className="mb-2 block font-semibold"
+                    >
+                      Phone number{" "}
+                      <span className="font-normal text-gray-500">
+                        (optional)
+                      </span>
+                    </label>
 
-                  <option>Community Partnership</option>
+                    <input
+                      id="p-phone"
+                      type="tel"
+                      name="phone"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      className={fieldClass}
+                    />
+                  </div>
+                </div>
 
-                  <option>Sponsor A Program</option>
+                <div>
+                  <label
+                    htmlFor="p-location"
+                    className="mb-2 block font-semibold"
+                  >
+                    Country / location{" "}
+                    <span className="font-normal text-gray-500">
+                      (optional)
+                    </span>
+                  </label>
 
-                  <option>Sponsor A Beneficiary</option>
+                  <input
+                    id="p-location"
+                    type="text"
+                    name="location"
+                    className={fieldClass}
+                  />
+                </div>
 
-                  <option>Volunteer Partnership</option>
+                <div>
+                  <label htmlFor="p-type" className="mb-2 block font-semibold">
+                    Partnership type
+                  </label>
 
-                  <option>Media Partnership</option>
+                  <select
+                    id="p-type"
+                    name="partnershipType"
+                    defaultValue=""
+                    className={fieldClass}
+                  >
+                    <option value="">Please select</option>
 
-                  <option>Other</option>
-                </select>
+                    {PARTNERSHIP_TYPES.map((option) => (
+                      <option key={option}>{option}</option>
+                    ))}
+                  </select>
+                </div>
 
-                <textarea
-                  rows={5}
-                  placeholder="Tell us about your organization and how you would like to partner with St. Hannah Foundation."
-                  className="w-full p-4 border rounded-xl"
-                />
+                <div>
+                  <label
+                    htmlFor="p-message"
+                    className="mb-2 block font-semibold"
+                  >
+                    How would you like to partner with us?
+                  </label>
+
+                  <textarea
+                    id="p-message"
+                    name="message"
+                    rows={5}
+                    className={fieldClass}
+                  />
+                </div>
 
                 <label className="flex items-start gap-3">
-                  <input type="checkbox" className="mt-1" />
+                  <input
+                    type="checkbox"
+                    name="consent"
+                    required
+                    className="mt-1 h-5 w-5 shrink-0"
+                  />
 
                   <span className="text-gray-700">
-                    I agree to be contacted regarding partnership opportunities.
+                    I agree to be contacted regarding partnership
+                    opportunities.
                   </span>
                 </label>
 
+                {error && (
+                  <p
+                    role="alert"
+                    className="rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-red-700"
+                  >
+                    {error}
+                  </p>
+                )}
+
                 <button
-                  type="button"
-                  onClick={() => setSubmitted(true)}
-                  className="w-full bg-brand text-white py-5 rounded-xl font-semibold text-lg hover:bg-brand-dark transition"
+                  type="submit"
+                  disabled={sending}
+                  className="w-full rounded-xl bg-brand py-5 text-lg font-semibold text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60"
                 >
-                  Submit Partnership Request
+                  {sending ? "Sending…" : "Submit partnership request"}
                 </button>
               </form>
             </div>

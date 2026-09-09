@@ -23,9 +23,11 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
       {formData.deliveryMethod === "Pickup" && (
         <div className="space-y-6">
           <div>
-            <label className="block font-semibold mb-2">Pickup Address *</label>
+            <label htmlFor="stepfour-pickup-address" className="block font-semibold mb-2">
+            Pickup Address *
+          </label>
 
-            <textarea
+            <textarea id="stepfour-pickup-address"
               rows={4}
               value={formData.pickupAddress}
               onChange={(e) =>
@@ -40,11 +42,11 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
           </div>
 
           <div>
-            <label className="block font-semibold mb-2">
-              Preferred Contact Method *
-            </label>
+            <label htmlFor="stepfour-preferred-contact-method" className="block font-semibold mb-2">
+            Preferred Contact Method *
+          </label>
 
-            <select
+            <select id="stepfour-preferred-contact-method"
               value={formData.contactMethod}
               onChange={(e) =>
                 setFormData((prev) => ({
@@ -68,11 +70,11 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
 
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block font-semibold mb-2">
-                Preferred Pickup Date *
-              </label>
+              <label htmlFor="stepfour-preferred-pickup-date" className="block font-semibold mb-2">
+            Preferred Pickup Date *
+          </label>
 
-              <input
+              <input id="stepfour-preferred-pickup-date"
                 type="date"
                 value={formData.pickupDate}
                 onChange={(e) =>
@@ -86,11 +88,11 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
             </div>
 
             <div>
-              <label className="block font-semibold mb-2">
-                Preferred Pickup Time *
-              </label>
+              <label htmlFor="stepfour-preferred-pickup-time" className="block font-semibold mb-2">
+            Preferred Pickup Time *
+          </label>
 
-              <select
+              <select id="stepfour-preferred-pickup-time"
                 value={formData.pickupTime}
                 onChange={(e) =>
                   setFormData((prev) => ({
@@ -112,11 +114,11 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
           </div>
 
           <div>
-            <label className="block font-semibold mb-2">
-              Additional Pickup Instructions
-            </label>
+            <label htmlFor="stepfour-additional-pickup-instructions" className="block font-semibold mb-2">
+            Additional Pickup Instructions
+          </label>
 
-            <textarea
+            <textarea id="stepfour-additional-pickup-instructions"
               rows={4}
               value={formData.pickupInstructions}
               onChange={(e) =>
@@ -137,11 +139,11 @@ export default function StepFour({ formData, setFormData }: StepFourProps) {
       {formData.deliveryMethod === "Send" && (
         <div className="space-y-6">
           <div>
-            <label className="block font-semibold mb-2">
-              Choose Delivery Destination *
-            </label>
+            <label htmlFor="stepfour-choose-delivery-destination" className="block font-semibold mb-2">
+            Choose Delivery Destination *
+          </label>
 
-            <select
+            <select id="stepfour-choose-delivery-destination"
               value={formData.destination}
               onChange={(e) =>
                 setFormData((prev) => ({
