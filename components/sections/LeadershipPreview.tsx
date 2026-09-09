@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Crown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import governance from "@/public/data/governance.json";
 
@@ -8,14 +8,14 @@ interface Leader {
   name: string;
   role: string;
   image: string;
-  // Not yet supplied for every board member in governance.json.
+  /** Optional. Add a bio to governance.json and it appears here. */
   bio?: string;
 }
 
 const allLeaders: Leader[] = governance;
 
-// A preview with a "meet the team" link; /team lists everyone. Rendering all
-// six here cost six phone screens on the homepage.
+// A preview with a link to /team, which lists everyone. Rendering all six here
+// cost six phone screens on the homepage.
 const leaders = allLeaders.slice(0, 3);
 
 interface LeadershipPreviewProps {
@@ -27,175 +27,78 @@ interface LeadershipPreviewProps {
 
 export default function LeadershipPreview({
   eyebrow = "Governance & Leadership",
-  title = "Meet The Leaders Behind The Mission",
-  description = "Behind every initiative is a dedicated team committed to advancing our mission, strengthening communities and ensuring every programme delivers meaningful, measurable and lasting impact.",
+  title = "Meet the leaders behind the mission",
+  description = "The people responsible for the Foundation's direction, oversight and accountability.",
   showButton = true,
 }: LeadershipPreviewProps) {
+  if (!leaders.length) return null;
+
   return (
-    <section className="relative overflow-hidden bg-white py-16 md:py-24">
-      {/* Decorative Background */}
+    <section className="bg-white py-14 md:py-24">
+      <div className="container-custom">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
+              {eyebrow}
+            </span>
 
-      <div className="absolute inset-0">
-        <div className="absolute -top-48 left-0 h-[520px] w-[520px] rounded-full bg-cream" />
+            <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
+              {title}
+            </h2>
 
-        <div className="absolute right-0 bottom-0 h-[420px] w-[420px] rounded-full bg-cream/70" />
-      </div>
+            <p className="mt-5 text-lg leading-9 text-gray-700">{description}</p>
+          </div>
 
-      <div className="container-custom relative">
-        {/* Heading */}
-
-        <div className="mx-auto mb-24 max-w-4xl text-center">
-          <span className="uppercase tracking-[6px] text-brand font-semibold">
-            {eyebrow}
-          </span>
-
-          <h2 className="mt-5 text-5xl md:text-6xl font-bold leading-tight text-ink">
-            {title}
-          </h2>
-
-          <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-700">
-            {description}
-          </p>
-        </div>
-
-        {/* Cards */}
-
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {leaders.map((leader) => {
-            const isFounder = leader.role === "President";
-
-            return (
-              <div
-                key={leader.name}
-                className={`group relative overflow-hidden rounded-[34px] bg-white transition-all duration-700 hover:-translate-y-3 ${
-                  isFounder
-                    ? "border-2 border-accent shadow-[0_25px_70px_rgba(217,164,65,0.18)]"
-                    : "border border-gray-100 shadow-lg hover:shadow-2xl"
-                }`}
-              >
-                {/* Premium Badge */}
-                {isFounder && (
-                  <div className="absolute right-6 top-6 z-30">
-                    <div className="flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-xs font-bold uppercase tracking-[2px] text-[#2E1B05] shadow-lg">
-                      <Crown size={14} />
-                      Founder
-                    </div>
-                  </div>
-                )}
-                {/* Image Area */}
-                <div
-                  className={`relative overflow-hidden ${
-                    isFounder
-                      ? "bg-gradient-to-b from-[#F8F1E5] via-cream to-white"
-                      : "bg-cream"
-                  }`}
-                >
-                  {/* Decorative Glow */}
-
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#F8E6C8_0%,transparent_70%)]" />
-
-                  <div className="relative h-[380px]">
-                    <Image
-                      src={leader.image}
-                      alt={leader.name}
-                      fill
-                      className={`object-contain object-bottom p-6 transition-all duration-1000 ease-out ${
-                        isFounder
-                          ? "grayscale group-hover:grayscale-0 group-hover:scale-[1.05]"
-                          : "group-hover:scale-[1.04]"
-                      }`}
-                    />
-                  </div>
-
-                  {/* Gold Divider */}
-
-                  <div
-                    className={`h-[2px] w-full ${
-                      isFounder ? "bg-accent" : "bg-gray-100"
-                    }`}
-                  />
-                </div>{" "}
-                {/* Content */}
-                <div className="flex h-[330px] flex-col p-8">
-                  {isFounder && (
-                    <span className="inline-flex w-fit items-center rounded-full bg-[#FFF7E8] px-4 py-2 text-xs font-bold uppercase tracking-[3px] text-brand">
-                      Founder & President
-                    </span>
-                  )}
-
-                  <h3 className="mt-6 text-3xl font-bold leading-tight text-ink">
-                    {leader.name}
-                  </h3>
-
-                  <p
-                    className={`mt-2 font-semibold ${
-                      isFounder ? "text-brand" : "text-[#9A6A17]"
-                    }`}
-                  >
-                    {leader.role}
-                  </p>
-
-                  {/* Founder Card */}
-
-                  {isFounder ? (
-                    <>
-                      <div className="mt-6">
-                        <div className="mb-6 h-[2px] w-16 rounded-full bg-accent" />
-
-                        <blockquote className="relative pl-6 italic leading-8 text-gray-700">
-                          <span className="absolute -left-1 -top-6 text-6xl font-serif text-accent/20">
-                            &quot;
-                          </span>
-                          Transforming lives begins with compassion, commitment
-                          and collective action.
-                        </blockquote>
-                      </div>
-
-                      <div className="mt-auto pt-8">
-                        <div className="rounded-2xl border border-accent/20 bg-[#FFF9F0] p-5">
-                          <p className="text-sm leading-7 text-gray-700">
-                            Providing visionary leadership and strategic
-                            direction while inspiring sustainable impact across
-                            communities.
-                          </p>
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      {leader.bio && (
-                        <p className="mt-6 leading-8 text-gray-700">
-                          {leader.bio}
-                        </p>
-                      )}
-
-                      <div className="mt-auto pt-8">
-                        <div className="h-px w-14 bg-accent/50" />
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* CTA */}
-
-        {showButton && (
-          <div className="mt-20 text-center">
+          {showButton && (
             <Link
               href="/team"
-              className="group inline-flex items-center gap-3 rounded-full bg-brand px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-brand-dark hover:shadow-xl"
+              className="group inline-flex shrink-0 items-center gap-3 rounded-full border border-brand px-7 py-3 font-semibold text-brand transition-all duration-300 hover:bg-brand hover:text-white"
             >
-              View Full Leadership Team
+              Meet the whole team
               <ArrowRight
                 size={18}
+                aria-hidden
                 className="transition-transform duration-300 group-hover:translate-x-1"
               />
             </Link>
-          </div>
-        )}
+          )}
+        </div>
+
+        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {leaders.map((leader) => (
+            <li key={leader.name}>
+              <article className="group h-full overflow-hidden rounded-[24px] border border-accent/15 bg-white transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-cream">
+                  <Image
+                    src={leader.image}
+                    alt={leader.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
+                  />
+                </div>
+
+                <div className="p-6">
+                  <p className="text-[11px] font-semibold uppercase tracking-[2px] text-brand">
+                    {leader.role}
+                  </p>
+
+                  <h3 className="mt-2 text-xl font-bold leading-tight text-ink">
+                    {leader.name}
+                  </h3>
+
+                  {/* Nothing invented here. The previous version printed a
+                      quotation attributed to the President that appears
+                      nowhere in the data, and a generic paragraph under the
+                      others. */}
+                  {leader.bio && (
+                    <p className="mt-3 leading-8 text-gray-700">{leader.bio}</p>
+                  )}
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

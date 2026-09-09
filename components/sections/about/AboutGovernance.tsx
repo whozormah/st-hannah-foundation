@@ -6,120 +6,106 @@ interface TeamMember {
   name: string;
   role: string;
   image: string;
+  /** Optional. Add a bio to governance.json and it appears on the card. */
   bio?: string;
 }
 
 const team: TeamMember[] = teamData;
 
-export default function AboutGovernance() {
+// The first entry leads the page; the rest follow in the grid.
+const [lead, ...others] = team;
 
+export default function AboutGovernance() {
+  if (!team.length) return null;
 
   return (
-    <section className="py-32 bg-white">
-      {" "}
+    <section className="bg-white py-14 md:py-24">
       <div className="container-custom">
-        {/* Header */}
-        <div className="text-center max-w-4xl mx-auto mb-20">
-          <span className="uppercase tracking-[5px] text-brand font-semibold">
-            Governance & Leadership
+        <div className="max-w-2xl">
+          <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
+            Governance &amp; Leadership
           </span>
 
-          <h2 className="text-4xl md:text-5xl font-bold mt-4">
-            Stewarding The Mission
+          <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-5xl">
+            Stewarding the mission
           </h2>
 
-          <p className="max-w-3xl mx-auto mt-6 text-gray-700 text-lg leading-8">
-            The Governance and Leadership Team provides strategic direction,
-            oversight and stewardship for the Foundation, ensuring
-            accountability, sustainability and meaningful impact across all
-            programmes and initiatives.
+          <p className="mt-5 text-lg leading-9 text-gray-700">
+            The people responsible for the Foundation&apos;s direction,
+            oversight and accountability.
           </p>
         </div>
-        {/* Message Banner */}
-        <div className="max-w-5xl mx-auto bg-gradient-to-r from-brand to-brand-light rounded-[32px] p-6 sm:p-10 md:p-14 mb-20 text-center text-white">
-          <h3 className="text-3xl md:text-4xl font-bold">
-            Leadership Rooted In Service
-          </h3>
 
-          <p className="mt-6 text-white/90 text-lg leading-8 max-w-3xl mx-auto">
-            Our leadership team is committed to guiding the Foundation with
-            integrity, transparency and a shared vision of empowering lives,
-            strengthening communities and creating sustainable impact.
-          </p>
-        </div>
-        {/* Leadership Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {team.map((member) => (
-            <div
-              key={member.name}
-              className={`rounded-[32px] overflow-hidden transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${
-                member.role === "President"
-                  ? "bg-white border border-accent shadow-xl"
-                  : "bg-white border border-gray-100"
-              }`}
-            >
-              {/* Image */}
+        {/* Lead */}
 
-              <div
-                className={`relative h-[350px] flex items-end justify-center ${
-                  member.role === "President" ? "bg-white" : "bg-cream"
-                }`}
-              >
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="object-contain p-6"
-                />
-              </div>
+        <article className="mt-12 grid items-center gap-8 overflow-hidden rounded-[28px] border border-accent/20 bg-cream lg:grid-cols-[minmax(0,420px)_1fr] lg:gap-0">
+          <div className="relative aspect-[4/5] w-full lg:h-full lg:aspect-auto lg:min-h-[460px]">
+            <Image
+              src={lead.image}
+              alt={lead.name}
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 420px"
+              className="object-cover object-top"
+            />
+          </div>
 
-              {/* Content */}
+          <div className="p-8 lg:p-12">
+            <span className="inline-flex rounded-full bg-brand px-4 py-2 text-xs font-bold uppercase tracking-[3px] text-white">
+              {lead.role}
+            </span>
 
-              <div
-                className={`p-8 ${
-                  member.role === "President"
-                    ? "bg-gradient-to-br from-brand to-brand-light text-white"
-                    : ""
-                }`}
-              >
-                {member.role === "President" && (
-                  <span className="inline-flex items-center px-4 py-2 rounded-full bg-accent text-[#140B02] text-xs font-bold mb-5">
-                    Founder & President
-                  </span>
-                )}
+            <h3 className="mt-6 text-3xl font-bold leading-tight text-ink md:text-4xl">
+              {lead.name}
+            </h3>
 
-                <p
-                  className={`uppercase tracking-[3px] text-xs font-semibold ${
-                    member.role === "President"
-                      ? "text-accent-soft"
-                      : "text-brand"
-                  }`}
-                >
-                  {member.role}
-                </p>
+            <div aria-hidden className="mt-6 h-[3px] w-16 rounded-full bg-accent" />
 
-                <h3 className="text-2xl font-bold mt-3 leading-tight">
-                  {member.name}
-                </h3>
+            {lead.bio && (
+              <p className="mt-6 text-lg leading-9 text-gray-700">{lead.bio}</p>
+            )}
+          </div>
+        </article>
 
-                {member.role === "President" ? (
-                  <div className="mt-6 border-l-4 border-accent pl-4">
-                    <p className="italic text-white/90 leading-7">
-                      &quot;Transforming lives begins with compassion, commitment and
-                      collective action.&quot;
-                    </p>
-                  </div>
-                ) : (
-                  <p className="mt-5 text-gray-700 text-sm leading-7">
-                    Helping provide strategic leadership, governance and
-                    oversight that strengthens the Foundation&apos;s mission and
-                    long-term impact.
+        {/* The rest */}
+
+        <ul className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-5">
+          {others.map((member) => (
+            <li key={member.name}>
+              <article className="group h-full overflow-hidden rounded-[22px] border border-accent/15 bg-white transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-cream">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 20vw"
+                    className="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
+                  />
+                </div>
+
+                <div className="p-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-[2px] text-brand">
+                    {member.role}
                   </p>
-                )}
-              </div>
-            </div>
+
+                  <h3 className="mt-2 text-lg font-bold leading-tight text-ink">
+                    {member.name}
+                  </h3>
+
+                  {/* No filler: the previous version printed the same
+                      "strategic leadership and governance" paragraph under
+                      all five of them. A bio appears here once the data
+                      carries one. */}
+                  {member.bio && (
+                    <p className="mt-3 text-sm leading-7 text-gray-700">
+                      {member.bio}
+                    </p>
+                  )}
+                </div>
+              </article>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
