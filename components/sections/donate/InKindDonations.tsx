@@ -66,25 +66,6 @@ export default function InKindDonations() {
             ))}
           </div>
 
-          {/* Impact Promise */}
-
-          <div className="mt-20 bg-white rounded-[32px] p-6 sm:p-10 md:p-14 text-center shadow-sm">
-            <span className="uppercase tracking-[5px] text-brand font-semibold">
-              Every Item Matters
-            </span>
-
-            <h3 className="text-4xl md:text-5xl font-bold mt-4">
-              Turning Generosity Into Opportunity
-            </h3>
-
-            <p className="max-w-4xl mx-auto mt-6 text-gray-700 leading-8">
-              Whether it is educational materials, food supplies, medical
-              resources, business tools or household essentials, your donation
-              helps restore dignity, create opportunities and bring hope to
-              those who need it most.
-            </p>
-          </div>
-
           {/* CTA */}
 
           <div className="text-center mt-14">

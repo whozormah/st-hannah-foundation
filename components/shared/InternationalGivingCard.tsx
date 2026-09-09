@@ -70,9 +70,9 @@ export default function InternationalGivingCard() {
         </p>
 
         <p className="mt-3 text-gray-700 leading-8 max-w-xl mx-auto">
-          We&apos;ll notify you as soon as international donations in
+          We&apos;ll email you the moment giving in
           <strong> USD, GBP and EUR </strong>
-          become available.
+          opens.
         </p>
       </div>
     );
@@ -93,7 +93,7 @@ export default function InternationalGivingCard() {
               Coming Soon
             </span>
 
-            <h3 className="mt-1 text-3xl font-bold">International Giving</h3>
+            <h3 className="mt-1 text-2xl font-bold md:text-3xl">Giving from outside Nigeria</h3>
           </div>
         </div>
       </div>
@@ -107,13 +107,14 @@ export default function InternationalGivingCard() {
         </p>
 
         <p className="mt-5 text-gray-700 leading-8">
-          International donations in{" "}
-          <span className="font-semibold text-brand">US Dollar (USD),</span>{" "}
+          Giving in{" "}
+          <span className="font-semibold text-brand">US Dollars (USD),</span>{" "}
           <span className="font-semibold text-brand">
-            British Pound (GBP)
+            Pounds (GBP)
           </span>{" "}
-          and <span className="font-semibold text-brand">Euro (EUR)</span>{" "}
-          will be available soon.
+          and <span className="font-semibold text-brand">Euros (EUR)</span> is
+          being set up: our Paystack registration for international payments is
+          in progress.
         </p>
 
         <p className="mt-5 text-gray-700 leading-8">

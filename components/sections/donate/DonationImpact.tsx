@@ -95,25 +95,6 @@ export default function DonationImpact() {
           ))}
         </div>
 
-        {/* Donation Promise */}
-
-        <div className="mt-24 bg-white rounded-[32px] p-6 sm:p-10 md:p-14 text-center shadow-sm">
-          <span className="uppercase tracking-[5px] text-brand font-semibold">
-            Our Commitment
-          </span>
-
-          <h3 className="text-4xl md:text-5xl font-bold mt-4">
-            Stewarding Every Gift With Integrity
-          </h3>
-
-          <p className="max-w-4xl mx-auto mt-6 text-gray-700 leading-8">
-            We are committed to ensuring that every donation is used
-            responsibly, transparently and strategically to create measurable
-            impact. Through accountability, stewardship and compassionate
-            service, we maximize every contribution to transform lives and
-            strengthen communities.
-          </p>
-        </div>
       </div>
     </section>
   );
