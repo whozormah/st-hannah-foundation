@@ -26,6 +26,7 @@ export default function VolunteerPage() {
       <PageHeader
         title="Volunteer"
         subtitle="Join a growing community of passionate individuals committed to empowering lives, supporting families and creating lasting change."
+        image="/gallery/gallery2.jpeg"
       />
 
       <VolunteerOpportunities />

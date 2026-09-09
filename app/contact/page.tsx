@@ -11,7 +11,7 @@ export default function ContactPage() {
       <PageHeader
         title="Contact Us"
         subtitle="We would love to hear from you. Reach out about our programmes, volunteering, partnerships and community initiatives."
-        image="/headers/contact.jpg"
+        image="/gallery/gallery6.jpg"
       />
 
       {/* Details and form sit side by side: the page's job is to get someone

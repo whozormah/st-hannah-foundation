@@ -29,6 +29,7 @@ export default function AboutPage() {
       <PageHeader
         title="About Us"
         subtitle="Learn more about our story, mission, leadership and commitment to restoring hope, empowering families and transforming communities."
+        image="/about/story.jpg"
       />
 
       <AboutMission />

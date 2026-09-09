@@ -27,6 +27,7 @@ export default function ProgramsPage() {
       <PageHeader
         title="Our Programmes"
         subtitle="Eight programmes creating opportunities, restoring dignity and strengthening communities."
+        image="/programs/community-outreach.jpg"
       />
 
       <ProgramsStats />

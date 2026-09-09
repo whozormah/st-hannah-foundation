@@ -26,6 +26,7 @@ export default function DonatePage() {
       <PageHeader
         title="Donate"
         subtitle="Your support helps us empower lives, strengthen families and create lasting change."
+        image="/causes/children.jpg"
       />
 
       {/* The form comes first: someone arriving here has already decided.

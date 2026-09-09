@@ -4,6 +4,7 @@ import Image from "next/image";
 interface PageHeaderProps {
   title: string;
   subtitle: string;
+  /** Optional. Without one the header falls back to a designed brand panel. */
   image?: string;
   parentTitle?: string;
   parentHref?: string;
@@ -12,64 +13,100 @@ interface PageHeaderProps {
 export default function PageHeader({
   title,
   subtitle,
-  image = "/headers/default.jpg",
+  image,
   parentTitle,
   parentHref,
 }: PageHeaderProps) {
   return (
-    <section className="relative flex min-h-[360px] items-center overflow-hidden sm:min-h-[460px] md:min-h-[600px]">
-      {/* Background Image */}
+    <section className="relative flex min-h-[340px] items-end overflow-hidden sm:min-h-[420px] lg:min-h-[520px]">
+      {image ? (
+        <>
+          <Image
+            src={image}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
 
-      <Image src={image} alt={title} fill priority className="object-cover" />
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/60" />
-      {/* Decorative Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/60" />
-      <div className="container-custom relative z-10 py-16 md:py-24">
-        {/* Breadcrumb */}
+          {/* One gradient, weighted to the bottom where the words sit, so the
+              photograph still reads. It used to carry a flat black/60 wash
+              with a second black gradient on top, which buried the image. */}
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-t from-[#1B1815]/95 via-[#1B1815]/55 to-[#1B1815]/25"
+          />
 
-        <div className="flex flex-wrap items-center text-white/80 text-sm mb-8">
-          <Link href="/" className="hover:text-accent transition">
-            Home
-          </Link>
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-r from-[#2E1B05]/60 to-transparent"
+          />
+        </>
+      ) : (
+        // No photograph: a deliberate brand panel rather than a broken image.
+        // The previous default pointed at /headers/default.jpg, which does not
+        // exist, so every page without an image rendered a flat black block.
+        <>
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-br from-[#2E1B05] via-brand-dark to-brand"
+          />
 
-          {parentTitle && parentHref && (
-            <>
-              <span className="mx-3">/</span>
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+          >
+            <div className="absolute -left-24 -top-24 h-80 w-80 rounded-full bg-accent/15 blur-3xl" />
 
-              <Link
-                href={parentHref}
-                className="hover:text-accent transition"
-              >
-                {parentTitle}
+            <div className="absolute -bottom-32 right-0 h-96 w-96 rounded-full bg-accent-soft/10 blur-3xl" />
+          </div>
+        </>
+      )}
+
+      <div className="container-custom relative z-10 py-12 md:py-16">
+        <nav aria-label="Breadcrumb">
+          <ol className="mb-7 flex flex-wrap items-center gap-2 text-sm text-white/70">
+            <li>
+              <Link href="/" className="transition hover:text-accent">
+                Home
               </Link>
-            </>
-          )}
+            </li>
 
-          <span className="mx-3">/</span>
+            {parentTitle && parentHref && (
+              <>
+                <li aria-hidden>/</li>
 
-          <span className="text-accent">{title}</span>
-        </div>
+                <li>
+                  <Link
+                    href={parentHref}
+                    className="transition hover:text-accent"
+                  >
+                    {parentTitle}
+                  </Link>
+                </li>
+              </>
+            )}
 
-        {/* Label */}
+            <li aria-hidden>/</li>
 
-        <span className="uppercase tracking-[6px] text-accent font-semibold">
-          ST. HANNAH FOUNDATION
+            <li className="text-accent" aria-current="page">
+              {title}
+            </li>
+          </ol>
+        </nav>
+
+        <span className="text-xs font-semibold uppercase tracking-[5px] text-accent">
+          St. Hannah Foundation
         </span>
 
-        {/* Title */}
-
-        <h1 className="text-5xl md:text-7xl font-bold text-white mt-6 max-w-5xl leading-tight">
+        <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-[1.08] text-white md:text-6xl">
           {title}
         </h1>
 
-        {/* Divider */}
+        <div aria-hidden className="mt-7 h-1 w-16 rounded-full bg-accent" />
 
-        <div className="w-24 h-1 bg-accent mt-8 rounded-full" />
-
-        {/* Subtitle */}
-
-        <p className="max-w-3xl mt-8 text-lg md:text-xl text-gray-200 leading-8">
+        <p className="mt-7 max-w-2xl text-lg leading-9 text-white/85">
           {subtitle}
         </p>
       </div>

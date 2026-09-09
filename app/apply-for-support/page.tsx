@@ -28,6 +28,7 @@ export default function ApplyForSupportPage() {
       <PageHeader
         title="Apply For Support"
         subtitle="Request assistance through our support programmes and empowerment initiatives. Every application is reviewed with care, dignity and compassion."
+        image="/causes/family.png"
       />
       <SupportCategories />
       <BeforeYouApply />

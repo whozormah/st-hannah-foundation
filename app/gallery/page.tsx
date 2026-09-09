@@ -70,7 +70,7 @@ export default function GalleryPage() {
       <PageHeader
         title="Gallery"
         subtitle="Moments of hope, compassion and transformation captured through the work of St. Hannah Foundation."
-        image="/headers/gallery.jpg"
+        image="/gallery/gallery1.jpeg"
       />
 
       <GalleryStats />
