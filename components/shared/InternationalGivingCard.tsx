@@ -113,8 +113,7 @@ export default function InternationalGivingCard() {
             Pounds (GBP)
           </span>{" "}
           and <span className="font-semibold text-brand">Euros (EUR)</span> is
-          being set up: our Paystack registration for international payments is
-          in progress.
+          being set up: our international payment account is being approved.
         </p>
 
         <p className="mt-5 text-gray-700 leading-8">

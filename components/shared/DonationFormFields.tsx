@@ -10,10 +10,10 @@ interface DonationFormFieldsProps {
   programName?: string;
 }
 
-/* Naira is live through Paystack. USD, GBP and EUR are pending Paystack
-   registration, so they are shown as upcoming rather than offered as equal
-   choices: previously a donor could pick USD, complete every field and only
-   discover at the pay button that it was unavailable. */
+/* Naira is live through Paystack. USD, GBP and EUR will run through PayPal
+   once that account is approved, so they are shown as upcoming rather than
+   offered as equal choices: previously a donor could pick USD, complete every
+   field and only discover at the pay button that it was unavailable. */
 const CURRENCIES = [
   { code: "NGN", symbol: "₦", live: true },
   { code: "USD", symbol: "$", live: false },
@@ -83,8 +83,8 @@ export default function DonationFormFields({
 
         <p className="mt-4 text-gray-700">
           Donations are processed in Nigerian Naira. Giving in US Dollars,
-          Pounds and Euros is being set up with Paystack — you can ask us to let
-          you know the moment it opens.
+          Pounds and Euros is being set up — you can ask us to let you know the
+          moment it opens.
         </p>
       </div>
 
