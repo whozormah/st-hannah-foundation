@@ -5,14 +5,12 @@
     "educationalBeneficiaries": "45+",
     "communitiesImpacted": "50+"
   },
-
   "programs": {
     "yearsOfCompassion": "10+",
     "livesReached": "900+",
     "outreachActivities": "50+",
     "countriesRepresented": "2"
   },
-
   "impact": {
     "widowsSupported": "500+",
     "childrenReached": "100+",
@@ -20,9 +18,9 @@
     "livesImpacted": "900+"
   },
   "gallery": {
-    "livesImpacted": "1,000+",
+    "livesImpacted": "900+",
     "outreachEvents": "50+",
-    "communitiesReached": "100+",
+    "communitiesReached": "50+",
     "yearsOfService": "10+"
   }
 }
