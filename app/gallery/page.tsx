@@ -85,18 +85,18 @@ export default function GalleryPage() {
                 Moments That Matter
               </span>
 
-              <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
+              <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-5xl">
                 A visual journey of impact
               </h2>
 
               <p className="mt-5 text-lg leading-9 text-gray-700">
-                Browse the work by programme area. Select any photograph to view
-                it full size.
+                {galleryItems.length} photographs from the field. Tap any one to
+                open it full screen.
               </p>
             </div>
 
-            <p className="shrink-0 text-gray-500">
-              Showing {total} of {galleryItems.length} photographs
+            <p className="shrink-0 text-sm uppercase tracking-[3px] text-gray-400">
+              Showing {total} of {galleryItems.length}
             </p>
           </div>
 
@@ -111,7 +111,7 @@ export default function GalleryPage() {
             />
           </div>
 
-          <div className="mt-10">
+          <div>
             <GalleryGrid images={filteredImages} onOpen={setSelectedImage} />
           </div>
         </div>
@@ -125,6 +125,7 @@ export default function GalleryPage() {
         onPrevious={() =>
           setSelectedImage((prev) => ((prev ?? 0) - 1 + total) % total)
         }
+        onSelect={setSelectedImage}
       />
 
       <FeaturedEvents />
