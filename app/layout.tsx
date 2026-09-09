@@ -1,18 +1,31 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const inter = Inter({
-  subsets: ["latin"],
+/* The font files live in the repository rather than being fetched from Google
+   at build time. next/font/google needs a network call while building, so a
+   momentary problem reaching Google fails the whole deploy. These are the same
+   latin variable faces, now served from our own domain: no third-party request
+   for visitors either. */
+const inter = localFont({
+  src: "./fonts/Inter-latin.woff2",
+  weight: "100 900",
+  style: "normal",
+  display: "swap",
   variable: "--font-inter",
+  fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
 });
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
+const playfair = localFont({
+  src: "./fonts/PlayfairDisplay-latin.woff2",
+  weight: "400 900",
+  style: "normal",
+  display: "swap",
   variable: "--font-playfair",
+  fallback: ["ui-serif", "Georgia", "serif"],
 });
 
 const siteUrl =
