@@ -3,7 +3,6 @@
 import { useState, useEffect, useMemo } from "react";
 
 import PageHeader from "@/components/shared/PageHeader";
-import GalleryStats from "@/components/sections/gallery/GalleryStats";
 import GalleryFilters from "@/components/sections/gallery/GalleryFilters";
 import GalleryGrid from "@/components/sections/gallery/GalleryGrid";
 import GalleryLightbox from "@/components/sections/gallery/GalleryLightbox";
@@ -73,8 +72,6 @@ export default function GalleryPage() {
         image="/gallery/gallery1.jpeg"
       />
 
-      <GalleryStats />
-
       {/* The photographs are the page, so they come straight after the header
           rather than behind an intro and a second hero image. */}
       <section id="gallery" className="bg-white py-20">
@@ -90,14 +87,11 @@ export default function GalleryPage() {
               </h2>
 
               <p className="mt-5 text-lg leading-9 text-gray-700">
-                {galleryItems.length} photographs from the field. Tap any one to
-                open it full screen.
+                Moments from the field. Tap any photograph to open it full
+                screen.
               </p>
             </div>
 
-            <p className="shrink-0 text-sm uppercase tracking-[3px] text-gray-400">
-              Showing {total} of {galleryItems.length}
-            </p>
           </div>
 
           <div className="mt-10">

@@ -1,18 +1,6 @@
-import {
-  Eye,
-  Target,
-  HeartHandshake,
-  ShieldCheck,
-  Award,
-  Sparkles,
-  Scale,
-  Users,
-  Star,
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { Eye, Target } from "lucide-react";
 
 import foundationData from "@/public/data/homepage/foundation.json";
-import coreValues from "@/public/data/homepage/core-values.json";
 
 interface FoundationData {
   badge: string;
@@ -22,28 +10,11 @@ interface FoundationData {
   mission: string;
 }
 
-interface Value {
-  title: string;
-  // Optional: add one to core-values.json and the card fills out on its own.
-  description?: string;
-}
-
 const foundation: FoundationData = foundationData;
-const values: Value[] = coreValues;
 
 // Keyed by name rather than array position. The previous version indexed into
 // a fixed icon list, so reordering the data silently moved every icon and a
 // seventh value would have rendered without one.
-const VALUE_ICONS: Record<string, LucideIcon> = {
-  Compassion: HeartHandshake,
-  Integrity: ShieldCheck,
-  Excellence: Award,
-  Empowerment: Sparkles,
-  Accountability: Scale,
-  Community: Users,
-  Service: HeartHandshake,
-};
-
 export default function VisionMission() {
   return (
     <section className="relative overflow-hidden bg-white py-14 md:py-24">
@@ -107,54 +78,6 @@ export default function VisionMission() {
           })}
         </div>
 
-        {/* Core values */}
-
-        <div className="mt-20">
-          <div className="max-w-2xl">
-            <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
-              What Guides Us
-            </span>
-
-            <h3 className="mt-4 text-2xl font-bold text-ink md:text-3xl">
-              Our core values
-            </h3>
-
-            <p className="mt-5 text-lg leading-9 text-gray-700">
-              These shape our decisions and the way we serve every individual
-              and community.
-            </p>
-          </div>
-
-          <ul className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
-            {values.map((value) => {
-              const Icon = VALUE_ICONS[value.title] ?? Star;
-
-              return (
-                <li
-                  key={value.title}
-                  className="group rounded-[20px] border border-accent/15 bg-white p-6 text-center transition-all duration-500 hover:-translate-y-1 hover:border-accent hover:shadow-lg"
-                >
-                  <span
-                    aria-hidden
-                    className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-brand/10 text-brand transition-all duration-500 group-hover:bg-brand group-hover:text-white"
-                  >
-                    <Icon size={24} />
-                  </span>
-
-                  <h4 className="mt-5 font-bold leading-6 text-ink">
-                    {value.title}
-                  </h4>
-
-                  {value.description && (
-                    <p className="mt-3 text-sm leading-7 text-gray-600">
-                      {value.description}
-                    </p>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
       </div>
     </section>
   );

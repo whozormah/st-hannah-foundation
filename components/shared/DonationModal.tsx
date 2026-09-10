@@ -48,14 +48,12 @@ export default function DonationModal({
                 </span>
 
                 <h2 className="text-2xl md:text-3xl font-bold text-ink mt-2">
-                  {programName
-                    ? `Support ${programName}`
-                    : "Make An Impact Today"}
+                  {programName ?? "Make An Impact Today"}
                 </h2>
 
                 <p className="text-gray-500 mt-2">
                   {programName
-                    ? `Your donation will directly support our ${programName} initiative.`
+                    ? "Your donation will send help directly to the beneficiaries of this programme."
                     : "Choose how you'd like to support St. Hannah Foundation."}
                 </p>
               </div>
@@ -78,9 +76,8 @@ export default function DonationModal({
                 </div>
 
                 <p className="text-white/80 leading-7">
-                  Make a secure online donation using our trusted Paystack
-                  payment gateway. Your support helps transform lives and
-                  strengthen communities.
+                  Give securely by card or bank transfer. You will receive a
+                  receipt by email.
                 </p>
 
                 <button

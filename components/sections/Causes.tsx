@@ -14,8 +14,6 @@ interface Program {
   excerpt: string;
 }
 
-const ALL_PROGRAMMES = programsData.length;
-
 // A homepage teaser; /programs carries the full list.
 const programs: Program[] = programsData.slice(0, 4);
 
@@ -43,18 +41,13 @@ export default function Causes() {
               <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
                 Creating opportunities. Restoring hope.
               </h2>
-
-              <p className="mt-5 text-lg leading-9 text-gray-700">
-                Targeted, sustainable initiatives that help individuals,
-                families and communities thrive.
-              </p>
             </div>
 
             <Link
               href="/programs"
               className="group inline-flex shrink-0 items-center gap-3 rounded-full border border-brand px-7 py-3 font-semibold text-brand transition-all duration-300 hover:bg-brand hover:text-white"
             >
-              All {ALL_PROGRAMMES} programmes
+              View our programmes
               <ArrowRight
                 size={18}
                 aria-hidden
