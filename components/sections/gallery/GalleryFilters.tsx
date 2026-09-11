@@ -1,7 +1,7 @@
 "use client";
 
 interface GalleryFiltersProps {
-  categories: { name: string; count: number }[];
+  categories: string[];
   activeCategory: string;
   onSelect: (category: string) => void;
 }
@@ -21,12 +21,12 @@ export default function GalleryFilters({
         className="flex gap-2 overflow-x-auto pb-1"
       >
         {categories.map((category) => {
-          const active = activeCategory === category.name;
+          const active = activeCategory === category;
 
           return (
             <button
-              key={category.name}
-              onClick={() => onSelect(category.name)}
+              key={category}
+              onClick={() => onSelect(category)}
               aria-pressed={active}
               className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-semibold transition-all duration-300 ${
                 active
@@ -34,15 +34,7 @@ export default function GalleryFilters({
                   : "border border-gray-200 bg-white text-gray-700 hover:border-ink hover:text-ink"
               }`}
             >
-              {category.name}
-
-              <span
-                className={`ml-2 tabular-nums ${
-                  active ? "text-white/60" : "text-gray-400"
-                }`}
-              >
-                {category.count}
-              </span>
+              {category}
             </button>
           );
         })}

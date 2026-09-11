@@ -59,10 +59,6 @@ export default function ProgramsAreas() {
               still running today.
             </p>
           </div>
-
-          <p className="shrink-0 text-gray-500">
-            {programs.length} programmes
-          </p>
         </div>
 
         <ul className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">

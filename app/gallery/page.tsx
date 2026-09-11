@@ -21,13 +21,8 @@ interface GalleryItem {
 const galleryItems: GalleryItem[] = galleryData;
 
 const categories = [
-  { name: "All", count: galleryItems.length },
-  ...Array.from(new Set(galleryItems.map((item) => item.category))).map(
-    (name) => ({
-      name,
-      count: galleryItems.filter((item) => item.category === name).length,
-    }),
-  ),
+  "All",
+  ...Array.from(new Set(galleryItems.map((item) => item.category))),
 ];
 
 export default function GalleryPage() {

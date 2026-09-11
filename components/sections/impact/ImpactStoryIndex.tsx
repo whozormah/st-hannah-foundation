@@ -42,10 +42,6 @@ export default function ImpactStoryIndex() {
               Behind every number is a person
             </h2>
           </div>
-
-          <p className="shrink-0 text-gray-500">
-            {all.length} stories in total
-          </p>
         </div>
 
         <ul className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">

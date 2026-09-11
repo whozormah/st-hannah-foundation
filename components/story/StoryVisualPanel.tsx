@@ -55,7 +55,7 @@ export default function StoryVisualPanel({
             >
               <span className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[3px] text-brand">
                 <Images size={16} aria-hidden />
-                {imageCount} photographs
+                Photographs
               </span>
 
               <span className="mt-5 flex gap-3">

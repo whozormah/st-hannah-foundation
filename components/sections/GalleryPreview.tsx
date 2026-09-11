@@ -172,14 +172,7 @@ export default function GalleryPreview() {
               </h3>
             </div>
 
-            <div className="relative mt-8 flex items-end justify-between gap-6">
-              <div>
-                <p className="text-5xl font-bold">{items.length}</p>
-
-                <p className="mt-2 text-white/80">
-                  Photographs across {areas.length} programme areas
-                </p>
-              </div>
+            <div className="relative mt-8 flex items-end justify-end gap-6">
 
               <span className="shrink-0 rounded-full bg-white px-6 py-3 font-semibold text-brand transition-transform duration-300 group-hover:translate-x-1">
                 Explore

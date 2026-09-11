@@ -51,14 +51,11 @@ export default function GalleryCard({
           aria-hidden
           className="absolute inset-x-0 bottom-0 flex translate-y-2 items-end justify-between gap-3 p-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100"
         >
-          <span className="text-left">
-            <span className="block text-[11px] font-semibold uppercase tracking-[2px] text-accent-soft">
-              {category}
-            </span>
-
-            <span className="mt-1 block text-sm font-medium text-white/90">
-              {position} of {total}
-            </span>
+          {/* Category only. The position stays in the accessible name, which
+              is what distinguishes otherwise identical buttons, but it is not
+              published on the tile. */}
+          <span className="text-left text-xs font-semibold uppercase tracking-[2px] text-accent-soft">
+            {category}
           </span>
 
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-md">

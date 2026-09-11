@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import foundation from "@/public/data/homepage/foundation.json";
-import coreValues from "@/public/data/homepage/core-values.json";
 
 export default function AboutMission() {
   return (
@@ -101,38 +100,6 @@ export default function AboutMission() {
           </div>
         </div>
 
-        {/* Values */}
-
-        <div className="mt-24 rounded-[40px] bg-brand p-7 md:p-14 text-white">
-          <div className="grid gap-12 lg:grid-cols-2">
-            <div>
-              <span className="uppercase tracking-[5px] text-accent">
-                Our Values
-              </span>
-
-              <h3 className="mt-5 text-4xl font-bold">
-                The Principles That Guide Every Decision
-              </h3>
-
-              <p className="mt-8 text-lg leading-9 text-white/80">
-                Everything we do is rooted in values that inspire trust, build
-                relationships and create lasting impact within the communities
-                we serve.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-5">
-              {coreValues.map((value) => (
-                <div
-                  key={value.title}
-                  className="rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-sm"
-                >
-                  <p className="font-semibold">{value.title}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
