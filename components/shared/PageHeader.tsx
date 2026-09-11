@@ -6,6 +6,10 @@ interface PageHeaderProps {
   subtitle: string;
   /** Optional. Without one the header falls back to a designed brand panel. */
   image?: string;
+  /** Small label above the heading. Defaults to the Foundation's name. */
+  eyebrow?: string;
+  /** Shown in the breadcrumb when the heading itself is a full sentence. */
+  breadcrumbLabel?: string;
   parentTitle?: string;
   parentHref?: string;
 }
@@ -14,6 +18,8 @@ export default function PageHeader({
   title,
   subtitle,
   image,
+  eyebrow,
+  breadcrumbLabel,
   parentTitle,
   parentHref,
 }: PageHeaderProps) {
@@ -91,13 +97,13 @@ export default function PageHeader({
             <li aria-hidden>/</li>
 
             <li className="text-accent" aria-current="page">
-              {title}
+              {breadcrumbLabel ?? title}
             </li>
           </ol>
         </nav>
 
         <span className="text-xs font-semibold uppercase tracking-[5px] text-accent">
-          St. Hannah Foundation
+          {eyebrow ?? "St. Hannah Foundation"}
         </span>
 
         <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-[1.08] text-white md:text-6xl">

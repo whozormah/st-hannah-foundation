@@ -7,6 +7,8 @@ interface PaystackButtonProps {
   amount: number;
   currency: string;
   purpose: string;
+  /** Shown on the button, e.g. "Give ₦50,000". Falls back to a generic label. */
+  label?: string;
 }
 
 export default function PaystackButton({
@@ -16,6 +18,7 @@ export default function PaystackButton({
   amount,
   currency,
   purpose,
+  label,
 }: PaystackButtonProps) {
   const isValid =
     name.trim().length >= 3 &&
@@ -66,13 +69,13 @@ export default function PaystackButton({
       type="button"
       onClick={handlePayment}
       disabled={!isValid}
-      className={`w-full py-5 rounded-xl font-semibold text-lg transition ${
+      className={`w-full rounded-xl py-5 text-lg font-semibold transition ${
         isValid
-          ? "bg-brand hover:bg-brand-dark text-white"
-          : "bg-gray-300 text-gray-500 cursor-not-allowed"
+          ? "bg-brand text-white hover:bg-brand-dark"
+          : "cursor-not-allowed bg-gray-300 text-gray-500"
       }`}
     >
-      Complete Your Donation
+      {label || "Give"}
     </button>
   );
 }

@@ -1,24 +1,29 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Check, Lock } from "lucide-react";
+import { Check } from "lucide-react";
 
 import PaystackButton from "@/components/paystack/PaystackButton";
-import InternationalGivingCard from "./InternationalGivingCard";
 
 interface DonationFormFieldsProps {
   programName?: string;
 }
 
-/* Naira is live through Paystack. USD, GBP and EUR will run through PayPal
-   once that account is approved, so they are shown as upcoming rather than
-   offered as equal choices: previously a donor could pick USD, complete every
-   field and only discover at the pay button that it was unavailable. */
+/* One donation system, not four forms. Naira is live through Paystack; the
+   other currencies become active by flipping `live` here once the
+   international payment account is approved. */
 const CURRENCIES = [
   { code: "NGN", symbol: "₦", live: true },
   { code: "USD", symbol: "$", live: false },
   { code: "GBP", symbol: "£", live: false },
   { code: "EUR", symbol: "€", live: false },
+];
+
+/* Monthly giving needs Paystack subscription plans, which are not built yet.
+   It is shown but marked, rather than quietly charging a donor once. */
+const FREQUENCIES = [
+  { id: "one-time", label: "One-time", live: true },
+  { id: "monthly", label: "Monthly", live: false },
 ];
 
 const PRESETS = ["10000", "25000", "50000", "100000", "200000", "500000"];
@@ -33,7 +38,7 @@ const PURPOSES = [
 ];
 
 const fieldClass =
-  "w-full rounded-xl border border-gray-200 p-4 transition focus:border-brand";
+  "w-full rounded-xl border border-gray-200 bg-white p-4 transition focus:border-brand";
 
 export default function DonationFormFields({
   programName,
@@ -51,28 +56,39 @@ export default function DonationFormFields({
       ? [programName, ...PURPOSES]
       : PURPOSES;
 
+  const numericAmount = Number(amount);
+
+  const buttonLabel =
+    numericAmount > 0 ? `Give ₦${numericAmount.toLocaleString()}` : "Give";
+
   return (
-    <div className="space-y-8">
+    <div className="rounded-[28px] border border-accent/20 bg-cream p-6 shadow-sm sm:p-8">
+      <h2 className="text-2xl font-bold text-ink md:text-3xl">
+        Give to St. Hannah Foundation
+      </h2>
+
       {/* Currency */}
 
-      <div>
-        <p className="font-bold">Currency</p>
+      <fieldset className="mt-7">
+        <legend className="text-sm font-semibold uppercase tracking-[2px] text-gray-500">
+          Currency
+        </legend>
 
-        <ul className="mt-4 flex flex-wrap gap-3">
+        <ul className="mt-3 flex flex-wrap gap-2">
           {CURRENCIES.map((item) => (
             <li key={item.code}>
               {item.live ? (
-                <span className="inline-flex items-center gap-2 rounded-xl border-2 border-brand bg-brand px-5 py-3 font-bold text-white">
-                  <Check size={16} aria-hidden />
+                <span className="inline-flex items-center gap-2 rounded-xl bg-brand px-4 py-2.5 text-sm font-bold text-white">
+                  <Check size={14} aria-hidden />
                   {item.symbol} {item.code}
                 </span>
               ) : (
                 <span
-                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-xl border border-dashed border-gray-300 px-5 py-3 font-semibold text-gray-400"
                   title="Coming soon"
+                  className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-xl border border-dashed border-gray-300 px-4 py-2.5 text-sm font-semibold text-gray-400"
                 >
                   {item.symbol} {item.code}
-                  <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-gray-500">
+                  <span className="text-[10px] font-bold uppercase tracking-wider">
                     Soon
                   </span>
                 </span>
@@ -80,57 +96,90 @@ export default function DonationFormFields({
             </li>
           ))}
         </ul>
+      </fieldset>
 
-        <p className="mt-4 text-gray-700">
-          Donations are processed in Nigerian Naira. Giving in US Dollars,
-          Pounds and Euros is being set up — you can ask us to let you know the
-          moment it opens.
-        </p>
-      </div>
+      {/* Frequency */}
+
+      <fieldset className="mt-7">
+        <legend className="text-sm font-semibold uppercase tracking-[2px] text-gray-500">
+          Giving frequency
+        </legend>
+
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {FREQUENCIES.map((item) => (
+            <li key={item.id}>
+              {item.live ? (
+                <span className="inline-flex items-center gap-2 rounded-xl bg-brand px-5 py-2.5 text-sm font-bold text-white">
+                  <Check size={14} aria-hidden />
+                  {item.label}
+                </span>
+              ) : (
+                <span
+                  title="Coming soon"
+                  className="inline-flex cursor-not-allowed items-center gap-1.5 rounded-xl border border-dashed border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-400"
+                >
+                  {item.label}
+                  <span className="text-[10px] font-bold uppercase tracking-wider">
+                    Soon
+                  </span>
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </fieldset>
 
       {/* Amount */}
 
-      <div>
-        <label htmlFor="donation-amount" className="font-bold">
+      <fieldset className="mt-7">
+        <legend className="text-sm font-semibold uppercase tracking-[2px] text-gray-500">
           Amount
-        </label>
+        </legend>
 
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {PRESETS.map((value) => (
-            <button
-              key={value}
-              type="button"
-              onClick={() => setAmount(value)}
-              aria-pressed={amount === value}
-              className={`rounded-xl border p-4 font-bold transition ${
-                amount === value
-                  ? "border-brand bg-brand text-white"
-                  : "border-gray-200 bg-white hover:border-brand"
-              }`}
-            >
-              ₦{Number(value).toLocaleString()}
-            </button>
-          ))}
+        <div className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+          {PRESETS.map((value) => {
+            const selected = amount === value;
+
+            return (
+              <button
+                key={value}
+                type="button"
+                onClick={() => setAmount(value)}
+                aria-pressed={selected}
+                className={`rounded-xl border-2 p-3.5 font-bold transition ${
+                  selected
+                    ? "border-brand bg-brand text-white"
+                    : "border-transparent bg-white text-ink hover:border-brand/40"
+                }`}
+              >
+                ₦{Number(value).toLocaleString()}
+              </button>
+            );
+          })}
         </div>
+
+        <label htmlFor="donation-amount" className="sr-only">
+          Other amount in Naira
+        </label>
 
         <input
           id="donation-amount"
           ref={amountInputRef}
           type="number"
           inputMode="numeric"
-          placeholder="Or enter another amount in ₦"
+          placeholder="Other amount"
           value={amount}
           required
           min="1"
           onChange={(event) => setAmount(event.target.value)}
-          className={`${fieldClass} mt-3`}
+          className={`${fieldClass} mt-2.5`}
         />
-      </div>
+      </fieldset>
 
       {/* Donor */}
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <div>
+      <div className="mt-7 grid gap-4 sm:grid-cols-2">
+        <div className="sm:col-span-2">
           <label htmlFor="donor-name" className="mb-2 block font-semibold">
             Full name
           </label>
@@ -162,9 +211,7 @@ export default function DonationFormFields({
             className={fieldClass}
           />
 
-          <p className="mt-2 text-sm text-gray-600">
-            Your receipt is sent here.
-          </p>
+          <p className="mt-2 text-sm text-gray-600">Your receipt is sent here.</p>
         </div>
 
         <div>
@@ -177,15 +224,16 @@ export default function DonationFormFields({
             id="donor-phone"
             type="tel"
             value={phone}
+            inputMode="tel"
             autoComplete="tel"
             onChange={(event) => setPhone(event.target.value)}
             className={fieldClass}
           />
         </div>
 
-        <div>
+        <div className="sm:col-span-2">
           <label htmlFor="donation-purpose" className="mb-2 block font-semibold">
-            What should it go towards?
+            Support area
           </label>
 
           <select
@@ -206,30 +254,28 @@ export default function DonationFormFields({
         </div>
       </div>
 
-      <PaystackButton
-        name={name}
-        email={email}
-        phone={phone}
-        amount={Number(amount)}
-        currency="NGN"
-        purpose={purpose}
-      />
+      <div className="mt-7">
+        <PaystackButton
+          name={name}
+          email={email}
+          phone={phone}
+          amount={numericAmount}
+          currency="NGN"
+          purpose={purpose}
+          label={buttonLabel}
+        />
+      </div>
 
-      <ul className="grid gap-3 text-sm text-gray-700 sm:grid-cols-2">
-        {[
-          "Secure, SSL-encrypted payment",
-          "Processed by Paystack",
-          "Instant emailed receipt",
-          "Your details are never shared",
-        ].map((item) => (
-          <li key={item} className="flex items-center gap-2">
-            <Lock size={14} className="shrink-0 text-brand" aria-hidden />
-            {item}
-          </li>
-        ))}
-      </ul>
+      {/* Trust, kept to one line at the point of action. */}
 
-      <InternationalGivingCard />
+      <p className="mt-5 text-center text-sm leading-7 text-gray-600">
+        Your gift is handled securely. Your payment is processed through our
+        payment partner and your receipt is sent to your email.
+      </p>
+
+      <p className="mt-2 text-center text-xs font-semibold uppercase tracking-[2px] text-gray-400">
+        Secure payment · Instant receipt · Paystack
+      </p>
     </div>
   );
 }

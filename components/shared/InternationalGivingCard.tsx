@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Globe2, Mail, Loader2, CheckCircle2 } from "lucide-react";
+import { Mail, Loader2, CheckCircle2 } from "lucide-react";
 
+/* Just the notify-me capture. The heading, explanation and currencies live in
+   the section that wraps this, so they are not repeated here. The request
+   itself is unchanged: it still posts to /api/international-interest. */
 export default function InternationalGivingCard() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -58,128 +61,68 @@ export default function InternationalGivingCard() {
 
   if (success) {
     return (
-      <div className="mt-8 rounded-[32px] border border-green-200 bg-green-50 p-6 sm:p-10 text-center">
-        <CheckCircle2 size={60} className="mx-auto text-green-600" />
+      <div
+        role="status"
+        className="rounded-[22px] border border-green-200 bg-green-50 p-7 text-center"
+      >
+        <CheckCircle2 size={40} className="mx-auto text-green-600" aria-hidden />
 
-        <h3 className="mt-6 text-3xl font-bold text-green-700">
-          You&apos;re On The List!
-        </h3>
+        <p className="mt-4 font-bold text-green-800">You&apos;re on the list</p>
 
-        <p className="mt-5 text-gray-700 leading-8 max-w-xl mx-auto">
-          Thank you for your interest in supporting St. Hannah Foundation.
-        </p>
-
-        <p className="mt-3 text-gray-700 leading-8 max-w-xl mx-auto">
-          We&apos;ll email you the moment giving in
-          <strong> USD, GBP and EUR </strong>
-          opens.
+        <p className="mt-2 leading-8 text-gray-700">
+          We&apos;ll email you the moment giving in USD, GBP and EUR opens.
         </p>
       </div>
     );
   }
 
   return (
-    <div className="mt-8 overflow-hidden rounded-[32px] border border-accent/20 bg-white shadow-sm">
-      {/* Header */}
+    <div className="rounded-[22px] bg-white p-7 shadow-sm">
+      <label
+        htmlFor="international-email"
+        className="block font-semibold text-ink"
+      >
+        Notify me when it opens
+      </label>
 
-      <div className="bg-gradient-to-r from-brand to-[#A86A1F] px-8 py-8 text-white">
-        <div className="flex items-center gap-3">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/15">
-            <Globe2 size={28} />
-          </div>
+      <div className="relative mt-4">
+        <Mail
+          size={18}
+          aria-hidden
+          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+        />
 
-          <div>
-            <span className="text-sm font-semibold uppercase tracking-[4px] text-white/80">
-              Coming Soon
-            </span>
-
-            <h3 className="mt-1 text-2xl font-bold md:text-3xl">Giving from outside Nigeria</h3>
-          </div>
-        </div>
+        <input
+          id="international-email"
+          type="email"
+          autoComplete="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          placeholder="Your email address"
+          className="w-full rounded-xl border border-gray-200 py-4 pl-12 pr-4 transition focus:border-brand"
+        />
       </div>
 
-      {/* Body */}
+      <button
+        onClick={handleNotifyMe}
+        disabled={loading}
+        className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-6 py-4 font-semibold text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-70"
+      >
+        {loading ? (
+          <>
+            <Loader2 size={18} className="animate-spin" aria-hidden />
+            Joining…
+          </>
+        ) : (
+          "Notify Me"
+        )}
+      </button>
 
-      <div className="px-8 py-10">
-        <p className="text-lg font-semibold text-ink leading-8">
-          Thank you for your interest in supporting St. Hannah Foundation from
-          anywhere in the world.
+      {error && (
+        <p role="alert" className="mt-3 text-sm text-red-600">
+          {error}
         </p>
-
-        <p className="mt-5 text-gray-700 leading-8">
-          Giving in{" "}
-          <span className="font-semibold text-brand">US Dollars (USD),</span>{" "}
-          <span className="font-semibold text-brand">
-            Pounds (GBP)
-          </span>{" "}
-          and <span className="font-semibold text-brand">Euros (EUR)</span> is
-          being set up: our international payment account is being approved.
-        </p>
-
-        <p className="mt-5 text-gray-700 leading-8">
-          Join our notification list and be among the first to know when
-          international giving becomes available.
-        </p>
-
-        {/* Email */}
-
-        <div className="mt-10">
-          <label className="mb-3 block text-sm font-semibold uppercase tracking-wide text-brand">
-            Stay Updated
-          </label>
-
-          <div className="flex flex-col gap-4 md:flex-row">
-            <div className="relative flex-1">
-              <Mail
-                size={18}
-                className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
-              />
-
-              <input
-                type="email"
-                aria-label="Email address for international giving updates"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address"
-                className="w-full rounded-2xl border border-gray-200 py-4 pl-14 pr-5 outline-none transition focus:border-brand"
-              />
-            </div>
-
-            <button
-              onClick={handleNotifyMe}
-              disabled={loading}
-              className="flex items-center justify-center gap-2 rounded-2xl bg-brand px-8 py-4 font-semibold text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-70"
-            >
-              {loading ? (
-                <>
-                  <Loader2 size={18} className="animate-spin" />
-                  Joining...
-                </>
-              ) : (
-                "Notify Me"
-              )}
-            </button>
-          </div>
-
-          {error && <p className="mt-4 text-sm text-red-600">{error}</p>}
-        </div>
-
-        {/* Supported Currencies */}
-
-        <div className="mt-10 flex flex-wrap gap-3">
-          <span className="rounded-full bg-cream px-4 py-2 text-sm font-semibold text-brand">
-            🇺🇸 USD
-          </span>
-
-          <span className="rounded-full bg-cream px-4 py-2 text-sm font-semibold text-brand">
-            🇬🇧 GBP
-          </span>
-
-          <span className="rounded-full bg-cream px-4 py-2 text-sm font-semibold text-brand">
-            🇪🇺 EUR
-          </span>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

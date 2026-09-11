@@ -1,64 +1,33 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 export default function DonateCTA() {
   return (
-    <section className="py-32 bg-brand text-white">
-      {" "}
-      <div className="container-custom max-w-6xl text-center">
-        {" "}
-        <span className="uppercase tracking-[5px] text-accent font-semibold">
-          Your Generosity Matters{" "}
+    <section className="bg-brand py-14 text-white md:py-24">
+      <div className="container-custom max-w-3xl text-center">
+        <span className="text-sm font-semibold uppercase tracking-[4px] text-accent">
+          Your Generosity Matters
         </span>
-        <h2 className="text-5xl md:text-7xl font-bold mt-6 leading-tight">
-          Together We Can{" "}
-          <br />
-          Restore Hope.{" "}
-          <br />
-          Transform Lives.
+
+        <h2 className="mt-5 text-3xl font-bold leading-tight md:text-5xl">
+          Together, we can restore hope.
         </h2>
-        <p className="max-w-4xl mx-auto mt-8 text-lg leading-8 text-gray-200">
-          Every donation helps create opportunities, empower widows, support
-          families, sponsor education, strengthen livelihoods and bring hope to
-          communities in need. Your generosity is more than a gift — it is an
-          investment in lasting impact.
+
+        <p className="mt-6 text-lg leading-9 text-white/85">
+          Every gift can help create opportunity and strengthen lives.
         </p>
-        <div className="grid md:grid-cols-3 gap-6 mt-16">
-          <Link
-            href="#donation-form"
-            className="bg-white text-brand rounded-[24px] p-8 hover:scale-105 transition"
-          >
-            <h3 className="text-2xl font-bold">Donate Now</h3>
 
-            <p className="mt-3 text-gray-700 leading-7">
-              Support our programmes and help transform lives through your
-              financial contribution.
-            </p>
-          </Link>
-
-          <Link
-            href="/volunteer"
-            className="bg-white text-brand rounded-[24px] p-8 hover:scale-105 transition"
-          >
-            <h3 className="text-2xl font-bold">Volunteer</h3>
-
-            <p className="mt-3 text-gray-700 leading-7">
-              Give your time, skills and expertise to support our mission and
-              create meaningful change.
-            </p>
-          </Link>
-
-          <Link
-            href="/contact"
-            className="bg-white text-brand rounded-[24px] p-8 hover:scale-105 transition"
-          >
-            <h3 className="text-2xl font-bold">Contact Us</h3>
-
-            <p className="mt-3 text-gray-700 leading-7">
-              Speak with our team about donations, partnerships and other ways
-              to support our work.
-            </p>
-          </Link>
-        </div>
+        <Link
+          href="#give"
+          className="group mt-10 inline-flex items-center gap-3 rounded-full bg-white px-9 py-4 font-semibold text-brand transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+        >
+          Give Now
+          <ArrowRight
+            size={18}
+            aria-hidden
+            className="transition-transform duration-300 group-hover:translate-x-1"
+          />
+        </Link>
       </div>
     </section>
   );
