@@ -1,3 +1,5 @@
+import PrivacyNotice from "@/components/shared/PrivacyNotice";
+
 export default function Step6ReviewSubmit() {
   return (
     <div>
@@ -124,6 +126,11 @@ export default function Step6ReviewSubmit() {
             </span>
           </label>
         </div>
+
+        <PrivacyNotice className="mt-6">
+          How we use and protect the information in your application is
+          explained in full.
+        </PrivacyNotice>
       </div>
       {/* Encouragement */}
       <div className="mt-10 bg-brand text-white rounded-[24px] p-8 text-center">

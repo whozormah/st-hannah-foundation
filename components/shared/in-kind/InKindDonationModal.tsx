@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { X } from "lucide-react";
 
+import PrivacyNotice from "@/components/shared/PrivacyNotice";
+
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
@@ -278,6 +280,12 @@ export default function InKindDonationModal({
 
             {step === 4 && (
               <StepFour formData={formData} setFormData={setFormData} />
+            )}
+
+            {step === 4 && (
+              <PrivacyNotice className="mt-8">
+                We&apos;ll use your details only to arrange your donation.
+              </PrivacyNotice>
             )}
 
             {submitError && (

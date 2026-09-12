@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 
+import PrivacyNotice from "@/components/shared/PrivacyNotice";
+
 const REASONS = [
   "General Enquiry",
   "Volunteer Application",
@@ -184,6 +186,10 @@ export default function ContactForm() {
             {error}
           </p>
         )}
+
+        <PrivacyNotice>
+          We&apos;ll use your details only to reply to your message.
+        </PrivacyNotice>
 
         <button
           type="submit"

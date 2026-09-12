@@ -35,7 +35,6 @@ const GROUPS: { title: string; fields: [string, string][] }[] = [
       ["phone", "Phone Number"],
       ["email", "Email Address"],
       ["contactMethod", "Preferred Contact"],
-      ["nationalId", "National ID"],
       ["referralSource", "Heard About Us Via"],
     ],
   },

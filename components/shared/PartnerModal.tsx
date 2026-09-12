@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { X, CheckCircle } from "lucide-react";
 
+import PrivacyNotice from "@/components/shared/PrivacyNotice";
+
 interface PartnerModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -250,6 +252,10 @@ export default function PartnerModal({ isOpen, onClose }: PartnerModalProps) {
                     opportunities.
                   </span>
                 </label>
+
+                <PrivacyNotice className="-mt-2 pl-8">
+                  We&apos;ll use your details only to respond to your enquiry.
+                </PrivacyNotice>
 
                 {error && (
                   <p

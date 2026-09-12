@@ -16,7 +16,7 @@ const DECLARATIONS = [
 // Everything the form collects. Anything else in the payload is discarded.
 const FIELDS = [
   "fullName", "gender", "dateOfBirth", "nationality", "phone", "email",
-  "contactMethod", "nationalId", "referralSource",
+  "contactMethod", "referralSource",
   "address", "state", "lga", "landmark", "durationAtAddress", "housingStatus",
   "livingConditions", "housingChallenges",
   "supportType", "supportTypeOther", "urgency", "appliedElsewhere",

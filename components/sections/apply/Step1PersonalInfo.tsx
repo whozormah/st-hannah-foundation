@@ -117,19 +117,6 @@ export default function Step1PersonalInfo() {
           <option>Other</option>
         </select>
         </div>
-
-        <div>
-          <label htmlFor="apply-nationalId" className="mb-2 block font-semibold">
-            National ID Number (Optional)
-          </label>
-
-          <input id="apply-nationalId"
-          type="text"
-          name="nationalId"
-            placeholder="National ID Number (Optional)"
-          className="w-full p-4 border rounded-xl md:col-span-2"
-          />
-        </div>
       </div>
     </div>
   );

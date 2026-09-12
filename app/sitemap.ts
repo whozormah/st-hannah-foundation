@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 
 import programs from "@/public/data/programs.json";
+import legal from "@/public/data/legal.json";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
@@ -67,5 +68,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...programRoutes, ...storyRoutes];
+  // Draft legal documents are reachable for review but not advertised.
+  const legalRoutes: MetadataRoute.Sitemap =
+    legal.status === "approved"
+      ? ["/privacy", "/terms"].map((route) => ({
+          url: `${siteUrl}${route}`,
+          lastModified,
+          changeFrequency: "yearly",
+          priority: 0.3,
+        }))
+      : [];
+
+  return [...staticRoutes, ...programRoutes, ...storyRoutes, ...legalRoutes];
 }
