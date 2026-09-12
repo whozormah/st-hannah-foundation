@@ -6,6 +6,7 @@ import Image from "next/image";
 import settings from "@/public/data/site-settings.json";
 
 import DonationModal from "@/components/shared/DonationModal";
+import PrivacyNotice from "@/components/shared/PrivacyNotice";
 
 export default function Footer() {
   const [showDonationModal, setShowDonationModal] = useState(false);
@@ -97,6 +98,11 @@ export default function Footer() {
                   {subscribeState === "sending" ? "Sending…" : "Subscribe"}
                 </button>
               </form>
+
+              <PrivacyNotice dark className="mt-5">
+                We&apos;ll use your email only to send you updates, and you can
+                ask us to stop at any time.
+              </PrivacyNotice>
 
               {subscribeMessage && (
                 <p
@@ -375,9 +381,26 @@ export default function Footer() {
 
         <div className="border-t border-white/10">
           <div className="container-custom py-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-400 text-sm text-center md:text-left">
-              © 2026 {settings?.foundationName}. All Rights Reserved.
-            </p>
+            <div className="flex flex-col items-center gap-2 md:flex-row md:gap-6">
+              <p className="text-gray-400 text-sm text-center md:text-left">
+                © 2026 {settings?.foundationName}. All Rights Reserved.
+              </p>
+
+              <nav aria-label="Legal" className="flex gap-6 text-sm">
+                <Link
+                  href="/privacy"
+                  className="py-2 text-gray-400 transition hover:text-white"
+                >
+                  Privacy Policy
+                </Link>
+                <Link
+                  href="/terms"
+                  className="py-2 text-gray-400 transition hover:text-white"
+                >
+                  Terms of Use
+                </Link>
+              </nav>
+            </div>
 
             <p className="text-gray-400 text-sm text-center md:text-right">
               Designed & Developed by{" "}

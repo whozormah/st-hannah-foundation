@@ -1,0 +1,312 @@
+{
+  "status": "draft",
+  "draftNotice": "This is a draft for review by the Foundation's lawyer. It is not yet in effect.",
+  "registeredName": null,
+  "dataProtectionContact": {
+    "name": null,
+    "email": null
+  },
+  "emailProvider": {
+    "name": null,
+    "location": null
+  },
+  "privacy": {
+    "version": "1.0",
+    "lastUpdated": "2026-09-12",
+    "effectiveDate": null,
+    "summary": "What personal information we collect through this website, why we collect it, who we share it with, how long we keep it and the rights you have.",
+    "collection": [
+      {
+        "where": "Apply for support",
+        "what": "Your name, gender, date of birth, nationality, phone number, email address, preferred contact method and how you heard about us; your address, state, local government area, how long you have lived there and your housing situation; the support you need, how urgent it is and why; your occupation, marital status, income and its source; your household, including children, dependants, dependants with special needs and elderly relatives; any support you have received before; and your own account of your situation.",
+        "why": "To assess your application, contact you about it, and provide and administer any support."
+      },
+      {
+        "where": "Volunteer",
+        "what": "Your name, email address, phone and WhatsApp numbers, gender, date of birth, location, occupation, qualifications, profession, skills, previous volunteering, areas of interest, availability, commitment and motivation.",
+        "why": "To consider you as a volunteer and contact you about opportunities."
+      },
+      {
+        "where": "Partner with us",
+        "what": "Your organisation, contact name, email address, phone number, location, the type of partnership and your message.",
+        "why": "To respond to your enquiry."
+      },
+      {
+        "where": "Donate online",
+        "what": "Your name, email address, phone number, the amount and currency, and what your gift is for. Card details are entered on Paystack's checkout, not on this website.",
+        "why": "To process your gift through Paystack and send your receipt."
+      },
+      {
+        "where": "Donate items",
+        "what": "Your name, email address and phone number; the item's category, description, quantity and condition; your location, the office receiving it, and delivery or collection details; your preferred contact method; and whether you would like your donation publicly acknowledged.",
+        "why": "To arrange receiving your donation."
+      },
+      {
+        "where": "Contact us",
+        "what": "Your name, email address, the subject and type of your enquiry, and your message.",
+        "why": "To reply to you."
+      },
+      {
+        "where": "Newsletter",
+        "what": "Your email address.",
+        "why": "To send you updates about our work."
+      },
+      {
+        "where": "International giving updates",
+        "what": "Your email address.",
+        "why": "To tell you when giving in other currencies becomes available."
+      }
+    ],
+    "processors": [
+      {
+        "name": "Vercel",
+        "role": "Hosts this website.",
+        "location": "United States"
+      },
+      {
+        "name": "Resend",
+        "role": "Sends the emails our forms generate, including your confirmation and our copy of your submission.",
+        "location": "United States"
+      },
+      {
+        "name": "Paystack",
+        "role": "Processes online donations.",
+        "location": "Nigeria"
+      },
+      {
+        "name": "{{emailProviderName}}",
+        "role": "Receives and stores the submissions sent to us by email.",
+        "location": "{{emailProviderLocation}}"
+      },
+      {
+        "name": "Google",
+        "role": "Provides the map on our contact page and, where shown, videos from YouTube.",
+        "location": "United States"
+      }
+    ],
+    "retention": [
+      { "record": "Applications for support", "period": null },
+      { "record": "Volunteer applications", "period": null },
+      { "record": "Partnership enquiries", "period": null },
+      { "record": "Donation records", "period": null },
+      { "record": "In-kind donation arrangements", "period": null },
+      { "record": "Contact messages", "period": null },
+      { "record": "Newsletter subscriptions", "period": null },
+      { "record": "International giving updates", "period": null }
+    ],
+    "sections": [
+      {
+        "id": "who-we-are",
+        "heading": "Who we are",
+        "paragraphs": [
+          "{{displayName}}, registered as {{registeredName}}, is a charity based at {{nigeriaAddress}}, with a further office at {{usaAddress}}.",
+          "We are responsible for the personal information you give us through this website, under the Nigeria Data Protection Act 2023."
+        ]
+      },
+      {
+        "id": "what-we-collect",
+        "heading": "What we collect and why",
+        "paragraphs": [
+          "We only collect what you choose to give us through the forms on this website. The table below lists every form and exactly what it asks for."
+        ],
+        "table": "collection"
+      },
+      {
+        "id": "sensitive-information",
+        "heading": "Sensitive information",
+        "paragraphs": [
+          "Some of what the support application asks for is sensitive — your income, your housing, the needs of dependants with special needs, and your own account of your situation. We ask for your explicit consent before you submit it, and we use it only to assess and administer your application.",
+          "We do not ask for your national identity number when you apply. If your application is approved and identification is needed, we will ask for it then."
+        ]
+      },
+      {
+        "id": "other-people",
+        "heading": "Information about other people",
+        "paragraphs": [
+          "The support application asks about your household, including children and dependants. Please share only what is needed, and make sure the people concerned know you are sharing it."
+        ]
+      },
+      {
+        "id": "legal-basis",
+        "heading": "Our legal basis",
+        "paragraphs": ["We rely on:"],
+        "items": [
+          "Your consent — for support applications, the newsletter and international giving updates. You can withdraw it at any time.",
+          "Taking steps you have asked us to take — processing a donation, arranging an in-kind gift, and responding to volunteer, partnership and contact enquiries.",
+          "Legal obligation — keeping records of donations where the law requires it."
+        ]
+      },
+      {
+        "id": "sharing",
+        "heading": "Who we share it with",
+        "paragraphs": [
+          "We do not sell your information. We share it only with the services that run this website for us:"
+        ],
+        "table": "processors",
+        "after": [
+          "We may also disclose information where the law requires us to."
+        ]
+      },
+      {
+        "id": "outside-nigeria",
+        "heading": "Where your information is held",
+        "paragraphs": [
+          "Our website, our email delivery and some embedded services are provided from outside Nigeria, mainly from the United States. This means information you submit through this website is transferred to, and held, outside Nigeria."
+        ]
+      },
+      {
+        "id": "retention",
+        "heading": "How long we keep it",
+        "paragraphs": [
+          "We keep information only for as long as we need it for the purpose it was collected, or as the law requires."
+        ],
+        "table": "retention",
+        "after": [
+          "After these periods we delete the information, or make it anonymous so that it can no longer identify you."
+        ]
+      },
+      {
+        "id": "cookies",
+        "heading": "Cookies",
+        "paragraphs": [
+          "This website does not set cookies of its own, and does not use analytics or advertising trackers.",
+          "Our contact page shows a Google map, and our gallery may show YouTube videos. Both are provided by Google, which may set cookies under its own policy. Paystack's checkout, where you enter payment details, is on Paystack's own website and is covered by its policy."
+        ]
+      },
+      {
+        "id": "security",
+        "heading": "Keeping it safe",
+        "paragraphs": [
+          "Information you send through this website travels over an encrypted (HTTPS) connection. Payment card details are entered on Paystack's checkout and never reach our website.",
+          "No system is completely secure. If a breach puts your rights at risk, we will tell the Nigeria Data Protection Commission and, where required, you."
+        ]
+      },
+      {
+        "id": "your-rights",
+        "heading": "Your rights",
+        "paragraphs": ["Under the Nigeria Data Protection Act 2023, you have the right to:"],
+        "items": [
+          "be told how your information is used, as this policy does;",
+          "have a copy of the information we hold about you;",
+          "have inaccurate information corrected;",
+          "have your information deleted;",
+          "restrict or object to how we use it;",
+          "receive your information in a portable form;",
+          "withdraw your consent at any time, without affecting anything we did before you withdrew it."
+        ],
+        "after": [
+          "To use any of these rights, contact us using the details below. We may need to confirm your identity first.",
+          "If you are unhappy with how we have handled your information, you can complain to the Nigeria Data Protection Commission."
+        ]
+      },
+      {
+        "id": "changes",
+        "heading": "Changes to this policy",
+        "paragraphs": [
+          "We will update this policy when what we collect, or how we handle it, changes. The version and date at the top of this page show when it last changed."
+        ]
+      },
+      {
+        "id": "contact",
+        "heading": "Contact us",
+        "items": [
+          "Data protection contact: {{dpoName}}, {{dpoEmail}}",
+          "General enquiries: {{email}}",
+          "Post: {{displayName}}, {{nigeriaAddress}}"
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "version": "1.0",
+    "lastUpdated": "2026-09-12",
+    "effectiveDate": null,
+    "governingLaw": null,
+    "summary": "The terms that apply when you use this website, give a donation or submit a form.",
+    "sections": [
+      {
+        "id": "about",
+        "heading": "About these terms",
+        "paragraphs": [
+          "These terms apply to your use of this website, which is run by {{displayName}}, registered as {{registeredName}}. By using the website you agree to them."
+        ]
+      },
+      {
+        "id": "using",
+        "heading": "Using this website",
+        "paragraphs": [
+          "Please use the website lawfully. Do not submit false information, or other people's details without their knowledge, and do not try to disrupt the website or gain unauthorised access to it."
+        ]
+      },
+      {
+        "id": "accuracy",
+        "heading": "Information on this website",
+        "paragraphs": [
+          "We work to keep the information on this website accurate and current, but it is provided for general information and may change."
+        ]
+      },
+      {
+        "id": "content",
+        "heading": "Our content",
+        "paragraphs": [
+          "The text, photographs, logos and other material on this website belong to the Foundation or to the people who created them. Please do not reuse them without our written permission."
+        ]
+      },
+      {
+        "id": "donations",
+        "heading": "Donations",
+        "items": [
+          "Online donations are processed by Paystack. You enter your payment details on Paystack's checkout, not on this website.",
+          "Online donations are taken in Nigerian naira.",
+          "After a successful payment, we email you a receipt.",
+          "If you think a donation was made in error, contact us as soon as possible with your payment reference."
+        ]
+      },
+      {
+        "id": "applications",
+        "heading": "Applications for support",
+        "paragraphs": [
+          "Submitting an application does not guarantee support. Every application is reviewed, and support depends on eligibility, verification and the resources available."
+        ]
+      },
+      {
+        "id": "links",
+        "heading": "Other websites",
+        "paragraphs": [
+          "This website links to other websites and shows content from other services, such as maps and videos. We are not responsible for their content or how they handle information."
+        ]
+      },
+      {
+        "id": "liability",
+        "heading": "Our responsibility",
+        "paragraphs": [
+          "We provide this website in good faith. As far as the law allows, we are not liable for loss arising from its use, or from it being temporarily unavailable."
+        ]
+      },
+      {
+        "id": "privacy",
+        "heading": "Your information",
+        "paragraphs": [
+          "How we handle personal information is explained in our {{privacyPolicy}}."
+        ]
+      },
+      {
+        "id": "law",
+        "heading": "Governing law",
+        "paragraphs": ["These terms are governed by {{governingLaw}}."]
+      },
+      {
+        "id": "changes",
+        "heading": "Changes to these terms",
+        "paragraphs": [
+          "We may update these terms. The version and date at the top of this page show when they last changed."
+        ]
+      },
+      {
+        "id": "contact",
+        "heading": "Contact us",
+        "paragraphs": ["Questions about these terms: {{email}}"]
+      }
+    ]
+  }
+}

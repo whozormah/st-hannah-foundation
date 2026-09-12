@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Mail, Loader2, CheckCircle2 } from "lucide-react";
 
+import PrivacyNotice from "@/components/shared/PrivacyNotice";
+
 /* Just the notify-me capture. The heading, explanation and currencies live in
    the section that wraps this, so they are not repeated here. The request
    itself is unchanged: it still posts to /api/international-interest. */
@@ -117,6 +119,11 @@ export default function InternationalGivingCard() {
           "Notify Me"
         )}
       </button>
+
+      <PrivacyNotice className="mt-3">
+        We&apos;ll use your email only to tell you when international giving
+        opens.
+      </PrivacyNotice>
 
       {error && (
         <p role="alert" className="mt-3 text-sm text-red-600">

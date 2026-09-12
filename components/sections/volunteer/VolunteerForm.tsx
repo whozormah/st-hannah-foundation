@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 
+import PrivacyNotice from "@/components/shared/PrivacyNotice";
+
 const GENDER = ["Male", "Female"];
 
 const QUALIFICATIONS = [
@@ -438,6 +440,11 @@ export default function VolunteerForm() {
                 Foundation.
               </span>
             </label>
+
+            <PrivacyNotice className="mt-3 pl-9">
+              We&apos;ll use your details only to consider your application and
+              contact you about volunteering.
+            </PrivacyNotice>
           </div>
 
           {error && (

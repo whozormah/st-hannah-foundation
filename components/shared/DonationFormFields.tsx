@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Check } from "lucide-react";
 
 import PaystackButton from "@/components/paystack/PaystackButton";
+import PrivacyNotice from "@/components/shared/PrivacyNotice";
 
 interface DonationFormFieldsProps {
   programName?: string;
@@ -268,10 +269,10 @@ export default function DonationFormFields({
 
       {/* Trust, kept to one line at the point of action. */}
 
-      <p className="mt-5 text-center text-sm leading-7 text-gray-600">
+      <PrivacyNotice className="mt-5 text-center">
         Your gift is handled securely. Your payment is processed through our
         payment partner and your receipt is sent to your email.
-      </p>
+      </PrivacyNotice>
 
       <p className="mt-2 text-center text-xs font-semibold uppercase tracking-[2px] text-gray-400">
         Secure payment · Instant receipt · Paystack
