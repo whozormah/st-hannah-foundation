@@ -1,0 +1,62 @@
+name: Deploy
+
+# Section 21. Build in CI, pull on the droplet, migrate before serving.
+on:
+  workflow_run:
+    workflows: [CI]
+    branches: [main]
+    types: [completed]
+
+jobs:
+  deploy:
+    # DEP-06: only a green CI run deploys.
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # DEP-02: immutable tags, so rollback is a compose command against the
+      # previous tag.
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:${{ github.sha }}
+            ghcr.io/${{ github.repository }}:latest
+
+      - name: Release on the droplet
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DROPLET_HOST }}
+          username: ${{ secrets.DROPLET_USER }}
+          key: ${{ secrets.DROPLET_SSH_KEY }}
+          script: |
+            set -euo pipefail
+            cd /srv/st-hannah
+            export APP_IMAGE=ghcr.io/${{ github.repository }}:${{ github.sha }}
+            docker compose pull app
+            # DEP-01: migrations complete before the new container serves.
+            docker compose run --rm app npx payload migrate
+            docker compose up -d
+            # DEP-04: a failing health check rolls back to the previous tag.
+            for i in $(seq 1 30); do
+              if curl -fsS http://localhost/api/health >/dev/null; then
+                echo "healthy"; exit 0
+              fi
+              sleep 2
+            done
+            echo "health check failed, rolling back"
+            export APP_IMAGE=$(cat .previous-image)
+            docker compose up -d
+            exit 1

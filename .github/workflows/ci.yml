@@ -1,0 +1,64 @@
+name: CI
+
+# DEP-06: a red build never deploys.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: shf
+          POSTGRES_PASSWORD: shf_ci
+          POSTGRES_DB: shf_ci
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U shf -d shf_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+
+    env:
+      DATABASE_URL: postgres://shf:shf_ci@localhost:5432/shf_ci
+      PAYLOAD_SECRET: ci-only-secret-not-used-in-production
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # The spike found npm can fail to re-resolve this tree spuriously, so CI
+      # installs from the committed lockfile and never re-resolves.
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npx tsc --noEmit
+
+      - run: npx payload migrate
+
+      - run: npm run build
+
+      - name: Start the application
+        run: |
+          npx next start -p 3000 &
+          for _ in $(seq 1 60); do
+            if curl -fsS http://localhost:3000/api/health >/dev/null; then
+              echo "up"; break
+            fi
+            sleep 2
+          done
+
+      # The access-control suite: the five roles, authentication, and the
+      # field-level protection of the sensitive application fields.
+      - run: npm run test:acl
