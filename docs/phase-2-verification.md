@@ -52,18 +52,45 @@ the suite returned to 22 passing.
 | Public site | Home 200, unchanged |
 | **A12** — backup and restore | Passed: dump encrypted (`Salted__`), restored into a throwaway container, row counts asserted (5 staff accounts, 1 application) |
 
-## What could not be proven here, and why
+## Infrastructure, proven locally
 
-These are part of Phase 2 in the specification but need accounts and
-infrastructure that do not exist yet. **The configuration is written; none of
-it is tested, and none should be believed until it is.**
+The Docker, Nginx and workflow configuration was originally written from the
+specification and never run. It has since been executed:
+
+| Check | Result |
+|---|---|
+| `docker build` | Passed — production image, 397 MB. A `.dockerignore` keeps `node_modules` and `.next` out of the context |
+| `nginx -t` | Passed against the real configuration and certificates |
+| `actionlint` | Passed — no findings in either workflow |
+| **Full stack via Compose** | Nginx, app and PostgreSQL started together; the site served over TLS, `/admin` 200, HTTP correctly 301s to HTTPS |
+| **A11 rehearsal** | A fresh database restored from the encrypted backup, then the app started and served — **43 seconds** end to end |
+| Restored data | 5 staff accounts and the application came back intact |
+| **SEC-05 rate limiting** | Proven live: four logins allowed (one plus a burst of three), then throttled |
+
+Two changes came out of this:
+
+1. **A `.dockerignore`**, without which the build context carried
+   `node_modules` and `.next` — slow, and wrong, since both are rebuilt inside
+   the image.
+2. **`limit_req_status 429`.** Nginx throttles with 503 by default, which
+   reads as the site being down. 429 says what actually happened.
+
+### Running the suite through Nginx trips the rate limit
+
+Run end to end against the Compose stack, 17 of the 22 tests pass and five
+fail — every one of them a login throttled by Nginx, confirmed in its error
+log. That is the rate limit working, not an access-control defect. The suite
+is therefore run against the application directly, as CI does; the rate limit
+is verified separately, as above.
+
+## What still cannot be proven, and why
 
 | Gate | Blocked by |
 |---|---|
-| **A11** — rebuild the droplet from Compose and a backup in 45 minutes | No droplet exists |
+| **A11** — the real gate | No droplet. The rehearsal above used an image already built locally, with no pull, no DNS and no TLS provisioning. It de-risks the gate; it does not pass it |
 | **A22** — `/admin` unreachable without a Cloudflare Access identity | No Cloudflare account, and the domain is not yet connected |
 | R2 storage | No Cloudflare credentials. The adapter switches on only when `R2_*` is set, so local runs and CI are unaffected |
-| The Dockerfile and deploy workflow | Never executed. Written from the specification, unproven |
+| The deploy workflow | Lints clean, but has never run: it needs a droplet and repository secrets |
 | Memory under load on the 1 GB tier | Needs the real droplet |
 
 **The Phase 2 gate is therefore not fully passed.** A5, A6 and A12 pass; A11
