@@ -489,6 +489,10 @@ export interface SupportApplication {
   declarationContact?: string | null;
   declarationDataUse?: string | null;
   status: 'new' | 'under_review' | 'approved' | 'declined' | 'support_provided' | 'closed';
+  /**
+   * Required to decline. Kept on the record.
+   */
+  declineReason?: string | null;
   assignedTo?: (number | null) | AdminUser;
   /**
    * Collected at approval, never at application (PRV-04).
@@ -595,6 +599,7 @@ export interface VolunteerApplication {
   previousExperience?: string | null;
   motivation?: string | null;
   status?: ('new' | 'contacted' | 'accepted' | 'declined' | 'closed') | null;
+  declineReason?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -632,6 +637,7 @@ export interface InKindOffer {
    */
   photoKey?: string | null;
   status?: ('new' | 'accepted' | 'received' | 'declined' | 'closed') | null;
+  declineReason?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1332,6 +1338,7 @@ export interface SupportApplicationsSelect<T extends boolean = true> {
   declarationContact?: T;
   declarationDataUse?: T;
   status?: T;
+  declineReason?: T;
   assignedTo?: T;
   nationalId?: T;
   monthlyIncome?: T;
@@ -1430,6 +1437,7 @@ export interface VolunteerApplicationsSelect<T extends boolean = true> {
   previousExperience?: T;
   motivation?: T;
   status?: T;
+  declineReason?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1463,6 +1471,7 @@ export interface InKindOffersSelect<T extends boolean = true> {
   photo?: T;
   photoKey?: T;
   status?: T;
+  declineReason?: T;
   updatedAt?: T;
   createdAt?: T;
 }

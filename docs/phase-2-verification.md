@@ -39,6 +39,11 @@ not ok 9 - A6: GraphQL withholds the sensitive fields from the Administrator
 Exactly those three failed and nothing else. The change was then reverted and
 the suite returned to 22 passing.
 
+> **Correction, 13 September 2026.** The admin returned HTTP 200 but crashed
+> in every browser: the site's root layout wrapped it, and React failed to
+> hydrate the nested document. This record checked only the status code. The
+> defect and its fix are in `docs/phase-4-verification.md`.
+
 ## Other checks
 
 | Check | Result |
@@ -48,7 +53,7 @@ the suite returned to 22 passing.
 | `eslint` | 0 errors (4 warnings, all in Payload's generated migration) |
 | `npx payload migrate` | Passed — **66 tables** created, migration recorded |
 | `/api/health` | `{"status":"ok"}` |
-| `/admin` | 200 |
+| `/admin` | 200 — **but see the correction below** |
 | Public site | Home 200, unchanged |
 | **A12** — backup and restore | Passed: dump encrypted (`Salted__`), restored into a throwaway container, row counts asserted (5 staff accounts, 1 application) |
 

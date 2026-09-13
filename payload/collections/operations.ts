@@ -1,7 +1,15 @@
 import type { CollectionConfig, Field } from "payload";
 
 import {
+  createBeneficiaryOnApproval,
+  notifyAssignee,
+  setNoteAuthor,
+} from "../hooks";
+import { enforceWorkflow, recordTransition } from "../workflows";
+
+import {
   allow,
+  allowField,
   applicationFieldWrite,
   never,
   sensitiveRead,
@@ -34,6 +42,12 @@ const caseWritable = (fields: Field[]): Field[] =>
       ({ ...field, access: { update: applicationFieldWrite } }) as Field,
   );
 
+/* The admin's status control: offers only the moves Figure 4 allows and
+   confirms approve/decline (WFL-03). Mirrors the server rule; never replaces it. */
+const statusControl = {
+  components: { Field: "/payload/components/StatusField#StatusField" },
+};
+
 /** Plain text fields, named exactly as the form already posts them, so the
     migration from the existing endpoints is a mapping and not a rename. */
 const text = (...names: string[]): Field[] =>
@@ -46,6 +60,14 @@ const longText = (...names: string[]): Field[] =>
    status field, Content none, Case Officer CRU, Finance none. */
 export const SupportApplications: CollectionConfig = {
   slug: "support-applications",
+  hooks: {
+    beforeChange: [enforceWorkflow("support-applications")],
+    afterChange: [
+      recordTransition("support-applications"),
+      createBeneficiaryOnApproval,
+      notifyAssignee,
+    ],
+  },
   admin: {
     useAsTitle: "reference",
     group: "People",
@@ -118,6 +140,7 @@ export const SupportApplications: CollectionConfig = {
       required: true,
       defaultValue: "new",
       index: true,
+      admin: statusControl,
       options: [
         { label: "New", value: "new" },
         { label: "Under review", value: "under_review" },
@@ -126,6 +149,18 @@ export const SupportApplications: CollectionConfig = {
         { label: "Support provided", value: "support_provided" },
         { label: "Closed", value: "closed" },
       ],
+    },
+    {
+      /* WFL-05: required to decline. Whoever may move the workflow may give
+         the reason, so an Administrator can write this one field too. */
+      name: "declineReason",
+      type: "textarea",
+      access: { update: allowField("owner", "administrator", "case") },
+      admin: {
+        condition: (data) =>
+          data?.status === "under_review" || data?.status === "declined",
+        description: "Required to decline. Kept on the record.",
+      },
     },
     {
       name: "assignedTo",
@@ -213,6 +248,7 @@ export const Beneficiaries: CollectionConfig = {
 
 export const CaseNotes: CollectionConfig = {
   slug: "case-notes",
+  hooks: { beforeChange: [setNoteAuthor] },
   admin: { useAsTitle: "summary", group: "People" },
   access: caseAccess,
   fields: [
@@ -223,7 +259,13 @@ export const CaseNotes: CollectionConfig = {
       type: "relationship",
       relationTo: "support-applications",
     },
-    { name: "author", type: "relationship", relationTo: "admin-users" },
+    {
+      name: "author",
+      type: "relationship",
+      relationTo: "admin-users",
+      // Set from the signed-in user on create (payload/hooks.ts).
+      admin: { readOnly: true },
+    },
   ],
 };
 
@@ -281,6 +323,10 @@ const enquiryAccess = {
 
 export const VolunteerApplications: CollectionConfig = {
   slug: "volunteer-applications",
+  hooks: {
+    beforeChange: [enforceWorkflow("volunteer-applications")],
+    afterChange: [recordTransition("volunteer-applications")],
+  },
   admin: { useAsTitle: "reference", group: "People" },
   access: enquiryAccess,
   fields: [
@@ -306,12 +352,18 @@ export const VolunteerApplications: CollectionConfig = {
       type: "select",
       defaultValue: "new",
       options: ["new", "contacted", "accepted", "declined", "closed"],
+      admin: statusControl,
     },
+    { name: "declineReason", type: "textarea" },
   ],
 };
 
 export const InKindOffers: CollectionConfig = {
   slug: "in-kind-offers",
+  hooks: {
+    beforeChange: [enforceWorkflow("in-kind-offers")],
+    afterChange: [recordTransition("in-kind-offers")],
+  },
   admin: { useAsTitle: "reference", group: "People" },
   access: enquiryAccess,
   fields: [
@@ -351,12 +403,18 @@ export const InKindOffers: CollectionConfig = {
       type: "select",
       defaultValue: "new",
       options: ["new", "accepted", "received", "declined", "closed"],
+      admin: statusControl,
     },
+    { name: "declineReason", type: "textarea" },
   ],
 };
 
 export const PartnerEnquiries: CollectionConfig = {
   slug: "partner-enquiries",
+  hooks: {
+    beforeChange: [enforceWorkflow("partner-enquiries")],
+    afterChange: [recordTransition("partner-enquiries")],
+  },
   admin: { useAsTitle: "reference", group: "People" },
   access: enquiryAccess,
   fields: [
@@ -369,12 +427,17 @@ export const PartnerEnquiries: CollectionConfig = {
       type: "select",
       defaultValue: "new",
       options: ["new", "in_discussion", "agreed", "closed"],
+      admin: statusControl,
     },
   ],
 };
 
 export const ContactMessages: CollectionConfig = {
   slug: "contact-messages",
+  hooks: {
+    beforeChange: [enforceWorkflow("contact-messages")],
+    afterChange: [recordTransition("contact-messages")],
+  },
   admin: { useAsTitle: "reference", group: "People" },
   access: enquiryAccess,
   fields: [
@@ -387,6 +450,7 @@ export const ContactMessages: CollectionConfig = {
       type: "select",
       defaultValue: "unread",
       options: ["unread", "read", "resolved"],
+      admin: statusControl,
     },
   ],
 };

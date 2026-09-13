@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "../globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -11,7 +11,7 @@ import Footer from "@/components/layout/Footer";
    latin variable faces, now served from our own domain: no third-party request
    for visitors either. */
 const inter = localFont({
-  src: "./fonts/Inter-latin.woff2",
+  src: "../fonts/Inter-latin.woff2",
   weight: "100 900",
   style: "normal",
   display: "swap",
@@ -20,7 +20,7 @@ const inter = localFont({
 });
 
 const playfair = localFont({
-  src: "./fonts/PlayfairDisplay-latin.woff2",
+  src: "../fonts/PlayfairDisplay-latin.woff2",
   weight: "400 900",
   style: "normal",
   display: "swap",
