@@ -38,6 +38,11 @@ const slug: Field = {
 /* Images are paths to files the website already has, until the private
    Cloudflare storage exists (MED-01). Uploading into the media library now
    would put files on the server's disk, which a redeploy destroys. */
+/* Shown on content the website does not display at present, so an editor
+   is not left wondering why a published change appears nowhere. */
+export const NOT_ON_WEBSITE =
+  "Not shown on the website at the moment. The section that displayed this was retired; the content is kept here, ready if that section returns.";
+
 export const IMAGE_PATH_HELP =
   "Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.";
 

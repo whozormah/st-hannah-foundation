@@ -2,7 +2,7 @@ import type { Field, GlobalAfterChangeHook, GlobalConfig } from "payload";
 
 import { allow } from "./access";
 import { CMS_TAGS } from "../lib/cms-tags";
-import { imagePath, list, paragraphs } from "./collections/content";
+import { imagePath, list, NOT_ON_WEBSITE, paragraphs } from "./collections/content";
 import { refresh } from "./revalidate";
 
 /* Section 8.2, "Navigation, settings": Owner full, Administrator read and
@@ -163,7 +163,7 @@ export const ApplyPage: GlobalConfig = {
 export const DonatePage: GlobalConfig = {
   slug: "donate-page",
   label: "Donate Page",
-  admin: { group: "Content" },
+  admin: { group: "Content", description: NOT_ON_WEBSITE },
   access: pageContentAccess,
   hooks: refreshesGlobal(CMS_TAGS.donatePage),
   fields: [

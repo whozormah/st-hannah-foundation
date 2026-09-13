@@ -95,7 +95,13 @@ Interface defects that belong to no phase are tracked separately, in
   request does little work, and Cloudflare caches the finished pages — keeping
   ARC-02's aim that public traffic rarely reaches the server.
 - **Evidence:** a published edit was live on the homepage 1.1 seconds later;
-  a draft never appeared (`tests/cms-publish.test.mjs`).
+  a draft never appeared (`tests/cms-publish.test.mjs`). Every content type
+  the site shows is checked the same way (`tests/cms-content.test.mjs`).
+- **Refresh behaviour:** publishing expires the cached content at once
+  (`revalidateTag` with `expire: 0`), so the first visitor afterwards sees the
+  change. The "max" profile the Next.js docs suggest serves that visitor the
+  old version while it refreshes — on this site, usually the editor checking
+  their own change. The tests require the first visit to show the edit.
 - **Technical note:** caching uses `unstable_cache`, which Next.js 16 still
   supports. Its replacement, `'use cache'`, requires switching the whole app to
   Cache Components, which changes how every page renders; that move is left
@@ -118,6 +124,13 @@ Interface defects that belong to no phase are tracked separately, in
   page (core values were removed at the client's request) and are not
   migrated. `legal.json` stays out of Phase 6: it belongs to Phase 1's approval
   gate.
+- **Follow-up, 13 September 2026:** two of the nine turned out to be shown
+  nowhere on the website: in-kind categories and donation impact (the Donate
+  Page global). The sections that displayed them had already been retired
+  from the donate page, and were deleted in Phase 6 as unused code. Agreed:
+  keep both in the CMS, marked in the admin as "not shown on the website at
+  the moment", so the content is ready if those sections return and editors
+  are not left wondering why a change appears nowhere.
 
 ## Decisions
 

@@ -6,6 +6,7 @@ import {
   imagePath,
   imagePaths,
   list,
+  NOT_ON_WEBSITE,
   paragraphs,
   refreshes,
   versions,
@@ -51,12 +52,17 @@ export const VolunteerBenefits = titledEntry(
   CMS_TAGS.volunteerBenefits,
 );
 
-export const InKindCategories = titledEntry(
+const inKind = titledEntry(
   "in-kind-categories",
   "In-kind Category",
   "In-kind Categories",
   CMS_TAGS.inKindCategories,
 );
+
+export const InKindCategories: CollectionConfig = {
+  ...inKind,
+  admin: { ...inKind.admin, description: NOT_ON_WEBSITE },
+};
 
 export const VolunteerProfiles: CollectionConfig = {
   slug: "volunteer-profiles",
