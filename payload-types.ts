@@ -501,6 +501,8 @@ export interface VolunteerBenefit {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Not shown on the website at the moment. The section that displayed this was retired; the content is kept here, ready if that section returns.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "in-kind-categories".
  */
@@ -2162,6 +2164,8 @@ export interface ApplyPage {
   createdAt?: string | null;
 }
 /**
+ * Not shown on the website at the moment. The section that displayed this was retired; the content is kept here, ready if that section returns.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "donate-page".
  */
@@ -2202,32 +2206,70 @@ export interface SeoDefault {
  */
 export interface StatisticsManual {
   id: number;
-  homepage?: {
-    childrenReached?: string | null;
-    widowsSupported?: string | null;
-    educationalBeneficiaries?: string | null;
-    communitiesImpacted?: string | null;
+  /**
+   * Shown on: the homepage and Impact Stories.
+   */
+  childrenReached: {
+    value: string;
+    source?: string | null;
+    verifiedAt?: string | null;
   };
-  programs?: {
-    yearsOfCompassion?: string | null;
-    livesReached?: string | null;
-    outreachActivities?: string | null;
-    countriesRepresented?: string | null;
+  /**
+   * Shown on: the homepage and Impact Stories.
+   */
+  widowsSupported: {
+    value: string;
+    source?: string | null;
+    verifiedAt?: string | null;
   };
-  impact?: {
-    widowsSupported?: string | null;
-    childrenReached?: string | null;
-    communityOutreachEvents?: string | null;
-    livesImpacted?: string | null;
+  /**
+   * Shown on: the homepage.
+   */
+  educationalBeneficiaries: {
+    value: string;
+    source?: string | null;
+    verifiedAt?: string | null;
   };
-  gallery?: {
-    livesImpacted?: string | null;
-    outreachEvents?: string | null;
-    communitiesReached?: string | null;
-    yearsOfService?: string | null;
+  /**
+   * Shown on: the homepage.
+   */
+  communitiesReached: {
+    value: string;
+    source?: string | null;
+    verifiedAt?: string | null;
   };
-  source?: string | null;
-  verifiedAt?: string | null;
+  /**
+   * Shown on: Programmes, About and Impact Stories.
+   */
+  livesReached: {
+    value: string;
+    source?: string | null;
+    verifiedAt?: string | null;
+  };
+  /**
+   * Shown on: Programmes, About and Impact Stories.
+   */
+  outreachEvents: {
+    value: string;
+    source?: string | null;
+    verifiedAt?: string | null;
+  };
+  /**
+   * Shown on: Programmes and About.
+   */
+  yearsOfService: {
+    value: string;
+    source?: string | null;
+    verifiedAt?: string | null;
+  };
+  /**
+   * Shown on: Programmes and About.
+   */
+  countriesRepresented: {
+    value: string;
+    source?: string | null;
+    verifiedAt?: string | null;
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -2387,40 +2429,62 @@ export interface SeoDefaultsSelect<T extends boolean = true> {
  * via the `definition` "statistics-manual_select".
  */
 export interface StatisticsManualSelect<T extends boolean = true> {
-  homepage?:
+  childrenReached?:
     | T
     | {
-        childrenReached?: T;
-        widowsSupported?: T;
-        educationalBeneficiaries?: T;
-        communitiesImpacted?: T;
+        value?: T;
+        source?: T;
+        verifiedAt?: T;
       };
-  programs?:
+  widowsSupported?:
     | T
     | {
-        yearsOfCompassion?: T;
-        livesReached?: T;
-        outreachActivities?: T;
-        countriesRepresented?: T;
+        value?: T;
+        source?: T;
+        verifiedAt?: T;
       };
-  impact?:
+  educationalBeneficiaries?:
     | T
     | {
-        widowsSupported?: T;
-        childrenReached?: T;
-        communityOutreachEvents?: T;
-        livesImpacted?: T;
+        value?: T;
+        source?: T;
+        verifiedAt?: T;
       };
-  gallery?:
+  communitiesReached?:
     | T
     | {
-        livesImpacted?: T;
-        outreachEvents?: T;
-        communitiesReached?: T;
-        yearsOfService?: T;
+        value?: T;
+        source?: T;
+        verifiedAt?: T;
       };
-  source?: T;
-  verifiedAt?: T;
+  livesReached?:
+    | T
+    | {
+        value?: T;
+        source?: T;
+        verifiedAt?: T;
+      };
+  outreachEvents?:
+    | T
+    | {
+        value?: T;
+        source?: T;
+        verifiedAt?: T;
+      };
+  yearsOfService?:
+    | T
+    | {
+        value?: T;
+        source?: T;
+        verifiedAt?: T;
+      };
+  countriesRepresented?:
+    | T
+    | {
+        value?: T;
+        source?: T;
+        verifiedAt?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -413,7 +413,7 @@ export const getDonationImpact = cached(CMS_TAGS.donatePage, async () => {
   };
 });
 
-/** The shape of stats.json: four figures for each page that shows them. */
+/** Four figures for each page that shows them — the shape stats.json had. */
 export type Stats = {
   homepage: {
     childrenReached: string;
@@ -433,27 +433,33 @@ export type Stats = {
     communityOutreachEvents: string;
     livesImpacted: string;
   };
-  gallery: {
-    livesImpacted: string;
-    outreachEvents: string;
-    communitiesReached: string;
-    yearsOfService: string;
-  };
 };
 
+/* Each figure is stored once (CR-010); every page's set is built from the
+   same eight, so two pages can never show different numbers for the same
+   thing. The page-level names are the sections' own. */
 export const getStats = cached(CMS_TAGS.statistics, async (): Promise<Stats> => {
   const d = await global("statistics-manual");
-  const group = (name: string) =>
-    Object.fromEntries(
-      Object.entries((d[name] ?? {}) as Doc)
-        .filter(([key]) => key !== "id")
-        .map(([key, value]) => [key, text(value)]),
-    );
+  const figure = (name: string) => text(((d[name] ?? {}) as Doc).value);
 
   return {
-    homepage: group("homepage") as Stats["homepage"],
-    programs: group("programs") as Stats["programs"],
-    impact: group("impact") as Stats["impact"],
-    gallery: group("gallery") as Stats["gallery"],
+    homepage: {
+      childrenReached: figure("childrenReached"),
+      widowsSupported: figure("widowsSupported"),
+      educationalBeneficiaries: figure("educationalBeneficiaries"),
+      communitiesImpacted: figure("communitiesReached"),
+    },
+    programs: {
+      yearsOfCompassion: figure("yearsOfService"),
+      livesReached: figure("livesReached"),
+      outreachActivities: figure("outreachEvents"),
+      countriesRepresented: figure("countriesRepresented"),
+    },
+    impact: {
+      widowsSupported: figure("widowsSupported"),
+      childrenReached: figure("childrenReached"),
+      communityOutreachEvents: figure("outreachEvents"),
+      livesImpacted: figure("livesReached"),
+    },
   };
 });

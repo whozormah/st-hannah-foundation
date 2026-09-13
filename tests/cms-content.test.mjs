@@ -119,8 +119,8 @@ const cases = [
     "statistics-manual",
     "content",
     "/impact-stories",
-    (doc, stamp) => ({ impact: { ...doc.impact, livesImpacted: stamp } }),
-    (doc) => ({ impact: doc.impact }),
+    (doc, stamp) => ({ livesReached: { ...doc.livesReached, value: stamp } }),
+    (doc) => ({ livesReached: doc.livesReached }),
   ),
 ];
 

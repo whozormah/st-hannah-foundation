@@ -132,6 +132,61 @@ Interface defects that belong to no phase are tracked separately, in
   the moment", so the content is ready if those sections return and editors
   are not left wondering why a change appears nowhere.
 
+### CR-009 — Two more homepage block types
+
+- **Status:** Approved, 13 September 2026
+- **Affects:** CNT-03 (the homepage block library)
+- **Conflict:** The homepage has ten sections. CNT-03's twelve blocks cover
+  eight; "Vision & Mission" and the leadership preview have no block. Building
+  them from rich text or image-and-text would change how they look, which
+  PUB-02 forbids.
+- **Change:** The block library gains **vision and mission** and **leadership
+  preview**: fourteen blocks. The homepage looks exactly as it does now, and
+  editors can reorder or remove any section.
+- **Unchanged:** CNT-01's block canvas for the legal pages stays with Phase
+  1's approval gate, not Phase 6.
+
+### CR-010 — Each statistic stored once; historic totals stay typed in
+
+- **Status:** Approved, 13 September 2026
+- **Affects:** CNT-09, CNT-10, A21
+- **Conflict:** CNT-09 requires any figure the system can calculate to be
+  calculated. The Foundation's totals ("500+ widows supported") come from
+  years of work before the system; counting its records would show close to
+  zero, which is false. Separately, the same figure was stored once per page,
+  under different names — "outreach activities" on /programs, "outreach
+  events" on /impact-stories — the drift section 5.4 warns about.
+- **Change:**
+  1. Each figure is stored once and shown on every page that uses it, so no
+     two pages can disagree. The eight: children reached, widows supported,
+     educational beneficiaries, communities reached, lives reached, outreach
+     events, years of service, countries represented. Page labels are
+     unchanged.
+  2. Historic totals stay typed in, under CNT-10, each with its own source
+     note and "verified on" date. They count as unmeasurable by the system
+     until its records can produce them.
+  3. Figures the system can count are counted. Of those in section 5.4, the
+     site shows only photographs per gallery area, already counted from the
+     gallery itself.
+- **Note:** the retired donate-page figures (CR-008) repeat two of these
+  (500+ widows, 50+ communities). If that section returns, it reads the same
+  stored figures.
+
+### CR-011 — Alt text drafted by the developer, approved by the Foundation
+
+- **Status:** Approved, 13 September 2026
+- **Affects:** MIG-08, CNT-06
+- **Conflict:** MIG-08 says alt text is "preserved", but none of the 65 images
+  has any; the site builds it from titles and names. Under CNT-06, an image
+  without alt text cannot be published, so migrating them bare would take
+  every image off the site.
+- **Change:** The developer drafts alt text by looking at each photograph,
+  describing only what is visible: no names, places or events that cannot be
+  seen. The Foundation corrects and approves it, as with the legal documents.
+- **Condition:** The media library is built and verified now but goes live
+  only once Cloudflare R2 exists (MED-01); until then an upload would be
+  written to a disk the next deployment discards.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

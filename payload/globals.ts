@@ -198,65 +198,41 @@ export const SeoDefaults: GlobalConfig = {
   ],
 };
 
-/* CNT-09 and CNT-10. The figures the site shows are typed by hand today, and
-   none can yet be derived — the records they would be counted from are not
-   in the system. They live here, in one place, per page.
+/* CNT-09 and CNT-10, as amended by CR-010. The Foundation's totals come
+   from years of work before this system, so none can yet be counted from its
+   records; they are typed in here, each once, with its source and the date
+   it was verified. A page that shows a figure reads it from here, so no two
+   pages can disagree — the drift section 5.4 describes.
 
-   CNT-10 asks for each figure's source and the date it was verified. Their
-   source is known — they were on the website before the CMS — but nobody has
-   verified them, so "verified on" stays empty rather than claiming a check
-   that never happened (MIG-07). */
-const figure = (name: string): Field => ({ name, type: "text" });
+   Their source is known — they were on the website before the CMS — but
+   nobody has verified them yet, so "verified on" stays empty rather than
+   claiming a check that never happened (MIG-07). */
+const figure = (name: string, shownOn: string): Field => ({
+  name,
+  type: "group",
+  admin: { description: `Shown on: ${shownOn}.` },
+  fields: [
+    { name: "value", type: "text", required: true },
+    { name: "source", type: "textarea" },
+    { name: "verifiedAt", type: "date" },
+  ],
+});
 
 export const StatisticsManual: GlobalConfig = {
   slug: "statistics-manual",
-  label: "Manual Statistics",
+  label: "Statistics",
   admin: { group: "Content" },
   access: pageContentAccess,
   hooks: refreshesGlobal(CMS_TAGS.statistics),
   fields: [
-    {
-      name: "homepage",
-      type: "group",
-      fields: [
-        figure("childrenReached"),
-        figure("widowsSupported"),
-        figure("educationalBeneficiaries"),
-        figure("communitiesImpacted"),
-      ],
-    },
-    {
-      name: "programs",
-      type: "group",
-      fields: [
-        figure("yearsOfCompassion"),
-        figure("livesReached"),
-        figure("outreachActivities"),
-        figure("countriesRepresented"),
-      ],
-    },
-    {
-      name: "impact",
-      type: "group",
-      fields: [
-        figure("widowsSupported"),
-        figure("childrenReached"),
-        figure("communityOutreachEvents"),
-        figure("livesImpacted"),
-      ],
-    },
-    {
-      name: "gallery",
-      type: "group",
-      fields: [
-        figure("livesImpacted"),
-        figure("outreachEvents"),
-        figure("communitiesReached"),
-        figure("yearsOfService"),
-      ],
-    },
-    { name: "source", type: "textarea" },
-    { name: "verifiedAt", type: "date" },
+    figure("childrenReached", "the homepage and Impact Stories"),
+    figure("widowsSupported", "the homepage and Impact Stories"),
+    figure("educationalBeneficiaries", "the homepage"),
+    figure("communitiesReached", "the homepage"),
+    figure("livesReached", "Programmes, About and Impact Stories"),
+    figure("outreachEvents", "Programmes, About and Impact Stories"),
+    figure("yearsOfService", "Programmes and About"),
+    figure("countriesRepresented", "Programmes and About"),
   ],
 };
 

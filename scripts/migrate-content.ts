@@ -290,13 +290,61 @@ const migrators: Record<string, Migrator> = {
   },
 
   async statistics(payload) {
-    return writeGlobal(payload, "statistics-manual", {
-      ...readJson<Record<string, unknown>>("stats.json"),
-      // Known source, no verification: MIG-07 forbids claiming a check that
-      // never happened, so "verified on" is left empty.
-      source:
-        "Carried over from the website before the CMS (public/data/stats.json). Not yet verified by the Foundation.",
-    });
+    const stats = readJson<Record<string, Record<string, string>>>("stats.json");
+
+    // CR-010: the file held each figure once per page, sometimes under a
+    // different name. Each is stored once; every place it was held must
+    // agree, or the migration stops (MIG-07) rather than pick one.
+    const figures: Record<string, string[]> = {
+      childrenReached: ["homepage.childrenReached", "impact.childrenReached"],
+      widowsSupported: ["homepage.widowsSupported", "impact.widowsSupported"],
+      educationalBeneficiaries: ["homepage.educationalBeneficiaries"],
+      communitiesReached: ["homepage.communitiesImpacted", "gallery.communitiesReached"],
+      livesReached: ["programs.livesReached", "impact.livesImpacted", "gallery.livesImpacted"],
+      outreachEvents: [
+        "programs.outreachActivities",
+        "impact.communityOutreachEvents",
+        "gallery.outreachEvents",
+      ],
+      yearsOfService: ["programs.yearsOfCompassion", "gallery.yearsOfService"],
+      countriesRepresented: ["programs.countriesRepresented"],
+    };
+
+    const held = Object.values(stats).reduce((n, group) => n + Object.keys(group).length, 0);
+    const mapped = Object.values(figures).flat();
+    const notes: string[] = [];
+
+    if (mapped.length !== held) {
+      notes.push(`not saved as written: stats.json holds ${held} values, ${mapped.length} are mapped`);
+    }
+
+    const data: Record<string, unknown> = {};
+
+    for (const [name, places] of Object.entries(figures)) {
+      const values = places.map((place) => {
+        const [group, key] = place.split(".");
+        return stats[group]?.[key];
+      });
+
+      if (values.some((value) => value === undefined) || new Set(values).size !== 1) {
+        notes.push(
+          `not saved as written: ${name} disagrees across pages — ${places.map((place, i) => `${place}=${values[i]}`).join(", ")}`,
+        );
+        continue;
+      }
+
+      data[name] = {
+        value: values[0],
+        // Known source, no verification: MIG-07 forbids claiming a check
+        // that never happened, so "verified on" is left empty.
+        source: `Carried over from the website before the CMS (public/data/stats.json: ${places.join(", ")}). Not yet verified by the Foundation.`,
+        verifiedAt: null,
+      };
+    }
+
+    const result = await writeGlobal(payload, "statistics-manual", data);
+
+    return { ...result, notes: [...notes, ...(result.notes ?? [])] };
   },
 };
 

@@ -207,6 +207,8 @@ const BY_COLLECTION: Record<string, Record<string, string>> = {
     openGraphImage: "Social Sharing Image",
   },
   "statistics-manual": {
+    value: "Figure as Shown",
+    source: "Where This Figure Comes From",
     verifiedAt: "Verified On",
   },
 };

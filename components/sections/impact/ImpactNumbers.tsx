@@ -5,7 +5,7 @@ import { getStats } from "@/lib/cms";
 export default async function ImpactNumbers() {
   const siteStats = await getStats();
 
-  // One set of figures for the page, from the Manual Statistics. They
+  // One set of figures for the page, from Statistics in the CMS. They
   // previously appeared twice, in ImpactArchive and again in ImpactCTA, and the
   // "15+ Students Sponsored" in both contradicted the data.
   const numbers = [
