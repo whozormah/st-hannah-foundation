@@ -1,6 +1,11 @@
 import type { CollectionConfig } from "payload";
 
 import { allow, allowField, canUseAdminPanel, ROLE_OPTIONS } from "../access";
+import {
+  RESET_LINK_LIFETIME_MS,
+  resetEmailHTML,
+  resetEmailSubject,
+} from "../email/resetPassword";
 
 /* Staff accounts. Owner-only management (section 8.2).
 
@@ -10,7 +15,13 @@ import { allow, allowField, canUseAdminPanel, ROLE_OPTIONS } from "../access";
 export const AdminUsers: CollectionConfig = {
   slug: "admin-users",
   labels: { singular: "Administrator", plural: "Administrators" },
-  auth: true,
+  auth: {
+    forgotPassword: {
+      expiration: RESET_LINK_LIFETIME_MS,
+      generateEmailSubject: resetEmailSubject,
+      generateEmailHTML: resetEmailHTML,
+    },
+  },
   admin: {
     useAsTitle: "name",
     group: "Administration",

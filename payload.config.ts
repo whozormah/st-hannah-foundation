@@ -5,6 +5,7 @@ import { buildConfig } from "payload";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { s3Storage } from "@payloadcms/storage-s3";
+import { resendAdapter } from "@payloadcms/email-resend";
 
 import { AdminUsers } from "./payload/collections/adminUsers";
 import { contentCollections } from "./payload/collections/content";
@@ -74,7 +75,23 @@ const storage = [
     : []),
 ];
 
+/* Staff emails — the password reset — go through Resend, the same service
+   and sender the website's forms already use. Without a key (local
+   development, the test suite) Payload writes the email to the console
+   instead, which is how the reset flow is tested without sending anything. */
+const email =
+  process.env.RESEND_API_KEY && process.env.FROM_EMAIL
+    ? resendAdapter({
+        apiKey: process.env.RESEND_API_KEY,
+        defaultFromAddress: process.env.FROM_EMAIL,
+        defaultFromName: "St. Hannah Foundation",
+      })
+    : undefined;
+
 export default buildConfig({
+  // Links in staff emails are built from this address.
+  serverURL: process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "",
+  email,
   admin: {
     user: AdminUsers.slug,
     importMap: { baseDir: dirname },
