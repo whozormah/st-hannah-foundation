@@ -58,43 +58,288 @@ html[data-theme="dark"] .btn--style-primary:not(.btn--disabled) {
   --hover-color: var(--shf-ink);
 }
 
-/* ── Login screen: the Foundation's mark and name ─────────────────────── */
+/* ── Sign-in screens ────────────────────────────────────────────────────
 
-.shf-logo {
+   A brand panel and a calm form. Desktop splits the screen; phones and
+   tablets stack the panel as a card above the form. Nothing here touches the
+   form itself — Payload's own sign-in, reset and redirect handling is kept. */
+
+.shf-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  color: var(--shf-cream);
+  /* A warm light source, top right, over the brand browns. */
+  background:
+    radial-gradient(120% 70% at 85% 0%, rgba(217, 164, 65, 0.38), transparent 60%),
+    radial-gradient(90% 60% at 0% 100%, rgba(168, 90, 18, 0.35), transparent 65%),
+    linear-gradient(160deg, #6d3503 0%, #3a1c02 55%, #1d1208 100%);
+}
+
+/* A faint engraved ring echoing the logo's disc — texture, not decoration. */
+.shf-panel::before {
+  content: "";
+  position: absolute;
+  width: 140%;
+  aspect-ratio: 1;
+  right: -70%;
+  top: -40%;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 210, 122, 0.12);
+  box-shadow:
+    0 0 0 48px rgba(245, 210, 122, 0.035),
+    0 0 0 96px rgba(245, 210, 122, 0.025);
+  pointer-events: none;
+}
+
+.shf-panel__inner {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
   text-align: center;
 }
 
-.shf-logo__mark {
-  width: 112px;
-  height: auto;
-  /* The logo's own disc is pale; a soft ring holds it on light and dark. */
+.shf-panel__mark {
+  width: 148px;
+  aspect-ratio: 521 / 570;
   border-radius: 50%;
-  box-shadow: 0 0 0 1px var(--theme-elevation-150);
+  overflow: hidden;
+  background: #fdf8ee;
+  box-shadow:
+    0 0 0 1px rgba(245, 210, 122, 0.9),
+    0 0 0 8px rgba(217, 164, 65, 0.18),
+    0 24px 60px rgba(0, 0, 0, 0.35);
 }
 
-.shf-logo__name {
-  margin: 0;
-  font-size: 1.55rem;
+.shf-panel__mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shf-panel__name {
+  margin: 1.75rem 0 0;
+  font-family: var(--shf-display), Georgia, serif;
+  font-size: 2.1rem;
   font-weight: 600;
+  line-height: 1.15;
   letter-spacing: -0.01em;
-  color: var(--theme-elevation-1000);
+  color: var(--shf-cream);
 }
 
-.shf-logo__role {
-  margin: 0.3rem 0 0;
-  font-size: 0.72rem;
+.shf-panel__rule {
+  display: block;
+  width: 44px;
+  height: 1px;
+  margin: 1.1rem 0;
+  background: var(--shf-accent);
+}
+
+.shf-panel__tagline {
+  margin: 0;
+  max-width: 22ch;
+  font-family: var(--shf-display), Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--shf-accent-soft);
+}
+
+.shf-panel__foot {
+  position: relative;
+  margin: 0;
+  font-size: 0.7rem;
   font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(255, 252, 247, 0.62);
+}
+
+/* The welcome above the form. */
+.shf-signin {
+  margin-bottom: 2rem;
+}
+
+.shf-signin__eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--shf-brand);
 }
 
-html[data-theme="dark"] .shf-logo__role {
+html[data-theme="dark"] .shf-signin__eyebrow {
   color: var(--shf-accent);
+}
+
+.shf-signin__title {
+  margin: 0.6rem 0 0;
+  font-family: var(--shf-display), Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--theme-elevation-1000);
+}
+
+.shf-signin__lede {
+  margin: 0.7rem 0 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--theme-elevation-600);
+}
+
+/* A roomier, more deliberate form. */
+.template-minimal .login__form .field-type input {
+  min-height: 48px;
+  border-radius: 10px;
+}
+
+.template-minimal .form-submit .btn {
+  width: 100%;
+  min-height: 50px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* Desktop: the panel fills the left of the screen; the form is centred in
+   the rest. */
+@media (min-width: 1024px) {
+  .template-minimal {
+    min-height: 100vh;
+    padding-left: calc(44vw + 1.5rem);
+  }
+
+  .login__brand {
+    margin-bottom: 0;
+  }
+
+  .shf-panel {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 44vw;
+    padding: 4.5rem 3rem 2.5rem;
+  }
+
+  .shf-panel__inner {
+    margin: auto 0;
+  }
+}
+
+/* Phones and tablets: the panel becomes a card above the form, the same width
+   as it, so nothing ever overflows the screen. */
+@media (max-width: 1023px) {
+  .template-minimal {
+    align-items: flex-start;
+    padding-top: 1.25rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .login__brand {
+    margin-bottom: 1.75rem;
+  }
+
+  .shf-panel {
+    width: 100%;
+    padding: 2rem 1.5rem 1.5rem;
+    border-radius: 24px;
+  }
+
+  .shf-panel__mark {
+    width: 92px;
+  }
+
+  .shf-panel__name {
+    margin-top: 1.1rem;
+    font-size: 1.6rem;
+  }
+
+  .shf-panel__rule {
+    margin: 0.8rem 0;
+  }
+
+  .shf-panel__tagline {
+    font-size: 1rem;
+  }
+
+  .shf-panel__foot {
+    margin-top: 1.25rem;
+  }
+}
+
+/* ── Phones and tablets ────────────────────────────────────────────────
+
+   Payload's admin already avoids sideways scrolling on a phone (measured at
+   360px and 390px). What it gets wrong for thumbs is size, measured at 390px:
+
+   - every field's text is 12px, and iPhones zoom the whole page into any field
+     under 16px the moment it is tapped — all 54 fields on an application;
+   - a third of the tap targets are under 32px: the menu button is 22px, the
+     navigation 20px, the home mark 16px.
+
+   44px is the minimum comfortable target (Apple HIG, WCAG 2.5.5).
+   `!important` is used only for field text, which Payload sets through several
+   component-level selectors that would otherwise each need matching. */
+@media (max-width: 1023px) {
+  input,
+  textarea,
+  select,
+  .rs__input input,
+  .rs__single-value,
+  .rs__placeholder {
+    font-size: 16px !important;
+  }
+
+  /* Size only. No rule here sets `display`: Payload shows and hides several of
+     these responsively (it has separate desktop and phone menu buttons), and
+     every one is already block or flex, so minimum sizes apply as they are.
+     An earlier version set `display` here and broke the phone menu. */
+  /* The phone's menu button only. Payload also renders a desktop menu
+     button in the header; sizing that one up made it cover this one. */
+  .app-header__mobile-nav-toggler,
+  .app-header__account,
+  .step-nav__home,
+  .paginator__page,
+  .sort-column__asc,
+  .sort-column__desc,
+  .pill,
+  .popup-button,
+  .clickable-arrow,
+  .nav__mobile-close,
+  .nav__log-out,
+  a.btn,
+  button.btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Every entry in the navigation drawer, links in list rows (an
+     application's reference) and the breadcrumb. */
+  .nav-group__toggle,
+  .nav a,
+  table td a,
+  .step-nav a {
+    min-height: 44px;
+  }
+
+  /* The small clear and open buttons inside fields. */
+  .dropdown-indicator,
+  .clear-indicator,
+  .date-time-picker__clear-button,
+  .relationship--single-value__drawer-toggler {
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  /* "Forgot password?" on the sign-in screen. */
+  .template-minimal .login__form > a {
+    display: inline-block;
+    padding: 12px 0;
+  }
 }
 
 /* ── Navigation: the mark in the sidebar ──────────────────────────────── */

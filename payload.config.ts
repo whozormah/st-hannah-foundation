@@ -83,6 +83,7 @@ export default buildConfig({
         Logo: "/payload/components/Brand#Logo",
         Icon: "/payload/components/Brand#Icon",
       },
+      beforeLogin: ["/payload/components/Brand#SignInHeading"],
     },
     meta: {
       titleSuffix: " · St. Hannah Foundation",

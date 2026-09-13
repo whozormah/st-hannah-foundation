@@ -61,6 +61,17 @@ Interface defects that belong to no phase are tracked separately, in
   4. Scope is never expanded silently; anything outside the specification is
      raised as a change request first.
 
+### CR-005 — The admin must work on phones
+
+- **Status:** Approved, 13 September 2026 — requested by the Foundation's
+  developer
+- **Affects:** ADM-04, which said the admin need only work at desktop and
+  tablet widths and that "phone support is not required"
+- **Change:** The admin must be fully usable on a phone: no sideways
+  scrolling, no page zoom when a field is tapped, and tap targets of at least
+  44px, measured at 360px and 390px.
+- **Evidence:** `docs/admin-experience.md`.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |
