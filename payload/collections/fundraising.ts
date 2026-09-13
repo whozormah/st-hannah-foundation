@@ -14,6 +14,7 @@ const fundraisingAccess = {
 /* A donor is not a user: no password, no session, no login route. */
 export const Donors: CollectionConfig = {
   slug: "donors",
+  labels: { singular: "Donor", plural: "Donors" },
   admin: { useAsTitle: "email", group: "Fundraising" },
   access: fundraisingAccess,
   fields: [
@@ -28,6 +29,7 @@ export const Donors: CollectionConfig = {
 
 export const Campaigns: CollectionConfig = {
   slug: "campaigns",
+  labels: { singular: "Campaign", plural: "Campaigns" },
   admin: { useAsTitle: "name", group: "Fundraising" },
   access: {
     create: allow("owner", "finance"),
@@ -50,6 +52,7 @@ export const Campaigns: CollectionConfig = {
    sequence in Phase 5 and are immutable once allocated (RCP-01, RCP-02). */
 export const Donations: CollectionConfig = {
   slug: "donations",
+  labels: { singular: "Donation", plural: "Donations" },
   admin: {
     useAsTitle: "receiptNumber",
     group: "Fundraising",
@@ -82,6 +85,7 @@ export const Donations: CollectionConfig = {
    can be reconciled rather than silently collapsed (section 6.2). */
 export const PaymentTransactions: CollectionConfig = {
   slug: "payment-transactions",
+  labels: { singular: "Transaction", plural: "Transactions" },
   admin: { useAsTitle: "providerReference", group: "Fundraising" },
   access: {
     // Written by the webhook through the local API, never by hand.
@@ -114,6 +118,7 @@ export const PaymentTransactions: CollectionConfig = {
    webhook harmless; the application never decides idempotency for itself. */
 export const WebhookEvents: CollectionConfig = {
   slug: "webhook-events",
+  labels: { singular: "Webhook Event", plural: "Webhook Events" },
   admin: { useAsTitle: "providerEventId", group: "Fundraising" },
   access: {
     create: never,

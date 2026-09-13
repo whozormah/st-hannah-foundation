@@ -77,12 +77,25 @@ export default buildConfig({
   admin: {
     user: AdminUsers.slug,
     importMap: { baseDir: dirname },
+    // The Foundation's mark and name, per the section 9 login screen.
+    components: {
+      graphics: {
+        Logo: "/payload/components/Brand#Logo",
+        Icon: "/payload/components/Brand#Icon",
+      },
+    },
+    meta: {
+      titleSuffix: " · St. Hannah Foundation",
+      icons: [{ rel: "icon", type: "image/x-icon", url: "/favicon.ico" }],
+    },
   },
+  // Order sets the admin's sections: Content, People, Fundraising,
+  // Administration — the section 9 navigation.
   collections: [
-    AdminUsers,
     ...contentCollections,
     ...operationsCollections,
     ...fundraisingCollections,
+    AdminUsers,
     ...systemCollections,
   ],
   globals,

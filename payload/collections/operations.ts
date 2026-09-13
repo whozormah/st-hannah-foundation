@@ -60,6 +60,7 @@ const longText = (...names: string[]): Field[] =>
    status field, Content none, Case Officer CRU, Finance none. */
 export const SupportApplications: CollectionConfig = {
   slug: "support-applications",
+  labels: { singular: "Support Application", plural: "Support Applications" },
   hooks: {
     beforeChange: [enforceWorkflow("support-applications")],
     afterChange: [
@@ -232,6 +233,7 @@ const caseAccess = {
 
 export const Beneficiaries: CollectionConfig = {
   slug: "beneficiaries",
+  labels: { singular: "Beneficiary", plural: "Beneficiaries" },
   admin: { useAsTitle: "fullName", group: "People" },
   access: caseAccess,
   fields: [
@@ -248,6 +250,7 @@ export const Beneficiaries: CollectionConfig = {
 
 export const CaseNotes: CollectionConfig = {
   slug: "case-notes",
+  labels: { singular: "Case Note", plural: "Case Notes" },
   hooks: { beforeChange: [setNoteAuthor] },
   admin: { useAsTitle: "summary", group: "People" },
   access: caseAccess,
@@ -271,6 +274,7 @@ export const CaseNotes: CollectionConfig = {
 
 export const Documents: CollectionConfig = {
   slug: "documents",
+  labels: { singular: "Document", plural: "Documents" },
   admin: { useAsTitle: "title", group: "People" },
   access: caseAccess,
   fields: [
@@ -294,6 +298,7 @@ export const Documents: CollectionConfig = {
    endpoint through the local API; no public or staff create route. */
 export const SubmissionFiles: CollectionConfig = {
   slug: "submission-files",
+  labels: { singular: "Submission File", plural: "Submission Files" },
   upload: {
     // MED-03: images capped at 10 MB, types allow-listed.
     mimeTypes: ["image/jpeg", "image/png", "image/webp", "image/heic"],
@@ -323,6 +328,7 @@ const enquiryAccess = {
 
 export const VolunteerApplications: CollectionConfig = {
   slug: "volunteer-applications",
+  labels: { singular: "Volunteer", plural: "Volunteers" },
   hooks: {
     beforeChange: [enforceWorkflow("volunteer-applications")],
     afterChange: [recordTransition("volunteer-applications")],
@@ -360,6 +366,7 @@ export const VolunteerApplications: CollectionConfig = {
 
 export const InKindOffers: CollectionConfig = {
   slug: "in-kind-offers",
+  labels: { singular: "In-kind Offer", plural: "In-kind Offers" },
   hooks: {
     beforeChange: [enforceWorkflow("in-kind-offers")],
     afterChange: [recordTransition("in-kind-offers")],
@@ -411,6 +418,7 @@ export const InKindOffers: CollectionConfig = {
 
 export const PartnerEnquiries: CollectionConfig = {
   slug: "partner-enquiries",
+  labels: { singular: "Partner", plural: "Partners" },
   hooks: {
     beforeChange: [enforceWorkflow("partner-enquiries")],
     afterChange: [recordTransition("partner-enquiries")],
@@ -434,6 +442,7 @@ export const PartnerEnquiries: CollectionConfig = {
 
 export const ContactMessages: CollectionConfig = {
   slug: "contact-messages",
+  labels: { singular: "Contact Message", plural: "Contact Messages" },
   hooks: {
     beforeChange: [enforceWorkflow("contact-messages")],
     afterChange: [recordTransition("contact-messages")],
@@ -457,6 +466,7 @@ export const ContactMessages: CollectionConfig = {
 
 export const Subscribers: CollectionConfig = {
   slug: "subscribers",
+  labels: { singular: "Subscriber", plural: "Subscribers" },
   admin: { useAsTitle: "email", group: "People" },
   access: enquiryAccess,
   fields: [
@@ -478,6 +488,7 @@ export const Subscribers: CollectionConfig = {
    because two submissions arriving together must never take one number. */
 export const ReferenceCounters: CollectionConfig = {
   slug: "reference-counters",
+  labels: { singular: "Reference Counter", plural: "Reference Counters" },
   admin: { group: "Administration", hidden: true },
   access: {
     create: never,

@@ -9,6 +9,7 @@ import { allow, allowField, canUseAdminPanel, ROLE_OPTIONS } from "../access";
    still cannot read anyone else's, and cannot change their own role. */
 export const AdminUsers: CollectionConfig = {
   slug: "admin-users",
+  labels: { singular: "Administrator", plural: "Administrators" },
   auth: true,
   admin: {
     useAsTitle: "name",

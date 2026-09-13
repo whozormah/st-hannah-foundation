@@ -7,6 +7,7 @@ import { allow, allowField, never } from "../access";
    the log can never become a second copy of the sensitive data. */
 export const AuditLog: CollectionConfig = {
   slug: "audit-log",
+  labels: { singular: "Audit Entry", plural: "Audit Log" },
   admin: {
     useAsTitle: "action",
     group: "Administration",
@@ -54,6 +55,7 @@ export const AuditLog: CollectionConfig = {
    log (section 15). */
 export const ActivityLog: CollectionConfig = {
   slug: "activity-log",
+  labels: { singular: "Activity Entry", plural: "Activity Log" },
   admin: { useAsTitle: "summary", group: "Administration" },
   access: {
     create: never,
@@ -75,6 +77,7 @@ export const ActivityLog: CollectionConfig = {
 /* EML-04: every send is recorded. */
 export const EmailLog: CollectionConfig = {
   slug: "email-log",
+  labels: { singular: "Email Log Entry", plural: "Email Log" },
   admin: { useAsTitle: "template", group: "Administration" },
   access: {
     create: never,
@@ -96,6 +99,7 @@ export const EmailLog: CollectionConfig = {
    so the subject is restricted at field level. */
 export const EmailTemplates: CollectionConfig = {
   slug: "email-templates",
+  labels: { singular: "Email Template", plural: "Email Templates" },
   admin: { useAsTitle: "name", group: "Administration" },
   access: {
     create: allow("owner"),
@@ -130,6 +134,7 @@ export const EmailTemplates: CollectionConfig = {
 /* In-app awareness, which replaces internal notification email (EML-01). */
 export const Notifications: CollectionConfig = {
   slug: "notifications",
+  labels: { singular: "Notification", plural: "Notifications" },
   admin: { useAsTitle: "message", group: "Administration" },
   access: {
     create: never,
@@ -161,6 +166,7 @@ export const Notifications: CollectionConfig = {
 /* CNT-07: a published slug is immutable unless a redirect is created. */
 export const Redirects: CollectionConfig = {
   slug: "redirects",
+  labels: { singular: "Redirect", plural: "Redirects" },
   admin: { useAsTitle: "from", group: "Administration" },
   access: {
     create: allow("owner", "administrator"),

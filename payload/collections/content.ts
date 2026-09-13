@@ -35,6 +35,7 @@ const slug: Field = {
 
 export const Media: CollectionConfig = {
   slug: "media",
+  labels: { singular: "Media item", plural: "Media" },
   upload: true,
   admin: { group: "Content" },
   access: contentAccess,
@@ -55,6 +56,7 @@ export const Media: CollectionConfig = {
 
 export const Programmes: CollectionConfig = {
   slug: "programmes",
+  labels: { singular: "Programme", plural: "Programmes" },
   admin: { useAsTitle: "name", group: "Content" },
   access: contentAccess,
   versions,
@@ -76,6 +78,7 @@ export const Programmes: CollectionConfig = {
 
 export const ImpactStories: CollectionConfig = {
   slug: "impact-stories",
+  labels: { singular: "Impact Story", plural: "Impact Stories" },
   admin: { useAsTitle: "title", group: "Content" },
   access: contentAccess,
   versions,
@@ -97,6 +100,7 @@ export const ImpactStories: CollectionConfig = {
 
 export const GalleryAlbums: CollectionConfig = {
   slug: "gallery-albums",
+  labels: { singular: "Gallery Album", plural: "Gallery" },
   admin: { useAsTitle: "title", group: "Content" },
   access: contentAccess,
   versions,
@@ -113,6 +117,7 @@ export const GalleryAlbums: CollectionConfig = {
 
 export const Leadership: CollectionConfig = {
   slug: "leadership",
+  labels: { singular: "Leader", plural: "Leadership" },
   admin: { useAsTitle: "name", group: "Content" },
   access: contentAccess,
   versions,
@@ -127,6 +132,7 @@ export const Leadership: CollectionConfig = {
 
 export const Testimonials: CollectionConfig = {
   slug: "testimonials",
+  labels: { singular: "Testimonial", plural: "Testimonials" },
   admin: { useAsTitle: "name", group: "Content" },
   access: contentAccess,
   versions,
@@ -141,6 +147,7 @@ export const Testimonials: CollectionConfig = {
 
 export const Faqs: CollectionConfig = {
   slug: "faqs",
+  labels: { singular: "FAQ", plural: "FAQs" },
   admin: { useAsTitle: "question", group: "Content" },
   access: contentAccess,
   versions,
@@ -157,6 +164,7 @@ export const Faqs: CollectionConfig = {
    HTML or arbitrary styling. */
 export const Pages: CollectionConfig = {
   slug: "pages",
+  labels: { singular: "Page", plural: "Pages" },
   admin: { useAsTitle: "title", group: "Content" },
   access: contentAccess,
   versions,

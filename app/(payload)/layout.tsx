@@ -5,6 +5,8 @@ import type { ServerFunctionClient } from "payload";
 import config from "@payload-config";
 import { handleServerFunctions, RootLayout } from "@payloadcms/next/layouts";
 import "@payloadcms/next/css";
+// After Payload's own stylesheet, so the brand overrides win.
+import "./custom.css";
 
 import { importMap } from "./admin/importMap";
 

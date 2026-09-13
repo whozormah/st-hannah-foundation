@@ -11,6 +11,8 @@ const settingsAccess = {
 
 export const SiteSettings: GlobalConfig = {
   slug: "site-settings",
+  label: "Site Settings",
+  admin: { group: "Administration" },
   access: settingsAccess,
   fields: [
     { name: "foundationName", type: "text", required: true },
@@ -36,6 +38,8 @@ export const SiteSettings: GlobalConfig = {
    code, so the navigation cannot be restructured from the admin. */
 export const Navigation: GlobalConfig = {
   slug: "navigation",
+  label: "Navigation",
+  admin: { group: "Content" },
   access: settingsAccess,
   fields: [
     {
@@ -59,6 +63,8 @@ export const Navigation: GlobalConfig = {
 
 export const Foundation: GlobalConfig = {
   slug: "foundation",
+  label: "About the Foundation",
+  admin: { group: "Content" },
   access: settingsAccess,
   fields: [
     { name: "vision", type: "textarea" },
@@ -70,6 +76,8 @@ export const Foundation: GlobalConfig = {
 
 export const SeoDefaults: GlobalConfig = {
   slug: "seo-defaults",
+  label: "SEO Defaults",
+  admin: { group: "Content" },
   access: settingsAccess,
   fields: [
     { name: "titleTemplate", type: "text" },
@@ -83,6 +91,8 @@ export const SeoDefaults: GlobalConfig = {
    verified, in exactly one place. */
 export const StatisticsManual: GlobalConfig = {
   slug: "statistics-manual",
+  label: "Manual Statistics",
+  admin: { group: "Content" },
   access: settingsAccess,
   fields: [
     {

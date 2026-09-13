@@ -1,0 +1,121 @@
+/* St. Hannah Foundation — admin brand.
+
+   Payload builds both its light and dark themes from one grey ramp
+   (--color-base-0 … 1000); dark mode simply reads it in reverse. Warming
+   that single ramp therefore brands both themes at once, coherently.
+
+   Each step keeps the luminance of Payload's original grey (generated, not
+   picked by eye), so text contrast stays as Payload designed it: body text
+   13.1:1 in light mode (was 13.4) and 15.4:1 in dark (unchanged). The hue is
+   drawn from the brand browns, strongest at the cream end. */
+:root {
+  --color-base-0: rgb(253, 252, 250);
+  --color-base-50: rgb(249, 245, 239);
+  --color-base-100: rgb(242, 234, 223);
+  --color-base-150: rgb(231, 220, 206);
+  --color-base-200: rgb(219, 206, 191);
+  --color-base-250: rgb(206, 193, 178);
+  --color-base-300: rgb(191, 179, 166);
+  --color-base-350: rgb(178, 167, 152);
+  --color-base-400: rgb(164, 153, 138);
+  --color-base-450: rgb(151, 140, 126);
+  --color-base-500: rgb(137, 126, 114);
+  --color-base-550: rgb(122, 113, 101);
+  --color-base-600: rgb(109, 100, 88);
+  --color-base-650: rgb(94, 85, 75);
+  --color-base-700: rgb(81, 73, 63);
+  --color-base-750: rgb(66, 59, 50);
+  --color-base-800: rgb(52, 46, 38);
+  --color-base-850: rgb(39, 34, 27);
+  --color-base-900: rgb(23, 20, 16);
+  --color-base-950: rgb(8, 7, 5);
+  --color-base-1000: rgb(3, 3, 2);
+
+  /* The site's brand tokens (app/globals.css), repeated here because the
+     admin does not load the website's stylesheet. */
+  --shf-brand: #844204;
+  --shf-brand-dark: #6d3503;
+  --shf-accent: #d9a441;
+  --shf-accent-soft: #f5d27a;
+  --shf-ink: #1b1815;
+  --shf-cream: #fffcf7;
+}
+
+/* Primary actions carry the brand: brown on cream in light mode (8.7:1),
+   gold on espresso in dark mode, where brown would sink into the background.
+   Disabled buttons keep Payload's own muted treatment. */
+html[data-theme="light"] .btn--style-primary:not(.btn--disabled) {
+  --bg-color: var(--shf-brand);
+  --hover-bg: var(--shf-brand-dark);
+  --color: var(--shf-cream);
+  --hover-color: var(--shf-cream);
+}
+
+html[data-theme="dark"] .btn--style-primary:not(.btn--disabled) {
+  --bg-color: var(--shf-accent);
+  --hover-bg: var(--shf-accent-soft);
+  --color: var(--shf-ink);
+  --hover-color: var(--shf-ink);
+}
+
+/* ── Login screen: the Foundation's mark and name ─────────────────────── */
+
+.shf-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.shf-logo__mark {
+  width: 112px;
+  height: auto;
+  /* The logo's own disc is pale; a soft ring holds it on light and dark. */
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--theme-elevation-150);
+}
+
+.shf-logo__name {
+  margin: 0;
+  font-size: 1.55rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--theme-elevation-1000);
+}
+
+.shf-logo__role {
+  margin: 0.3rem 0 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--shf-brand);
+}
+
+html[data-theme="dark"] .shf-logo__role {
+  color: var(--shf-accent);
+}
+
+/* ── Navigation: the mark in the sidebar ──────────────────────────────── */
+
+.shf-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Payload's breadcrumb slot is exactly 18×18 and clips anything larger. */
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--shf-brand);
+  color: var(--shf-cream);
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+html[data-theme="dark"] .shf-icon {
+  background: var(--shf-accent);
+  color: var(--shf-ink);
+}
