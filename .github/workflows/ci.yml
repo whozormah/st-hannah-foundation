@@ -47,6 +47,14 @@ jobs:
 
       - run: npx payload migrate
 
+      # The test accounts for the five roles and one synthetic application.
+      # Missing until now: without it every access-control test fails to sign
+      # in. Synthetic data only; the seed refuses to run without ALLOW_SEED.
+      - run: ALLOW_SEED=1 npx tsx scripts/seed-test-data.ts
+
+      # Content the CMS publishing tests read (Phase 6).
+      - run: ALLOW_MIGRATE=1 npx tsx scripts/migrate-content.ts testimonials
+
       - run: npm run build
 
       - name: Start the application

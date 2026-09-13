@@ -9,6 +9,12 @@ import GalleryPreview from "@/components/sections/GalleryPreview";
 import LeadershipPreview from "@/components/sections/LeadershipPreview";
 import HomeCTA from "@/components/sections/HomeCTA";
 
+/* Rendered on request, because it shows CMS content (CR-007). The content
+   itself is cached and refreshed on publish (lib/cms.ts), so this stays
+   cheap; a static build would bake in whatever the build machine's database
+   held, and production images are built in CI, away from the live one. */
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
   return (
     <>

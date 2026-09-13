@@ -1,6 +1,8 @@
 import type { CollectionConfig, Field } from "payload";
 
 import { allow } from "../access";
+import { revalidateOnChange, revalidateOnDelete } from "../revalidate";
+import { CMS_TAGS } from "../../lib/cms-tags";
 
 /* Content, media and SEO — section 8.2: Owner and Administrator CRUD, Content
    Manager create/read/update but no delete, Case Officer and Finance none. */
@@ -133,6 +135,10 @@ export const Leadership: CollectionConfig = {
 export const Testimonials: CollectionConfig = {
   slug: "testimonials",
   labels: { singular: "Testimonial", plural: "Testimonials" },
+  hooks: {
+    afterChange: [revalidateOnChange(CMS_TAGS.testimonials)],
+    afterDelete: [revalidateOnDelete(CMS_TAGS.testimonials)],
+  },
   admin: { useAsTitle: "name", group: "Content" },
   access: contentAccess,
   versions,

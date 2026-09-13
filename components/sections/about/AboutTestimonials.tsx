@@ -1,14 +1,6 @@
 import { Quote } from "lucide-react";
 
-import testimonialsData from "@/public/data/testimonials.json";
-
-interface Testimonial {
-  name: string;
-  role: string;
-  text: string;
-}
-
-const testimonials: Testimonial[] = testimonialsData;
+import { getTestimonials } from "@/lib/cms";
 
 function initials(name: string) {
   return name
@@ -19,7 +11,11 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-export default function Testimonials() {
+/* Published testimonials from the CMS (PUB-03). The section hides itself when
+   there are none, as every section with absent data does (PUB-06). */
+export default async function Testimonials() {
+  const testimonials = await getTestimonials();
+
   if (!testimonials.length) return null;
 
   return (

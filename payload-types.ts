@@ -244,6 +244,9 @@ export interface AdminUser {
 export interface Programme {
   id: number;
   name: string;
+  /**
+   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
+   */
   slug: string;
   excerpt?: string | null;
   body?: {
@@ -284,6 +287,9 @@ export interface Programme {
 export interface ImpactStory {
   id: number;
   title: string;
+  /**
+   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
+   */
   slug: string;
   excerpt?: string | null;
   body?: {
@@ -323,6 +329,9 @@ export interface ImpactStory {
 export interface GalleryAlbum {
   id: number;
   title: string;
+  /**
+   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
+   */
   slug: string;
   description?: string | null;
   cover?: (number | null) | Media;
@@ -384,6 +393,9 @@ export interface Faq {
 export interface Page {
   id: number;
   title: string;
+  /**
+   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
+   */
   slug: string;
   blocks?:
     | (
@@ -721,6 +733,9 @@ export interface Donor {
 export interface Campaign {
   id: number;
   name: string;
+  /**
+   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
+   */
   slug: string;
   /**
    * In kobo for naira and cents for dollars: ₦1,000 is 100000.

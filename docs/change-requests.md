@@ -72,6 +72,53 @@ Interface defects that belong to no phase are tracked separately, in
   44px, measured at 360px and 390px.
 - **Evidence:** `docs/admin-experience.md`.
 
+### CR-006 — Phase 6 (content) before Phase 5 (payments)
+
+- **Status:** Approved, 13 September 2026
+- **Affects:** Section 25, delivery order
+- **Reason:** Phase 5 is blocked until decisions 1 and 2 are answered
+  (CR-001). Phase 6 depends on nothing outstanding and involves no personal
+  data, so it proceeds under CR-004.
+- **Change:** Phase 6 runs before Phase 5. Phase 5 follows once decisions 1
+  and 2 are answered.
+
+### CR-007 — CMS pages render on request, with cached content
+
+- **Status:** Proposed — awaiting approval. Implemented for the homepage
+  (testimonials) to prove the approach.
+- **Affects:** ARC-02 ("public pages are statically rendered")
+- **Conflict:** A static build reads the content while building. ARC-05
+  requires images to be built in CI, which cannot reach the live database — so
+  static pages would bake in CI's empty test database, not the Foundation's
+  content.
+- **Change:** Pages that show CMS content render on request. The content reads
+  are cached and tagged (`lib/cms.ts`) and invalidated on publish, so each
+  request does little work, and Cloudflare caches the finished pages — keeping
+  ARC-02's aim that public traffic rarely reaches the server.
+- **Evidence:** a published edit was live on the homepage 1.1 seconds later;
+  a draft never appeared (`tests/cms-publish.test.mjs`).
+- **Technical note:** caching uses `unstable_cache`, which Next.js 16 still
+  supports. Its replacement, `'use cache'`, requires switching the whole app to
+  Cache Components, which changes how every page renders; that move is left
+  for later and is contained to `lib/cms.ts`.
+
+### CR-008 — Homes for the content the model does not cover
+
+- **Status:** Proposed — awaiting approval
+- **Affects:** Section 5 (content model) and section 22 (migration)
+- **Conflict:** Section 22 migrates *every* file in `public/data`, but section
+  5 has no collection or global for nine of them: volunteer opportunities,
+  volunteer benefits, featured events, video highlights, donation impact,
+  in-kind categories, apply-for-support information, the volunteers list and
+  the campaign details shown on the site.
+- **Options:** (a) add a collection or global for each, so all of it becomes
+  editable; (b) keep some as code, where they change rarely enough not to need
+  editing.
+- **Also:** `donation-faqs.json` and `homepage/core-values.json` are used by no
+  page (core values were removed at the client's request) and are not
+  migrated. `legal.json` stays out of Phase 6: it belongs to Phase 1's approval
+  gate.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |
@@ -79,6 +126,7 @@ Interface defects that belong to no phase are tracked separately, in
 | 5 | National ID at application or approval? | At approval | 12 Sep 2026 | PRV-04 stands; field removed from the application |
 | — | Who writes the legal documents? | Developer drafts from facts in the code; the Foundation's lawyer approves | 12 Sep 2026 | Documents stay `draft` until approved |
 | — | Consent on forms without it | One-line notice and policy link; existing checkboxes unchanged | 12 Sep 2026 | PRV-03 display |
+| 8 | Content freeze during migration | Agreed: nobody edits the content files in `public/data` while they are migrated | 13 Sep 2026 | MIG-04; Phase 6 may proceed |
 
 ## Still open
 
@@ -90,4 +138,3 @@ Interface defects that belong to no phase are tracked separately, in
 | 4 | Retention periods per record type | PRV-06 — approval of the Privacy Policy |
 | 6 | Who holds each role | Phase 2 |
 | 7 | Tax-deductibility status | RCP-05 |
-| 8 | Content freeze window | Phase 6 |
