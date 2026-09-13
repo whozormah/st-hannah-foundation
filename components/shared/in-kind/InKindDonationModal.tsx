@@ -7,6 +7,16 @@ import { X } from "lucide-react";
 
 import PrivacyNotice from "@/components/shared/PrivacyNotice";
 
+function readAsDataUrl(file: File): Promise<string | null> {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => resolve(null);
+    reader.readAsDataURL(file);
+  });
+}
+
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
@@ -145,10 +155,15 @@ export default function InKindDonationModal({
     setSubmitError("");
 
     try {
-      // The image is deliberately not sent: there is no file storage
-      // configured, and the Foundation asks for photographs by reply.
-      const { image, ...submission } = formData;
-      void image;
+      // The photograph is now stored (OPS-03). It is sent as a data URL so
+      // the request stays JSON; the server decodes it, checks the type and
+      // size, and keeps it in the private collection.
+      const { image, ...rest } = formData;
+
+      const submission = {
+        ...rest,
+        image: image ? await readAsDataUrl(image) : null,
+      };
 
       const response = await fetch("/api/in-kind-donation", {
         method: "POST",

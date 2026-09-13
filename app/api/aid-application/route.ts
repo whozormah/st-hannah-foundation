@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { sendAidApplicationEmails } from "@/lib/email";
-import { generateReferenceNumber } from "@/lib/receipt";
+import { deliverNotifications, nextReference, persistSubmission } from "@/lib/submissions";
 import type { AidApplicationDetails } from "@/emails/FoundationAidApplication";
 
 const EMAIL_PATTERN = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
@@ -72,9 +72,23 @@ export async function POST(request: NextRequest) {
       ),
     ) as AidApplicationDetails;
 
-    const reference = generateReferenceNumber("SHA");
+    const reference = await nextReference("SHA");
 
-    await sendAidApplicationEmails(details, reference);
+    /* OPS-01: the application is in the database before any email is sent.
+       This is the submission that mattered most in V1, where it existed only
+       as an email and a deleted message lost it for good. */
+    await persistSubmission("support-applications", {
+      reference,
+      ...details,
+      ...Object.fromEntries(
+        DECLARATIONS.map((name) => [name, body[name] ? "Yes" : "No"]),
+      ),
+      status: "new",
+    });
+
+    await deliverNotifications("aid-application", reference, () =>
+      sendAidApplicationEmails(details, reference),
+    );
 
     return NextResponse.json({
       success: true,

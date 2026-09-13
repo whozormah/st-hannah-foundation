@@ -15,27 +15,63 @@ import { globals } from "./payload/globals";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
-/* MED-01: media belongs in Cloudflare R2, never on the droplet. The adapter
-   is enabled only when the bucket is configured, so local development and the
-   test suite run without cloud credentials. Production must set these. */
-const storage =
-  process.env.R2_BUCKET_PUBLIC && process.env.R2_ACCOUNT_ID
+/* MED-01 and ARC-04: nothing uploaded lives on the droplet. Two buckets,
+   because the two kinds of file have opposite rules:
+
+   - site media is public, served through the CDN;
+   - files that arrive with a submission (the in-kind photograph) are private
+     and reachable only through a short-lived signed URL (SEC-07), after the
+     collection's own read rule has passed.
+
+   The adapters switch on only when R2 is configured, so local development and
+   the test suite run without cloud credentials. Production must set these;
+   without them uploads fall back to local disk, which a redeploy destroys. */
+const r2Config = {
+  endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+  region: "auto",
+  forcePathStyle: true,
+  credentials: {
+    accessKeyId: process.env.R2_ACCESS_KEY_ID ?? "",
+    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY ?? "",
+  },
+};
+
+const r2Configured = Boolean(process.env.R2_ACCOUNT_ID);
+
+// Said loudly, because the failure is silent: without R2, a production
+// server writes uploads to a disk the next deployment throws away.
+if (process.env.NODE_ENV === "production" && !r2Configured) {
+  console.warn(
+    "[storage] R2 is not configured: uploads, including in-kind photographs, " +
+      "are being written to local disk and will be lost on redeploy (MED-01).",
+  );
+}
+
+const storage = [
+  ...(r2Configured && process.env.R2_BUCKET_PUBLIC
     ? [
         s3Storage({
           collections: { media: true },
           bucket: process.env.R2_BUCKET_PUBLIC,
-          config: {
-            endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-            region: "auto",
-            forcePathStyle: true,
-            credentials: {
-              accessKeyId: process.env.R2_ACCESS_KEY_ID ?? "",
-              secretAccessKey: process.env.R2_SECRET_ACCESS_KEY ?? "",
-            },
-          },
+          config: r2Config,
         }),
       ]
-    : [];
+    : []),
+  ...(r2Configured && process.env.R2_BUCKET_PRIVATE
+    ? [
+        s3Storage({
+          collections: {
+            "submission-files": {
+              // SEC-07: a link that stops working after five minutes.
+              signedDownloads: { expiresIn: 300 },
+            },
+          },
+          bucket: process.env.R2_BUCKET_PRIVATE,
+          config: r2Config,
+        }),
+      ]
+    : []),
+];
 
 export default buildConfig({
   admin: {

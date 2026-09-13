@@ -43,3 +43,8 @@ next-env.d.ts
 
 # Local self-signed certs for config validation only.
 nginx/certs/
+
+# Local upload fallback, used only when R2 is not configured.
+# Production stores these in R2 (MED-01); they must never be committed.
+/media/
+/submission-files/

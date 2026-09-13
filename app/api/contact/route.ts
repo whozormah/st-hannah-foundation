@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { sendContactEnquiryEmails } from "@/lib/email";
-import { generateReferenceNumber } from "@/lib/receipt";
+import { deliverNotifications, nextReference, persistSubmission } from "@/lib/submissions";
 
 const EMAIL_PATTERN = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
@@ -35,16 +35,29 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const reference = generateReferenceNumber("SHC");
+    const reference = await nextReference("SHC");
 
-    await sendContactEnquiryEmails({
+    // OPS-01: saved before anything is sent.
+    await persistSubmission("contact-messages", {
       reference,
       name,
       email,
       subject,
       enquiry,
       message,
+      status: "unread",
     });
+
+    await deliverNotifications("contact", reference, () =>
+      sendContactEnquiryEmails({
+        reference,
+        name,
+        email,
+        subject,
+        enquiry,
+        message,
+      }),
+    );
 
     return NextResponse.json({
       success: true,

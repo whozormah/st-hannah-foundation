@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "payload": "payload",
-    "test:acl": "node --test tests/*.test.mjs",
+    "test:acl": "node --test --test-concurrency=1 tests/*.test.mjs",
     "db:up": "docker compose -f docker-compose.dev.yml up -d",
     "db:down": "docker compose -f docker-compose.dev.yml down -v"
   },

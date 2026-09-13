@@ -76,10 +76,12 @@ export interface Config {
     testimonials: Testimonial;
     faqs: Faq;
     pages: Page;
+    'reference-counters': ReferenceCounter;
     'support-applications': SupportApplication;
     beneficiaries: Beneficiary;
     'case-notes': CaseNote;
     documents: Document;
+    'submission-files': SubmissionFile;
     'volunteer-applications': VolunteerApplication;
     'in-kind-offers': InKindOffer;
     'partner-enquiries': PartnerEnquiry;
@@ -112,10 +114,12 @@ export interface Config {
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    'reference-counters': ReferenceCountersSelect<false> | ReferenceCountersSelect<true>;
     'support-applications': SupportApplicationsSelect<false> | SupportApplicationsSelect<true>;
     beneficiaries: BeneficiariesSelect<false> | BeneficiariesSelect<true>;
     'case-notes': CaseNotesSelect<false> | CaseNotesSelect<true>;
     documents: DocumentsSelect<false> | DocumentsSelect<true>;
+    'submission-files': SubmissionFilesSelect<false> | SubmissionFilesSelect<true>;
     'volunteer-applications': VolunteerApplicationsSelect<false> | VolunteerApplicationsSelect<true>;
     'in-kind-offers': InKindOffersSelect<false> | InKindOffersSelect<true>;
     'partner-enquiries': PartnerEnquiriesSelect<false> | PartnerEnquiriesSelect<true>;
@@ -425,6 +429,17 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reference-counters".
+ */
+export interface ReferenceCounter {
+  id: number;
+  prefix: string;
+  value: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "support-applications".
  */
 export interface SupportApplication {
@@ -439,6 +454,40 @@ export interface SupportApplication {
   email?: string | null;
   phone?: string | null;
   supportType?: string | null;
+  supportTypeOther?: string | null;
+  gender?: string | null;
+  dateOfBirth?: string | null;
+  nationality?: string | null;
+  contactMethod?: string | null;
+  referralSource?: string | null;
+  state?: string | null;
+  lga?: string | null;
+  landmark?: string | null;
+  durationAtAddress?: string | null;
+  housingStatus?: string | null;
+  urgency?: string | null;
+  appliedElsewhere?: string | null;
+  occupation?: string | null;
+  maritalStatus?: string | null;
+  incomeSourceOther?: string | null;
+  children?: string | null;
+  dependents?: string | null;
+  primaryProvider?: string | null;
+  householdSize?: string | null;
+  elderlyRelatives?: string | null;
+  previousSupport?: string | null;
+  address?: string | null;
+  livingConditions?: string | null;
+  supportSummary?: string | null;
+  challenge?: string | null;
+  expectedImpact?: string | null;
+  previousSupportDetail?: string | null;
+  stepsTaken?: string | null;
+  additionalInformation?: string | null;
+  declarationTrue?: string | null;
+  declarationNoGuarantee?: string | null;
+  declarationContact?: string | null;
+  declarationDataUse?: string | null;
   status: 'new' | 'under_review' | 'approved' | 'declined' | 'support_provided' | 'closed';
   assignedTo?: (number | null) | AdminUser;
   /**
@@ -497,6 +546,26 @@ export interface CaseNote {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "submission-files".
+ */
+export interface SubmissionFile {
+  id: number;
+  submittedWith?: string | null;
+  anonymisedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "volunteer-applications".
  */
 export interface VolunteerApplication {
@@ -510,7 +579,21 @@ export interface VolunteerApplication {
   fullName?: string | null;
   email?: string | null;
   phone?: string | null;
+  whatsapp?: string | null;
+  gender?: string | null;
+  dateOfBirth?: string | null;
+  location?: string | null;
+  occupation?: string | null;
+  qualification?: string | null;
+  profession?: string | null;
+  volunteeredBefore?: string | null;
   areaOfInterest?: string | null;
+  availability?: string | null;
+  commitment?: string | null;
+  consent?: string | null;
+  skills?: string | null;
+  previousExperience?: string | null;
+  motivation?: string | null;
   status?: ('new' | 'contacted' | 'accepted' | 'declined' | 'closed') | null;
   updatedAt: string;
   createdAt: string;
@@ -531,7 +614,22 @@ export interface InKindOffer {
   email?: string | null;
   phone?: string | null;
   category?: string | null;
+  quantity?: string | null;
+  condition?: string | null;
+  location?: string | null;
+  deliveryMethod?: string | null;
+  contactMethod?: string | null;
+  pickupDate?: string | null;
+  pickupTime?: string | null;
+  destination?: string | null;
+  acknowledgeDonation?: string | null;
   description?: string | null;
+  pickupAddress?: string | null;
+  pickupInstructions?: string | null;
+  photo?: (number | null) | SubmissionFile;
+  /**
+   * Deprecated. Removed after Phase 3.
+   */
   photoKey?: string | null;
   status?: ('new' | 'accepted' | 'received' | 'declined' | 'closed') | null;
   updatedAt: string;
@@ -551,8 +649,12 @@ export interface PartnerEnquiry {
   anonymisedAt?: string | null;
   organisation?: string | null;
   contactPerson?: string | null;
-  email?: string | null;
+  location?: string | null;
+  partnershipType?: string | null;
   phone?: string | null;
+  consent?: string | null;
+  email?: string | null;
+  message?: string | null;
   status?: ('new' | 'in_discussion' | 'agreed' | 'closed') | null;
   updatedAt: string;
   createdAt: string;
@@ -570,8 +672,9 @@ export interface ContactMessage {
   sourceIpHash?: string | null;
   anonymisedAt?: string | null;
   name?: string | null;
-  email?: string | null;
   subject?: string | null;
+  enquiry?: string | null;
+  email?: string | null;
   message?: string | null;
   status?: ('unread' | 'read' | 'resolved') | null;
   updatedAt: string;
@@ -845,6 +948,10 @@ export interface PayloadLockedDocument {
         value: number | Page;
       } | null)
     | ({
+        relationTo: 'reference-counters';
+        value: number | ReferenceCounter;
+      } | null)
+    | ({
         relationTo: 'support-applications';
         value: number | SupportApplication;
       } | null)
@@ -859,6 +966,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'documents';
         value: number | Document;
+      } | null)
+    | ({
+        relationTo: 'submission-files';
+        value: number | SubmissionFile;
       } | null)
     | ({
         relationTo: 'volunteer-applications';
@@ -1163,6 +1274,16 @@ export interface PagesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reference-counters_select".
+ */
+export interface ReferenceCountersSelect<T extends boolean = true> {
+  prefix?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "support-applications_select".
  */
 export interface SupportApplicationsSelect<T extends boolean = true> {
@@ -1176,6 +1297,40 @@ export interface SupportApplicationsSelect<T extends boolean = true> {
   email?: T;
   phone?: T;
   supportType?: T;
+  supportTypeOther?: T;
+  gender?: T;
+  dateOfBirth?: T;
+  nationality?: T;
+  contactMethod?: T;
+  referralSource?: T;
+  state?: T;
+  lga?: T;
+  landmark?: T;
+  durationAtAddress?: T;
+  housingStatus?: T;
+  urgency?: T;
+  appliedElsewhere?: T;
+  occupation?: T;
+  maritalStatus?: T;
+  incomeSourceOther?: T;
+  children?: T;
+  dependents?: T;
+  primaryProvider?: T;
+  householdSize?: T;
+  elderlyRelatives?: T;
+  previousSupport?: T;
+  address?: T;
+  livingConditions?: T;
+  supportSummary?: T;
+  challenge?: T;
+  expectedImpact?: T;
+  previousSupportDetail?: T;
+  stepsTaken?: T;
+  additionalInformation?: T;
+  declarationTrue?: T;
+  declarationNoGuarantee?: T;
+  declarationContact?: T;
+  declarationDataUse?: T;
   status?: T;
   assignedTo?: T;
   nationalId?: T;
@@ -1228,6 +1383,25 @@ export interface DocumentsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "submission-files_select".
+ */
+export interface SubmissionFilesSelect<T extends boolean = true> {
+  submittedWith?: T;
+  anonymisedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "volunteer-applications_select".
  */
 export interface VolunteerApplicationsSelect<T extends boolean = true> {
@@ -1240,7 +1414,21 @@ export interface VolunteerApplicationsSelect<T extends boolean = true> {
   fullName?: T;
   email?: T;
   phone?: T;
+  whatsapp?: T;
+  gender?: T;
+  dateOfBirth?: T;
+  location?: T;
+  occupation?: T;
+  qualification?: T;
+  profession?: T;
+  volunteeredBefore?: T;
   areaOfInterest?: T;
+  availability?: T;
+  commitment?: T;
+  consent?: T;
+  skills?: T;
+  previousExperience?: T;
+  motivation?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1260,7 +1448,19 @@ export interface InKindOffersSelect<T extends boolean = true> {
   email?: T;
   phone?: T;
   category?: T;
+  quantity?: T;
+  condition?: T;
+  location?: T;
+  deliveryMethod?: T;
+  contactMethod?: T;
+  pickupDate?: T;
+  pickupTime?: T;
+  destination?: T;
+  acknowledgeDonation?: T;
   description?: T;
+  pickupAddress?: T;
+  pickupInstructions?: T;
+  photo?: T;
   photoKey?: T;
   status?: T;
   updatedAt?: T;
@@ -1279,8 +1479,12 @@ export interface PartnerEnquiriesSelect<T extends boolean = true> {
   anonymisedAt?: T;
   organisation?: T;
   contactPerson?: T;
-  email?: T;
+  location?: T;
+  partnershipType?: T;
   phone?: T;
+  consent?: T;
+  email?: T;
+  message?: T;
   status?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1297,8 +1501,9 @@ export interface ContactMessagesSelect<T extends boolean = true> {
   sourceIpHash?: T;
   anonymisedAt?: T;
   name?: T;
-  email?: T;
   subject?: T;
+  enquiry?: T;
+  email?: T;
   message?: T;
   status?: T;
   updatedAt?: T;

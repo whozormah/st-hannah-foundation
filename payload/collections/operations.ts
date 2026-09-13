@@ -34,6 +34,14 @@ const caseWritable = (fields: Field[]): Field[] =>
       ({ ...field, access: { update: applicationFieldWrite } }) as Field,
   );
 
+/** Plain text fields, named exactly as the form already posts them, so the
+    migration from the existing endpoints is a mapping and not a rename. */
+const text = (...names: string[]): Field[] =>
+  names.map((name) => ({ name, type: "text" }) as Field);
+
+const longText = (...names: string[]): Field[] =>
+  names.map((name) => ({ name, type: "textarea" }) as Field);
+
 /* Support applications — section 8.2: Owner CRUD, Administrator read plus the
    status field, Content none, Case Officer CRU, Finance none. */
 export const SupportApplications: CollectionConfig = {
@@ -52,11 +60,57 @@ export const SupportApplications: CollectionConfig = {
   fields: [
     ...caseWritable(systemFields),
     ...caseWritable(contactFields),
-    {
-      name: "supportType",
-      type: "text",
-      access: { update: applicationFieldWrite },
-    },
+    /* The rest of the application, named exactly as the form posts it.
+       Phase 2 held only what the permission rules needed; Phase 3 stores the
+       whole submission. */
+    ...caseWritable([
+      ...text(
+        "supportType",
+        "supportTypeOther",
+        "gender",
+        "dateOfBirth",
+        "nationality",
+        "contactMethod",
+        "referralSource",
+        "state",
+        "lga",
+        "landmark",
+        "durationAtAddress",
+        "housingStatus",
+        "urgency",
+        "appliedElsewhere",
+        "occupation",
+        "maritalStatus",
+        "incomeSourceOther",
+        "children",
+        "dependents",
+        "primaryProvider",
+        "householdSize",
+        "elderlyRelatives",
+        "previousSupport",
+      ),
+      ...longText(
+        "address",
+        "livingConditions",
+        "supportSummary",
+        "challenge",
+        "expectedImpact",
+        "previousSupportDetail",
+        "stepsTaken",
+        "additionalInformation",
+      ),
+    ]),
+
+    /* The four declarations the form requires, kept as evidence of what the
+       applicant agreed to and when (PRV-03). */
+    ...caseWritable(
+      text(
+        "declarationTrue",
+        "declarationNoGuarantee",
+        "declarationContact",
+        "declarationDataUse",
+      ),
+    ),
     {
       // The one field an Administrator may write: the workflow (section 8.2).
       name: "status",
@@ -190,6 +244,32 @@ export const Documents: CollectionConfig = {
   ],
 };
 
+/* Files that arrive with a public submission — currently the in-kind
+   photograph (OPS-03).
+
+   SEC-07/SEC-08: never a public path, stored under a generated name, and
+   readable only by the roles that handle the submission. Created by the
+   endpoint through the local API; no public or staff create route. */
+export const SubmissionFiles: CollectionConfig = {
+  slug: "submission-files",
+  upload: {
+    // MED-03: images capped at 10 MB, types allow-listed.
+    mimeTypes: ["image/jpeg", "image/png", "image/webp", "image/heic"],
+    disableLocalStorage: false,
+  },
+  admin: { group: "People", hidden: true },
+  access: {
+    create: never,
+    read: allow("owner", "administrator", "case"),
+    update: never,
+    delete: allow("owner"),
+  },
+  fields: [
+    { name: "submittedWith", type: "text" },
+    { name: "anonymisedAt", type: "date" },
+  ],
+};
+
 /* Volunteers, partners, contacts, in-kind offers and subscribers — Owner,
    Administrator and Case Officer all CRUD (section 8.2). */
 const enquiryAccess = {
@@ -206,7 +286,21 @@ export const VolunteerApplications: CollectionConfig = {
   fields: [
     ...systemFields,
     ...contactFields,
-    { name: "areaOfInterest", type: "text" },
+    ...text(
+      "whatsapp",
+      "gender",
+      "dateOfBirth",
+      "location",
+      "occupation",
+      "qualification",
+      "profession",
+      "volunteeredBefore",
+      "areaOfInterest",
+      "availability",
+      "commitment",
+      "consent",
+    ),
+    ...longText("skills", "previousExperience", "motivation"),
     {
       name: "status",
       type: "select",
@@ -223,10 +317,35 @@ export const InKindOffers: CollectionConfig = {
   fields: [
     ...systemFields,
     ...contactFields,
-    { name: "category", type: "text" },
-    { name: "description", type: "textarea" },
-    // OPS-03: the photograph the form already asks for, which V1 discarded.
-    { name: "photoKey", type: "text" },
+    ...text(
+      "category",
+      "quantity",
+      "condition",
+      "location",
+      "deliveryMethod",
+      "contactMethod",
+      "pickupDate",
+      "pickupTime",
+      "destination",
+      "acknowledgeDonation",
+    ),
+    ...longText("description", "pickupAddress", "pickupInstructions"),
+    /* OPS-03: the photograph the form already asks for and V1 discarded.
+       Held in the private collection, never a public path (SEC-07). */
+    {
+      name: "photo",
+      type: "relationship",
+      relationTo: "submission-files",
+    },
+    /* Superseded by `photo` above and written by nothing. Kept for one
+       release so this migration only adds columns: dropping it here would
+       make the generator ask whether it was renamed, and a wrong answer
+       silently moves data. A later migration removes it on its own. */
+    {
+      name: "photoKey",
+      type: "text",
+      admin: { hidden: true, description: "Deprecated. Removed after Phase 3." },
+    },
     {
       name: "status",
       type: "select",
@@ -242,10 +361,9 @@ export const PartnerEnquiries: CollectionConfig = {
   access: enquiryAccess,
   fields: [
     ...systemFields,
-    { name: "organisation", type: "text" },
-    { name: "contactPerson", type: "text" },
+    ...text("organisation", "contactPerson", "location", "partnershipType", "phone", "consent"),
     { name: "email", type: "email" },
-    { name: "phone", type: "text" },
+    { name: "message", type: "textarea" },
     {
       name: "status",
       type: "select",
@@ -261,9 +379,8 @@ export const ContactMessages: CollectionConfig = {
   access: enquiryAccess,
   fields: [
     ...systemFields,
-    { name: "name", type: "text" },
+    ...text("name", "subject", "enquiry"),
     { name: "email", type: "email" },
-    { name: "subject", type: "text" },
     { name: "message", type: "textarea" },
     {
       name: "status",
@@ -291,11 +408,32 @@ export const Subscribers: CollectionConfig = {
   ],
 };
 
+/* OPS-04: reference numbers are unique, sequential within their prefix and
+   generated server-side. The counter lives here so the schema owns it; the
+   increment itself is a single atomic statement (see lib/submissions.ts),
+   because two submissions arriving together must never take one number. */
+export const ReferenceCounters: CollectionConfig = {
+  slug: "reference-counters",
+  admin: { group: "Administration", hidden: true },
+  access: {
+    create: never,
+    read: allow("owner"),
+    update: never,
+    delete: never,
+  },
+  fields: [
+    { name: "prefix", type: "text", required: true, unique: true, index: true },
+    { name: "value", type: "number", required: true, defaultValue: 0 },
+  ],
+};
+
 export const operationsCollections = [
+  ReferenceCounters,
   SupportApplications,
   Beneficiaries,
   CaseNotes,
   Documents,
+  SubmissionFiles,
   VolunteerApplications,
   InKindOffers,
   PartnerEnquiries,

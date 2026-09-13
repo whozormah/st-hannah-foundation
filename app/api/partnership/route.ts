@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { sendPartnershipEnquiryEmails } from "@/lib/email";
-import { generateReferenceNumber } from "@/lib/receipt";
+import { deliverNotifications, nextReference, persistSubmission } from "@/lib/submissions";
 
 const EMAIL_PATTERN = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
@@ -34,10 +34,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const reference = generateReferenceNumber("SHP");
+    const reference = await nextReference("SHP");
 
-    await sendPartnershipEnquiryEmails({
-      reference,
+    const details = {
       organisation,
       contactPerson,
       email,
@@ -45,7 +44,18 @@ export async function POST(request: NextRequest) {
       location: String(body?.location ?? "").trim(),
       partnershipType: String(body?.partnershipType ?? "").trim(),
       message: String(body?.message ?? "").trim(),
+    };
+
+    await persistSubmission("partner-enquiries", {
+      reference,
+      ...details,
+      consent: String(body?.consent ?? "").trim(),
+      status: "new",
     });
+
+    await deliverNotifications("partnership", reference, () =>
+      sendPartnershipEnquiryEmails({ reference, ...details }),
+    );
 
     return NextResponse.json({
       success: true,

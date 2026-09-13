@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { sendVolunteerApplicationEmails } from "@/lib/email";
-import { generateReferenceNumber } from "@/lib/receipt";
+import { deliverNotifications, nextReference, persistSubmission } from "@/lib/submissions";
 
 const REQUIRED_FIELDS = ["fullName", "email", "phone"] as const;
 
@@ -67,15 +67,24 @@ export async function POST(request: NextRequest) {
       OPTIONAL_FIELDS.map((field) => [field, String(body[field] ?? "").trim()]),
     );
 
-    const reference = generateReferenceNumber("SHV");
+    const reference = await nextReference("SHV");
 
-    await sendVolunteerApplicationEmails({
-      ...details,
-      reference,
+    const applicant = {
       fullName: String(body.fullName).trim(),
       email: String(body.email).trim(),
       phone: String(body.phone).trim(),
+    };
+
+    await persistSubmission("volunteer-applications", {
+      reference,
+      ...details,
+      ...applicant,
+      status: "new",
     });
+
+    await deliverNotifications("volunteer", reference, () =>
+      sendVolunteerApplicationEmails({ ...details, reference, ...applicant }),
+    );
 
     return NextResponse.json({
       success: true,
