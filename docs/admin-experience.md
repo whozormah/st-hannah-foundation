@@ -13,8 +13,17 @@ no permission, workflow or data rule changed. All 50 tests still pass.
 - **Language (ADM-01).** Every section uses the spec's navigation wording —
   Leadership, FAQs, Volunteers, Partners, Transactions, Administrators, Audit
   Log — grouped Content, People, Fundraising, Administration. Browser tabs read
-  "… · St. Hannah Foundation". *Field labels inside records are still Payload's
-  defaults and remain to be done under ADM-01.*
+  "… · St. Hannah Foundation".
+- **Field labels (ADM-01).** Every field inside every record is labelled in
+  plain English from one dictionary, `payload/labels.ts`, drawn from the
+  public forms' own questions and shortened for staff — "lga" is "Local
+  Government Area", "situationNarrative" is "Their Account of Their
+  Situation". Web jargon is rephrased: "slug" is "Web Address", with a note on
+  what it is. Status options stored as bare values ("in_discussion") show
+  readable names in lists and filters. Display only: the migration generator
+  confirmed no schema change. Reviewed by reading every label rendered on each
+  record screen; the only automated flags were WhatsApp, YouTube, LinkedIn and
+  TikTok — their own spellings.
 - **Navigation mark.** An "SH" monogram sized to Payload's 18px slot; the
   portrait logo blurs at that size.
 

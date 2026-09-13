@@ -12,6 +12,7 @@ import { operationsCollections } from "./payload/collections/operations";
 import { fundraisingCollections } from "./payload/collections/fundraising";
 import { systemCollections } from "./payload/collections/system";
 import { globals } from "./payload/globals";
+import { labelCollection, labelGlobal } from "./payload/labels";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -92,14 +93,16 @@ export default buildConfig({
   },
   // Order sets the admin's sections: Content, People, Fundraising,
   // Administration — the section 9 navigation.
+  // ADM-01: every field is labelled in the Foundation's language
+  // (payload/labels.ts). Display only; stored values are unchanged.
   collections: [
     ...contentCollections,
     ...operationsCollections,
     ...fundraisingCollections,
     AdminUsers,
     ...systemCollections,
-  ],
-  globals,
+  ].map(labelCollection),
+  globals: globals.map(labelGlobal),
   plugins: storage,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? "",

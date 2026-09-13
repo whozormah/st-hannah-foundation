@@ -67,7 +67,6 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    'admin-users': AdminUser;
     media: Media;
     programmes: Programme;
     'impact-stories': ImpactStory;
@@ -92,6 +91,7 @@ export interface Config {
     donations: Donation;
     'payment-transactions': PaymentTransaction;
     'webhook-events': WebhookEvent;
+    'admin-users': AdminUser;
     'email-templates': EmailTemplate;
     notifications: Notification;
     redirects: Redirect;
@@ -105,7 +105,6 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    'admin-users': AdminUsersSelect<false> | AdminUsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     programmes: ProgrammesSelect<false> | ProgrammesSelect<true>;
     'impact-stories': ImpactStoriesSelect<false> | ImpactStoriesSelect<true>;
@@ -130,6 +129,7 @@ export interface Config {
     donations: DonationsSelect<false> | DonationsSelect<true>;
     'payment-transactions': PaymentTransactionsSelect<false> | PaymentTransactionsSelect<true>;
     'webhook-events': WebhookEventsSelect<false> | WebhookEventsSelect<true>;
+    'admin-users': AdminUsersSelect<false> | AdminUsersSelect<true>;
     'email-templates': EmailTemplatesSelect<false> | EmailTemplatesSelect<true>;
     notifications: NotificationsSelect<false> | NotificationsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
@@ -189,6 +189,28 @@ export interface AdminUserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  caption?: string | null;
+  tags?: string[] | null;
+  uploadedBy?: (number | null) | AdminUser;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "admin-users".
  */
 export interface AdminUser {
@@ -214,28 +236,6 @@ export interface AdminUser {
     | null;
   password?: string | null;
   collection: 'admin-users';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  caption?: string | null;
-  tags?: string[] | null;
-  uploadedBy?: (number | null) | AdminUser;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -722,6 +722,9 @@ export interface Campaign {
   id: number;
   name: string;
   slug: string;
+  /**
+   * In kobo for naira and cents for dollars: ₦1,000 is 100000.
+   */
   targetMinor?: number | null;
   currency?: string | null;
   active?: boolean | null;
@@ -738,6 +741,9 @@ export interface Donation {
   donor: number | Donor;
   campaign?: (number | null) | Campaign;
   programme?: (number | null) | Programme;
+  /**
+   * In kobo for naira and cents for dollars: ₦1,000 is 100000.
+   */
   amountMinor: number;
   currency: string;
   status: 'successful' | 'refunded' | 'partially_refunded';
@@ -918,10 +924,6 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'admin-users';
-        value: number | AdminUser;
-      } | null)
-    | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
@@ -1018,6 +1020,10 @@ export interface PayloadLockedDocument {
         value: number | WebhookEvent;
       } | null)
     | ({
+        relationTo: 'admin-users';
+        value: number | AdminUser;
+      } | null)
+    | ({
         relationTo: 'email-templates';
         value: number | EmailTemplate;
       } | null)
@@ -1082,31 +1088,6 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "admin-users_select".
- */
-export interface AdminUsersSelect<T extends boolean = true> {
-  name?: T;
-  role?: T;
-  status?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
-    | T
-    | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1609,6 +1590,31 @@ export interface WebhookEventsSelect<T extends boolean = true> {
   receivedAt?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admin-users_select".
+ */
+export interface AdminUsersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
