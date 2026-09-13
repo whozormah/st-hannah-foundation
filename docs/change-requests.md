@@ -158,19 +158,24 @@ Interface defects that belong to no phase are tracked separately, in
   events" on /impact-stories — the drift section 5.4 warns about.
 - **Change:**
   1. Each figure is stored once and shown on every page that uses it, so no
-     two pages can disagree. The eight: children reached, widows supported,
+     two pages can disagree. The ten: children reached, widows supported,
      educational beneficiaries, communities reached, lives reached, outreach
-     events, years of service, countries represented. Page labels are
-     unchanged.
+     events, years of service, countries represented, families reached,
+     students sponsored. Page labels are unchanged. The last two, and the
+     About page's "10+ years of service", were typed into page code rather
+     than the data file; the A21 test found them.
   2. Historic totals stay typed in, under CNT-10, each with its own source
      note and "verified on" date. They count as unmeasurable by the system
      until its records can produce them.
   3. Figures the system can count are counted. Of those in section 5.4, the
      site shows only photographs per gallery area, already counted from the
      gallery itself.
-- **Note:** the retired donate-page figures (CR-008) repeat two of these
-  (500+ widows, 50+ communities). If that section returns, it reads the same
-  stored figures.
+- **Note:** the retired donate-page figures (CR-008) repeat four of these,
+  under slightly different labels; the migration checks they agree. If that
+  section returns, it reads the same stored figures.
+- **For the Foundation (MIG-07):** the Partnerships page says "Multiple"
+  communities impacted, where the homepage says 50+. "Multiple" is not a
+  figure, so it is left as written until the Foundation says which to show.
 
 ### CR-011 — Alt text drafted by the developer, approved by the Foundation
 

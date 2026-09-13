@@ -226,13 +226,15 @@ export const StatisticsManual: GlobalConfig = {
   hooks: refreshesGlobal(CMS_TAGS.statistics),
   fields: [
     figure("childrenReached", "the homepage and Impact Stories"),
-    figure("widowsSupported", "the homepage and Impact Stories"),
+    figure("widowsSupported", "the homepage, Impact Stories and Partnerships"),
     figure("educationalBeneficiaries", "the homepage"),
     figure("communitiesReached", "the homepage"),
     figure("livesReached", "Programmes, About and Impact Stories"),
     figure("outreachEvents", "Programmes, About and Impact Stories"),
     figure("yearsOfService", "Programmes and About"),
     figure("countriesRepresented", "Programmes and About"),
+    figure("familiesReached", "Partnerships"),
+    figure("studentsSponsored", "Partnerships"),
   ],
 };
 

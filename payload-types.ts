@@ -2215,7 +2215,7 @@ export interface StatisticsManual {
     verifiedAt?: string | null;
   };
   /**
-   * Shown on: the homepage and Impact Stories.
+   * Shown on: the homepage, Impact Stories and Partnerships.
    */
   widowsSupported: {
     value: string;
@@ -2266,6 +2266,22 @@ export interface StatisticsManual {
    * Shown on: Programmes and About.
    */
   countriesRepresented: {
+    value: string;
+    source?: string | null;
+    verifiedAt?: string | null;
+  };
+  /**
+   * Shown on: Partnerships.
+   */
+  familiesReached: {
+    value: string;
+    source?: string | null;
+    verifiedAt?: string | null;
+  };
+  /**
+   * Shown on: Partnerships.
+   */
+  studentsSponsored: {
     value: string;
     source?: string | null;
     verifiedAt?: string | null;
@@ -2479,6 +2495,20 @@ export interface StatisticsManualSelect<T extends boolean = true> {
         verifiedAt?: T;
       };
   countriesRepresented?:
+    | T
+    | {
+        value?: T;
+        source?: T;
+        verifiedAt?: T;
+      };
+  familiesReached?:
+    | T
+    | {
+        value?: T;
+        source?: T;
+        verifiedAt?: T;
+      };
+  studentsSponsored?:
     | T
     | {
         value?: T;

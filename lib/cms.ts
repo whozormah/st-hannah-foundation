@@ -433,6 +433,8 @@ export type Stats = {
     communityOutreachEvents: string;
     livesImpacted: string;
   };
+  about: { yearsOfService: string };
+  partnerships: { widowsSupported: string; familiesReached: string; studentsSponsored: string };
 };
 
 /* Each figure is stored once (CR-010); every page's set is built from the
@@ -460,6 +462,12 @@ export const getStats = cached(CMS_TAGS.statistics, async (): Promise<Stats> => 
       childrenReached: figure("childrenReached"),
       communityOutreachEvents: figure("outreachEvents"),
       livesImpacted: figure("livesReached"),
+    },
+    about: { yearsOfService: figure("yearsOfService") },
+    partnerships: {
+      widowsSupported: figure("widowsSupported"),
+      familiesReached: figure("familiesReached"),
+      studentsSponsored: figure("studentsSponsored"),
     },
   };
 });

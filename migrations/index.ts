@@ -6,6 +6,7 @@ import * as migration_20260913_193200_phase6_content_model from './20260913_1932
 import * as migration_20260913_193524_phase6_single_story_summary from './20260913_193524_phase6_single_story_summary';
 import * as migration_20260913_210321_phase6_statistics_remove_per_page from './20260913_210321_phase6_statistics_remove_per_page';
 import * as migration_20260913_210326_phase6_statistics_single_figures from './20260913_210326_phase6_statistics_single_figures';
+import * as migration_20260913_211551_phase6_statistics_partnership_figures from './20260913_211551_phase6_statistics_partnership_figures';
 
 export const migrations = [
   {
@@ -46,6 +47,11 @@ export const migrations = [
   {
     up: migration_20260913_210326_phase6_statistics_single_figures.up,
     down: migration_20260913_210326_phase6_statistics_single_figures.down,
-    name: '20260913_210326_phase6_statistics_single_figures'
+    name: '20260913_210326_phase6_statistics_single_figures',
+  },
+  {
+    up: migration_20260913_211551_phase6_statistics_partnership_figures.up,
+    down: migration_20260913_211551_phase6_statistics_partnership_figures.down,
+    name: '20260913_211551_phase6_statistics_partnership_figures'
   },
 ];

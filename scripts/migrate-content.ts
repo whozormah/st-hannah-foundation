@@ -291,40 +291,67 @@ const migrators: Record<string, Migrator> = {
 
   async statistics(payload) {
     const stats = readJson<Record<string, Record<string, string>>>("stats.json");
+    const donate = readJson<{ stats: { number: string; label: string }[] }>(
+      "donation-impact.json",
+    ).stats;
 
-    // CR-010: the file held each figure once per page, sometimes under a
-    // different name. Each is stored once; every place it was held must
-    // agree, or the migration stops (MIG-07) rather than pick one.
-    const figures: Record<string, string[]> = {
-      childrenReached: ["homepage.childrenReached", "impact.childrenReached"],
-      widowsSupported: ["homepage.widowsSupported", "impact.widowsSupported"],
-      educationalBeneficiaries: ["homepage.educationalBeneficiaries"],
-      communitiesReached: ["homepage.communitiesImpacted", "gallery.communitiesReached"],
-      livesReached: ["programs.livesReached", "impact.livesImpacted", "gallery.livesImpacted"],
-      outreachEvents: [
-        "programs.outreachActivities",
-        "impact.communityOutreachEvents",
-        "gallery.outreachEvents",
-      ],
-      yearsOfService: ["programs.yearsOfCompassion", "gallery.yearsOfService"],
-      countriesRepresented: ["programs.countriesRepresented"],
+    // Every place a figure was held before the CMS: stats.json, per page,
+    // and the retired donate-page figures (CR-008), by their label there.
+    const at = (place: string) => {
+      const [file, key] = place.split(":");
+
+      if (file === "donate") return donate.find((item) => item.label === key)?.number;
+
+      const [group, name] = key.split(".");
+      return stats[group]?.[name];
     };
 
-    const held = Object.values(stats).reduce((n, group) => n + Object.keys(group).length, 0);
+    // CR-010: each figure is stored once. Every place it was held must agree,
+    // or the migration stops (MIG-07) rather than pick one. Families reached
+    // and students sponsored were also typed into the Partnerships page's
+    // code; A18 checks that page still renders the same figures.
+    const figures: Record<string, string[]> = {
+      childrenReached: ["stats:homepage.childrenReached", "stats:impact.childrenReached"],
+      widowsSupported: [
+        "stats:homepage.widowsSupported",
+        "stats:impact.widowsSupported",
+        "donate:Widows Reached Through Empowerment Programmes",
+      ],
+      educationalBeneficiaries: ["stats:homepage.educationalBeneficiaries"],
+      communitiesReached: [
+        "stats:homepage.communitiesImpacted",
+        "stats:gallery.communitiesReached",
+        "donate:Communities Impacted Across Various Programmes",
+      ],
+      livesReached: [
+        "stats:programs.livesReached",
+        "stats:impact.livesImpacted",
+        "stats:gallery.livesImpacted",
+      ],
+      outreachEvents: [
+        "stats:programs.outreachActivities",
+        "stats:impact.communityOutreachEvents",
+        "stats:gallery.outreachEvents",
+      ],
+      yearsOfService: ["stats:programs.yearsOfCompassion", "stats:gallery.yearsOfService"],
+      countriesRepresented: ["stats:programs.countriesRepresented"],
+      familiesReached: ["donate:Families Supported Through Welfare Initiatives"],
+      studentsSponsored: ["donate:UTME Candidates Sponsored"],
+    };
+
+    const held =
+      Object.values(stats).reduce((n, group) => n + Object.keys(group).length, 0) + donate.length;
     const mapped = Object.values(figures).flat();
     const notes: string[] = [];
 
-    if (mapped.length !== held) {
-      notes.push(`not saved as written: stats.json holds ${held} values, ${mapped.length} are mapped`);
+    if (new Set(mapped).size !== held) {
+      notes.push(`not saved as written: the files hold ${held} figures, ${mapped.length} are mapped`);
     }
 
     const data: Record<string, unknown> = {};
 
     for (const [name, places] of Object.entries(figures)) {
-      const values = places.map((place) => {
-        const [group, key] = place.split(".");
-        return stats[group]?.[key];
-      });
+      const values = places.map(at);
 
       if (values.some((value) => value === undefined) || new Set(values).size !== 1) {
         notes.push(
@@ -337,7 +364,7 @@ const migrators: Record<string, Migrator> = {
         value: values[0],
         // Known source, no verification: MIG-07 forbids claiming a check
         // that never happened, so "verified on" is left empty.
-        source: `Carried over from the website before the CMS (public/data/stats.json: ${places.join(", ")}). Not yet verified by the Foundation.`,
+        source: `Carried over from the website before the CMS (${places.join("; ")}). Not yet verified by the Foundation.`,
         verifiedAt: null,
       };
     }

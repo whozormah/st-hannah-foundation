@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-import { getFoundation } from "@/lib/cms";
+import { getFoundation, getStats } from "@/lib/cms";
 
 export default async function AboutMission() {
-  const foundation = await getFoundation();
+  const [foundation, stats] = await Promise.all([getFoundation(), getStats()]);
 
   return (
     <section className="bg-white py-14 md:py-24">
@@ -47,7 +47,10 @@ export default async function AboutMission() {
             {/* Floating Card */}
 
             <div className="absolute -bottom-6 right-4 rounded-[28px] border border-accent/20 bg-white p-6 shadow-2xl sm:p-8 lg:-bottom-10 lg:-right-10">
-              <h3 className="text-3xl md:text-5xl font-bold text-brand">10+</h3>
+              {/* From Statistics, like every figure on the site (CR-010). */}
+              <h3 className="text-3xl md:text-5xl font-bold text-brand">
+                {stats.about.yearsOfService}
+              </h3>
 
               <p className="mt-2 uppercase tracking-[3px] text-sm text-gray-500">
                 Years of Service

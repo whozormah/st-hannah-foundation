@@ -1,15 +1,22 @@
-export default function PartnershipImpact() {
+import { getStats } from "@/lib/cms";
+
+export default async function PartnershipImpact() {
+  const { partnerships } = await getStats();
+
+  // The figures come from Statistics, like every figure on the site
+  // (CR-010). "Multiple" is not a figure; whether this should show the
+  // stored communities figure (50+) instead is the Foundation's call.
   const stats = [
     {
-      number: "500+",
+      number: partnerships.widowsSupported,
       label: "Widows Supported",
     },
     {
-      number: "100+",
+      number: partnerships.familiesReached,
       label: "Families Reached",
     },
     {
-      number: "15+",
+      number: partnerships.studentsSponsored,
       label: "Students Sponsored",
     },
     {

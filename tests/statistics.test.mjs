@@ -16,13 +16,15 @@ const page = async (path) => (await fetch(`${BASE}${path}`, { cache: "no-store" 
 // Where each figure appears, per CR-010.
 const SHOWN_ON = {
   childrenReached: ["/", "/impact-stories"],
-  widowsSupported: ["/", "/impact-stories"],
+  widowsSupported: ["/", "/impact-stories", "/partnerships"],
   educationalBeneficiaries: ["/"],
   communitiesReached: ["/"],
   livesReached: ["/programs", "/about", "/impact-stories"],
   outreachEvents: ["/programs", "/about", "/impact-stories"],
   yearsOfService: ["/programs", "/about"],
   countriesRepresented: ["/programs", "/about"],
+  familiesReached: ["/partnerships"],
+  studentsSponsored: ["/partnerships"],
 };
 
 test("A21: each figure is stored once and every page that shows it agrees", async (t) => {
@@ -63,7 +65,28 @@ test("A21: each figure is stored once and every page that shows it agrees", asyn
     }
   }
 
-  // And no page shows the old figures any more: nothing kept its own copy.
+  // No page still displays one of the original figures once all of them are
+  // replaced: a figure typed into a page's code would stay behind. Checked
+  // on every public page, not only those listed above.
+  const everyPage = ["/", "/about", "/programs", "/impact-stories", "/gallery", "/team",
+    "/volunteer", "/partnerships", "/donate", "/apply-for-support", "/contact"];
+  const figures = [...new Set(Object.keys(SHOWN_ON).map((n) => original[n].value))].filter((v) =>
+    /\d+\+/.test(v),
+  );
+
+  for (const path of everyPage) {
+    const html = pages[path] ?? (await page(path));
+    // A story's own beneficiary count ("15+ reached") is part of that story,
+    // not a site-wide figure (CR-010), so those are set aside.
+    const main = html
+      .slice(html.indexOf("<main"), html.indexOf("</main>"))
+      .replace(/>[^<>]*(?:<!-- -->\s*reached|<span[^>]*>\s*reached)/g, ">");
+    const left = figures.filter((value) => main.includes(`>${value}<`));
+
+    assert.deepEqual(left, [], `${path} still displays ${left.join(", ")} typed into the page`);
+  }
+
+  // And no page shows a figure CR-010 does not list for it.
   for (const [path, html] of Object.entries(pages)) {
     const main = html.slice(html.indexOf("<main"), html.indexOf("</main>"));
 
