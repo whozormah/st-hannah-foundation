@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import founderData from "@/public/data/homepage/founder.json";
+import { getFounder } from "@/lib/cms";
 
 interface FounderData {
   badge: string;
@@ -13,10 +13,8 @@ interface FounderData {
   message: string[];
 }
 
-const founder: FounderData | null = founderData;
-
-export default function AboutFounder() {
-
+export default async function AboutFounder() {
+  const founder: FounderData | null = await getFounder();
 
   if (!founder) return null;
 

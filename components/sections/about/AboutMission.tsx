@@ -1,8 +1,10 @@
 import Image from "next/image";
 
-import foundation from "@/public/data/homepage/foundation.json";
+import { getFoundation } from "@/lib/cms";
 
-export default function AboutMission() {
+export default async function AboutMission() {
+  const foundation = await getFoundation();
+
   return (
     <section className="bg-white py-14 md:py-24">
       <div className="container-custom">

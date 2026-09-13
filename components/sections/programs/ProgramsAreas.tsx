@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import programsData from "@/public/data/programs.json";
+import { getProgrammes } from "@/lib/cms";
 
 interface Program {
   slug: string;
@@ -22,7 +22,7 @@ interface Program {
   icon: string;
 }
 
-// Keyed to the icon names actually used in programs.json. The previous map
+// Keyed to the icon names actually used by the programmes. The previous map
 // imported Wallet, ShieldCheck and Globe, which no programme asks for, and
 // omitted HandCoins, Shield and Building2, which three do; a guard hid the
 // failure so Financial Aid, Support Our Men and Community Outreach rendered
@@ -38,9 +38,9 @@ const ICONS: Record<string, LucideIcon> = {
   Building2,
 };
 
-const programs: Program[] = programsData;
+export default async function ProgramsAreas() {
+  const programs: Program[] = await getProgrammes();
 
-export default function ProgramsAreas() {
   return (
     <section className="bg-cream py-14 md:py-24">
       <div className="container-custom">

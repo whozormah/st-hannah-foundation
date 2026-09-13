@@ -1,30 +1,19 @@
 import type { MetadataRoute } from "next";
-import fs from "fs";
-import path from "path";
-
-import programs from "@/public/data/programs.json";
 import legal from "@/public/data/legal.json";
+
+import { getProgrammes, getStories } from "@/lib/cms";
+
+// Lists what is published now, so a new story is advertised without a
+// deployment (CR-007).
+export const dynamic = "force-dynamic";
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
   "https://sthannahfoundation.org";
 
-function getStorySlugs() {
-  const storiesDir = path.join(
-    process.cwd(),
-    "public",
-    "data",
-    "impact-stories",
-  );
-
-  return fs
-    .readdirSync(storiesDir)
-    .filter((file) => file.endsWith(".json") && file !== "stories.json")
-    .map((file) => file.replace(".json", ""));
-}
-
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
+  const [programs, stories] = await Promise.all([getProgrammes(), getStories()]);
 
   const staticRoutes: MetadataRoute.Sitemap = (
     [
@@ -61,7 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  const storyRoutes: MetadataRoute.Sitemap = getStorySlugs().map((slug) => ({
+  const storyRoutes: MetadataRoute.Sitemap = stories.map(({ slug }) => ({
     url: `${siteUrl}/impact-stories/${slug}`,
     lastModified,
     changeFrequency: "monthly",

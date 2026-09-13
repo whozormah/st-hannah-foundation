@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import eventsData from "@/public/data/featured-events.json";
+import { getFeaturedEvents } from "@/lib/cms";
 
 interface EventItem {
   title: string;
@@ -11,10 +11,8 @@ interface EventItem {
   link: string;
 }
 
-const events: EventItem[] = eventsData;
-
-export default function FeaturedEvents() {
-
+export default async function FeaturedEvents() {
+  const events: EventItem[] = await getFeaturedEvents();
 
   return (
     <section className="bg-white py-14 md:py-24">

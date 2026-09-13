@@ -5,21 +5,26 @@ import type {
 } from "payload";
 
 /* PUB-04 and ARC-02: publishing content refreshes the website without a
-   deployment. Each content collection invalidates its own cache tag when a
-   document changes or is deleted; the next visitor gets the new content.
+   deployment. Each kind of content invalidates its own cache tag when it
+   changes or is deleted, and the next visitor gets the new content.
 
-   "max" is the profile the Next.js 16 docs recommend: stale-while-revalidate,
-   so no visitor ever waits on the database. The single-argument form of
-   revalidateTag is deprecated in this version.
+   `{ expire: 0 }`, not the "max" profile the Next.js docs recommend for most
+   sites. "max" is stale-while-revalidate: the first visitor after a publish
+   is served the old version while the new one loads. On a site this quiet
+   that visitor is usually the editor checking their change, and the old
+   version could be hours old. With `expire: 0` that one request waits for
+   the database instead, which the docs give as the pattern for route
+   handlers — where Payload saves run — that need data expired at once.
+   (`updateTag` does the same but works only in Server Actions.)
 
    Outside a Next.js request — the content migration script, for instance —
    there is no cache to invalidate, so the call is skipped rather than
    failing the write. Callers can also opt out with context.skipRevalidate. */
-function refresh(tag: string, context: Record<string, unknown> | undefined) {
+export function refresh(tag: string, context: Record<string, unknown> | undefined) {
   if (context?.skipRevalidate) return;
 
   try {
-    revalidateTag(tag, "max");
+    revalidateTag(tag, { expire: 0 });
   } catch {
     // Not inside a Next.js request: nothing is cached here to invalidate.
   }

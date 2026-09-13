@@ -1,34 +1,36 @@
 import { Users, HeartHandshake, HandHeart, Sparkles } from "lucide-react";
 
-import siteStats from "@/public/data/stats.json";
+import { getStats } from "@/lib/cms";
 
-// One set of figures for the page, read from stats.json. They previously
-// appeared twice, in ImpactArchive and again in ImpactCTA, and the
-// "15+ Students Sponsored" in both contradicted the data.
-const numbers = [
-  {
-    icon: HeartHandshake,
-    value: siteStats.impact.widowsSupported,
-    label: "Widows supported",
-  },
-  {
-    icon: Users,
-    value: siteStats.impact.childrenReached,
-    label: "Children reached",
-  },
-  {
-    icon: HandHeart,
-    value: siteStats.impact.communityOutreachEvents,
-    label: "Outreach events",
-  },
-  {
-    icon: Sparkles,
-    value: siteStats.impact.livesImpacted,
-    label: "Lives impacted",
-  },
-];
+export default async function ImpactNumbers() {
+  const siteStats = await getStats();
 
-export default function ImpactNumbers() {
+  // One set of figures for the page, from the Manual Statistics. They
+  // previously appeared twice, in ImpactArchive and again in ImpactCTA, and the
+  // "15+ Students Sponsored" in both contradicted the data.
+  const numbers = [
+    {
+      icon: HeartHandshake,
+      value: siteStats.impact.widowsSupported,
+      label: "Widows supported",
+    },
+    {
+      icon: Users,
+      value: siteStats.impact.childrenReached,
+      label: "Children reached",
+    },
+    {
+      icon: HandHeart,
+      value: siteStats.impact.communityOutreachEvents,
+      label: "Outreach events",
+    },
+    {
+      icon: Sparkles,
+      value: siteStats.impact.livesImpacted,
+      label: "Lives impacted",
+    },
+  ];
+
   return (
     <section className="bg-cream py-16">
       <div className="container-custom">

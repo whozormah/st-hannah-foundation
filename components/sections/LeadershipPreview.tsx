@@ -2,21 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import governance from "@/public/data/governance.json";
+import { getLeadership } from "@/lib/cms";
 
 interface Leader {
   name: string;
   role: string;
   image: string;
-  /** Optional. Add a bio to governance.json and it appears here. */
+  /** Optional. An editor adds a bio in the CMS and it appears here. */
   bio?: string;
 }
-
-const allLeaders: Leader[] = governance;
-
-// A preview with a link to /team, which lists everyone. Rendering all six here
-// cost six phone screens on the homepage.
-const leaders = allLeaders.slice(0, 3);
 
 interface LeadershipPreviewProps {
   eyebrow?: string;
@@ -25,12 +19,18 @@ interface LeadershipPreviewProps {
   showButton?: boolean;
 }
 
-export default function LeadershipPreview({
+export default async function LeadershipPreview({
   eyebrow = "Governance & Leadership",
   title = "Meet the leaders behind the mission",
   description = "The people responsible for the Foundation's direction, oversight and accountability.",
   showButton = true,
 }: LeadershipPreviewProps) {
+  const allLeaders: Leader[] = await getLeadership();
+
+  // A preview with a link to /team, which lists everyone. Rendering all six here
+  // cost six phone screens on the homepage.
+  const leaders = allLeaders.slice(0, 3);
+
   if (!leaders.length) return null;
 
   return (

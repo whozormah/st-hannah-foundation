@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { PlayCircle } from "lucide-react";
 
-import videosData from "@/public/data/video-highlights.json";
+import { getVideoHighlights } from "@/lib/cms";
 
 interface VideoItem {
   title: string;
@@ -12,7 +12,7 @@ interface VideoItem {
   link: string;
 }
 
-// Every entry in video-highlights.json currently points at
+// Every video highlight currently points at
 // "https://youtube.com", the site's home page rather than a video. Publishing
 // a Watch button that lands nowhere is worse than not publishing it, so only
 // entries with a real video URL are shown, and the section hides itself when
@@ -36,11 +36,11 @@ function isPlayableVideo(link: string) {
   }
 }
 
-const videos: VideoItem[] = (videosData as VideoItem[]).filter((video) =>
-  isPlayableVideo(video.link),
-);
+export default async function VideoHighlights() {
+  const videos: VideoItem[] = (await getVideoHighlights()).filter((video) =>
+    isPlayableVideo(video.link),
+  );
 
-export default function VideoHighlights() {
   if (!videos.length) return null;
 
   return (

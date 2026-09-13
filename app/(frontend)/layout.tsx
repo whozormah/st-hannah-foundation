@@ -5,6 +5,8 @@ import "../globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
+import { getSiteSettings } from "@/lib/cms";
+
 /* The font files live in the repository rather than being fetched from Google
    at build time. next/font/google needs a network call while building, so a
    momentary problem reaching Google fails the whole deploy. These are the same
@@ -31,6 +33,13 @@ const playfair = localFont({
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
   "https://sthannahfoundation.org";
+
+/* Every page shows CMS content, if only in the footer, so the whole site is
+   rendered on request (CR-007). The content itself is cached and refreshed
+   on publish (lib/cms.ts), so this stays cheap. A static build would bake in
+   whatever the build machine's database held, and production images are
+   built in CI, away from the live one. */
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -75,11 +84,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { foundationName, email, phone, nigeriaOffice, usaOffice, socials } =
+    await getSiteSettings();
+
   return (
     // The font variables must live on <html>: --font-sans and --font-display
     // are declared on :root, and a custom property is substituted where it is
@@ -95,7 +107,7 @@ export default function RootLayout({
 
         <main>{children}</main>
 
-        <Footer />
+        <Footer settings={{ foundationName, email, phone, nigeriaOffice, usaOffice, socials }} />
       </body>
     </html>
   );

@@ -1,15 +1,13 @@
 
-import benefitsData from "@/public/data/volunteer-benefits.json";
+import { getVolunteerBenefits } from "@/lib/cms";
 
 interface Benefit {
   title: string;
   description: string;
 }
 
-const benefits: Benefit[] = benefitsData;
-
-export default function VolunteerBenefits() {
-
+export default async function VolunteerBenefits() {
+  const benefits: Benefit[] = await getVolunteerBenefits();
 
   return (
     <section className="py-28 bg-white">

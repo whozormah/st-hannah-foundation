@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import DonationModal from "@/components/shared/DonationModal";
-import programsData from "@/public/data/programs.json";
 
 interface Program {
   slug: string;
@@ -14,10 +13,10 @@ interface Program {
   excerpt: string;
 }
 
-// A homepage teaser; /programs carries the full list.
-const programs: Program[] = programsData.slice(0, 4);
+export default function Causes({ programs: allPrograms }: { programs: Program[] }) {
+  // A homepage teaser; /programs carries the full list.
+  const programs = allPrograms.slice(0, 4);
 
-export default function Causes() {
   const [isDonationOpen, setIsDonationOpen] = useState(false);
   const [selectedProgram, setSelectedProgram] = useState("");
 

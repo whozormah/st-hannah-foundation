@@ -1,9 +1,9 @@
-import { revalidateTag } from "next/cache";
 import type { Field, GlobalAfterChangeHook, GlobalConfig } from "payload";
 
 import { allow } from "./access";
 import { CMS_TAGS } from "../lib/cms-tags";
 import { imagePath, list, paragraphs } from "./collections/content";
+import { refresh } from "./revalidate";
 
 /* Section 8.2, "Navigation, settings": Owner full, Administrator read and
    update, nobody else. Globals have no create or delete. */
@@ -23,14 +23,7 @@ const pageContentAccess = {
 const refreshesGlobal = (tag: string): { afterChange: GlobalAfterChangeHook[] } => ({
   afterChange: [
     ({ doc, context }) => {
-      if (!context?.skipRevalidate) {
-        try {
-          revalidateTag(tag, "max");
-        } catch {
-          // Outside a Next.js request (the migration script): nothing cached.
-        }
-      }
-
+      refresh(tag, context);
       return doc;
     },
   ],

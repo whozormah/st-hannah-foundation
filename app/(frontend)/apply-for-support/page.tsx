@@ -21,7 +21,11 @@ import ApplicationProcess from "@/components/sections/apply/ApplicationProcess";
 import AidApplicationForm from "@/components/sections/apply/AidApplicationForm";
 import ApplyCTA from "@/components/sections/apply/ApplyCTA";
 
-export default function ApplyForSupportPage() {
+import { getProgrammes } from "@/lib/cms";
+
+export default async function ApplyForSupportPage() {
+  const programmes = await getProgrammes();
+
   return (
     <>
       {" "}
@@ -30,7 +34,7 @@ export default function ApplyForSupportPage() {
         subtitle="Request assistance through our support programmes and empowerment initiatives. Every application is reviewed with care, dignity and compassion."
         image="/causes/family.jpg"
       />
-      <SupportCategories />
+      <SupportCategories programs={programmes} />
       <BeforeYouApply />
       <ApplicationProcess />
       <AidApplicationForm />

@@ -1,5 +1,5 @@
 
-import siteStats from "@/public/data/stats.json";
+import { getStats } from "@/lib/cms";
 
 interface ProgramsStatsData {
   yearsOfCompassion: string;
@@ -8,9 +8,10 @@ interface ProgramsStatsData {
   countriesRepresented: string;
 }
 
-const statsData: ProgramsStatsData = siteStats.programs;
+export default async function AboutImpact() {
+  const siteStats = await getStats();
 
-export default function AboutImpact() {
+  const statsData: ProgramsStatsData = siteStats.programs;
 
   const stats = [
     {

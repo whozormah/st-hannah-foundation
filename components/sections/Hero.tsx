@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import slides from "@/public/data/homepage/hero.json";
+import type { HeroSlide } from "@/lib/cms";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
@@ -12,7 +12,7 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
-export default function Hero() {
+export default function Hero({ slides }: { slides: HeroSlide[] }) {
   // Content that moves on its own for more than five seconds has to be
   // stoppable, and some people have asked their system not to animate at all.
   const [reduceMotion, setReduceMotion] = useState(false);

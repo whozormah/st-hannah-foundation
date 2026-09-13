@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Camera } from "lucide-react";
 
-import galleryData from "@/public/data/gallery.json";
+import { getGallery } from "@/lib/cms";
 
 interface GalleryItem {
   image: string;
@@ -10,30 +10,30 @@ interface GalleryItem {
   title: string;
 }
 
-const items: GalleryItem[] = galleryData;
-
-// One tile per programme area, largest collection first. Built from the
-// gallery data itself so new photographs appear here without a code change.
-const areas = Array.from(new Set(items.map((item) => item.category)))
-  .map((category) => {
-    const photographs = items.filter((item) => item.category === category);
-
-    return {
-      category,
-      count: photographs.length,
-      cover: photographs[0].image,
-      title: photographs[0].title,
-    };
-  })
-  .sort((a, b) => b.count - a.count);
-
-const [lead, ...supporting] = areas;
-
 function photographLabel(count: number) {
   return `${count} ${count === 1 ? "photograph" : "photographs"}`;
 }
 
-export default function GalleryPreview() {
+export default async function GalleryPreview() {
+  const items: GalleryItem[] = await getGallery();
+
+  // One tile per programme area, largest collection first. Built from the
+  // gallery data itself so new photographs appear here without a code change.
+  const areas = Array.from(new Set(items.map((item) => item.category)))
+    .map((category) => {
+      const photographs = items.filter((item) => item.category === category);
+
+      return {
+        category,
+        count: photographs.length,
+        cover: photographs[0].image,
+        title: photographs[0].title,
+      };
+    })
+    .sort((a, b) => b.count - a.count);
+
+  const [lead, ...supporting] = areas;
+
   return (
     <section className="bg-white py-14 md:py-24">
       <div className="container-custom">

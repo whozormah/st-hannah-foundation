@@ -5,19 +5,15 @@ import Link from "next/link";
 
 import InKindDonationModal from "@/components/shared/in-kind/InKindDonationModal";
 
-import allPrograms from "@/public/data/programs.json";
-
 interface Program {
   slug: string;
   title: string;
   excerpt: string;
 }
 
-const programs: Program[] = allPrograms.filter(
-  (item) => item.slug !== "community-outreach",
-);
+export default function SupportCategories({ programs: allPrograms }: { programs: Program[] }) {
+  const programs = allPrograms.filter((item) => item.slug !== "community-outreach");
 
-export default function SupportCategories() {
   const [isInKindModalOpen, setIsInKindModalOpen] = useState(false);
 
   return (

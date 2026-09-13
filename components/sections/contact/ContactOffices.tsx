@@ -1,25 +1,27 @@
 import { MapPin } from "lucide-react";
 
-import { contact } from "./ContactDetails";
+import { getContact } from "./ContactDetails";
 
-const offices = [
-  {
-    label: "Headquarters",
-    name: "Nigeria",
-    address: contact.nigeria,
-  },
-  {
-    label: "International office",
-    name: "United States",
-    address: contact.usa,
-  },
-];
+export default async function ContactOffices() {
+  const contact = await getContact();
 
-// Built from the same address the offices list shows, so the pin and the text
-// cannot drift apart.
-const mapQuery = encodeURIComponent(contact.nigeria);
+  const offices = [
+    {
+      label: "Headquarters",
+      name: "Nigeria",
+      address: contact.nigeria,
+    },
+    {
+      label: "International office",
+      name: "United States",
+      address: contact.usa,
+    },
+  ];
 
-export default function ContactOffices() {
+  // Built from the same address the offices list shows, so the pin and the
+  // text cannot drift apart.
+  const mapQuery = encodeURIComponent(contact.nigeria);
+
   return (
     <section id="offices" className="bg-cream py-14 md:py-24">
       <div className="container-custom">

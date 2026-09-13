@@ -6,7 +6,8 @@ import { BASE, as } from "./helpers.mjs";
 /* Phase 6: the CMS drives the website.
 
    PUB-04 / A10 — a published edit reaches the page within 60 seconds, with no
-   deployment. CNT-05 — a draft never does. Uses the migrated testimonials, so
+   deployment: in fact from the first visit after it. CNT-05 — a draft never
+   does. Uses the migrated testimonials, so
    the content migration must have run first (CI does this). */
 
 const home = async () => (await fetch(`${BASE}/`, { cache: "no-store" })).text();
@@ -70,4 +71,18 @@ test("CMS: a draft stays off the website; publishing puts it live within 60 seco
   const live = await waitFor(async () => (await home()).includes(publishedText), 60);
 
   assert.ok(live, "the published edit did not reach the homepage within 60 seconds");
+
+  // Putting the original back is a publish too, and the first visitor after
+  // it must see it: a stale-while-revalidate cache would show them the edit.
+  const restored = await as("content", `/api/testimonials/${doc.id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ quote: original, _status: "published" }),
+  });
+
+  assert.equal(restored.status, 200);
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  assert.ok(
+    (await home()).includes(original.slice(0, 40)),
+    "the first visit after publishing showed the previous version",
+  );
 });

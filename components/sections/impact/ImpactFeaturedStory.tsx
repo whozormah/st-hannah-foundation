@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Users, CalendarDays } from "lucide-react";
 
-import allStories from "@/public/data/impact-stories/stories.json";
+import { getStories } from "@/lib/cms";
 
 interface Story {
   slug: string;
@@ -15,13 +15,13 @@ interface Story {
   featured: boolean;
 }
 
-// Reads the lead story from stories.json. It previously featured the campaign
-// from campaigns.json, which is the same story the homepage leads with, so the
-// same person headlined both pages.
-const stories = allStories as Story[];
-const story = stories.find((item) => item.featured) ?? stories[0];
+export default async function ImpactFeaturedStory() {
+  // The lead impact story. This previously featured the donate campaign,
+  // which is the same story the homepage leads with, so the same person
+  // headlined both pages.
+  const stories: Story[] = await getStories();
+  const story = stories.find((item) => item.featured) ?? stories[0];
 
-export default function ImpactFeaturedStory() {
   if (!story) return null;
 
   return (

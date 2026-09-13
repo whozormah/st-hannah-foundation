@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 
 import legal from "@/public/data/legal.json";
-import settings from "@/public/data/site-settings.json";
+import { getSiteSettings, type SiteSettings } from "@/lib/cms";
 
 type Section = {
   id: string;
@@ -22,22 +22,28 @@ type Document = {
 
 export const isApproved = legal.status === "approved";
 
+type Values = Record<string, string | null>;
+
 // Every value the Foundation has still to confirm is null in legal.json.
 // While the documents are drafts those render as a visible marker; once they
-// are approved a missing value fails the build, so a policy can never go live
-// with a blank where the data protection contact should be.
-const values: Record<string, string | null> = {
-  displayName: settings.foundationName,
-  registeredName: legal.registeredName,
-  email: settings.email,
-  nigeriaAddress: settings.nigeriaOffice.address,
-  usaAddress: settings.usaOffice.address,
-  dpoName: legal.dataProtectionContact.name,
-  dpoEmail: legal.dataProtectionContact.email,
-  emailProviderName: legal.emailProvider.name,
-  emailProviderLocation: legal.emailProvider.location,
-  governingLaw: legal.terms.governingLaw,
-};
+// are approved a missing value fails the render, so a policy can never go
+// live with a blank where the data protection contact should be. The name,
+// email and addresses are the ones in Site Settings, so they match the rest
+// of the site.
+function legalValues(settings: SiteSettings): Values {
+  return {
+    displayName: settings.foundationName,
+    registeredName: legal.registeredName,
+    email: settings.email,
+    nigeriaAddress: settings.nigeriaOffice.address,
+    usaAddress: settings.usaOffice.address,
+    dpoName: legal.dataProtectionContact.name,
+    dpoEmail: legal.dataProtectionContact.email,
+    emailProviderName: legal.emailProvider.name,
+    emailProviderLocation: legal.emailProvider.location,
+    governingLaw: legal.terms.governingLaw,
+  };
+}
 
 function unconfirmed(what: string): ReactNode {
   if (isApproved) {
@@ -53,7 +59,7 @@ function unconfirmed(what: string): ReactNode {
   );
 }
 
-function renderText(text: string): ReactNode[] {
+function renderText(text: string, values: Values): ReactNode[] {
   return text.split(/(\{\{\w+\}\})/).map((part, index) => {
     const token = part.match(/^\{\{(\w+)\}\}$/)?.[1];
 
@@ -94,7 +100,13 @@ function formatDate(iso: string) {
   });
 }
 
-function Rows({ rows }: { rows: { label: string; body: ReactNode }[] }) {
+function Rows({
+  rows,
+  values,
+}: {
+  rows: { label: string; body: ReactNode }[];
+  values: Values;
+}) {
   return (
     <div className="mt-6 divide-y divide-gray-200 border-y border-gray-200">
       {rows.map((row) => (
@@ -103,7 +115,7 @@ function Rows({ rows }: { rows: { label: string; body: ReactNode }[] }) {
           className="grid gap-2 py-5 md:grid-cols-[13rem_1fr] md:gap-8"
         >
           <h3 className="text-lg font-bold text-ink">
-            {renderText(row.label)}
+            {renderText(row.label, values)}
           </h3>
           <div className="text-lg leading-8 text-gray-700">{row.body}</div>
         </div>
@@ -112,10 +124,11 @@ function Rows({ rows }: { rows: { label: string; body: ReactNode }[] }) {
   );
 }
 
-function Table({ name }: { name: string }) {
+function Table({ name, values }: { name: string; values: Values }) {
   if (name === "collection") {
     return (
       <Rows
+        values={values}
         rows={legal.privacy.collection.map((row) => ({
           label: row.where,
           body: (
@@ -135,6 +148,7 @@ function Table({ name }: { name: string }) {
   if (name === "processors") {
     return (
       <Rows
+        values={values}
         rows={legal.privacy.processors.map((row) => ({
           label: row.name,
           body: (
@@ -142,7 +156,7 @@ function Table({ name }: { name: string }) {
               <p>{row.role}</p>
               <p className="mt-2">
                 <span className="font-semibold text-ink">Location: </span>
-                {renderText(row.location)}
+                {renderText(row.location, values)}
               </p>
             </>
           ),
@@ -157,6 +171,7 @@ function Table({ name }: { name: string }) {
 
   return (
     <Rows
+      values={values}
       rows={legal.privacy.retention.map((row) => ({
         label: row.record,
         body: row.period ?? unconfirmed(`retention period for ${row.record}`),
@@ -165,7 +180,9 @@ function Table({ name }: { name: string }) {
   );
 }
 
-export default function LegalDocument({ document }: { document: Document }) {
+export default async function LegalDocument({ document }: { document: Document }) {
+  const values = legalValues(await getSiteSettings());
+
   return (
     <section className="bg-white py-14 md:py-24">
       <div className="container-custom">
@@ -217,23 +234,23 @@ export default function LegalDocument({ document }: { document: Document }) {
 
               {section.paragraphs?.map((text, index) => (
                 <p key={index} className="mt-5 text-lg leading-8 text-gray-700">
-                  {renderText(text)}
+                  {renderText(text, values)}
                 </p>
               ))}
 
               {section.items && (
                 <ul className="mt-5 list-disc space-y-3 pl-6 text-lg leading-8 text-gray-700 marker:text-brand">
                   {section.items.map((text, index) => (
-                    <li key={index}>{renderText(text)}</li>
+                    <li key={index}>{renderText(text, values)}</li>
                   ))}
                 </ul>
               )}
 
-              {section.table && <Table name={section.table} />}
+              {section.table && <Table name={section.table} values={values} />}
 
               {section.after?.map((text, index) => (
                 <p key={index} className="mt-5 text-lg leading-8 text-gray-700">
-                  {renderText(text)}
+                  {renderText(text, values)}
                 </p>
               ))}
             </section>

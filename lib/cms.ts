@@ -1,5 +1,5 @@
 import { unstable_cache } from "next/cache";
-import { getPayload } from "payload";
+import { getPayload, type CollectionSlug, type GlobalSlug } from "payload";
 
 import config from "@payload-config";
 
@@ -7,44 +7,453 @@ import { CMS_TAGS } from "./cms-tags";
 
 /* Reading website content from the CMS.
 
+   Every function returns content in exactly the shape its old JSON file had,
+   so switching a component from the file to the CMS is a one-line change and
+   the page renders the same.
+
    Each read is cached and tagged. When an editor publishes, a hook
-   (payload/revalidate.ts) invalidates the tag, and the next visitor gets the
+   (payload/revalidate.ts) invalidates the tag and the next visitor gets the
    new content — PUB-04, within 60 seconds and without a deployment.
 
    `unstable_cache` rather than the newer `'use cache'`: in Next 16 the newer
    API requires switching the whole app to Cache Components, which changes how
-   every existing page renders. This works today with nothing else changed;
-   moving to `'use cache'` later is a contained change inside this file.
+   every existing page renders (CR-007). Moving later is contained to here.
 
-   Only published content is ever read here (CNT-05): drafts stay in the
-   admin until someone publishes them. */
+   Only published content is ever read (CNT-05): drafts stay in the admin. */
 
 export { CMS_TAGS };
+
+type Doc = Record<string, unknown>;
 
 async function payloadClient() {
   return getPayload({ config });
 }
 
+/** Published documents of a collection, in the editors' chosen order. */
+async function published(collection: CollectionSlug): Promise<Doc[]> {
+  const payload = await payloadClient();
+
+  const { docs } = await payload.find({
+    collection,
+    where: { _status: { equals: "published" } },
+    sort: "order",
+    limit: 500,
+    depth: 0,
+  });
+
+  return docs as unknown as Doc[];
+}
+
+async function global(slug: GlobalSlug): Promise<Doc> {
+  const payload = await payloadClient();
+
+  return (await payload.findGlobal({ slug, depth: 0 })) as unknown as Doc;
+}
+
+/* The database returns null for an empty field; the old files had "" and [].
+   Components were written against the files, so the files' shape is kept. */
+const text = (value: unknown) => (typeof value === "string" ? value : "");
+const lines = (value: unknown) => (Array.isArray(value) ? (value as string[]) : []);
+const paras = (value: unknown) =>
+  Array.isArray(value) ? (value as { text: string }[]).map((p) => p.text) : [];
+
+const cached = <T>(tag: string, read: () => Promise<T>) =>
+  unstable_cache(read, [tag], { tags: [tag] });
+
+/* ── Collections ────────────────────────────────────────────────────────── */
+
 export type Testimonial = { name: string; role: string; text: string };
 
-export const getTestimonials = unstable_cache(
-  async (): Promise<Testimonial[]> => {
-    const payload = await payloadClient();
-
-    const { docs } = await payload.find({
-      collection: "testimonials",
-      where: { _status: { equals: "published" } },
-      sort: "order",
-      limit: 100,
-      depth: 0,
-    });
-
-    return docs.map((doc) => ({
-      name: doc.name,
-      role: doc.role ?? "",
-      text: doc.quote,
-    }));
-  },
-  [CMS_TAGS.testimonials],
-  { tags: [CMS_TAGS.testimonials] },
+export const getTestimonials = cached(CMS_TAGS.testimonials, async (): Promise<Testimonial[]> =>
+  (await published("testimonials")).map((d) => ({
+    name: text(d.name),
+    role: text(d.role),
+    text: text(d.quote),
+  })),
 );
+
+export type Programme = {
+  slug: string;
+  title: string;
+  icon: string;
+  heroImage: string;
+  excerpt: string;
+  why: string;
+  approach: string;
+  impact: string;
+  activities: string[];
+  beneficiaries: string[];
+  ctaTitle: string;
+  ctaText: string;
+};
+
+export const getProgrammes = cached(CMS_TAGS.programmes, async (): Promise<Programme[]> =>
+  (await published("programmes")).map((d) => ({
+    slug: text(d.slug),
+    title: text(d.title),
+    icon: text(d.icon),
+    heroImage: text(d.heroImage),
+    excerpt: text(d.excerpt),
+    why: text(d.why),
+    approach: text(d.approach),
+    impact: text(d.impact),
+    activities: lines(d.activities),
+    beneficiaries: lines(d.beneficiaries),
+    ctaTitle: text(d.ctaTitle),
+    ctaText: text(d.ctaText),
+  })),
+);
+
+export async function getProgramme(slug: string) {
+  return (await getProgrammes()).find((p) => p.slug === slug) ?? null;
+}
+
+/** The shape of impact-stories/stories.json: what the story list shows. */
+export type StorySummary = {
+  slug: string;
+  title: string;
+  category: string;
+  excerpt: string;
+  image: string;
+  beneficiaries: string;
+  date: string;
+  featured: boolean;
+};
+
+/** The shape of each impact-stories/<slug>.json: a story's own page. */
+export type Story = {
+  slug: string;
+  category: string;
+  title: string;
+  beneficiaries: string;
+  featured: boolean;
+  donationProgram: string;
+  summary: string;
+  date: string;
+  location: string;
+  image: string;
+  images: string[];
+  challenge: string;
+  response: string;
+  impact: string;
+  story: string[];
+  /** Absent when the story has no quote; the page then shows none. */
+  quote?: { text: string; author: string };
+};
+
+const getStoryDocs = cached(CMS_TAGS.stories, () => published("impact-stories"));
+
+export async function getStories(): Promise<StorySummary[]> {
+  return (await getStoryDocs()).map((d) => ({
+    slug: text(d.slug),
+    title: text(d.title),
+    category: text(d.category),
+    excerpt: text(d.excerpt),
+    image: text(d.image),
+    beneficiaries: text(d.beneficiaries),
+    date: text(d.date),
+    featured: Boolean(d.featured),
+  }));
+}
+
+export async function getStory(slug: string): Promise<Story | null> {
+  const d = (await getStoryDocs()).find((doc) => doc.slug === slug);
+
+  if (!d) return null;
+
+  const quote = (d.quote ?? {}) as { text?: unknown; author?: unknown };
+
+  return {
+    slug: text(d.slug),
+    category: text(d.category),
+    title: text(d.title),
+    beneficiaries: text(d.beneficiaries),
+    featured: Boolean(d.featured),
+    donationProgram: text(d.donationProgram),
+    // One field serves the list and the page; in the source they were
+    // identical text held twice.
+    summary: text(d.excerpt),
+    date: text(d.date),
+    location: text(d.location),
+    image: text(d.image),
+    images: lines(d.images),
+    challenge: text(d.challenge),
+    response: text(d.response),
+    impact: text(d.impact),
+    story: paras(d.story),
+    ...(text(quote.text) ? { quote: { text: text(quote.text), author: text(quote.author) } } : {}),
+  };
+}
+
+export type Person = { name: string; role: string; image: string; bio?: string };
+
+/* The team cards already show a bio when one exists; they were waiting on the
+   Foundation to supply them. Now an editor adds one in the CMS. */
+export const getLeadership = cached(CMS_TAGS.leadership, async (): Promise<Person[]> =>
+  (await published("leadership")).map((d) => ({
+    name: text(d.name),
+    role: text(d.position),
+    image: text(d.image),
+    ...(text(d.bio) ? { bio: text(d.bio) } : {}),
+  })),
+);
+
+export const getVolunteerProfiles = cached(CMS_TAGS.volunteers, async (): Promise<Person[]> =>
+  (await published("volunteer-profiles")).map((d) => ({
+    name: text(d.name),
+    role: text(d.role),
+    image: text(d.image),
+  })),
+);
+
+export type GalleryPhoto = { image: string; category: string; title: string };
+
+export const getGallery = cached(CMS_TAGS.gallery, async (): Promise<GalleryPhoto[]> =>
+  (await published("gallery-photos")).map((d) => ({
+    image: text(d.image),
+    category: text(d.category),
+    title: text(d.title),
+  })),
+);
+
+export type FeaturedEvent = {
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+  link: string;
+};
+
+export const getFeaturedEvents = cached(CMS_TAGS.events, async (): Promise<FeaturedEvent[]> =>
+  (await published("featured-events")).map((d) => ({
+    title: text(d.title),
+    description: text(d.description),
+    image: text(d.image),
+    category: text(d.category),
+    link: text(d.link),
+  })),
+);
+
+export type VideoHighlight = {
+  title: string;
+  category: string;
+  description: string;
+  thumbnail: string;
+  link: string;
+};
+
+export const getVideoHighlights = cached(CMS_TAGS.videos, async (): Promise<VideoHighlight[]> =>
+  (await published("video-highlights")).map((d) => ({
+    title: text(d.title),
+    category: text(d.category),
+    description: text(d.description),
+    thumbnail: text(d.thumbnail),
+    link: text(d.link),
+  })),
+);
+
+export type TitledEntry = { title: string; description: string };
+
+const titled = (collection: CollectionSlug, tag: string) =>
+  cached(tag, async (): Promise<TitledEntry[]> =>
+    (await published(collection)).map((d) => ({
+      title: text(d.title),
+      description: text(d.description),
+    })),
+  );
+
+export const getVolunteerOpportunities = titled(
+  "volunteer-opportunities",
+  CMS_TAGS.volunteerOpportunities,
+);
+export const getVolunteerBenefits = titled("volunteer-benefits", CMS_TAGS.volunteerBenefits);
+export const getInKindCategories = titled("in-kind-categories", CMS_TAGS.inKindCategories);
+
+export type CampaignStory = {
+  id: number;
+  name: string;
+  age: number;
+  tagline: string;
+  headline: string;
+  heroImage: string;
+  gallery: string[];
+  description: string[];
+  whyStoryMattersTitle: string;
+  whyStoryMatters: string;
+  needs: string[];
+  videoLink: string;
+  featured: boolean;
+};
+
+export const getCampaigns = cached(CMS_TAGS.campaigns, async (): Promise<CampaignStory[]> =>
+  (await published("campaign-stories")).map((d) => ({
+    id: Number(d.id),
+    name: text(d.name),
+    age: Number(d.age ?? 0),
+    tagline: text(d.tagline),
+    headline: text(d.headline),
+    heroImage: text(d.heroImage),
+    gallery: lines(d.gallery),
+    description: paras(d.description),
+    whyStoryMattersTitle: text(d.whyStoryMattersTitle),
+    whyStoryMatters: text(d.whyStoryMatters),
+    needs: lines(d.needs),
+    videoLink: text(d.videoLink),
+    featured: Boolean(d.featured),
+  })),
+);
+
+/* ── Page sections (globals) ────────────────────────────────────────────── */
+
+export type SiteSettings = {
+  foundationName: string;
+  email: string;
+  phone: string;
+  nigeriaOffice: { address: string };
+  usaOffice: { address: string };
+  bank: { bankName: string; accountNumber: string; accountName: string };
+  socials: { facebook: string; instagram: string; youtube: string; linkedin: string; tiktok: string };
+};
+
+export const getSiteSettings = cached(CMS_TAGS.siteSettings, async (): Promise<SiteSettings> => {
+  const d = await global("site-settings");
+  const bank = (d.bank ?? {}) as Doc;
+  const socials = (d.socials ?? {}) as Doc;
+
+  return {
+    foundationName: text(d.foundationName),
+    email: text(d.email),
+    phone: text(d.phone),
+    nigeriaOffice: { address: text(d.nigeriaAddress) },
+    usaOffice: { address: text(d.usaAddress) },
+    bank: {
+      bankName: text(bank.bankName),
+      accountNumber: text(bank.accountNumber),
+      accountName: text(bank.accountName),
+    },
+    socials: {
+      facebook: text(socials.facebook),
+      instagram: text(socials.instagram),
+      youtube: text(socials.youtube),
+      linkedin: text(socials.linkedin),
+      tiktok: text(socials.tiktok),
+    },
+  };
+});
+
+const getFoundationDoc = cached(CMS_TAGS.foundation, () => global("foundation"));
+
+export async function getFoundation() {
+  const d = await getFoundationDoc();
+
+  return {
+    badge: text(d.badge),
+    title: text(d.title),
+    description: text(d.description),
+    vision: text(d.vision),
+    mission: text(d.mission),
+  };
+}
+
+export async function getFounder() {
+  const f = ((await getFoundationDoc()).founder ?? {}) as Doc;
+
+  return {
+    badge: text(f.badge),
+    title: text(f.title),
+    name: text(f.name),
+    position: text(f.position),
+    organization: text(f.organization),
+    image: text(f.image),
+    quote: text(f.quote),
+    message: paras(f.message),
+  };
+}
+
+export type HeroSlide = {
+  image: string;
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+};
+
+export const getHeroSlides = cached(CMS_TAGS.homepage, async (): Promise<HeroSlide[]> => {
+  const slides = ((await global("homepage")).heroSlides ?? []) as Doc[];
+
+  return slides.map((s) => ({
+    image: text(s.image),
+    title: text(s.title),
+    description: text(s.description),
+    buttonText: text(s.buttonText),
+    buttonLink: text(s.buttonLink),
+  }));
+});
+
+export const getApplyInfo = cached(CMS_TAGS.applyPage, async () => {
+  const d = await global("apply-page");
+
+  return {
+    title: text(d.title),
+    intro: text(d.intro),
+    importantNotes: lines(d.importantNotes),
+    requiredInformation: lines(d.requiredInformation),
+  };
+});
+
+export const getDonationImpact = cached(CMS_TAGS.donatePage, async () => {
+  const d = await global("donate-page");
+
+  return {
+    stats: ((d.stats ?? []) as Doc[]).map((s) => ({ number: text(s.number), label: text(s.label) })),
+    causes: ((d.causes ?? []) as Doc[]).map((c) => ({
+      title: text(c.title),
+      description: text(c.description),
+    })),
+  };
+});
+
+/** The shape of stats.json: four figures for each page that shows them. */
+export type Stats = {
+  homepage: {
+    childrenReached: string;
+    widowsSupported: string;
+    educationalBeneficiaries: string;
+    communitiesImpacted: string;
+  };
+  programs: {
+    yearsOfCompassion: string;
+    livesReached: string;
+    outreachActivities: string;
+    countriesRepresented: string;
+  };
+  impact: {
+    widowsSupported: string;
+    childrenReached: string;
+    communityOutreachEvents: string;
+    livesImpacted: string;
+  };
+  gallery: {
+    livesImpacted: string;
+    outreachEvents: string;
+    communitiesReached: string;
+    yearsOfService: string;
+  };
+};
+
+export const getStats = cached(CMS_TAGS.statistics, async (): Promise<Stats> => {
+  const d = await global("statistics-manual");
+  const group = (name: string) =>
+    Object.fromEntries(
+      Object.entries((d[name] ?? {}) as Doc)
+        .filter(([key]) => key !== "id")
+        .map(([key, value]) => [key, text(value)]),
+    );
+
+  return {
+    homepage: group("homepage") as Stats["homepage"],
+    programs: group("programs") as Stats["programs"],
+    impact: group("impact") as Stats["impact"],
+    gallery: group("gallery") as Stats["gallery"],
+  };
+});

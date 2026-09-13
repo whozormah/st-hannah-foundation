@@ -2,13 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import programs from "@/public/data/programs.json";
-
-export async function generateStaticParams() {
-  return programs.map((program) => ({
-    slug: program.slug,
-  }));
-}
+import { getProgramme } from "@/lib/cms";
 
 interface Program {
   slug: string;
@@ -29,7 +23,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
 
-  const program = (programs as Program[]).find((item) => item.slug === slug);
+  const program: Program | null = await getProgramme(slug);
 
   if (!program) {
     return { title: "Programme Not Found" };
@@ -57,7 +51,7 @@ interface PageProps {
 export default async function ProgramPage({ params }: PageProps) {
   const { slug } = await params;
 
-  const program = (programs as Program[]).find((item) => item.slug === slug);
+  const program: Program | null = await getProgramme(slug);
 
   if (!program) {
     return (

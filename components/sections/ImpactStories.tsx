@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import storiesData from "@/public/data/impact-stories/stories.json";
+import { getStories } from "@/lib/cms";
 
 interface Story {
   slug: string;
@@ -12,12 +12,12 @@ interface Story {
   excerpt: string;
 }
 
-const allStories: Story[] = storiesData;
+export default async function ImpactStories() {
+  const allStories: Story[] = await getStories();
 
-// Teaser; /impact-stories carries the full index.
-const stories = allStories.slice(0, 3);
+  // Teaser; /impact-stories carries the full index.
+  const stories = allStories.slice(0, 3);
 
-export default function ImpactStories() {
   return (
     <section className="py-28 bg-white">
       <div className="container-custom">

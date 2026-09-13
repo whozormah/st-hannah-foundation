@@ -1,68 +1,11 @@
 import type { Metadata } from "next";
-import fs from "fs";
-import path from "path";
 import Image from "next/image";
 
 import RelatedStories from "@/components/sections/impact/RelatedStories";
 import StoryDonationCTA from "@/components/sections/impact/StoryDonationCTA";
 import { notFound } from "next/navigation";
 
-interface StoryData {
-  slug: string;
-  category: string;
-  title: string;
-  beneficiaries: string;
-  donationProgram: string;
-  summary: string;
-  date: string;
-  location: string;
-  image: string;
-  images: string[];
-  challenge: string;
-  response: string;
-  impact: string;
-  story: string[];
-  quote?: {
-    text: string;
-    author: string;
-  };
-}
-
-export async function generateStaticParams() {
-  const storiesDir = path.join(
-    process.cwd(),
-    "public",
-    "data",
-    "impact-stories",
-  );
-
-  const files = fs.readdirSync(storiesDir);
-
-  return files
-    .filter((file) => file.endsWith(".json") && file !== "stories.json")
-    .map((file) => ({
-      slug: file.replace(".json", ""),
-    }));
-}
-
-async function getStory(slug: string): Promise<StoryData | null> {
-  try {
-    const filePath = path.join(
-      process.cwd(),
-      "public",
-      "data",
-      "impact-stories",
-      `${slug}.json`,
-    );
-    const fileContents = fs.readFileSync(filePath, "utf8");
-
-    return JSON.parse(fileContents);
-  } catch (error) {
-    console.error("Story loading error:", error);
-
-    return null;
-  }
-}
+import { getStory } from "@/lib/cms";
 
 export async function generateMetadata({
   params,

@@ -3,20 +3,27 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import settings from "@/public/data/site-settings.json";
+import type { SiteSettings } from "@/lib/cms";
 
 import DonationModal from "@/components/shared/DonationModal";
 import PrivacyNotice from "@/components/shared/PrivacyNotice";
 
-export default function Footer() {
+/** What the footer shows. Only these reach the browser: the rest of Site
+    Settings, the bank details among them, stays on the server. */
+export type FooterSettings = Pick<
+  SiteSettings,
+  "foundationName" | "email" | "phone" | "nigeriaOffice" | "usaOffice" | "socials"
+>;
+
+export default function Footer({ settings }: { settings: FooterSettings }) {
   const [showDonationModal, setShowDonationModal] = useState(false);
   const [subscribeState, setSubscribeState] = useState<
     "idle" | "sending" | "done"
   >("idle");
   const [subscribeMessage, setSubscribeMessage] = useState("");
 
-  // The number committed in site-settings.json is a placeholder, so the tel:
-  // link and the number itself are hidden until a real one is configured.
+  // The number carried over into Site Settings is a placeholder, so the tel:
+  // link and the number itself are hidden until a real one is set.
   const hasRealPhone = /[1-9]/.test(settings.phone.replace(/^\+?\d{1,4}/, ""));
 
   const handleSubscribe = async (event: React.FormEvent<HTMLFormElement>) => {

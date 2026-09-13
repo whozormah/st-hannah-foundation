@@ -1,15 +1,13 @@
 
-import opportunitiesData from "@/public/data/volunteer-opportunities.json";
+import { getVolunteerOpportunities } from "@/lib/cms";
 
 interface Opportunity {
   title: string;
   description: string;
 }
 
-const opportunities: Opportunity[] = opportunitiesData;
-
-export default function VolunteerOpportunities() {
-
+export default async function VolunteerOpportunities() {
+  const opportunities: Opportunity[] = await getVolunteerOpportunities();
 
   return (
     <section className="py-28 bg-cream">

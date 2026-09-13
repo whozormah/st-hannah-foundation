@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import allStories from "@/public/data/impact-stories/stories.json";
+import { getStories } from "@/lib/cms";
 
 interface Story {
   slug: string;
@@ -12,11 +12,13 @@ interface Story {
   image: string;
 }
 
-export default function RelatedStories({
+export default async function RelatedStories({
   currentSlug,
 }: {
   currentSlug: string;
 }) {
+  const allStories = await getStories();
+
   const stories: Story[] = (allStories as Story[])
     .filter((story) => story.slug !== currentSlug)
     .slice(0, 3);

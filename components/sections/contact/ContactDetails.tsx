@@ -1,23 +1,20 @@
 import { Mail, Phone, MapPin, Clock, MessageCircle } from "lucide-react";
 
-import settings from "@/public/data/site-settings.json";
+import { getSiteSettings } from "@/lib/cms";
 
-// site-settings.json is the single source for these; the offices section reads
-// the same values rather than repeating them.
-export const contact = {
-  email: settings.email,
-  phone: settings.phone,
-  nigeria: settings.nigeriaOffice.address,
-  usa: settings.usaOffice.address,
-  responseTime: "Within 24–48 business hours",
-};
+// Site Settings is the single source for these; the offices section reads the
+// same values rather than repeating them.
+export async function getContact() {
+  const settings = await getSiteSettings();
 
-// The committed number is a placeholder (+2340000000000). Publishing it, or a
-// wa.me link built from it, would send people nowhere, so it is hidden until a
-// real number is configured.
-export const hasRealPhone = /[1-9]/.test(contact.phone.replace(/^\+?\d{1,4}/, ""));
-
-const whatsappNumber = contact.phone.replace(/\D/g, "");
+  return {
+    email: settings.email,
+    phone: settings.phone,
+    nigeria: settings.nigeriaOffice.address,
+    usa: settings.usaOffice.address,
+    responseTime: "Within 24–48 business hours",
+  };
+}
 
 function Row({
   icon,
@@ -46,7 +43,15 @@ function Row({
   );
 }
 
-export default function ContactDetails() {
+export default async function ContactDetails() {
+  const contact = await getContact();
+
+  // The number carried over is a placeholder (+2340000000000). Publishing it,
+  // or a wa.me link built from it, would send people nowhere, so it is hidden
+  // until a real number is set.
+  const hasRealPhone = /[1-9]/.test(contact.phone.replace(/^\+?\d{1,4}/, ""));
+  const whatsappNumber = contact.phone.replace(/\D/g, "");
+
   return (
     <div className="rounded-[32px] bg-cream p-8 lg:p-10">
       <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">

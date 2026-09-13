@@ -1,21 +1,21 @@
 import Image from "next/image";
 
-import teamData from "@/public/data/governance.json";
+import { getLeadership } from "@/lib/cms";
 
 interface TeamMember {
   name: string;
   role: string;
   image: string;
-  /** Optional. Add a bio to governance.json and it appears on the card. */
+  /** Optional. An editor adds a bio in the CMS and it appears on the card. */
   bio?: string;
 }
 
-const team: TeamMember[] = teamData;
+export default async function AboutGovernance() {
+  const team: TeamMember[] = await getLeadership();
 
-// The first entry leads the page; the rest follow in the grid.
-const [lead, ...others] = team;
+  // The first entry leads the page; the rest follow in the grid.
+  const [lead, ...others] = team;
 
-export default function AboutGovernance() {
   if (!team.length) return null;
 
   return (

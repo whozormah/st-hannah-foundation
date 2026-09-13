@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Users } from "lucide-react";
 
-import allStories from "@/public/data/impact-stories/stories.json";
+import { getStories } from "@/lib/cms";
 
 interface Story {
   slug: string;
@@ -15,18 +15,18 @@ interface Story {
   featured: boolean;
 }
 
-// Every story except the one already featured above it, so no story appears
-// twice on the page. The previous grid filtered on `featured` and then sliced
-// to four, so medical-aid-outreach (featured: false) had a published page, a
-// sitemap entry and no link anywhere on the site.
-const all = allStories as Story[];
-const lead = all.find((item) => item.featured) ?? all[0];
+export default async function ImpactStoryIndex() {
+  // Every story except the one already featured above it, so no story appears
+  // twice on the page. The previous grid filtered on `featured` and then sliced
+  // to four, so medical-aid-outreach (featured: false) had a published page, a
+  // sitemap entry and no link anywhere on the site.
+  const all: Story[] = await getStories();
+  const lead = all.find((item) => item.featured) ?? all[0];
 
-const stories = all
-  .filter((item) => item.slug !== lead?.slug)
-  .sort((a, b) => Number(b.featured) - Number(a.featured));
+  const stories = all
+    .filter((item) => item.slug !== lead?.slug)
+    .sort((a, b) => Number(b.featured) - Number(a.featured));
 
-export default function ImpactStoryIndex() {
   if (!stories.length) return null;
 
   return (

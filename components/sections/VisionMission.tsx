@@ -1,6 +1,6 @@
 import { Eye, Target } from "lucide-react";
 
-import foundationData from "@/public/data/homepage/foundation.json";
+import { getFoundation } from "@/lib/cms";
 
 interface FoundationData {
   badge: string;
@@ -10,12 +10,12 @@ interface FoundationData {
   mission: string;
 }
 
-const foundation: FoundationData = foundationData;
-
 // Keyed by name rather than array position. The previous version indexed into
 // a fixed icon list, so reordering the data silently moved every icon and a
 // seventh value would have rendered without one.
-export default function VisionMission() {
+export default async function VisionMission() {
+  const foundation: FoundationData = await getFoundation();
+
   return (
     <section className="relative overflow-hidden bg-white py-14 md:py-24">
       <div aria-hidden className="pointer-events-none absolute inset-0">

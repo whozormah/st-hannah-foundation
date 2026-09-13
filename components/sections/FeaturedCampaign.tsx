@@ -10,12 +10,9 @@ import StoryNavigation from "@/components/story/StoryNavigation";
 import StoryProgress from "@/components/story/StoryProgress";
 
 import { useStoryCarousel } from "@/hooks/useStoryCarousel";
-import storiesData from "@/public/data/campaigns.json";
 import { Story } from "@/types/story";
 
-const stories: Story[] = storiesData;
-
-export default function FeaturedCampaign() {
+export default function FeaturedCampaign({ stories }: { stories: Story[] }) {
   const [showDonationModal, setShowDonationModal] = useState(false);
 
   const { current, currentStory, next, previous } = useStoryCarousel(stories);

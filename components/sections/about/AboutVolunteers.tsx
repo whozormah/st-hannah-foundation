@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-import volunteersData from "@/public/data/volunteers.json";
+import { getVolunteerProfiles } from "@/lib/cms";
 
 interface Volunteer {
   name: string;
@@ -10,9 +10,9 @@ interface Volunteer {
   image: string;
 }
 
-const volunteers: Volunteer[] = volunteersData;
+export default async function AboutVolunteers() {
+  const volunteers: Volunteer[] = await getVolunteerProfiles();
 
-export default function AboutVolunteers() {
   if (!volunteers.length) return null;
 
   return (

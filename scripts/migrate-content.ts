@@ -237,9 +237,10 @@ const migrators: Record<string, Migrator> = {
       payload,
       "campaign-stories",
       "name",
-      source.map(({ id: _id, description, ...rest }) => ({
-        ...rest,
-        description: toParagraphs(description as string[]),
+      // The file's numeric id is not content; the CMS gives each its own.
+      source.map((campaign) => ({
+        ...Object.fromEntries(Object.entries(campaign).filter(([key]) => key !== "id")),
+        description: toParagraphs(campaign.description as string[]),
       })),
     );
   },

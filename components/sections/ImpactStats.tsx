@@ -1,6 +1,6 @@
 import { HeartHandshake, Users, GraduationCap, HandHeart } from "lucide-react";
 
-import siteStats from "@/public/data/stats.json";
+import { getStats } from "@/lib/cms";
 
 interface StatsData {
   childrenReached: string;
@@ -9,7 +9,9 @@ interface StatsData {
   communitiesImpacted: string;
 }
 
-export default function ImpactStats() {
+export default async function ImpactStats() {
+  const siteStats = await getStats();
+
   const statsData: StatsData = siteStats.homepage;
 
   const stats = [

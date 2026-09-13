@@ -1,6 +1,6 @@
 import { AlertCircle, FileText } from "lucide-react";
 
-import dataData from "@/public/data/apply-info.json";
+import { getApplyInfo } from "@/lib/cms";
 
 interface ApplyInfo {
   title: string;
@@ -9,10 +9,8 @@ interface ApplyInfo {
   requiredInformation: string[];
 }
 
-const data: ApplyInfo | null = dataData;
-
-export default function BeforeYouApply() {
-
+export default async function BeforeYouApply() {
+  const data: ApplyInfo | null = await getApplyInfo();
 
   if (!data) return null;
 
