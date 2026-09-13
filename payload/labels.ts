@@ -218,7 +218,6 @@ const SLUG_HELP =
 const DESCRIPTIONS: Record<string, Record<string, string>> = {
   programmes: { slug: SLUG_HELP },
   "impact-stories": { slug: SLUG_HELP },
-  "gallery-albums": { slug: SLUG_HELP },
   pages: { slug: SLUG_HELP },
   campaigns: {
     slug: SLUG_HELP,

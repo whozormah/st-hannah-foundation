@@ -6,7 +6,7 @@ import { CMS_TAGS } from "../../lib/cms-tags";
 
 /* Content, media and SEO — section 8.2: Owner and Administrator CRUD, Content
    Manager create/read/update but no delete, Case Officer and Finance none. */
-const contentAccess = {
+export const contentAccess = {
   create: allow("owner", "administrator", "content"),
   read: allow("owner", "administrator", "content"),
   update: allow("owner", "administrator", "content"),
@@ -15,7 +15,7 @@ const contentAccess = {
 
 // CNT-05: draft, preview and publish with version history on every content
 // collection.
-const versions = { drafts: true } as const;
+export const versions = { drafts: true } as const;
 
 const seo: Field = {
   name: "seo",
@@ -34,6 +34,41 @@ const slug: Field = {
   unique: true,
   index: true,
 };
+
+/* Images are paths to files the website already has, until the private
+   Cloudflare storage exists (MED-01). Uploading into the media library now
+   would put files on the server's disk, which a redeploy destroys. */
+export const IMAGE_PATH_HELP =
+  "Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.";
+
+export const imagePath = (name: string): Field => ({
+  name,
+  type: "text",
+  admin: { description: IMAGE_PATH_HELP },
+});
+
+export const imagePaths = (name: string): Field => ({
+  name,
+  type: "text",
+  hasMany: true,
+  admin: { description: IMAGE_PATH_HELP },
+});
+
+/** Short list items, edited as a list of lines. */
+export const list = (name: string): Field => ({ name, type: "text", hasMany: true });
+
+/** Paragraphs, each its own box, kept in order. */
+export const paragraphs = (name: string): Field => ({
+  name,
+  type: "array",
+  fields: [{ name: "text", type: "textarea", required: true }],
+});
+
+/** Publishing refreshes the website (PUB-04); see payload/revalidate.ts. */
+export const refreshes = (tag: string) => ({
+  afterChange: [revalidateOnChange(tag)],
+  afterDelete: [revalidateOnDelete(tag)],
+});
 
 export const Media: CollectionConfig = {
   slug: "media",
@@ -56,78 +91,87 @@ export const Media: CollectionConfig = {
   ],
 };
 
+/* Section 5.1, mapped to the programmes as they actually exist: the spec's
+   early draft imagined a body and objectives; the real content has why,
+   approach, beneficiaries and a closing call to action. */
 export const Programmes: CollectionConfig = {
   slug: "programmes",
   labels: { singular: "Programme", plural: "Programmes" },
-  admin: { useAsTitle: "name", group: "Content" },
+  hooks: refreshes(CMS_TAGS.programmes),
+  admin: { useAsTitle: "title", group: "Content", defaultColumns: ["title", "slug", "_status"] },
   access: contentAccess,
   versions,
   fields: [
-    { name: "name", type: "text", required: true },
+    { name: "title", type: "text", required: true },
     slug,
+    { name: "icon", type: "text" },
+    imagePath("heroImage"),
     { name: "excerpt", type: "textarea" },
-    { name: "body", type: "richText" },
-    { name: "heroImage", type: "relationship", relationTo: "media" },
-    { name: "gallery", type: "relationship", relationTo: "media", hasMany: true },
-    { name: "objectives", type: "text", hasMany: true },
-    { name: "activities", type: "text", hasMany: true },
+    { name: "why", type: "textarea" },
+    { name: "approach", type: "textarea" },
     { name: "impact", type: "textarea" },
-    { name: "featured", type: "checkbox" },
+    list("activities"),
+    list("beneficiaries"),
+    { name: "ctaTitle", type: "text" },
+    { name: "ctaText", type: "textarea" },
     { name: "order", type: "number" },
     seo,
   ],
 };
 
+/* Values are kept as the Foundation wrote them (MIG-07): "100+" and
+   "October 2025" are stored as text, not converted into a number or a date
+   the source never stated. */
 export const ImpactStories: CollectionConfig = {
   slug: "impact-stories",
   labels: { singular: "Impact Story", plural: "Impact Stories" },
-  admin: { useAsTitle: "title", group: "Content" },
+  hooks: refreshes(CMS_TAGS.stories),
+  admin: { useAsTitle: "title", group: "Content", defaultColumns: ["title", "category", "_status"] },
   access: contentAccess,
   versions,
   fields: [
     { name: "title", type: "text", required: true },
     slug,
+    { name: "category", type: "text" },
+    // One summary serves both the story list and the story page: in the
+    // source they were separate fields holding identical text in all five.
     { name: "excerpt", type: "textarea" },
-    { name: "body", type: "richText" },
-    { name: "featuredImage", type: "relationship", relationTo: "media" },
-    { name: "images", type: "relationship", relationTo: "media", hasMany: true },
-    // The relationship that makes "related stories" real rather than guessed.
-    { name: "programme", type: "relationship", relationTo: "programmes" },
-    { name: "date", type: "date" },
+    { name: "beneficiaries", type: "text" },
+    { name: "featured", type: "checkbox" },
+    { name: "donationProgram", type: "text" },
+    { name: "date", type: "text" },
     { name: "location", type: "text" },
-    { name: "beneficiariesReached", type: "number" },
-    seo,
-  ],
-};
-
-export const GalleryAlbums: CollectionConfig = {
-  slug: "gallery-albums",
-  labels: { singular: "Gallery Album", plural: "Gallery" },
-  admin: { useAsTitle: "title", group: "Content" },
-  access: contentAccess,
-  versions,
-  fields: [
-    { name: "title", type: "text", required: true },
-    slug,
-    { name: "description", type: "textarea" },
-    { name: "cover", type: "relationship", relationTo: "media" },
-    { name: "images", type: "relationship", relationTo: "media", hasMany: true },
-    { name: "programme", type: "relationship", relationTo: "programmes" },
+    imagePath("image"),
+    imagePaths("images"),
+    { name: "challenge", type: "textarea" },
+    { name: "response", type: "textarea" },
+    { name: "impact", type: "textarea" },
+    paragraphs("story"),
+    {
+      name: "quote",
+      type: "group",
+      fields: [
+        { name: "text", type: "textarea" },
+        { name: "author", type: "text" },
+      ],
+    },
     { name: "order", type: "number" },
+    seo,
   ],
 };
 
 export const Leadership: CollectionConfig = {
   slug: "leadership",
   labels: { singular: "Leader", plural: "Leadership" },
+  hooks: refreshes(CMS_TAGS.leadership),
   admin: { useAsTitle: "name", group: "Content" },
   access: contentAccess,
   versions,
   fields: [
     { name: "name", type: "text", required: true },
     { name: "position", type: "text", required: true },
+    imagePath("image"),
     { name: "bio", type: "textarea" },
-    { name: "photo", type: "relationship", relationTo: "media" },
     { name: "order", type: "number" },
   ],
 };
@@ -135,10 +179,7 @@ export const Leadership: CollectionConfig = {
 export const Testimonials: CollectionConfig = {
   slug: "testimonials",
   labels: { singular: "Testimonial", plural: "Testimonials" },
-  hooks: {
-    afterChange: [revalidateOnChange(CMS_TAGS.testimonials)],
-    afterDelete: [revalidateOnDelete(CMS_TAGS.testimonials)],
-  },
+  hooks: refreshes(CMS_TAGS.testimonials),
   admin: { useAsTitle: "name", group: "Content" },
   access: contentAccess,
   versions,
@@ -204,7 +245,6 @@ export const contentCollections = [
   Media,
   Programmes,
   ImpactStories,
-  GalleryAlbums,
   Leadership,
   Testimonials,
   Faqs,

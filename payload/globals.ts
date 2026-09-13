@@ -1,6 +1,9 @@
-import type { GlobalConfig } from "payload";
+import { revalidateTag } from "next/cache";
+import type { Field, GlobalAfterChangeHook, GlobalConfig } from "payload";
 
 import { allow } from "./access";
+import { CMS_TAGS } from "../lib/cms-tags";
+import { imagePath, list, paragraphs } from "./collections/content";
 
 /* Section 8.2, "Navigation, settings": Owner full, Administrator read and
    update, nobody else. Globals have no create or delete. */
@@ -9,17 +12,51 @@ const settingsAccess = {
   update: allow("owner", "administrator"),
 };
 
+/* Page content is content, not settings: the Content Manager edits it, as
+   they edit programmes and stories (section 8.2, "Content, media, SEO"). */
+const pageContentAccess = {
+  read: allow("owner", "administrator", "content"),
+  update: allow("owner", "administrator", "content"),
+};
+
+/* Publishing a global refreshes the website (PUB-04), as collections do. */
+const refreshesGlobal = (tag: string): { afterChange: GlobalAfterChangeHook[] } => ({
+  afterChange: [
+    ({ doc, context }) => {
+      if (!context?.skipRevalidate) {
+        try {
+          revalidateTag(tag, "max");
+        } catch {
+          // Outside a Next.js request (the migration script): nothing cached.
+        }
+      }
+
+      return doc;
+    },
+  ],
+});
+
 export const SiteSettings: GlobalConfig = {
   slug: "site-settings",
   label: "Site Settings",
   admin: { group: "Administration" },
   access: settingsAccess,
+  hooks: refreshesGlobal(CMS_TAGS.siteSettings),
   fields: [
     { name: "foundationName", type: "text", required: true },
     { name: "email", type: "email" },
     { name: "phone", type: "text" },
     { name: "nigeriaAddress", type: "textarea" },
     { name: "usaAddress", type: "textarea" },
+    {
+      name: "bank",
+      type: "group",
+      fields: [
+        { name: "bankName", type: "text" },
+        { name: "accountNumber", type: "text" },
+        { name: "accountName", type: "text" },
+      ],
+    },
     {
       name: "socials",
       type: "group",
@@ -61,16 +98,98 @@ export const Navigation: GlobalConfig = {
   ],
 };
 
+/* The Foundation's introduction, vision and mission, and the founder's
+   message — as the homepage and About page show them. */
 export const Foundation: GlobalConfig = {
   slug: "foundation",
   label: "About the Foundation",
   admin: { group: "Content" },
-  access: settingsAccess,
+  access: pageContentAccess,
+  hooks: refreshesGlobal(CMS_TAGS.foundation),
   fields: [
+    { name: "badge", type: "text" },
+    { name: "title", type: "text" },
+    { name: "description", type: "textarea" },
     { name: "vision", type: "textarea" },
     { name: "mission", type: "textarea" },
-    { name: "founderStory", type: "richText" },
-    { name: "history", type: "richText" },
+    {
+      name: "founder",
+      type: "group",
+      fields: [
+        { name: "badge", type: "text" },
+        { name: "title", type: "text" },
+        { name: "name", type: "text" },
+        { name: "position", type: "text" },
+        { name: "organization", type: "text" },
+        imagePath("image"),
+        { name: "quote", type: "textarea" },
+        paragraphs("message"),
+      ],
+    },
+  ],
+};
+
+/* The homepage's hero slides. CNT-01's block canvas for the homepage is a
+   later Phase 6 step; until then the page's composition stays in code and
+   its words live here. */
+export const Homepage: GlobalConfig = {
+  slug: "homepage",
+  label: "Homepage",
+  admin: { group: "Content" },
+  access: pageContentAccess,
+  hooks: refreshesGlobal(CMS_TAGS.homepage),
+  fields: [
+    {
+      name: "heroSlides",
+      type: "array",
+      fields: [
+        { name: "title", type: "text", required: true },
+        { name: "description", type: "textarea" },
+        imagePath("image"),
+        { name: "buttonText", type: "text" },
+        { name: "buttonLink", type: "text" },
+      ],
+    },
+  ],
+};
+
+export const ApplyPage: GlobalConfig = {
+  slug: "apply-page",
+  label: "Apply for Support Page",
+  admin: { group: "Content" },
+  access: pageContentAccess,
+  hooks: refreshesGlobal(CMS_TAGS.applyPage),
+  fields: [
+    { name: "title", type: "text" },
+    { name: "intro", type: "textarea" },
+    list("importantNotes"),
+    list("requiredInformation"),
+  ],
+};
+
+export const DonatePage: GlobalConfig = {
+  slug: "donate-page",
+  label: "Donate Page",
+  admin: { group: "Content" },
+  access: pageContentAccess,
+  hooks: refreshesGlobal(CMS_TAGS.donatePage),
+  fields: [
+    {
+      name: "stats",
+      type: "array",
+      fields: [
+        { name: "number", type: "text", required: true },
+        { name: "label", type: "text", required: true },
+      ],
+    },
+    {
+      name: "causes",
+      type: "array",
+      fields: [
+        { name: "title", type: "text", required: true },
+        { name: "description", type: "textarea" },
+      ],
+    },
   ],
 };
 
@@ -78,7 +197,7 @@ export const SeoDefaults: GlobalConfig = {
   slug: "seo-defaults",
   label: "SEO Defaults",
   admin: { group: "Content" },
-  access: settingsAccess,
+  access: pageContentAccess,
   fields: [
     { name: "titleTemplate", type: "text" },
     { name: "description", type: "textarea" },
@@ -86,25 +205,65 @@ export const SeoDefaults: GlobalConfig = {
   ],
 };
 
-/* CNT-09 and CNT-10: anything derivable is derived. Only genuinely
-   unmeasurable figures live here, each with its source and the date it was
-   verified, in exactly one place. */
+/* CNT-09 and CNT-10. The figures the site shows are typed by hand today, and
+   none can yet be derived — the records they would be counted from are not
+   in the system. They live here, in one place, per page.
+
+   CNT-10 asks for each figure's source and the date it was verified. Their
+   source is known — they were on the website before the CMS — but nobody has
+   verified them, so "verified on" stays empty rather than claiming a check
+   that never happened (MIG-07). */
+const figure = (name: string): Field => ({ name, type: "text" });
+
 export const StatisticsManual: GlobalConfig = {
   slug: "statistics-manual",
   label: "Manual Statistics",
   admin: { group: "Content" },
-  access: settingsAccess,
+  access: pageContentAccess,
+  hooks: refreshesGlobal(CMS_TAGS.statistics),
   fields: [
     {
-      name: "figures",
-      type: "array",
+      name: "homepage",
+      type: "group",
       fields: [
-        { name: "label", type: "text", required: true },
-        { name: "value", type: "text", required: true },
-        { name: "source", type: "text", required: true },
-        { name: "verifiedAt", type: "date", required: true },
+        figure("childrenReached"),
+        figure("widowsSupported"),
+        figure("educationalBeneficiaries"),
+        figure("communitiesImpacted"),
       ],
     },
+    {
+      name: "programs",
+      type: "group",
+      fields: [
+        figure("yearsOfCompassion"),
+        figure("livesReached"),
+        figure("outreachActivities"),
+        figure("countriesRepresented"),
+      ],
+    },
+    {
+      name: "impact",
+      type: "group",
+      fields: [
+        figure("widowsSupported"),
+        figure("childrenReached"),
+        figure("communityOutreachEvents"),
+        figure("livesImpacted"),
+      ],
+    },
+    {
+      name: "gallery",
+      type: "group",
+      fields: [
+        figure("livesImpacted"),
+        figure("outreachEvents"),
+        figure("communitiesReached"),
+        figure("yearsOfService"),
+      ],
+    },
+    { name: "source", type: "textarea" },
+    { name: "verifiedAt", type: "date" },
   ],
 };
 
@@ -112,6 +271,9 @@ export const globals = [
   SiteSettings,
   Navigation,
   Foundation,
+  Homepage,
+  ApplyPage,
+  DonatePage,
   SeoDefaults,
   StatisticsManual,
 ];

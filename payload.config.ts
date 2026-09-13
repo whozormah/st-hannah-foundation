@@ -9,6 +9,7 @@ import { resendAdapter } from "@payloadcms/email-resend";
 
 import { AdminUsers } from "./payload/collections/adminUsers";
 import { contentCollections } from "./payload/collections/content";
+import { siteContentCollections } from "./payload/collections/siteContent";
 import { operationsCollections } from "./payload/collections/operations";
 import { fundraisingCollections } from "./payload/collections/fundraising";
 import { systemCollections } from "./payload/collections/system";
@@ -114,6 +115,7 @@ export default buildConfig({
   // (payload/labels.ts). Display only; stored values are unchanged.
   collections: [
     ...contentCollections,
+    ...siteContentCollections,
     ...operationsCollections,
     ...fundraisingCollections,
     AdminUsers,

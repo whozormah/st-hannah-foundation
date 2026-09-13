@@ -84,8 +84,7 @@ Interface defects that belong to no phase are tracked separately, in
 
 ### CR-007 — CMS pages render on request, with cached content
 
-- **Status:** Proposed — awaiting approval. Implemented for the homepage
-  (testimonials) to prove the approach.
+- **Status:** Approved, 13 September 2026
 - **Affects:** ARC-02 ("public pages are statically rendered")
 - **Conflict:** A static build reads the content while building. ARC-05
   requires images to be built in CI, which cannot reach the live database — so
@@ -104,7 +103,8 @@ Interface defects that belong to no phase are tracked separately, in
 
 ### CR-008 — Homes for the content the model does not cover
 
-- **Status:** Proposed — awaiting approval
+- **Status:** Approved, 13 September 2026 — option (a): every one becomes
+  editable in the CMS
 - **Affects:** Section 5 (content model) and section 22 (migration)
 - **Conflict:** Section 22 migrates *every* file in `public/data`, but section
   5 has no collection or global for nine of them: volunteer opportunities,

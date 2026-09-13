@@ -70,11 +70,18 @@ export interface Config {
     media: Media;
     programmes: Programme;
     'impact-stories': ImpactStory;
-    'gallery-albums': GalleryAlbum;
     leadership: Leadership;
     testimonials: Testimonial;
     faqs: Faq;
     pages: Page;
+    'gallery-photos': GalleryPhoto;
+    'volunteer-profiles': VolunteerProfile;
+    'volunteer-opportunities': VolunteerOpportunity;
+    'volunteer-benefits': VolunteerBenefit;
+    'in-kind-categories': InKindCategory;
+    'featured-events': FeaturedEvent;
+    'video-highlights': VideoHighlight;
+    'campaign-stories': CampaignStory;
     'reference-counters': ReferenceCounter;
     'support-applications': SupportApplication;
     beneficiaries: Beneficiary;
@@ -108,11 +115,18 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     programmes: ProgrammesSelect<false> | ProgrammesSelect<true>;
     'impact-stories': ImpactStoriesSelect<false> | ImpactStoriesSelect<true>;
-    'gallery-albums': GalleryAlbumsSelect<false> | GalleryAlbumsSelect<true>;
     leadership: LeadershipSelect<false> | LeadershipSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     faqs: FaqsSelect<false> | FaqsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    'gallery-photos': GalleryPhotosSelect<false> | GalleryPhotosSelect<true>;
+    'volunteer-profiles': VolunteerProfilesSelect<false> | VolunteerProfilesSelect<true>;
+    'volunteer-opportunities': VolunteerOpportunitiesSelect<false> | VolunteerOpportunitiesSelect<true>;
+    'volunteer-benefits': VolunteerBenefitsSelect<false> | VolunteerBenefitsSelect<true>;
+    'in-kind-categories': InKindCategoriesSelect<false> | InKindCategoriesSelect<true>;
+    'featured-events': FeaturedEventsSelect<false> | FeaturedEventsSelect<true>;
+    'video-highlights': VideoHighlightsSelect<false> | VideoHighlightsSelect<true>;
+    'campaign-stories': CampaignStoriesSelect<false> | CampaignStoriesSelect<true>;
     'reference-counters': ReferenceCountersSelect<false> | ReferenceCountersSelect<true>;
     'support-applications': SupportApplicationsSelect<false> | SupportApplicationsSelect<true>;
     beneficiaries: BeneficiariesSelect<false> | BeneficiariesSelect<true>;
@@ -149,6 +163,9 @@ export interface Config {
     'site-settings': SiteSetting;
     navigation: Navigation;
     foundation: Foundation;
+    homepage: Homepage;
+    'apply-page': ApplyPage;
+    'donate-page': DonatePage;
     'seo-defaults': SeoDefault;
     'statistics-manual': StatisticsManual;
   };
@@ -156,6 +173,9 @@ export interface Config {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     foundation: FoundationSelect<false> | FoundationSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
+    'apply-page': ApplyPageSelect<false> | ApplyPageSelect<true>;
+    'donate-page': DonatePageSelect<false> | DonatePageSelect<true>;
     'seo-defaults': SeoDefaultsSelect<false> | SeoDefaultsSelect<true>;
     'statistics-manual': StatisticsManualSelect<false> | StatisticsManualSelect<true>;
   };
@@ -243,33 +263,24 @@ export interface AdminUser {
  */
 export interface Programme {
   id: number;
-  name: string;
+  title: string;
   /**
    * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
    */
   slug: string;
+  icon?: string | null;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  heroImage?: string | null;
   excerpt?: string | null;
-  body?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  heroImage?: (number | null) | Media;
-  gallery?: (number | Media)[] | null;
-  objectives?: string[] | null;
-  activities?: string[] | null;
+  why?: string | null;
+  approach?: string | null;
   impact?: string | null;
-  featured?: boolean | null;
+  activities?: string[] | null;
+  beneficiaries?: string[] | null;
+  ctaTitle?: string | null;
+  ctaText?: string | null;
   order?: number | null;
   seo?: {
     title?: string | null;
@@ -291,53 +302,40 @@ export interface ImpactStory {
    * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
    */
   slug: string;
+  category?: string | null;
   excerpt?: string | null;
-  body?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  featuredImage?: (number | null) | Media;
-  images?: (number | Media)[] | null;
-  programme?: (number | null) | Programme;
+  beneficiaries?: string | null;
+  featured?: boolean | null;
+  donationProgram?: string | null;
   date?: string | null;
   location?: string | null;
-  beneficiariesReached?: number | null;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  image?: string | null;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  images?: string[] | null;
+  challenge?: string | null;
+  response?: string | null;
+  impact?: string | null;
+  story?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  quote?: {
+    text?: string | null;
+    author?: string | null;
+  };
+  order?: number | null;
   seo?: {
     title?: string | null;
     description?: string | null;
     image?: (number | null) | Media;
   };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "gallery-albums".
- */
-export interface GalleryAlbum {
-  id: number;
-  title: string;
-  /**
-   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
-   */
-  slug: string;
-  description?: string | null;
-  cover?: (number | null) | Media;
-  images?: (number | Media)[] | null;
-  programme?: (number | null) | Programme;
-  order?: number | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -350,8 +348,11 @@ export interface Leadership {
   id: number;
   name: string;
   position: string;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  image?: string | null;
   bio?: string | null;
-  photo?: (number | null) | Media;
   order?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -435,6 +436,151 @@ export interface Page {
     description?: string | null;
     image?: (number | null) | Media;
   };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-photos".
+ */
+export interface GalleryPhoto {
+  id: number;
+  title: string;
+  category: string;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  image?: string | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volunteer-profiles".
+ */
+export interface VolunteerProfile {
+  id: number;
+  name: string;
+  role?: string | null;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  image?: string | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volunteer-opportunities".
+ */
+export interface VolunteerOpportunity {
+  id: number;
+  title: string;
+  description?: string | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volunteer-benefits".
+ */
+export interface VolunteerBenefit {
+  id: number;
+  title: string;
+  description?: string | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "in-kind-categories".
+ */
+export interface InKindCategory {
+  id: number;
+  title: string;
+  description?: string | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "featured-events".
+ */
+export interface FeaturedEvent {
+  id: number;
+  title: string;
+  description?: string | null;
+  category?: string | null;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  image?: string | null;
+  link?: string | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "video-highlights".
+ */
+export interface VideoHighlight {
+  id: number;
+  title: string;
+  category?: string | null;
+  description?: string | null;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  thumbnail?: string | null;
+  link?: string | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "campaign-stories".
+ */
+export interface CampaignStory {
+  id: number;
+  name: string;
+  age?: number | null;
+  tagline?: string | null;
+  headline?: string | null;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  heroImage?: string | null;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  gallery?: string[] | null;
+  description?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  whyStoryMattersTitle?: string | null;
+  whyStoryMatters?: string | null;
+  needs?: string[] | null;
+  videoLink?: string | null;
+  featured?: boolean | null;
+  order?: number | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -951,10 +1097,6 @@ export interface PayloadLockedDocument {
         value: number | ImpactStory;
       } | null)
     | ({
-        relationTo: 'gallery-albums';
-        value: number | GalleryAlbum;
-      } | null)
-    | ({
         relationTo: 'leadership';
         value: number | Leadership;
       } | null)
@@ -969,6 +1111,38 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'gallery-photos';
+        value: number | GalleryPhoto;
+      } | null)
+    | ({
+        relationTo: 'volunteer-profiles';
+        value: number | VolunteerProfile;
+      } | null)
+    | ({
+        relationTo: 'volunteer-opportunities';
+        value: number | VolunteerOpportunity;
+      } | null)
+    | ({
+        relationTo: 'volunteer-benefits';
+        value: number | VolunteerBenefit;
+      } | null)
+    | ({
+        relationTo: 'in-kind-categories';
+        value: number | InKindCategory;
+      } | null)
+    | ({
+        relationTo: 'featured-events';
+        value: number | FeaturedEvent;
+      } | null)
+    | ({
+        relationTo: 'video-highlights';
+        value: number | VideoHighlight;
+      } | null)
+    | ({
+        relationTo: 'campaign-stories';
+        value: number | CampaignStory;
       } | null)
     | ({
         relationTo: 'reference-counters';
@@ -1130,16 +1304,18 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "programmes_select".
  */
 export interface ProgrammesSelect<T extends boolean = true> {
-  name?: T;
+  title?: T;
   slug?: T;
-  excerpt?: T;
-  body?: T;
+  icon?: T;
   heroImage?: T;
-  gallery?: T;
-  objectives?: T;
-  activities?: T;
+  excerpt?: T;
+  why?: T;
+  approach?: T;
   impact?: T;
-  featured?: T;
+  activities?: T;
+  beneficiaries?: T;
+  ctaTitle?: T;
+  ctaText?: T;
   order?: T;
   seo?:
     | T
@@ -1159,14 +1335,31 @@ export interface ProgrammesSelect<T extends boolean = true> {
 export interface ImpactStoriesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
+  category?: T;
   excerpt?: T;
-  body?: T;
-  featuredImage?: T;
-  images?: T;
-  programme?: T;
+  beneficiaries?: T;
+  featured?: T;
+  donationProgram?: T;
   date?: T;
   location?: T;
-  beneficiariesReached?: T;
+  image?: T;
+  images?: T;
+  challenge?: T;
+  response?: T;
+  impact?: T;
+  story?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  quote?:
+    | T
+    | {
+        text?: T;
+        author?: T;
+      };
+  order?: T;
   seo?:
     | T
     | {
@@ -1180,29 +1373,13 @@ export interface ImpactStoriesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "gallery-albums_select".
- */
-export interface GalleryAlbumsSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  description?: T;
-  cover?: T;
-  images?: T;
-  programme?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "leadership_select".
  */
 export interface LeadershipSelect<T extends boolean = true> {
   name?: T;
   position?: T;
+  image?: T;
   bio?: T;
-  photo?: T;
   order?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1270,6 +1447,125 @@ export interface PagesSelect<T extends boolean = true> {
         description?: T;
         image?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "gallery-photos_select".
+ */
+export interface GalleryPhotosSelect<T extends boolean = true> {
+  title?: T;
+  category?: T;
+  image?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volunteer-profiles_select".
+ */
+export interface VolunteerProfilesSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  image?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volunteer-opportunities_select".
+ */
+export interface VolunteerOpportunitiesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volunteer-benefits_select".
+ */
+export interface VolunteerBenefitsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "in-kind-categories_select".
+ */
+export interface InKindCategoriesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "featured-events_select".
+ */
+export interface FeaturedEventsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  category?: T;
+  image?: T;
+  link?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "video-highlights_select".
+ */
+export interface VideoHighlightsSelect<T extends boolean = true> {
+  title?: T;
+  category?: T;
+  description?: T;
+  thumbnail?: T;
+  link?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "campaign-stories_select".
+ */
+export interface CampaignStoriesSelect<T extends boolean = true> {
+  name?: T;
+  age?: T;
+  tagline?: T;
+  headline?: T;
+  heroImage?: T;
+  gallery?: T;
+  description?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  whyStoryMattersTitle?: T;
+  whyStoryMatters?: T;
+  needs?: T;
+  videoLink?: T;
+  featured?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1760,6 +2056,11 @@ export interface SiteSetting {
   phone?: string | null;
   nigeriaAddress?: string | null;
   usaAddress?: string | null;
+  bank?: {
+    bankName?: string | null;
+    accountNumber?: string | null;
+    accountName?: string | null;
+  };
   socials?: {
     facebook?: string | null;
     instagram?: string | null;
@@ -1799,38 +2100,87 @@ export interface Navigation {
  */
 export interface Foundation {
   id: number;
+  badge?: string | null;
+  title?: string | null;
+  description?: string | null;
   vision?: string | null;
   mission?: string | null;
-  founderStory?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  history?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  founder?: {
+    badge?: string | null;
+    title?: string | null;
+    name?: string | null;
+    position?: string | null;
+    organization?: string | null;
+    /**
+     * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+     */
+    image?: string | null;
+    quote?: string | null;
+    message?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: number;
+  heroSlides?:
+    | {
+        title: string;
+        description?: string | null;
+        /**
+         * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+         */
+        image?: string | null;
+        buttonText?: string | null;
+        buttonLink?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "apply-page".
+ */
+export interface ApplyPage {
+  id: number;
+  title?: string | null;
+  intro?: string | null;
+  importantNotes?: string[] | null;
+  requiredInformation?: string[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "donate-page".
+ */
+export interface DonatePage {
+  id: number;
+  stats?:
+    | {
+        number: string;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  causes?:
+    | {
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1852,15 +2202,32 @@ export interface SeoDefault {
  */
 export interface StatisticsManual {
   id: number;
-  figures?:
-    | {
-        label: string;
-        value: string;
-        source: string;
-        verifiedAt: string;
-        id?: string | null;
-      }[]
-    | null;
+  homepage?: {
+    childrenReached?: string | null;
+    widowsSupported?: string | null;
+    educationalBeneficiaries?: string | null;
+    communitiesImpacted?: string | null;
+  };
+  programs?: {
+    yearsOfCompassion?: string | null;
+    livesReached?: string | null;
+    outreachActivities?: string | null;
+    countriesRepresented?: string | null;
+  };
+  impact?: {
+    widowsSupported?: string | null;
+    childrenReached?: string | null;
+    communityOutreachEvents?: string | null;
+    livesImpacted?: string | null;
+  };
+  gallery?: {
+    livesImpacted?: string | null;
+    outreachEvents?: string | null;
+    communitiesReached?: string | null;
+    yearsOfService?: string | null;
+  };
+  source?: string | null;
+  verifiedAt?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1874,6 +2241,13 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   phone?: T;
   nigeriaAddress?: T;
   usaAddress?: T;
+  bank?:
+    | T
+    | {
+        bankName?: T;
+        accountNumber?: T;
+        accountName?: T;
+      };
   socials?:
     | T
     | {
@@ -1915,10 +2289,83 @@ export interface NavigationSelect<T extends boolean = true> {
  * via the `definition` "foundation_select".
  */
 export interface FoundationSelect<T extends boolean = true> {
+  badge?: T;
+  title?: T;
+  description?: T;
   vision?: T;
   mission?: T;
-  founderStory?: T;
-  history?: T;
+  founder?:
+    | T
+    | {
+        badge?: T;
+        title?: T;
+        name?: T;
+        position?: T;
+        organization?: T;
+        image?: T;
+        quote?: T;
+        message?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  heroSlides?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        buttonText?: T;
+        buttonLink?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "apply-page_select".
+ */
+export interface ApplyPageSelect<T extends boolean = true> {
+  title?: T;
+  intro?: T;
+  importantNotes?: T;
+  requiredInformation?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "donate-page_select".
+ */
+export interface DonatePageSelect<T extends boolean = true> {
+  stats?:
+    | T
+    | {
+        number?: T;
+        label?: T;
+        id?: T;
+      };
+  causes?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -1940,15 +2387,40 @@ export interface SeoDefaultsSelect<T extends boolean = true> {
  * via the `definition` "statistics-manual_select".
  */
 export interface StatisticsManualSelect<T extends boolean = true> {
-  figures?:
+  homepage?:
     | T
     | {
-        label?: T;
-        value?: T;
-        source?: T;
-        verifiedAt?: T;
-        id?: T;
+        childrenReached?: T;
+        widowsSupported?: T;
+        educationalBeneficiaries?: T;
+        communitiesImpacted?: T;
       };
+  programs?:
+    | T
+    | {
+        yearsOfCompassion?: T;
+        livesReached?: T;
+        outreachActivities?: T;
+        countriesRepresented?: T;
+      };
+  impact?:
+    | T
+    | {
+        widowsSupported?: T;
+        childrenReached?: T;
+        communityOutreachEvents?: T;
+        livesImpacted?: T;
+      };
+  gallery?:
+    | T
+    | {
+        livesImpacted?: T;
+        outreachEvents?: T;
+        communitiesReached?: T;
+        yearsOfService?: T;
+      };
+  source?: T;
+  verifiedAt?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
