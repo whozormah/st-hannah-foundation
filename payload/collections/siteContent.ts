@@ -3,8 +3,8 @@ import type { CollectionConfig, Field } from "payload";
 import { CMS_TAGS } from "../../lib/cms-tags";
 import {
   contentAccess,
-  imagePath,
-  imagePaths,
+  imageField,
+  imageFields,
   list,
   NOT_ON_WEBSITE,
   paragraphs,
@@ -74,7 +74,7 @@ export const VolunteerProfiles: CollectionConfig = {
   fields: [
     { name: "name", type: "text", required: true },
     { name: "role", type: "text" },
-    imagePath("image"),
+    imageField("image"),
     order,
   ],
 };
@@ -92,7 +92,7 @@ export const GalleryPhotos: CollectionConfig = {
   fields: [
     { name: "title", type: "text", required: true },
     { name: "category", type: "text", required: true },
-    imagePath("image"),
+    imageField("image"),
     order,
   ],
 };
@@ -108,7 +108,7 @@ export const FeaturedEvents: CollectionConfig = {
     { name: "title", type: "text", required: true },
     { name: "description", type: "textarea" },
     { name: "category", type: "text" },
-    imagePath("image"),
+    imageField("image"),
     { name: "link", type: "text" },
     order,
   ],
@@ -125,7 +125,7 @@ export const VideoHighlights: CollectionConfig = {
     { name: "title", type: "text", required: true },
     { name: "category", type: "text" },
     { name: "description", type: "textarea" },
-    imagePath("thumbnail"),
+    imageField("thumbnail"),
     { name: "link", type: "text" },
     order,
   ],
@@ -146,8 +146,8 @@ export const CampaignStories: CollectionConfig = {
     { name: "age", type: "number" },
     { name: "tagline", type: "text" },
     { name: "headline", type: "text" },
-    imagePath("heroImage"),
-    imagePaths("gallery"),
+    imageField("heroImage"),
+    imageFields("gallery"),
     paragraphs("description"),
     { name: "whyStoryMattersTitle", type: "text" },
     { name: "whyStoryMatters", type: "textarea" },

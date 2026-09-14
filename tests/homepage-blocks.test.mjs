@@ -19,6 +19,17 @@ async function homepage() {
   return doc;
 }
 
+/** An image from the media library whose description is plain words, so it
+    can be looked for in the page's HTML as written. */
+async function libraryImage() {
+  const found = await as("content", "/api/media?limit=100&depth=0");
+  const photo = found.body?.docs?.find((doc) => /^[\w ,.()-]+$/.test(doc.alt));
+
+  assert.ok(photo, "no images in the media library — run the content migration first");
+
+  return photo;
+}
+
 const publish = (id, blocks) =>
   as("content", `/api/pages/${id}`, {
     method: "PATCH",
@@ -73,6 +84,7 @@ test("blocks: all fourteen block types render, in the order the editor sets", as
   const doc = await homepage();
   restoreAfter(t, doc);
 
+  const photo = await libraryImage();
   const stamp = Date.now();
   const m = (name) => `${name}-${stamp}`;
 
@@ -82,7 +94,7 @@ test("blocks: all fourteen block types render, in the order the editor sets", as
     { blockType: "quote", text: m("quote"), author: "A. Person" },
     {
       blockType: "hero",
-      slides: [{ title: m("hero"), image: "/hero/hero-1.jpg", buttonText: "Donate", buttonLink: "/donate" }],
+      slides: [{ title: m("hero"), image: photo.id, buttonText: "Donate", buttonLink: "/donate" }],
     },
     { blockType: "callToAction", title: m("callToAction") },
     { blockType: "richText", content: paragraph(m("richText"), "/donate") },
@@ -91,8 +103,7 @@ test("blocks: all fourteen block types render, in the order the editor sets", as
       blockType: "imageText",
       title: m("imageText"),
       text: "Some text.",
-      image: "/about/story.jpg",
-      imageAlt: m("imageAlt"),
+      image: photo.id,
     },
     { blockType: "programmeCards", title: m("programmeCards") },
     { blockType: "galleryStrip", title: m("galleryStrip") },
@@ -103,8 +114,7 @@ test("blocks: all fourteen block types render, in the order the editor sets", as
     {
       blockType: "video",
       title: m("video"),
-      thumbnail: "/hero/hero-2.jpg",
-      thumbnailAlt: "A video still",
+      thumbnail: photo.id,
       link: "https://www.youtube.com/watch?v=test",
     },
     { blockType: "visionMission" },
@@ -135,7 +145,10 @@ test("blocks: all fourteen block types render, in the order the editor sets", as
     last = at;
   }
 
-  assert.ok(main.includes(`alt="${m("imageAlt")}"`), "the image's description is not its alt text");
+  assert.ok(
+    main.includes(`alt="${photo.alt}"`),
+    "the image's description from the media library is not its alt text",
+  );
   assert.equal((page.match(/<h1[\s>]/g) ?? []).length, 1, "the homepage must have exactly one h1");
 });
 
@@ -185,13 +198,13 @@ test("blocks: unsafe links are refused (CNT-04)", async (t) => {
   const doc = await homepage();
   restoreAfter(t, doc);
 
+  const photo = await libraryImage();
   const attempts = {
     "a javascript: button link": {
       blockType: "imageText",
       title: "x",
       text: "x",
-      image: "/about/story.jpg",
-      imageAlt: "x",
+      image: photo.id,
       buttonLabel: "Go",
       buttonLink: "javascript:alert(1)",
     },
@@ -202,8 +215,7 @@ test("blocks: unsafe links are refused (CNT-04)", async (t) => {
     "a video link that is not a video": {
       blockType: "video",
       title: "x",
-      thumbnail: "/hero/hero-2.jpg",
-      thumbnailAlt: "x",
+      thumbnail: photo.id,
       link: "https://youtube.com",
     },
     "a javascript: link in rich text": {

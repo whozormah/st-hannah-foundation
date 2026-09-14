@@ -211,10 +211,22 @@ export interface AdminUserAuthOperations {
  */
 export interface Media {
   id: number;
+  /**
+   * What the image shows, for people who cannot see it. Describe only what is visible: no names, places or events the picture does not show.
+   */
   alt: string;
+  /**
+   * The descriptions carried over from the old website were drafted by the developer (CR-011). Tick once the Foundation has checked this one.
+   */
+  altApproved?: boolean | null;
   caption?: string | null;
   tags?: string[] | null;
   uploadedBy?: (number | null) | AdminUser;
+  /**
+   * Where this image was on the website before the media library, kept to trace the migration (MIG-08).
+   */
+  sourcePaths?: string[] | null;
+  sourceHash?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -267,10 +279,7 @@ export interface Programme {
    */
   slug: string;
   icon?: string | null;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  heroImage?: string | null;
+  heroImage?: (number | null) | Media;
   excerpt?: string | null;
   why?: string | null;
   approach?: string | null;
@@ -307,14 +316,8 @@ export interface ImpactStory {
   donationProgram?: string | null;
   date?: string | null;
   location?: string | null;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  image?: string | null;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  images?: string[] | null;
+  image?: (number | null) | Media;
+  images?: (number | Media)[] | null;
   challenge?: string | null;
   response?: string | null;
   impact?: string | null;
@@ -346,10 +349,7 @@ export interface Leadership {
   id: number;
   name: string;
   position: string;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  image?: string | null;
+  image?: (number | null) | Media;
   bio?: string | null;
   order?: number | null;
   updatedAt: string;
@@ -433,10 +433,7 @@ export interface HeroBlock {
   slides: {
     title: string;
     description?: string | null;
-    /**
-     * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-     */
-    image?: string | null;
+    image?: (number | null) | Media;
     buttonText?: string | null;
     buttonLink?: string | null;
     id?: string | null;
@@ -628,14 +625,7 @@ export interface ImageTextBlock {
   eyebrow?: string | null;
   title: string;
   text: string;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  image: string;
-  /**
-   * What the image shows, for people who cannot see it (CNT-06). Describe only what is visible.
-   */
-  imageAlt: string;
+  image: number | Media;
   imagePosition?: ('left' | 'right') | null;
   buttonLabel?: string | null;
   buttonLink?: string | null;
@@ -664,14 +654,7 @@ export interface QuoteBlock {
 export interface VideoBlock {
   title: string;
   description?: string | null;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  thumbnail: string;
-  /**
-   * What the image shows, for people who cannot see it (CNT-06). Describe only what is visible.
-   */
-  thumbnailAlt: string;
+  thumbnail: number | Media;
   link: string;
   id?: string | null;
   blockName?: string | null;
@@ -685,10 +668,7 @@ export interface GalleryPhoto {
   id: number;
   title: string;
   category: string;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  image?: string | null;
+  image?: (number | null) | Media;
   order?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -702,10 +682,7 @@ export interface VolunteerProfile {
   id: number;
   name: string;
   role?: string | null;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  image?: string | null;
+  image?: (number | null) | Media;
   order?: number | null;
   updatedAt: string;
   createdAt: string;
@@ -761,10 +738,7 @@ export interface FeaturedEvent {
   title: string;
   description?: string | null;
   category?: string | null;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  image?: string | null;
+  image?: (number | null) | Media;
   link?: string | null;
   order?: number | null;
   updatedAt: string;
@@ -780,10 +754,7 @@ export interface VideoHighlight {
   title: string;
   category?: string | null;
   description?: string | null;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  thumbnail?: string | null;
+  thumbnail?: (number | null) | Media;
   link?: string | null;
   order?: number | null;
   updatedAt: string;
@@ -800,14 +771,8 @@ export interface CampaignStory {
   age?: number | null;
   tagline?: string | null;
   headline?: string | null;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  heroImage?: string | null;
-  /**
-   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-   */
-  gallery?: string[] | null;
+  heroImage?: (number | null) | Media;
+  gallery?: (number | Media)[] | null;
   description?:
     | {
         text: string;
@@ -1523,9 +1488,12 @@ export interface PayloadMigration {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  altApproved?: T;
   caption?: T;
   tags?: T;
   uploadedBy?: T;
+  sourcePaths?: T;
+  sourceHash?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1817,7 +1785,6 @@ export interface ImageTextBlockSelect<T extends boolean = true> {
   title?: T;
   text?: T;
   image?: T;
-  imageAlt?: T;
   imagePosition?: T;
   buttonLabel?: T;
   buttonLink?: T;
@@ -1842,7 +1809,6 @@ export interface VideoBlockSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   thumbnail?: T;
-  thumbnailAlt?: T;
   link?: T;
   id?: T;
   blockName?: T;
@@ -2507,10 +2473,7 @@ export interface Foundation {
     name?: string | null;
     position?: string | null;
     organization?: string | null;
-    /**
-     * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-     */
-    image?: string | null;
+    image?: (number | null) | Media;
     quote?: string | null;
     message?:
       | {

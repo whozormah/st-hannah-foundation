@@ -199,7 +199,35 @@ Interface defects that belong to no phase are tracked separately, in
   seen. The Foundation corrects and approves it, as with the legal documents.
 - **Condition:** The media library is built and verified now but goes live
   only once Cloudflare R2 exists (MED-01); until then an upload would be
-  written to a disk the next deployment discards.
+  written to a disk the next deployment discards. The application container
+  mounts no volume for uploads. When R2 is switched on, the public bucket's
+  address must be added to Next's allowed image hosts.
+- **As built:** the 65 image paths the content used are 47 distinct
+  photographs; each is uploaded once, with every path it was at recorded,
+  and pointed to wherever it appears. The drafts are in
+  `scripts/data/alt-text-drafts.json`, and each image has a "Description
+  approved by the Foundation" tick, off until the Foundation checks it; the
+  migration never overwrites an approved description. Visitors can view
+  images and their descriptions — a browser must load the file, and Payload
+  serves a file only to someone allowed to read it — but not the approval
+  tick or the migration record, and cannot upload, change or delete.
+  Sections still use names and titles as alt text where they did before;
+  only the image-and-text and video blocks show the library description.
+  Page-template images (page headers, the logo) are part of the fixed
+  layouts (CNT-02) and stay in code.
+- **For the Foundation (MIG-07, CNT-11), found while drafting:**
+  1. Several images appear to be AI-generated or stock pictures rather than
+     photographs of the Foundation's work: the Business Empowerment and
+     Medical Aid Outreach story images (also the Equipment Support and
+     Medical Aid programme images), and the Family Support, Financial Aid
+     and Support Our Men programme images. The three homepage hero images
+     look like stock photography. Two illustrate impact stories as if they
+     showed the beneficiaries. Nothing has been changed; the descriptions
+     say only what is visible.
+  2. All six gallery photographs in "Community Outreach" are the same files
+     as six filed under Widow Empowerment and Education Support, so the
+     gallery shows them twice under different programmes. The migration
+     reports each pair.
 
 ## Decisions
 

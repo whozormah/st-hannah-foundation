@@ -2,7 +2,7 @@ import type { Field, GlobalAfterChangeHook, GlobalConfig } from "payload";
 
 import { allow } from "./access";
 import { CMS_TAGS } from "../lib/cms-tags";
-import { imagePath, list, NOT_ON_WEBSITE, paragraphs } from "./collections/content";
+import { imageField, list, NOT_ON_WEBSITE, paragraphs } from "./collections/content";
 import { refresh } from "./revalidate";
 
 /* Section 8.2, "Navigation, settings": Owner full, Administrator read and
@@ -114,7 +114,7 @@ export const Foundation: GlobalConfig = {
         { name: "name", type: "text" },
         { name: "position", type: "text" },
         { name: "organization", type: "text" },
-        imagePath("image"),
+        imageField("image"),
         { name: "quote", type: "textarea" },
         paragraphs("message"),
       ],

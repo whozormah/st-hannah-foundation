@@ -13,7 +13,7 @@ import {
   UnorderedListFeature,
 } from "@payloadcms/richtext-lexical";
 
-import { imagePath } from "./fields";
+import { imageField } from "./fields";
 import { isPlayableVideo, isSafeLink } from "../lib/links";
 import { SECTION_COPY, type SectionCopy } from "../lib/section-copy";
 
@@ -78,17 +78,6 @@ const copy = (defaults: SectionCopy, { multiline = false } = {}): Field[] => [
     : []),
 ];
 
-const alt = (name: string): Field => ({
-  name,
-  label: "Image Description (Alt Text)",
-  type: "text",
-  required: true,
-  admin: {
-    description:
-      "What the image shows, for people who cannot see it (CNT-06). Describe only what is visible.",
-  },
-});
-
 /* `about` says what the block shows; the block's name is what editors see.
    Each block's type is named "…Block": several blocks share a name with a
    collection (Testimonials), and GraphQL refuses two types of one name. */
@@ -110,7 +99,7 @@ export const homepageBlocks: Block[] = [
       fields: [
         { name: "title", label: "Heading", type: "text", required: true },
         { name: "description", label: "Text", type: "textarea" },
-        imagePath("image"),
+        imageField("image"),
         { name: "buttonText", label: "Button Label", type: "text" },
         link("buttonLink", "Button Link"),
       ],
@@ -202,8 +191,8 @@ export const homepageBlocks: Block[] = [
     { name: "eyebrow", label: "Small Heading", type: "text" },
     { name: "title", label: "Heading", type: "text", required: true },
     { name: "text", label: "Text", type: "textarea", required: true },
-    { ...imagePath("image"), required: true } as Field,
-    alt("imageAlt"),
+    // Its description comes with it from the media library (CNT-06).
+    { ...imageField("image"), required: true } as Field,
     {
       name: "imagePosition",
       label: "Image Side",
@@ -237,8 +226,7 @@ export const homepageBlocks: Block[] = [
     [
       { name: "title", label: "Heading", type: "text", required: true },
       { name: "description", label: "Text", type: "textarea" },
-      { ...imagePath("thumbnail"), required: true } as Field,
-      alt("thumbnailAlt"),
+      { ...imageField("thumbnail"), required: true } as Field,
       {
         name: "link",
         label: "Video Link",

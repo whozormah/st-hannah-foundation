@@ -41,7 +41,8 @@ async function published(collection: CollectionSlug): Promise<Doc[]> {
     where: { _status: { equals: "published" } },
     sort: "order",
     limit: 500,
-    depth: 0,
+    // One level deep, so an image arrives as its media library record.
+    depth: 1,
   });
 
   return docs as unknown as Doc[];
@@ -50,7 +51,7 @@ async function published(collection: CollectionSlug): Promise<Doc[]> {
 async function global(slug: GlobalSlug): Promise<Doc> {
   const payload = await payloadClient();
 
-  return (await payload.findGlobal({ slug, depth: 0 })) as unknown as Doc;
+  return (await payload.findGlobal({ slug, depth: 1 })) as unknown as Doc;
 }
 
 /* The database returns null for an empty field; the old files had "" and [].
@@ -60,8 +61,37 @@ const lines = (value: unknown) => (Array.isArray(value) ? (value as string[]) : 
 const paras = (value: unknown) =>
   Array.isArray(value) ? (value as { text: string }[]).map((p) => p.text) : [];
 
+/* An image field arrives as its media library record (MIG-08). Components
+   take a path, as they took one from the files, so the record's address is
+   passed on — made relative when it is this site's own, so Next optimises it
+   like any local image. Its description is read separately where a section
+   shows it. */
+const siteOrigin = (() => {
+  try {
+    return new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "").origin;
+  } catch {
+    return "";
+  }
+})();
+
+const src = (value: unknown) => {
+  const url = (value as { url?: unknown } | null)?.url;
+
+  if (typeof url !== "string") return "";
+
+  return siteOrigin && url.startsWith(siteOrigin) ? url.slice(siteOrigin.length) : url;
+};
+const srcs = (value: unknown) => (Array.isArray(value) ? value.map(src).filter(Boolean) : []);
+const altOf = (value: unknown) => text((value as { alt?: unknown } | null)?.alt);
+
+/* Publishing refreshes a read at once, through its tag. The hour is a safety
+   net for changes made outside the website — the content migration, a
+   backup restore — which cannot reach its cache: such a change shows within
+   the hour even if nobody restarts the site. The cache lives on disk and
+   outlives restarts and rebuilds, and it is keyed on the function's source,
+   so a read whose code did not change keeps its old entry. */
 const cached = <T>(tag: string, read: () => Promise<T>) =>
-  unstable_cache(read, [tag], { tags: [tag] });
+  unstable_cache(read, [tag], { tags: [tag], revalidate: 3600 });
 
 /* ── Collections ────────────────────────────────────────────────────────── */
 
@@ -95,7 +125,7 @@ export const getProgrammes = cached(CMS_TAGS.programmes, async (): Promise<Progr
     slug: text(d.slug),
     title: text(d.title),
     icon: text(d.icon),
-    heroImage: text(d.heroImage),
+    heroImage: src(d.heroImage),
     excerpt: text(d.excerpt),
     why: text(d.why),
     approach: text(d.approach),
@@ -152,7 +182,7 @@ export async function getStories(): Promise<StorySummary[]> {
     title: text(d.title),
     category: text(d.category),
     excerpt: text(d.excerpt),
-    image: text(d.image),
+    image: src(d.image),
     beneficiaries: text(d.beneficiaries),
     date: text(d.date),
     featured: Boolean(d.featured),
@@ -178,8 +208,8 @@ export async function getStory(slug: string): Promise<Story | null> {
     summary: text(d.excerpt),
     date: text(d.date),
     location: text(d.location),
-    image: text(d.image),
-    images: lines(d.images),
+    image: src(d.image),
+    images: srcs(d.images),
     challenge: text(d.challenge),
     response: text(d.response),
     impact: text(d.impact),
@@ -196,7 +226,7 @@ export const getLeadership = cached(CMS_TAGS.leadership, async (): Promise<Perso
   (await published("leadership")).map((d) => ({
     name: text(d.name),
     role: text(d.position),
-    image: text(d.image),
+    image: src(d.image),
     ...(text(d.bio) ? { bio: text(d.bio) } : {}),
   })),
 );
@@ -205,7 +235,7 @@ export const getVolunteerProfiles = cached(CMS_TAGS.volunteers, async (): Promis
   (await published("volunteer-profiles")).map((d) => ({
     name: text(d.name),
     role: text(d.role),
-    image: text(d.image),
+    image: src(d.image),
   })),
 );
 
@@ -213,7 +243,7 @@ export type GalleryPhoto = { image: string; category: string; title: string };
 
 export const getGallery = cached(CMS_TAGS.gallery, async (): Promise<GalleryPhoto[]> =>
   (await published("gallery-photos")).map((d) => ({
-    image: text(d.image),
+    image: src(d.image),
     category: text(d.category),
     title: text(d.title),
   })),
@@ -231,7 +261,7 @@ export const getFeaturedEvents = cached(CMS_TAGS.events, async (): Promise<Featu
   (await published("featured-events")).map((d) => ({
     title: text(d.title),
     description: text(d.description),
-    image: text(d.image),
+    image: src(d.image),
     category: text(d.category),
     link: text(d.link),
   })),
@@ -250,7 +280,7 @@ export const getVideoHighlights = cached(CMS_TAGS.videos, async (): Promise<Vide
     title: text(d.title),
     category: text(d.category),
     description: text(d.description),
-    thumbnail: text(d.thumbnail),
+    thumbnail: src(d.thumbnail),
     link: text(d.link),
   })),
 );
@@ -295,8 +325,8 @@ export const getCampaigns = cached(CMS_TAGS.campaigns, async (): Promise<Campaig
     age: Number(d.age ?? 0),
     tagline: text(d.tagline),
     headline: text(d.headline),
-    heroImage: text(d.heroImage),
-    gallery: lines(d.gallery),
+    heroImage: src(d.heroImage),
+    gallery: srcs(d.gallery),
     description: paras(d.description),
     whyStoryMattersTitle: text(d.whyStoryMattersTitle),
     whyStoryMatters: text(d.whyStoryMatters),
@@ -367,7 +397,7 @@ export async function getFounder() {
     name: text(f.name),
     position: text(f.position),
     organization: text(f.organization),
-    image: text(f.image),
+    image: src(f.image),
     quote: text(f.quote),
     message: paras(f.message),
   };
@@ -422,7 +452,7 @@ function toBlock(b: Doc): HomeBlock | null {
         id,
         blockType: "hero",
         slides: ((b.slides ?? []) as Doc[]).map((slide) => ({
-          image: text(slide.image),
+          image: src(slide.image),
           title: text(slide.title),
           description: text(slide.description),
           buttonText: text(slide.buttonText),
@@ -440,8 +470,8 @@ function toBlock(b: Doc): HomeBlock | null {
         eyebrow: text(b.eyebrow),
         title: text(b.title),
         text: text(b.text),
-        image: text(b.image),
-        imageAlt: text(b.imageAlt),
+        image: src(b.image),
+        imageAlt: altOf(b.image),
         imagePosition: b.imagePosition === "right" ? "right" : "left",
         buttonLabel: text(b.buttonLabel),
         buttonLink: text(b.buttonLink),
@@ -454,8 +484,8 @@ function toBlock(b: Doc): HomeBlock | null {
         blockType: "video",
         title: text(b.title),
         description: text(b.description),
-        thumbnail: text(b.thumbnail),
-        thumbnailAlt: text(b.thumbnailAlt),
+        thumbnail: src(b.thumbnail),
+        thumbnailAlt: altOf(b.thumbnail),
         link: text(b.link),
       };
     default:
@@ -492,7 +522,7 @@ export const getHomepage = cached(CMS_TAGS.pages, async (): Promise<HomeBlock[]>
     collection: "pages",
     where: { slug: { equals: "home" }, _status: { equals: "published" } },
     limit: 1,
-    depth: 0,
+    depth: 1,
   });
 
   if (!docs[0]) {

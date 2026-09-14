@@ -1,10 +1,15 @@
 import type { CollectionConfig, Field } from "payload";
 
-import { allow } from "../access";
-import { revalidateOnChange, revalidateOnDelete } from "../revalidate";
+import { allow, allowField } from "../access";
+import {
+  revalidateAllOnChange,
+  revalidateAllOnDelete,
+  revalidateOnChange,
+  revalidateOnDelete,
+} from "../revalidate";
 import { CMS_TAGS } from "../../lib/cms-tags";
 import { homepageBlocks } from "../blocks";
-import { imagePath, imagePaths, list, paragraphs } from "../fields";
+import { imageField, imageFields, list, paragraphs } from "../fields";
 
 /* Content, media and SEO — section 8.2: Owner and Administrator CRUD, Content
    Manager create/read/update but no delete, Case Officer and Finance none. */
@@ -44,7 +49,7 @@ export const NOT_ON_WEBSITE =
 
 // Field helpers live in ../fields, which the block library shares; they are
 // re-exported so existing imports keep working.
-export { IMAGE_PATH_HELP, imagePath, imagePaths, list, paragraphs } from "../fields";
+export { imageField, imageFields, list, paragraphs } from "../fields";
 
 /** Publishing refreshes the website (PUB-04); see payload/revalidate.ts. */
 export const refreshes = (tag: string) => ({
@@ -52,23 +57,76 @@ export const refreshes = (tag: string) => ({
   afterDelete: [revalidateOnDelete(tag)],
 });
 
+/* Every image here is published on the website, so anyone may view one and
+   its description: a visitor's browser has to load the file, and Payload
+   serves a file only to someone allowed to read it (MED-01: site media is
+   public). Uploading, editing and deleting stay with the content roles
+   (section 8.2), and the record-keeping fields are for staff only. */
+const staffOnly = allowField("owner", "administrator", "content");
+
 export const Media: CollectionConfig = {
   slug: "media",
-  labels: { singular: "Media item", plural: "Media" },
-  upload: true,
-  admin: { group: "Content" },
-  access: contentAccess,
+  labels: { singular: "Image", plural: "Media Library" },
+  upload: { mimeTypes: ["image/jpeg", "image/png", "image/webp"] },
+  hooks: { afterChange: [revalidateAllOnChange], afterDelete: [revalidateAllOnDelete] },
+  admin: {
+    group: "Content",
+    useAsTitle: "alt",
+    defaultColumns: ["filename", "alt", "altApproved"],
+  },
+  access: { ...contentAccess, read: () => true },
   fields: [
-    // CNT-06: alt text is required, so a visible image can never publish
-    // without it.
-    { name: "alt", type: "text", required: true },
+    // CNT-06: required, so an image can never be used without one.
+    {
+      name: "alt",
+      label: "Image Description (Alt Text)",
+      type: "text",
+      required: true,
+      admin: {
+        description:
+          "What the image shows, for people who cannot see it. Describe only what is visible: no names, places or events the picture does not show.",
+      },
+    },
+    {
+      name: "altApproved",
+      label: "Description Approved by the Foundation",
+      type: "checkbox",
+      defaultValue: false,
+      access: { read: staffOnly },
+      admin: {
+        description:
+          "The descriptions carried over from the old website were drafted by the developer (CR-011). Tick once the Foundation has checked this one.",
+      },
+    },
     { name: "caption", type: "text" },
-    { name: "tags", type: "text", hasMany: true },
+    { name: "tags", type: "text", hasMany: true, access: { read: staffOnly } },
     {
       name: "uploadedBy",
       type: "relationship",
       relationTo: "admin-users",
+      access: { read: staffOnly },
       admin: { readOnly: true },
+    },
+    {
+      name: "sourcePaths",
+      label: "Previously At",
+      type: "text",
+      hasMany: true,
+      access: { read: staffOnly },
+      admin: {
+        readOnly: true,
+        description:
+          "Where this image was on the website before the media library, kept to trace the migration (MIG-08).",
+      },
+    },
+    // Identifies the photograph itself, so the migration uploads each once.
+    {
+      name: "sourceHash",
+      type: "text",
+      unique: true,
+      index: true,
+      access: { read: staffOnly },
+      admin: { hidden: true },
     },
   ],
 };
@@ -87,7 +145,7 @@ export const Programmes: CollectionConfig = {
     { name: "title", type: "text", required: true },
     slug,
     { name: "icon", type: "text" },
-    imagePath("heroImage"),
+    imageField("heroImage"),
     { name: "excerpt", type: "textarea" },
     { name: "why", type: "textarea" },
     { name: "approach", type: "textarea" },
@@ -123,8 +181,8 @@ export const ImpactStories: CollectionConfig = {
     { name: "donationProgram", type: "text" },
     { name: "date", type: "text" },
     { name: "location", type: "text" },
-    imagePath("image"),
-    imagePaths("images"),
+    imageField("image"),
+    imageFields("images"),
     { name: "challenge", type: "textarea" },
     { name: "response", type: "textarea" },
     { name: "impact", type: "textarea" },
@@ -152,7 +210,7 @@ export const Leadership: CollectionConfig = {
   fields: [
     { name: "name", type: "text", required: true },
     { name: "position", type: "text", required: true },
-    imagePath("image"),
+    imageField("image"),
     { name: "bio", type: "textarea" },
     { name: "order", type: "number" },
   ],

@@ -1,4 +1,6 @@
 import { revalidateTag } from "next/cache";
+
+import { CMS_TAGS } from "../lib/cms-tags";
 import type {
   CollectionAfterChangeHook,
   CollectionAfterDeleteHook,
@@ -43,3 +45,15 @@ export const revalidateOnDelete =
     refresh(tag, context);
     return doc;
   };
+
+/* An image can appear on any page, so a change to one — its description, its
+   file — refreshes all of them. Images change rarely; this stays cheap. */
+export const revalidateAllOnChange: CollectionAfterChangeHook = ({ doc, context }) => {
+  for (const tag of Object.values(CMS_TAGS)) refresh(tag, context);
+  return doc;
+};
+
+export const revalidateAllOnDelete: CollectionAfterDeleteHook = ({ doc, context }) => {
+  for (const tag of Object.values(CMS_TAGS)) refresh(tag, context);
+  return doc;
+};

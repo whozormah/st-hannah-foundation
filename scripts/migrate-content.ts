@@ -15,7 +15,9 @@
    Re-running overwrites a record with the file's version, so once editors
    have started working in the CMS the files are retired (MIG-06) and this is
    not run again. ALLOW_MIGRATE guards against running it by accident. */
-import { readFileSync } from "fs";
+import { createHash } from "crypto";
+import { copyFileSync, mkdtempSync, readdirSync, readFileSync, statSync } from "fs";
+import os from "os";
 import path from "path";
 
 import { getPayload, type CollectionSlug, type GlobalSlug, type Payload } from "payload";
@@ -27,11 +29,78 @@ const DATA = path.join(process.cwd(), "public", "data");
 const readJson = <T>(file: string): T =>
   JSON.parse(readFileSync(path.join(DATA, file), "utf8")) as T;
 
-// Writes made here are not website visits; there is no cache to refresh.
+/* This runs outside the website, so it cannot refresh the website's cache:
+   a running site keeps showing what it cached before, for up to an hour
+   (lib/cms.ts). The script says so when it finishes. Asking the hooks not to
+   try saves each write a failing attempt. */
 const context = { skipRevalidate: true };
 
 type Result = { source: number; published: number; notes?: string[] };
 type Migrator = (payload: Payload) => Promise<Result>;
+
+/* ── Images (MIG-08, CR-011) ────────────────────────────────────────────── */
+
+/** Every image path the content files use (the legal documents have none). */
+function imagePathsInContent(): string[] {
+  const found = new Set<string>();
+  const walk = (value: unknown) => {
+    if (typeof value === "string") {
+      if (/^\/.+\.(jpe?g|png|webp)$/i.test(value)) found.add(value);
+    } else if (Array.isArray(value)) {
+      value.forEach(walk);
+    } else if (value && typeof value === "object") {
+      Object.values(value).forEach(walk);
+    }
+  };
+  const read = (dir: string) => {
+    for (const name of readdirSync(dir)) {
+      const full = path.join(dir, name);
+
+      if (statSync(full).isDirectory()) read(full);
+      else if (name.endsWith(".json") && name !== "legal.json") {
+        walk(JSON.parse(readFileSync(full, "utf8")));
+      }
+    }
+  };
+
+  read(DATA);
+
+  return [...found].sort();
+}
+
+/* Old image path → its media library record. Built on first use, after the
+   media step has run. */
+let mediaByPath: Map<string, number> | null = null;
+
+async function mediaId(payload: Payload, value: unknown): Promise<number | null> {
+  if (typeof value !== "string" || !value) return null;
+
+  if (!mediaByPath) {
+    const { docs } = await payload.find({
+      collection: "media",
+      limit: 1000,
+      depth: 0,
+      overrideAccess: true,
+    });
+
+    mediaByPath = new Map(
+      (docs as unknown as { id: number; sourcePaths?: string[] }[]).flatMap((doc) =>
+        (doc.sourcePaths ?? []).map((source) => [source, doc.id] as const),
+      ),
+    );
+  }
+
+  const id = mediaByPath.get(value);
+
+  if (id === undefined) {
+    throw new Error(`No media library image for ${value}: run the "media" step first.`);
+  }
+
+  return id;
+}
+
+const mediaIds = async (payload: Payload, values: unknown) =>
+  Array.isArray(values) ? Promise.all(values.map((value) => mediaId(payload, value))) : [];
 
 /** Paragraph arrays are stored as [{ text }] rows. */
 const toParagraphs = (items: string[] = []) => items.map((text) => ({ text }));
@@ -121,6 +190,80 @@ async function writeGlobal(
 }
 
 const migrators: Record<string, Migrator> = {
+  // First, so every later step can point at the images.
+  async media(payload) {
+    // Every image the content uses, uploaded once however many paths held
+    // it, with the description drafted for the Foundation to approve.
+    const drafts = (
+      JSON.parse(
+        readFileSync(path.join(process.cwd(), "scripts", "data", "alt-text-drafts.json"), "utf8"),
+      ) as { images: Record<string, string> }
+    ).images;
+    const notes: string[] = [];
+    const groups = new Map<string, string[]>();
+
+    for (const source of imagePathsInContent()) {
+      const hash = createHash("sha256")
+        .update(readFileSync(path.join(process.cwd(), "public", source)))
+        .digest("hex");
+
+      groups.set(hash, [...(groups.get(hash) ?? []), source]);
+    }
+
+    const tmp = mkdtempSync(path.join(os.tmpdir(), "shf-media-"));
+
+    for (const [hash, sources] of groups) {
+      const [first] = sources;
+      const alt = drafts[first];
+
+      if (!alt) {
+        notes.push(`not saved as written: no drafted description for ${first}`);
+        continue;
+      }
+
+      if (sources.some((source) => drafts[source] !== alt)) {
+        notes.push(`not saved as written: one photograph described differently at ${sources.join(", ")}`);
+      }
+
+      const existing = await payload.find({
+        collection: "media",
+        where: { sourceHash: { equals: hash } },
+        limit: 1,
+        overrideAccess: true,
+      });
+      const doc = existing.docs[0] as unknown as { id: number; altApproved?: boolean } | undefined;
+
+      if (doc) {
+        // A description the Foundation has approved is never overwritten.
+        await payload.update({
+          collection: "media",
+          id: doc.id,
+          data: { sourcePaths: sources, ...(doc.altApproved ? {} : { alt }) } as never,
+          overrideAccess: true,
+          context,
+        });
+      } else {
+        // Named after the first path it was at: readable, and unique.
+        const file = path.join(tmp, first.replace(/^\//, "").replace(/\//g, "-"));
+
+        copyFileSync(path.join(process.cwd(), "public", first), file);
+        await payload.create({
+          collection: "media",
+          data: { alt, sourceHash: hash, sourcePaths: sources, altApproved: false } as never,
+          filePath: file,
+          overrideAccess: true,
+          context,
+        });
+      }
+    }
+
+    mediaByPath = null;
+
+    const { totalDocs } = await payload.count({ collection: "media", overrideAccess: true });
+
+    return { source: groups.size, published: totalDocs, notes };
+  },
+
   async testimonials(payload) {
     const source = readJson<{ name: string; role: string; text: string }[]>("testimonials.json");
 
@@ -134,8 +277,14 @@ const migrators: Record<string, Migrator> = {
 
   async programmes(payload) {
     const source = readJson<Record<string, unknown>[]>("programs.json");
+    const items = await Promise.all(
+      source.map(async (programme) => ({
+        ...programme,
+        heroImage: await mediaId(payload, programme.heroImage),
+      })),
+    );
 
-    return upsertAll(payload, "programmes", "slug", source);
+    return upsertAll(payload, "programmes", "slug", items);
   },
 
   async stories(payload) {
@@ -144,7 +293,7 @@ const migrators: Record<string, Migrator> = {
     const list = readJson<Record<string, unknown>[]>("impact-stories/stories.json");
     const notes: string[] = [];
 
-    const items = list.map((entry) => {
+    const items = await Promise.all(list.map(async (entry) => {
       const detail = readJson<Record<string, unknown>>(`impact-stories/${entry.slug}.json`);
 
       for (const key of Object.keys(entry)) {
@@ -165,17 +314,17 @@ const migrators: Record<string, Migrator> = {
         beneficiaries: entry.beneficiaries,
         featured: entry.featured,
         date: entry.date,
-        image: entry.image,
+        image: await mediaId(payload, entry.image),
         donationProgram: detail.donationProgram,
         location: detail.location,
-        images: detail.images,
+        images: await mediaIds(payload, detail.images),
         challenge: detail.challenge,
         response: detail.response,
         impact: detail.impact,
         story: toParagraphs(detail.story as string[]),
         quote: { text: quote?.text ?? "", author: quote?.author ?? "" },
       };
-    });
+    }));
 
     const result = await upsertAll(payload, "impact-stories", "slug", items);
 
@@ -184,34 +333,71 @@ const migrators: Record<string, Migrator> = {
 
   async leadership(payload) {
     const source = readJson<{ name: string; role: string; image: string }[]>("governance.json");
-
-    return upsertAll(
-      payload,
-      "leadership",
-      "name",
-      source.map((l) => ({ name: l.name, position: l.role, image: l.image })),
+    const items = await Promise.all(
+      source.map(async (l) => ({
+        name: l.name,
+        position: l.role,
+        image: await mediaId(payload, l.image),
+      })),
     );
+
+    return upsertAll(payload, "leadership", "name", items);
   },
 
   async volunteers(payload) {
     const source = readJson<Record<string, unknown>[]>("volunteers.json");
+    const items = await Promise.all(
+      source.map(async (v) => ({ ...v, image: await mediaId(payload, v.image) })),
+    );
 
-    return upsertAll(payload, "volunteer-profiles", "name", source);
+    return upsertAll(payload, "volunteer-profiles", "name", items);
   },
 
   async gallery(payload) {
     const source = readJson<Record<string, unknown>[]>("gallery.json");
+    const items = await Promise.all(
+      source.map(async (photo, index) => ({
+        ...photo,
+        order: index + 1,
+        image: await mediaId(payload, photo.image),
+      })),
+    );
 
-    // A photograph's path is its identity; titles can repeat.
-    return upsertAll(payload, "gallery-photos", "image", source);
+    // MIG-07: some gallery entries are the same photograph filed under two
+    // programme areas. Reported, not resolved. Because of them neither the
+    // image nor the title identifies an entry; its place in the gallery does.
+    const byImage = new Map<unknown, string[]>();
+
+    for (const item of items) {
+      byImage.set(item.image, [
+        ...(byImage.get(item.image) ?? []),
+        `#${item.order} ${String((item as Record<string, unknown>).category)}`,
+      ]);
+    }
+
+    const notes = [...byImage.values()]
+      .filter((entries) => entries.length > 1)
+      .map((entries) => `the same photograph is in the gallery more than once: ${entries.join(" and ")}`);
+
+    return { ...(await upsertAll(payload, "gallery-photos", "order", items)), notes };
   },
 
   async events(payload) {
-    return upsertAll(payload, "featured-events", "title", readJson("featured-events.json"));
+    const source = readJson<Record<string, unknown>[]>("featured-events.json");
+    const items = await Promise.all(
+      source.map(async (event) => ({ ...event, image: await mediaId(payload, event.image) })),
+    );
+
+    return upsertAll(payload, "featured-events", "title", items);
   },
 
   async videos(payload) {
-    return upsertAll(payload, "video-highlights", "title", readJson("video-highlights.json"));
+    const source = readJson<Record<string, unknown>[]>("video-highlights.json");
+    const items = await Promise.all(
+      source.map(async (video) => ({ ...video, thumbnail: await mediaId(payload, video.thumbnail) })),
+    );
+
+    return upsertAll(payload, "video-highlights", "title", items);
   },
 
   async volunteerOpportunities(payload) {
@@ -239,10 +425,14 @@ const migrators: Record<string, Migrator> = {
       "campaign-stories",
       "name",
       // The file's numeric id is not content; the CMS gives each its own.
-      source.map((campaign) => ({
-        ...Object.fromEntries(Object.entries(campaign).filter(([key]) => key !== "id")),
-        description: toParagraphs(campaign.description as string[]),
-      })),
+      await Promise.all(
+        source.map(async (campaign) => ({
+          ...Object.fromEntries(Object.entries(campaign).filter(([key]) => key !== "id")),
+          heroImage: await mediaId(payload, campaign.heroImage),
+          gallery: await mediaIds(payload, campaign.gallery),
+          description: toParagraphs(campaign.description as string[]),
+        })),
+      ),
     );
   },
 
@@ -274,7 +464,11 @@ const migrators: Record<string, Migrator> = {
 
     return writeGlobal(payload, "foundation", {
       ...intro,
-      founder: { ...founder, message: toParagraphs(founder.message as string[]) },
+      founder: {
+        ...founder,
+        image: await mediaId(payload, founder.image),
+        message: toParagraphs(founder.message as string[]),
+      },
     });
   },
 
@@ -283,7 +477,12 @@ const migrators: Record<string, Migrator> = {
     // sections in the order the site has shown them, each with the wording it
     // had. The hero's slides come from hero.json; the rest have no file of
     // their own, so their wording is the one in lib/section-copy.ts.
-    const slides = readJson<Record<string, string>[]>("homepage/hero.json");
+    const slides = await Promise.all(
+      readJson<Record<string, string>[]>("homepage/hero.json").map(async (slide) => ({
+        ...slide,
+        image: await mediaId(payload, slide.image),
+      })),
+    );
     const blocks = HOMEPAGE_ORDER.map((type) =>
       type === "hero"
         ? { blockType: type, slides }
@@ -471,6 +670,14 @@ async function main() {
     );
 
     for (const note of notes ?? []) console.log(`        note: ${note}`);
+  }
+
+  if (!failed) {
+    console.log(
+      "\nRestart the website so it shows this content at once. It cannot see these writes in\n" +
+        "its cache; otherwise they appear within the hour. In production, recreate the app\n" +
+        "container (docker compose up -d --force-recreate app): a plain restart keeps the cache.",
+    );
   }
 
   process.exit(failed ? 1 : 0);

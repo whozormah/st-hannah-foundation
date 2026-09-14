@@ -1,23 +1,21 @@
 import type { Field } from "payload";
 
-/* Images are paths to files the website already has, until the private
-   Cloudflare storage exists (MED-01). Uploading into the media library now
-   would put files on the server's disk, which a redeploy destroys. */
-
-export const IMAGE_PATH_HELP =
-  "Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.";
-
-export const imagePath = (name: string): Field => ({
+/* Images live in the media library (MIG-08): each is uploaded once, with its
+   description (alt text, required by CNT-06), and chosen wherever it
+   appears. Until Cloudflare R2 exists an upload is kept on the server's
+   disk, which a redeploy discards (MED-01), so the library goes live with R2
+   (CR-011). */
+export const imageField = (name: string): Field => ({
   name,
-  type: "text",
-  admin: { description: IMAGE_PATH_HELP },
+  type: "upload",
+  relationTo: "media",
 });
 
-export const imagePaths = (name: string): Field => ({
+export const imageFields = (name: string): Field => ({
   name,
-  type: "text",
+  type: "upload",
+  relationTo: "media",
   hasMany: true,
-  admin: { description: IMAGE_PATH_HELP },
 });
 
 /** Short list items, edited as a list of lines. */
