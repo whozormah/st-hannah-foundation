@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import TitleLines from "@/components/shared/TitleLines";
 import { getLeadership } from "@/lib/cms";
+import { SECTION_COPY } from "@/lib/section-copy";
 
 interface Leader {
   name: string;
@@ -20,9 +22,9 @@ interface LeadershipPreviewProps {
 }
 
 export default async function LeadershipPreview({
-  eyebrow = "Governance & Leadership",
-  title = "Meet the leaders behind the mission",
-  description = "The people responsible for the Foundation's direction, oversight and accountability.",
+  eyebrow = SECTION_COPY.leadershipPreview.eyebrow,
+  title = SECTION_COPY.leadershipPreview.title,
+  description = SECTION_COPY.leadershipPreview.description,
   showButton = true,
 }: LeadershipPreviewProps) {
   const allLeaders: Leader[] = await getLeadership();
@@ -38,15 +40,17 @@ export default async function LeadershipPreview({
       <div className="container-custom">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
-              {eyebrow}
-            </span>
+            {eyebrow && (
+              <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
+                {eyebrow}
+              </span>
+            )}
 
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
-              {title}
+              <TitleLines text={title} />
             </h2>
 
-            <p className="mt-5 text-lg leading-9 text-gray-700">{description}</p>
+            {description && <p className="mt-5 text-lg leading-9 text-gray-700">{description}</p>}
           </div>
 
           {showButton && (

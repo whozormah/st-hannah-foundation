@@ -6,8 +6,14 @@ import { Heart, Users, Handshake, ArrowRight } from "lucide-react";
 
 import DonationModal from "@/components/shared/DonationModal";
 import PartnerModal from "@/components/shared/PartnerModal";
+import TitleLines from "@/components/shared/TitleLines";
+import { SECTION_COPY, type SectionCopy } from "@/lib/section-copy";
 
-export default function ImpactCTA() {
+export default function ImpactCTA({
+  eyebrow = SECTION_COPY.callToAction.eyebrow,
+  title = SECTION_COPY.callToAction.title,
+  description = SECTION_COPY.callToAction.description,
+}: SectionCopy) {
   const [showDonationModal, setShowDonationModal] = useState(false);
   const [showPartnerModal, setShowPartnerModal] = useState(false);
 
@@ -44,22 +50,21 @@ export default function ImpactCTA() {
           {/* Heading */}
 
           <div className="mx-auto max-w-5xl text-center">
-            <span className="inline-flex rounded-full border border-accent/20 bg-accent/10 px-6 py-3 text-xs font-semibold uppercase tracking-[5px] text-accent-soft">
-              Join The Mission
-            </span>
+            {eyebrow && (
+              <span className="inline-flex rounded-full border border-accent/20 bg-accent/10 px-6 py-3 text-xs font-semibold uppercase tracking-[5px] text-accent-soft">
+                {eyebrow}
+              </span>
+            )}
 
             <h2 className="mt-8 text-5xl font-bold leading-tight md:text-7xl">
-              Be The Reason{" "}
-              <br />
-              Hope Continues
+              <TitleLines text={title} />
             </h2>
 
-            <p className="mx-auto mt-8 max-w-3xl text-xl leading-10 text-white/85">
-              Every act of kindness creates opportunities for children,
-              strengthens families and restores hope to communities. Whether you
-              choose to give, volunteer or partner with us, you become part of a
-              mission that changes lives every day.
-            </p>
+            {description && (
+              <p className="mx-auto mt-8 max-w-3xl text-xl leading-10 text-white/85">
+                {description}
+              </p>
+            )}
 
             <div className="mx-auto mt-12 h-px w-40 bg-white/20" />
 

@@ -145,6 +145,15 @@ Interface defects that belong to no phase are tracked separately, in
   editors can reorder or remove any section.
 - **Unchanged:** CNT-01's block canvas for the legal pages stays with Phase
   1's approval gate, not Phase 6.
+- **As built:** the homepage is the one page in Pages (`home`); no other can
+  be created. Each block that wraps an existing section edits that section's
+  heading wording, pre-filled with the site's own (`lib/section-copy.ts`).
+  The video block is a picture that opens the video on YouTube or Vimeo, not
+  an embedded player, which would let the video site track every homepage
+  visitor — something the Privacy Policy does not cover. The page's one
+  screen-reader heading moved out of the hero, so removing or repeating the
+  hero cannot leave the page with none or two (PUB-07). The interim
+  Homepage global (hero slides only) is replaced by the hero block.
 
 ### CR-010 — Each statistic stored once; historic totals stay typed in
 

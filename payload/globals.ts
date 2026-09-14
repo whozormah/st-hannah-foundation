@@ -122,30 +122,6 @@ export const Foundation: GlobalConfig = {
   ],
 };
 
-/* The homepage's hero slides. CNT-01's block canvas for the homepage is a
-   later Phase 6 step; until then the page's composition stays in code and
-   its words live here. */
-export const Homepage: GlobalConfig = {
-  slug: "homepage",
-  label: "Homepage",
-  admin: { group: "Content" },
-  access: pageContentAccess,
-  hooks: refreshesGlobal(CMS_TAGS.homepage),
-  fields: [
-    {
-      name: "heroSlides",
-      type: "array",
-      fields: [
-        { name: "title", type: "text", required: true },
-        { name: "description", type: "textarea" },
-        imagePath("image"),
-        { name: "buttonText", type: "text" },
-        { name: "buttonLink", type: "text" },
-      ],
-    },
-  ],
-};
-
 export const ApplyPage: GlobalConfig = {
   slug: "apply-page",
   label: "Apply for Support Page",
@@ -242,7 +218,6 @@ export const globals = [
   SiteSettings,
   Navigation,
   Foundation,
-  Homepage,
   ApplyPage,
   DonatePage,
   SeoDefaults,

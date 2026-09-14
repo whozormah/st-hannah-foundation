@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Camera } from "lucide-react";
 
+import TitleLines from "@/components/shared/TitleLines";
 import { getGallery } from "@/lib/cms";
+import { SECTION_COPY, type SectionCopy } from "@/lib/section-copy";
 
 interface GalleryItem {
   image: string;
@@ -14,7 +16,11 @@ function photographLabel(count: number) {
   return `${count} ${count === 1 ? "photograph" : "photographs"}`;
 }
 
-export default async function GalleryPreview() {
+export default async function GalleryPreview({
+  eyebrow = SECTION_COPY.galleryStrip.eyebrow,
+  title = SECTION_COPY.galleryStrip.title,
+  description = SECTION_COPY.galleryStrip.description,
+}: SectionCopy = {}) {
   const items: GalleryItem[] = await getGallery();
 
   // One tile per programme area, largest collection first. Built from the
@@ -41,19 +47,19 @@ export default async function GalleryPreview() {
 
         <div className="mb-16 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <span className="font-semibold uppercase tracking-[4px] text-brand">
-              Moments Of Impact
-            </span>
+            {eyebrow && (
+              <span className="font-semibold uppercase tracking-[4px] text-brand">
+                {eyebrow}
+              </span>
+            )}
 
             <h2 className="mt-4 text-4xl font-bold text-ink md:text-5xl">
-              Moments That Tell Our Story
+              <TitleLines text={title} />
             </h2>
 
-            <p className="mt-6 text-lg leading-9 text-gray-700">
-              Every photograph records a life touched and a community
-              strengthened. Browse the work by programme area, or open the full
-              gallery.
-            </p>
+            {description && (
+              <p className="mt-6 text-lg leading-9 text-gray-700">{description}</p>
+            )}
           </div>
 
           <Link

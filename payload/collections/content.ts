@@ -3,6 +3,8 @@ import type { CollectionConfig, Field } from "payload";
 import { allow } from "../access";
 import { revalidateOnChange, revalidateOnDelete } from "../revalidate";
 import { CMS_TAGS } from "../../lib/cms-tags";
+import { homepageBlocks } from "../blocks";
+import { imagePath, imagePaths, list, paragraphs } from "../fields";
 
 /* Content, media and SEO — section 8.2: Owner and Administrator CRUD, Content
    Manager create/read/update but no delete, Case Officer and Finance none. */
@@ -35,39 +37,14 @@ const slug: Field = {
   index: true,
 };
 
-/* Images are paths to files the website already has, until the private
-   Cloudflare storage exists (MED-01). Uploading into the media library now
-   would put files on the server's disk, which a redeploy destroys. */
 /* Shown on content the website does not display at present, so an editor
    is not left wondering why a published change appears nowhere. */
 export const NOT_ON_WEBSITE =
   "Not shown on the website at the moment. The section that displayed this was retired; the content is kept here, ready if that section returns.";
 
-export const IMAGE_PATH_HELP =
-  "Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.";
-
-export const imagePath = (name: string): Field => ({
-  name,
-  type: "text",
-  admin: { description: IMAGE_PATH_HELP },
-});
-
-export const imagePaths = (name: string): Field => ({
-  name,
-  type: "text",
-  hasMany: true,
-  admin: { description: IMAGE_PATH_HELP },
-});
-
-/** Short list items, edited as a list of lines. */
-export const list = (name: string): Field => ({ name, type: "text", hasMany: true });
-
-/** Paragraphs, each its own box, kept in order. */
-export const paragraphs = (name: string): Field => ({
-  name,
-  type: "array",
-  fields: [{ name: "text", type: "textarea", required: true }],
-});
+// Field helpers live in ../fields, which the block library shares; they are
+// re-exported so existing imports keep working.
+export { IMAGE_PATH_HELP, imagePath, imagePaths, list, paragraphs } from "../fields";
 
 /** Publishing refreshes the website (PUB-04); see payload/revalidate.ts. */
 export const refreshes = (tag: string) => ({
@@ -214,33 +191,38 @@ export const Faqs: CollectionConfig = {
 /* CNT-01: the flexible block canvas is for the homepage and legal pages only.
    Every other page keeps a fixed template. CNT-04: no block accepts free-form
    HTML or arbitrary styling. */
+/* CNT-01: the block canvas is for the homepage only (and, later, the legal
+   pages — CR-009 leaves them with Phase 1's approval gate). Every other page
+   has a fixed layout (CNT-02), so no other page can be made here, and no page
+   here gets a new web address (PUB-01). */
+export const PAGE_SLUGS = ["home"];
+
 export const Pages: CollectionConfig = {
   slug: "pages",
   labels: { singular: "Page", plural: "Pages" },
-  admin: { useAsTitle: "title", group: "Content" },
+  hooks: refreshes(CMS_TAGS.pages),
+  admin: {
+    useAsTitle: "title",
+    group: "Content",
+    description:
+      "The homepage, built from sections you can add, reorder and remove. Every other page has a fixed layout; its words are edited in its own section of the admin.",
+  },
   access: contentAccess,
   versions,
   fields: [
     { name: "title", type: "text", required: true },
-    slug,
+    {
+      ...slug,
+      validate: (value: unknown) =>
+        (typeof value === "string" && PAGE_SLUGS.includes(value)) ||
+        "Only the homepage (home) is built from sections. Other pages have fixed layouts.",
+    } as Field,
     {
       name: "blocks",
+      label: "Sections",
+      labels: { singular: "Section", plural: "Sections" },
       type: "blocks",
-      blocks: [
-        {
-          slug: "richText",
-          fields: [{ name: "content", type: "richText" }],
-        },
-        {
-          slug: "callToAction",
-          fields: [
-            { name: "heading", type: "text", required: true },
-            { name: "body", type: "textarea" },
-            { name: "buttonLabel", type: "text" },
-            { name: "buttonHref", type: "text" },
-          ],
-        },
-      ],
+      blocks: homepageBlocks,
     },
     seo,
   ],

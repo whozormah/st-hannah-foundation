@@ -163,7 +163,6 @@ export interface Config {
     'site-settings': SiteSetting;
     navigation: Navigation;
     foundation: Foundation;
-    homepage: Homepage;
     'apply-page': ApplyPage;
     'donate-page': DonatePage;
     'seo-defaults': SeoDefault;
@@ -173,7 +172,6 @@ export interface Config {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     navigation: NavigationSelect<false> | NavigationSelect<true>;
     foundation: FoundationSelect<false> | FoundationSelect<true>;
-    homepage: HomepageSelect<false> | HomepageSelect<true>;
     'apply-page': ApplyPageSelect<false> | ApplyPageSelect<true>;
     'donate-page': DonatePageSelect<false> | DonatePageSelect<true>;
     'seo-defaults': SeoDefaultsSelect<false> | SeoDefaultsSelect<true>;
@@ -388,6 +386,8 @@ export interface Faq {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * The homepage, built from sections you can add, reorder and remove. Every other page has a fixed layout; its words are edited in its own section of the admin.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
@@ -400,35 +400,20 @@ export interface Page {
   slug: string;
   blocks?:
     | (
-        | {
-            content?: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            } | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'richText';
-          }
-        | {
-            heading: string;
-            body?: string | null;
-            buttonLabel?: string | null;
-            buttonHref?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'callToAction';
-          }
+        | HeroBlock
+        | VisionMissionBlock
+        | ProgrammeCardsBlock
+        | GalleryStripBlock
+        | StatisticsBlock
+        | DonationCallToActionBlock
+        | StoryCardsBlock
+        | TestimonialsBlock
+        | LeadershipPreviewBlock
+        | CallToActionBlock
+        | RichTextBlock
+        | ImageTextBlock
+        | QuoteBlock
+        | VideoBlock
       )[]
     | null;
   seo?: {
@@ -439,6 +424,258 @@ export interface Page {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlock".
+ */
+export interface HeroBlock {
+  slides: {
+    title: string;
+    description?: string | null;
+    /**
+     * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+     */
+    image?: string | null;
+    buttonText?: string | null;
+    buttonLink?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VisionMissionBlock".
+ */
+export interface VisionMissionBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'visionMission';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProgrammeCardsBlock".
+ */
+export interface ProgrammeCardsBlock {
+  /**
+   * The short line above the heading. Leave empty for none.
+   */
+  eyebrow?: string | null;
+  title: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'programmeCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryStripBlock".
+ */
+export interface GalleryStripBlock {
+  /**
+   * The short line above the heading. Leave empty for none.
+   */
+  eyebrow?: string | null;
+  title: string;
+  /**
+   * Leave empty for none.
+   */
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'galleryStrip';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatisticsBlock".
+ */
+export interface StatisticsBlock {
+  /**
+   * The short line above the heading. Leave empty for none.
+   */
+  eyebrow?: string | null;
+  title: string;
+  /**
+   * Leave empty for none.
+   */
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'statistics';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DonationCallToActionBlock".
+ */
+export interface DonationCallToActionBlock {
+  /**
+   * The short line above the heading. Leave empty for none.
+   */
+  eyebrow?: string | null;
+  /**
+   * Leave empty for none.
+   */
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'donationCallToAction';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryCardsBlock".
+ */
+export interface StoryCardsBlock {
+  /**
+   * The short line above the heading. Leave empty for none.
+   */
+  eyebrow?: string | null;
+  title: string;
+  /**
+   * Leave empty for none.
+   */
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'storyCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock".
+ */
+export interface TestimonialsBlock {
+  /**
+   * The short line above the heading. Leave empty for none.
+   */
+  eyebrow?: string | null;
+  title: string;
+  /**
+   * Leave empty for none.
+   */
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LeadershipPreviewBlock".
+ */
+export interface LeadershipPreviewBlock {
+  /**
+   * The short line above the heading. Leave empty for none.
+   */
+  eyebrow?: string | null;
+  title: string;
+  /**
+   * Leave empty for none.
+   */
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'leadershipPreview';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock".
+ */
+export interface CallToActionBlock {
+  /**
+   * The short line above the heading. Leave empty for none.
+   */
+  eyebrow?: string | null;
+  /**
+   * Start a new line where the heading should break.
+   */
+  title: string;
+  /**
+   * Leave empty for none.
+   */
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'callToAction';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock".
+ */
+export interface RichTextBlock {
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'richText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageTextBlock".
+ */
+export interface ImageTextBlock {
+  eyebrow?: string | null;
+  title: string;
+  text: string;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  image: string;
+  /**
+   * What the image shows, for people who cannot see it (CNT-06). Describe only what is visible.
+   */
+  imageAlt: string;
+  imagePosition?: ('left' | 'right') | null;
+  buttonLabel?: string | null;
+  buttonLink?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuoteBlock".
+ */
+export interface QuoteBlock {
+  /**
+   * Words someone actually said, with their permission (CNT-11). Never write a quotation for someone.
+   */
+  text: string;
+  author?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'quote';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoBlock".
+ */
+export interface VideoBlock {
+  title: string;
+  description?: string | null;
+  /**
+   * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
+   */
+  thumbnail: string;
+  /**
+   * What the image shows, for people who cannot see it (CNT-06). Describe only what is visible.
+   */
+  thumbnailAlt: string;
+  link: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'video';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1424,23 +1661,20 @@ export interface PagesSelect<T extends boolean = true> {
   blocks?:
     | T
     | {
-        richText?:
-          | T
-          | {
-              content?: T;
-              id?: T;
-              blockName?: T;
-            };
-        callToAction?:
-          | T
-          | {
-              heading?: T;
-              body?: T;
-              buttonLabel?: T;
-              buttonHref?: T;
-              id?: T;
-              blockName?: T;
-            };
+        hero?: T | HeroBlockSelect<T>;
+        visionMission?: T | VisionMissionBlockSelect<T>;
+        programmeCards?: T | ProgrammeCardsBlockSelect<T>;
+        galleryStrip?: T | GalleryStripBlockSelect<T>;
+        statistics?: T | StatisticsBlockSelect<T>;
+        donationCallToAction?: T | DonationCallToActionBlockSelect<T>;
+        storyCards?: T | StoryCardsBlockSelect<T>;
+        testimonials?: T | TestimonialsBlockSelect<T>;
+        leadershipPreview?: T | LeadershipPreviewBlockSelect<T>;
+        callToAction?: T | CallToActionBlockSelect<T>;
+        richText?: T | RichTextBlockSelect<T>;
+        imageText?: T | ImageTextBlockSelect<T>;
+        quote?: T | QuoteBlockSelect<T>;
+        video?: T | VideoBlockSelect<T>;
       };
   seo?:
     | T
@@ -1452,6 +1686,166 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroBlock_select".
+ */
+export interface HeroBlockSelect<T extends boolean = true> {
+  slides?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        buttonText?: T;
+        buttonLink?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VisionMissionBlock_select".
+ */
+export interface VisionMissionBlockSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProgrammeCardsBlock_select".
+ */
+export interface ProgrammeCardsBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryStripBlock_select".
+ */
+export interface GalleryStripBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatisticsBlock_select".
+ */
+export interface StatisticsBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DonationCallToActionBlock_select".
+ */
+export interface DonationCallToActionBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryCardsBlock_select".
+ */
+export interface StoryCardsBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock_select".
+ */
+export interface TestimonialsBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LeadershipPreviewBlock_select".
+ */
+export interface LeadershipPreviewBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock_select".
+ */
+export interface CallToActionBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RichTextBlock_select".
+ */
+export interface RichTextBlockSelect<T extends boolean = true> {
+  content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageTextBlock_select".
+ */
+export interface ImageTextBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  text?: T;
+  image?: T;
+  imageAlt?: T;
+  imagePosition?: T;
+  buttonLabel?: T;
+  buttonLink?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuoteBlock_select".
+ */
+export interface QuoteBlockSelect<T extends boolean = true> {
+  text?: T;
+  author?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoBlock_select".
+ */
+export interface VideoBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  thumbnail?: T;
+  thumbnailAlt?: T;
+  link?: T;
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2130,28 +2524,6 @@ export interface Foundation {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "homepage".
- */
-export interface Homepage {
-  id: number;
-  heroSlides?:
-    | {
-        title: string;
-        description?: string | null;
-        /**
-         * Path to an image the website already has, e.g. /impact/family-support/1.jpg. Uploading new images arrives with the Cloudflare storage.
-         */
-        image?: string | null;
-        buttonText?: string | null;
-        buttonLink?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "apply-page".
  */
 export interface ApplyPage {
@@ -2368,25 +2740,6 @@ export interface FoundationSelect<T extends boolean = true> {
               text?: T;
               id?: T;
             };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "homepage_select".
- */
-export interface HomepageSelect<T extends boolean = true> {
-  heroSlides?:
-    | T
-    | {
-        title?: T;
-        description?: T;
-        image?: T;
-        buttonText?: T;
-        buttonLink?: T;
-        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

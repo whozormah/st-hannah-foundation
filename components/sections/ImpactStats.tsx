@@ -1,6 +1,8 @@
 import { HeartHandshake, Users, GraduationCap, HandHeart } from "lucide-react";
 
+import TitleLines from "@/components/shared/TitleLines";
 import { getStats } from "@/lib/cms";
+import { SECTION_COPY, type SectionCopy } from "@/lib/section-copy";
 
 interface StatsData {
   childrenReached: string;
@@ -9,7 +11,11 @@ interface StatsData {
   communitiesImpacted: string;
 }
 
-export default async function ImpactStats() {
+export default async function ImpactStats({
+  eyebrow = SECTION_COPY.statistics.eyebrow,
+  title = SECTION_COPY.statistics.title,
+  description = SECTION_COPY.statistics.description,
+}: SectionCopy = {}) {
   const siteStats = await getStats();
 
   const statsData: StatsData = siteStats.homepage;
@@ -44,17 +50,17 @@ export default async function ImpactStats() {
         {" "}
         <div className="text-center mb-20">
           {" "}
-          <span className="uppercase tracking-[5px] text-accent font-semibold">
-            Impact At A Glance{" "}
-          </span>
+          {eyebrow && (
+            <span className="uppercase tracking-[5px] text-accent font-semibold">
+              {eyebrow}{" "}
+            </span>
+          )}
           <h2 className="text-4xl md:text-5xl font-bold text-ink mt-4">
-            Impact That Changes Lives
+            <TitleLines text={title} />
           </h2>
-          <p className="text-gray-700 max-w-3xl mx-auto mt-6 text-lg">
-            Every initiative, every outreach and every act of generosity
-            contributes to building stronger families, restoring dignity and
-            creating opportunities for individuals and communities to thrive.
-          </p>
+          {description && (
+            <p className="text-gray-700 max-w-3xl mx-auto mt-6 text-lg">{description}</p>
+          )}
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => {

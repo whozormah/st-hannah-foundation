@@ -21,6 +21,7 @@ import path from "path";
 import { getPayload, type CollectionSlug, type GlobalSlug, type Payload } from "payload";
 
 import config from "../payload.config";
+import { HOMEPAGE_ORDER, SECTION_COPY } from "../lib/section-copy";
 
 const DATA = path.join(process.cwd(), "public", "data");
 const readJson = <T>(file: string): T =>
@@ -278,7 +279,70 @@ const migrators: Record<string, Migrator> = {
   },
 
   async homepage(payload) {
-    return writeGlobal(payload, "homepage", { heroSlides: readJson("homepage/hero.json") });
+    // CR-009: the homepage becomes a page built from blocks — its ten
+    // sections in the order the site has shown them, each with the wording it
+    // had. The hero's slides come from hero.json; the rest have no file of
+    // their own, so their wording is the one in lib/section-copy.ts.
+    const slides = readJson<Record<string, string>[]>("homepage/hero.json");
+    const blocks = HOMEPAGE_ORDER.map((type) =>
+      type === "hero"
+        ? { blockType: type, slides }
+        : type === "visionMission"
+          ? { blockType: type }
+          : { blockType: type, ...SECTION_COPY[type] },
+    );
+    const data = { title: "Homepage", slug: "home", blocks, _status: "published" as const };
+
+    const existing = await payload.find({
+      collection: "pages",
+      where: { slug: { equals: "home" } },
+      limit: 1,
+      overrideAccess: true,
+    });
+
+    if (existing.docs[0]) {
+      await payload.update({
+        collection: "pages",
+        id: existing.docs[0].id,
+        data: data as never,
+        overrideAccess: true,
+        context,
+      });
+    } else {
+      await payload.create({ collection: "pages", data: data as never, overrideAccess: true, context });
+    }
+
+    // Read back: every block, in order, with every field as written.
+    const saved = await payload.find({
+      collection: "pages",
+      where: { slug: { equals: "home" }, _status: { equals: "published" } },
+      limit: 1,
+      depth: 0,
+      overrideAccess: true,
+    });
+    const strip = (value: unknown): unknown =>
+      Array.isArray(value)
+        ? value.map(strip)
+        : value && typeof value === "object"
+          ? Object.fromEntries(
+              Object.entries(value as Record<string, unknown>)
+                .filter(([key, v]) => key !== "id" && key !== "blockName" && v !== null)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([key, v]) => [key, strip(v)]),
+            )
+          : value;
+    const stored = ((saved.docs[0]?.blocks ?? []) as unknown[]).map(strip);
+    const wrong = blocks.filter(
+      (block, index) => JSON.stringify(stored[index]) !== JSON.stringify(strip(block)),
+    );
+
+    return {
+      source: blocks.length,
+      published: blocks.length - wrong.length,
+      notes: wrong.length
+        ? [`not saved as written: ${wrong.map((block) => block.blockType).join(", ")}`]
+        : undefined,
+    };
   },
 
   async applyPage(payload) {

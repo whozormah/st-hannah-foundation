@@ -1,6 +1,8 @@
 import { Quote } from "lucide-react";
 
+import TitleLines from "@/components/shared/TitleLines";
 import { getTestimonials } from "@/lib/cms";
+import { SECTION_COPY, type SectionCopy } from "@/lib/section-copy";
 
 function initials(name: string) {
   return name
@@ -13,7 +15,11 @@ function initials(name: string) {
 
 /* Published testimonials from the CMS (PUB-03). The section hides itself when
    there are none, as every section with absent data does (PUB-06). */
-export default async function Testimonials() {
+export default async function Testimonials({
+  eyebrow = SECTION_COPY.testimonials.eyebrow,
+  title = SECTION_COPY.testimonials.title,
+  description = SECTION_COPY.testimonials.description,
+}: SectionCopy = {}) {
   const testimonials = await getTestimonials();
 
   if (!testimonials.length) return null;
@@ -32,18 +38,19 @@ export default async function Testimonials() {
         {/* Heading */}
 
         <div className="max-w-3xl">
-          <span className="font-semibold uppercase tracking-[4px] text-accent-soft">
-            In Their Own Words
-          </span>
+          {eyebrow && (
+            <span className="font-semibold uppercase tracking-[4px] text-accent-soft">
+              {eyebrow}
+            </span>
+          )}
 
           <h2 className="mt-4 text-4xl font-bold leading-tight text-white md:text-5xl">
-            Voices From The Communities We Serve
+            <TitleLines text={title} />
           </h2>
 
-          <p className="mt-6 text-lg leading-9 text-white/80">
-            Beneficiaries, volunteers and community leaders on what the
-            Foundation&apos;s work has meant to them.
-          </p>
+          {description && (
+            <p className="mt-6 text-lg leading-9 text-white/80">{description}</p>
+          )}
         </div>
 
         {/* Voices */}

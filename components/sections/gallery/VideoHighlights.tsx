@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PlayCircle } from "lucide-react";
 
 import { getVideoHighlights } from "@/lib/cms";
+import { isPlayableVideo } from "@/lib/links";
 
 interface VideoItem {
   title: string;
@@ -12,30 +13,10 @@ interface VideoItem {
   link: string;
 }
 
-// Every video highlight currently points at
-// "https://youtube.com", the site's home page rather than a video. Publishing
-// a Watch button that lands nowhere is worse than not publishing it, so only
-// entries with a real video URL are shown, and the section hides itself when
-// none qualify. Fill in the links and the cards return on their own.
-function isPlayableVideo(link: string) {
-  try {
-    const url = new URL(link);
-    const host = url.hostname.replace(/^www\./, "");
-
-    if (host === "youtube.com" || host === "m.youtube.com") {
-      return url.searchParams.has("v") || url.pathname.startsWith("/embed/");
-    }
-
-    if (host === "youtu.be") return url.pathname.length > 1;
-
-    if (host === "vimeo.com") return url.pathname.length > 1;
-
-    return url.pathname.length > 1;
-  } catch {
-    return false;
-  }
-}
-
+// Only entries with a real video address are shown, and the section hides
+// itself when none qualify: the placeholder highlights all point at
+// "https://youtube.com", and a Watch button that lands nowhere is worse than
+// none. Fill in the links and the cards return on their own.
 export default async function VideoHighlights() {
   const videos: VideoItem[] = (await getVideoHighlights()).filter((video) =>
     isPlayableVideo(video.link),

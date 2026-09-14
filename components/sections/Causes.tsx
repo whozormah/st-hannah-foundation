@@ -4,7 +4,10 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+
+import TitleLines from "@/components/shared/TitleLines";
 import DonationModal from "@/components/shared/DonationModal";
+import { SECTION_COPY, type SectionCopy } from "@/lib/section-copy";
 
 interface Program {
   slug: string;
@@ -13,7 +16,11 @@ interface Program {
   excerpt: string;
 }
 
-export default function Causes({ programs: allPrograms }: { programs: Program[] }) {
+export default function Causes({
+  programs: allPrograms,
+  eyebrow = SECTION_COPY.programmeCards.eyebrow,
+  title = SECTION_COPY.programmeCards.title,
+}: { programs: Program[] } & SectionCopy) {
   // A homepage teaser; /programs carries the full list.
   const programs = allPrograms.slice(0, 4);
 
@@ -33,12 +40,14 @@ export default function Causes({ programs: allPrograms }: { programs: Program[] 
 
           <div className="mb-12 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
-                Our Programmes
-              </span>
+              {eyebrow && (
+                <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
+                  {eyebrow}
+                </span>
+              )}
 
               <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
-                Creating opportunities. Restoring hope.
+                <TitleLines text={title} />
               </h2>
             </div>
 

@@ -99,15 +99,31 @@ const cases = [
     (doc, stamp) => ({ vision: stamp }),
     (doc) => ({ vision: doc.vision }),
   ),
-  section(
-    "homepage",
-    "content",
-    "/",
-    (doc, stamp) => ({
-      heroSlides: doc.heroSlides.map((slide, index) => (index ? slide : { ...slide, title: stamp })),
+  // The homepage is a page built from blocks (CR-009): its hero's first slide.
+  {
+    label: "pages",
+    role: "content",
+    page: "/",
+    method: "PATCH",
+    async load() {
+      const found = await as("content", "/api/pages?where[slug][equals]=home&limit=1&depth=0");
+      const doc = found.body?.docs?.[0];
+
+      assert.ok(doc, "no homepage — run the content migration first");
+
+      return doc;
+    },
+    url: (doc) => `/api/pages/${doc.id}`,
+    edit: (doc, stamp) => ({
+      blocks: doc.blocks.map((block) =>
+        block.blockType === "hero"
+          ? { ...block, slides: block.slides.map((slide, i) => (i ? slide : { ...slide, title: stamp })) }
+          : block,
+      ),
+      _status: "published",
     }),
-    (doc) => ({ heroSlides: doc.heroSlides }),
-  ),
+    restore: (doc) => ({ blocks: doc.blocks, _status: "published" }),
+  },
   section(
     "apply-page",
     "content",

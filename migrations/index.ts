@@ -7,6 +7,8 @@ import * as migration_20260913_193524_phase6_single_story_summary from './202609
 import * as migration_20260913_210321_phase6_statistics_remove_per_page from './20260913_210321_phase6_statistics_remove_per_page';
 import * as migration_20260913_210326_phase6_statistics_single_figures from './20260913_210326_phase6_statistics_single_figures';
 import * as migration_20260913_211551_phase6_statistics_partnership_figures from './20260913_211551_phase6_statistics_partnership_figures';
+import * as migration_20260914_062219_phase6_homepage_remove_placeholders from './20260914_062219_phase6_homepage_remove_placeholders';
+import * as migration_20260914_062226_phase6_homepage_blocks from './20260914_062226_phase6_homepage_blocks';
 
 export const migrations = [
   {
@@ -52,6 +54,16 @@ export const migrations = [
   {
     up: migration_20260913_211551_phase6_statistics_partnership_figures.up,
     down: migration_20260913_211551_phase6_statistics_partnership_figures.down,
-    name: '20260913_211551_phase6_statistics_partnership_figures'
+    name: '20260913_211551_phase6_statistics_partnership_figures',
+  },
+  {
+    up: migration_20260914_062219_phase6_homepage_remove_placeholders.up,
+    down: migration_20260914_062219_phase6_homepage_remove_placeholders.down,
+    name: '20260914_062219_phase6_homepage_remove_placeholders',
+  },
+  {
+    up: migration_20260914_062226_phase6_homepage_blocks.up,
+    down: migration_20260914_062226_phase6_homepage_blocks.down,
+    name: '20260914_062226_phase6_homepage_blocks'
   },
 ];

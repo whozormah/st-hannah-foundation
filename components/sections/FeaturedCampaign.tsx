@@ -11,8 +11,13 @@ import StoryProgress from "@/components/story/StoryProgress";
 
 import { useStoryCarousel } from "@/hooks/useStoryCarousel";
 import { Story } from "@/types/story";
+import { SECTION_COPY, type SectionCopy } from "@/lib/section-copy";
 
-export default function FeaturedCampaign({ stories }: { stories: Story[] }) {
+export default function FeaturedCampaign({
+  stories,
+  eyebrow = SECTION_COPY.donationCallToAction.eyebrow,
+  description = SECTION_COPY.donationCallToAction.description,
+}: { stories: Story[] } & Omit<SectionCopy, "title">) {
   const [showDonationModal, setShowDonationModal] = useState(false);
 
   const { current, currentStory, next, previous } = useStoryCarousel(stories);
@@ -36,14 +41,15 @@ export default function FeaturedCampaign({ stories }: { stories: Story[] }) {
           {/* A lean intro: the story's own headline below is the section
               heading, so this no longer stacks a second full-height header. */}
           <div className="max-w-2xl">
-            <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
-              Stories of Hope
-            </span>
+            {eyebrow && (
+              <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
+                {eyebrow}
+              </span>
+            )}
 
-            <p className="mt-4 text-lg leading-9 text-gray-700">
-              Every programme begins with someone&apos;s real circumstances.
-              This is one of them, told in full.
-            </p>
+            {description && (
+              <p className="mt-4 text-lg leading-9 text-gray-700">{description}</p>
+            )}
           </div>
 
           <div className="mt-14" />

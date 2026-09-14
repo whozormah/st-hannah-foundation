@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import type { HeroSlide } from "@/lib/cms";
+import { isSafeLink } from "@/lib/links";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
@@ -27,13 +28,11 @@ export default function Hero({ slides }: { slides: HeroSlide[] }) {
     return () => query.removeEventListener("change", update);
   }, []);
 
+  // Without slides there is nothing to show (PUB-06).
+  if (!slides.length) return null;
+
   return (
     <section>
-      <h1 className="sr-only">
-        St. Hannah Foundation — Restoring Hope, Empowering Lives and
-        Transforming Communities
-      </h1>
-
       <Swiper
         modules={[Pagination, Autoplay]}
         pagination={{ clickable: true }}
@@ -81,12 +80,15 @@ export default function Hero({ slides }: { slides: HeroSlide[] }) {
                   </p>
 
                   <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                    <Link
-                      href={slide.buttonLink}
-                      className="rounded-lg bg-accent px-8 py-4 text-center font-semibold text-black shadow-lg transition-all duration-300 hover:scale-105 hover:opacity-90"
-                    >
-                      {slide.buttonText}
-                    </Link>
+                    {/* Checked when published, and again here (CNT-04). */}
+                    {slide.buttonText && isSafeLink(slide.buttonLink) && (
+                      <Link
+                        href={slide.buttonLink}
+                        className="rounded-lg bg-accent px-8 py-4 text-center font-semibold text-black shadow-lg transition-all duration-300 hover:scale-105 hover:opacity-90"
+                      >
+                        {slide.buttonText}
+                      </Link>
+                    )}
 
                     <Link
                       href="/apply-for-support"

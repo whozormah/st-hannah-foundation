@@ -3,7 +3,10 @@ import { getPayload, type CollectionSlug, type GlobalSlug } from "payload";
 
 import config from "@payload-config";
 
+import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
+
 import { CMS_TAGS } from "./cms-tags";
+import { HOMEPAGE_ORDER, SECTION_COPY } from "./section-copy";
 
 /* Reading website content from the CMS.
 
@@ -378,16 +381,128 @@ export type HeroSlide = {
   buttonLink: string;
 };
 
-export const getHeroSlides = cached(CMS_TAGS.homepage, async (): Promise<HeroSlide[]> => {
-  const slides = ((await global("homepage")).heroSlides ?? []) as Doc[];
+/* ── The homepage, built from blocks (CNT-01, CR-009) ───────────────────── */
 
-  return slides.map((s) => ({
-    image: text(s.image),
-    title: text(s.title),
-    description: text(s.description),
-    buttonText: text(s.buttonText),
-    buttonLink: text(s.buttonLink),
-  }));
+/** Blocks that wrap an existing section and carry only its heading wording. */
+type CopyBlockType = keyof typeof SECTION_COPY;
+
+export type HomeBlock = { id: string } & (
+  | { blockType: "hero"; slides: HeroSlide[] }
+  | { blockType: "visionMission" }
+  | { blockType: CopyBlockType; eyebrow: string; title: string; description: string }
+  | { blockType: "richText"; content: SerializedEditorState | null }
+  | {
+      blockType: "imageText";
+      eyebrow: string;
+      title: string;
+      text: string;
+      image: string;
+      imageAlt: string;
+      imagePosition: "left" | "right";
+      buttonLabel: string;
+      buttonLink: string;
+    }
+  | { blockType: "quote"; text: string; author: string }
+  | {
+      blockType: "video";
+      title: string;
+      description: string;
+      thumbnail: string;
+      thumbnailAlt: string;
+      link: string;
+    }
+);
+
+function toBlock(b: Doc): HomeBlock | null {
+  const id = text(b.id);
+
+  switch (b.blockType) {
+    case "hero":
+      return {
+        id,
+        blockType: "hero",
+        slides: ((b.slides ?? []) as Doc[]).map((slide) => ({
+          image: text(slide.image),
+          title: text(slide.title),
+          description: text(slide.description),
+          buttonText: text(slide.buttonText),
+          buttonLink: text(slide.buttonLink),
+        })),
+      };
+    case "visionMission":
+      return { id, blockType: "visionMission" };
+    case "richText":
+      return { id, blockType: "richText", content: (b.content as SerializedEditorState) ?? null };
+    case "imageText":
+      return {
+        id,
+        blockType: "imageText",
+        eyebrow: text(b.eyebrow),
+        title: text(b.title),
+        text: text(b.text),
+        image: text(b.image),
+        imageAlt: text(b.imageAlt),
+        imagePosition: b.imagePosition === "right" ? "right" : "left",
+        buttonLabel: text(b.buttonLabel),
+        buttonLink: text(b.buttonLink),
+      };
+    case "quote":
+      return { id, blockType: "quote", text: text(b.text), author: text(b.author) };
+    case "video":
+      return {
+        id,
+        blockType: "video",
+        title: text(b.title),
+        description: text(b.description),
+        thumbnail: text(b.thumbnail),
+        thumbnailAlt: text(b.thumbnailAlt),
+        link: text(b.link),
+      };
+    default:
+      if (typeof b.blockType === "string" && b.blockType in SECTION_COPY) {
+        return {
+          id,
+          blockType: b.blockType as CopyBlockType,
+          eyebrow: text(b.eyebrow),
+          title: text(b.title),
+          description: text(b.description),
+        };
+      }
+
+      return null;
+  }
+}
+
+/* The homepage's standard sections with their standard wording: what the
+   site shows if no homepage has been published, rather than a blank page.
+   Without slides the hero hides itself (PUB-06). */
+function standardHomepage(): HomeBlock[] {
+  return HOMEPAGE_ORDER.map((type) =>
+    type === "hero" || type === "visionMission"
+      ? toBlock({ id: type, blockType: type })!
+      : toBlock({ id: type, blockType: type, ...SECTION_COPY[type] })!,
+  );
+}
+
+/** The published homepage's sections, in the editors' order. */
+export const getHomepage = cached(CMS_TAGS.pages, async (): Promise<HomeBlock[]> => {
+  const payload = await payloadClient();
+
+  const { docs } = await payload.find({
+    collection: "pages",
+    where: { slug: { equals: "home" }, _status: { equals: "published" } },
+    limit: 1,
+    depth: 0,
+  });
+
+  if (!docs[0]) {
+    console.warn("[cms] No published homepage; showing the standard sections.");
+    return standardHomepage();
+  }
+
+  return ((docs[0].blocks ?? []) as unknown as Doc[])
+    .map(toBlock)
+    .filter((block): block is HomeBlock => block !== null);
 });
 
 export const getApplyInfo = cached(CMS_TAGS.applyPage, async () => {

@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import TitleLines from "@/components/shared/TitleLines";
 import { getStories } from "@/lib/cms";
+import { SECTION_COPY, type SectionCopy } from "@/lib/section-copy";
 
 interface Story {
   slug: string;
@@ -12,7 +14,11 @@ interface Story {
   excerpt: string;
 }
 
-export default async function ImpactStories() {
+export default async function ImpactStories({
+  eyebrow = SECTION_COPY.storyCards.eyebrow,
+  title = SECTION_COPY.storyCards.title,
+  description = SECTION_COPY.storyCards.description,
+}: SectionCopy = {}) {
   const allStories: Story[] = await getStories();
 
   // Teaser; /impact-stories carries the full index.
@@ -24,18 +30,21 @@ export default async function ImpactStories() {
         {/* Header */}
 
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="uppercase tracking-[5px] text-brand font-semibold">
-            Stories Of Transformation
-          </span>
+          {eyebrow && (
+            <span className="uppercase tracking-[5px] text-brand font-semibold">
+              {eyebrow}
+            </span>
+          )}
 
           <h2 className="text-4xl md:text-5xl font-bold mt-4 text-ink">
-            Lives Changed Through Compassion
+            <TitleLines text={title} />
           </h2>
 
-          <p className="max-w-3xl mx-auto mt-6 text-gray-700 text-lg leading-8">
-            Behind every program is a story of resilience, hope and lives being
-            transformed through compassion and support.
-          </p>
+          {description && (
+            <p className="max-w-3xl mx-auto mt-6 text-gray-700 text-lg leading-8">
+              {description}
+            </p>
+          )}
         </div>
 
         {/* Stories */}

@@ -17,7 +17,7 @@ export const CMS_TAGS = {
   campaigns: "cms:campaign-stories",
   siteSettings: "cms:site-settings",
   foundation: "cms:foundation",
-  homepage: "cms:homepage",
+  pages: "cms:pages",
   applyPage: "cms:apply-page",
   donatePage: "cms:donate-page",
   statistics: "cms:statistics",
