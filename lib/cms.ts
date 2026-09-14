@@ -1,3 +1,5 @@
+import { AsyncLocalStorage } from "node:async_hooks";
+
 import { unstable_cache } from "next/cache";
 import { getPayload, type CollectionSlug, type GlobalSlug } from "payload";
 
@@ -6,6 +8,7 @@ import config from "@payload-config";
 import type { SerializedEditorState } from "@payloadcms/richtext-lexical/lexical";
 
 import { CMS_TAGS } from "./cms-tags";
+import { isPreviewing } from "./preview";
 import { HOMEPAGE_ORDER, SECTION_COPY } from "./section-copy";
 
 /* Reading website content from the CMS.
@@ -28,6 +31,12 @@ export { CMS_TAGS };
 
 type Doc = Record<string, unknown>;
 
+/* While a content editor previews (lib/preview.ts), reads return the latest
+   drafts, straight from the database and never cached, so a draft can
+   neither be shown to a visitor nor linger in the cache. */
+const previewing = new AsyncLocalStorage<boolean>();
+const inPreview = () => previewing.getStore() === true;
+
 async function payloadClient() {
   return getPayload({ config });
 }
@@ -38,7 +47,7 @@ async function published(collection: CollectionSlug): Promise<Doc[]> {
 
   const { docs } = await payload.find({
     collection,
-    where: { _status: { equals: "published" } },
+    ...(inPreview() ? { draft: true } : { where: { _status: { equals: "published" } } }),
     sort: "order",
     limit: 500,
     // One level deep, so an image arrives as its media library record.
@@ -90,8 +99,11 @@ const altOf = (value: unknown) => text((value as { alt?: unknown } | null)?.alt)
    the hour even if nobody restarts the site. The cache lives on disk and
    outlives restarts and rebuilds, and it is keyed on the function's source,
    so a read whose code did not change keeps its old entry. */
-const cached = <T>(tag: string, read: () => Promise<T>) =>
-  unstable_cache(read, [tag], { tags: [tag], revalidate: 3600 });
+const cached = <T>(tag: string, read: () => Promise<T>) => {
+  const live = unstable_cache(read, [tag], { tags: [tag], revalidate: 3600 });
+
+  return async (): Promise<T> => ((await isPreviewing()) ? previewing.run(true, read) : live());
+};
 
 /* ── Collections ────────────────────────────────────────────────────────── */
 
@@ -520,7 +532,8 @@ export const getHomepage = cached(CMS_TAGS.pages, async (): Promise<HomeBlock[]>
 
   const { docs } = await payload.find({
     collection: "pages",
-    where: { slug: { equals: "home" }, _status: { equals: "published" } },
+    where: { slug: { equals: "home" }, ...(inPreview() ? {} : { _status: { equals: "published" } }) },
+    draft: inPreview(),
     limit: 1,
     depth: 1,
   });

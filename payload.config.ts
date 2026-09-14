@@ -15,6 +15,7 @@ import { fundraisingCollections } from "./payload/collections/fundraising";
 import { systemCollections } from "./payload/collections/system";
 import { globals } from "./payload/globals";
 import { labelCollection, labelGlobal } from "./payload/labels";
+import { addPreview } from "./payload/preview";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -120,7 +121,10 @@ export default buildConfig({
     ...fundraisingCollections,
     AdminUsers,
     ...systemCollections,
-  ].map(labelCollection),
+  ]
+    .map(labelCollection)
+    // CNT-05: a Preview button wherever the content has a page.
+    .map(addPreview),
   globals: globals.map(labelGlobal),
   plugins: storage,
   editor: lexicalEditor(),

@@ -4,6 +4,7 @@ import "../globals.css";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import PreviewBanner from "@/components/layout/PreviewBanner";
 
 import { getSiteSettings } from "@/lib/cms";
 
@@ -108,6 +109,8 @@ export default async function RootLayout({
         <main>{children}</main>
 
         <Footer settings={{ foundationName, email, phone, nigeriaOffice, usaOffice, socials }} />
+
+        <PreviewBanner />
       </body>
     </html>
   );

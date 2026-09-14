@@ -28,6 +28,10 @@ jobs:
       DATABASE_URL: postgres://shf:shf_ci@localhost:5432/shf_ci
       PAYLOAD_SECRET: ci-only-secret-not-used-in-production
       NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      # The tests' default is the local development port (3100). Without
+      # this, every HTTP test in CI would reach nothing: the app starts on
+      # 3000 below.
+      TEST_BASE_URL: http://localhost:3000
 
     steps:
       - uses: actions/checkout@v4

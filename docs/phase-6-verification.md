@@ -1,0 +1,120 @@
+# Phase 6 — content migration, verification
+
+Branch `phase-6-content`, 13–14 September 2026. Built on the Phase 1–4
+branches. Unmerged and undeployed. The content is the website's own public
+content; accounts and applications are synthetic test data.
+
+Phase 6 ran before Phase 5 (CR-006). Its gate is **A18 and A21 pass, content
+frozen throughout**: A18 and A21 pass, and the freeze was agreed (decision 8).
+
+## What changed
+
+The website reads every page's content from the CMS instead of the files in
+`public/data`, and staff edit it in the admin. **Visitors see no difference**:
+all 25 public pages match the pre-CMS capture, word for word, with the same
+photographs, alt text and image sizes.
+
+| Requirement | Status | Implementation |
+|---|---|---|
+| **PUB-01** | Met | All fourteen routes unchanged; detail pages and the sitemap list what is published. |
+| **PUB-02** | Met | No visual change (A18). |
+| **PUB-03** | Met | 35 components read the CMS; four sections nothing rendered were deleted. |
+| **PUB-04 / A10** | Met | Publishing expires the cached content at once: the **first** visit afterwards shows the change. |
+| **PUB-05** | Met | Metadata and canonicals unchanged; the sitemap is built from published content. |
+| **PUB-06** | Met | Sections with no content hide themselves, including the new block types. |
+| **PUB-07** | Met | The homepage has exactly one `h1` however its sections are arranged. |
+| **PUB-08** | Partly verified | The homepage with all fourteen block types has no overflow at 360 and 390 px. The other pages are unchanged (A18) but were not re-measured; that is A19, run at go-live. |
+| **CNT-01** | Met, with CR-009 | The homepage is built from blocks. Legal pages stay with Phase 1's approval gate. |
+| **CNT-02** | Met | Only the homepage can be built from blocks; every other page is a fixed template. |
+| **CNT-03** | Met, with CR-009 | Fourteen blocks: the twelve, plus vision and mission and the leadership preview. |
+| **CNT-04** | Met | No HTML, styles or classes are stored. Links must be a page on the site or https/mailto/tel, checked on publishing and again when rendered. |
+| **CNT-05** | Met | Draft, **preview**, publish, version history and restore, for every content collection. Preview is draft mode in a new tab, for signed-in content editors only. |
+| **CNT-06** | Met | Every image is a media library record, and one cannot be saved without a description. |
+| **CNT-07** | **Not met** | Slugs are unique per collection, but not generated from the title, and not locked once published with an automatic redirect. |
+| **CNT-08** (SHOULD) | **Not met** | Deleting a record that other content refers to is not yet blocked. |
+| **CNT-09 / CNT-10** | Met, with CR-010 | Each figure is stored once with its source and verification date; historic totals stay typed in. |
+| **CNT-11** | Met | Nothing invented; everything doubtful is reported below. |
+| **MIG-01, 02** | Met | One collection at a time; counts checked, page sections read back field by field. |
+| **MIG-03 / A18** | Met | Verified on the rendered pages, 25 of 25. |
+| **MIG-04** | Met | Content freeze agreed (decision 8). |
+| **MIG-05** | Met | All 13 migrations and all 19 content steps run from an empty database, twice, with no duplicates. |
+| **MIG-06** | Pending | The files stay until the content is verified in production. |
+| **MIG-07** | Met | Contradictions are reported, not resolved. |
+| **MIG-08** | Built, with CR-011 | 65 image paths are 47 photographs, each uploaded once with drafted alt text awaiting approval. Goes live with Cloudflare R2. |
+| **Editor training** | Guide written | `docs/editor-guide.md`. A session with the Foundation's staff has not been held. |
+
+## Tests
+
+`npm run test:acl`: **84 of 84 passing.** 22 access control, 11 forms, 17
+workflow, 2 password reset, and Phase 6's 32: 15 content types, 1 publishing,
+2 statistics, 6 homepage blocks, 4 media, 4 preview.
+
+**Each new test was proven able to fail:**
+
+- **Publishing:** against the earlier cache setting, all 16 publishing tests
+  failed. The first visitor after a publish saw the old version.
+- **Statistics (A21):** with one page wired to the wrong figure, the test
+  named the page and the figure. Its stricter check also found three real
+  figures typed into page code (About, Partnerships), now read from
+  Statistics.
+- **Blocks:** unsafe links and non-video addresses are refused on
+  publishing, and stray HTML, style and class values are never stored.
+- **Preview:** visitors and Case Officers or Finance cannot turn it on. It
+  only opens pages on this website. A copied draft-mode cookie shows a
+  visitor nothing.
+
+**Checked in a real browser:** every page for errors; the gallery filter and
+viewer; the admin's Add Section picker (all fourteen); the Preview button,
+the preview tab with its banner, and Exit preview; Versions and Restore this
+version; the media library's descriptions on the page.
+
+## Defects found and fixed
+
+1. **The first visitor after a publish saw the old version.** The "max"
+   refresh profile serves stale content first. Now expires immediately.
+2. **The bank account number was in every page's JavaScript.** The old
+   footer bundled the whole settings file. It now receives only what it
+   shows.
+3. **The admin's GraphQL schema failed to build.** The testimonials block
+   shared its type name with the collection. Blocks are now named "…Block".
+4. **Two sections rendered blank images after the image migration.** Next's
+   data cache lives on disk, survives rebuilds, and is keyed on a function's
+   source, so an unchanged read served its old entry. Every read now also
+   expires hourly, and the migration says to restart the site.
+5. **CI would have failed every HTTP test.** It started the app on port 3000
+   while the tests used 3100, and has done since Phase 2, unnoticed because
+   these branches have never been pushed. CI now sets `TEST_BASE_URL`.
+6. **Drafts are not validated by Payload,** so an unsafe link can sit in a
+   draft. It cannot be published, and the sections refuse to render one.
+
+## For the Foundation
+
+1. **Photographs:** several story and programme images look AI-generated or
+   stock rather than the Foundation's own, and two illustrate impact stories
+   as if they showed the beneficiaries (CR-011).
+2. **Gallery duplicates:** all six "Community Outreach" photographs are the
+   same files as six under Widow Empowerment and Education Support.
+3. **Communities:** Partnerships says "Multiple communities impacted"; the
+   homepage says 50+.
+4. **Descriptions:** 47 image descriptions to check and approve.
+5. **Statistics:** no figure has a verified source or date yet.
+6. **Medical Aid Outreach** is marked featured on its page but not in the
+   story list; the list's value is used.
+7. **Not shown:** In-kind Categories and the Donate Page figures appear
+   nowhere on the website.
+
+## Open before go-live
+
+- **CNT-07** (slugs from titles, locked once published, automatic redirect)
+  and **CNT-08** (blocking deletion of referenced records): not built.
+- **Cloudflare R2** does not exist. Until it does, the media library cannot
+  go live, and when it does, its address must be allowed in Next's image
+  settings.
+- **The Docker image copies the build as root but runs as another user,**
+  so Next probably cannot write its cache at runtime. Phase 8.
+- **A19** (every page at 360 and 390 px) to be run at go-live.
+
+## Merge note
+
+This branch carries Phases 1–4. Merge them as a stack, and not before
+Phase 1's legal approval gate is cleared.
