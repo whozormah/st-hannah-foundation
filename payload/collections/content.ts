@@ -10,6 +10,7 @@ import {
 import { CMS_TAGS } from "../../lib/cms-tags";
 import { homepageBlocks } from "../blocks";
 import { imageField, imageFields, list, paragraphs } from "../fields";
+import { slugField } from "../slugs";
 
 /* Content, media and SEO — section 8.2: Owner and Administrator CRUD, Content
    Manager create/read/update but no delete, Case Officer and Finance none. */
@@ -143,7 +144,7 @@ export const Programmes: CollectionConfig = {
   versions,
   fields: [
     { name: "title", type: "text", required: true },
-    slug,
+    slugField({ from: "title" }),
     { name: "icon", type: "text" },
     imageField("heroImage"),
     { name: "excerpt", type: "textarea" },
@@ -171,7 +172,7 @@ export const ImpactStories: CollectionConfig = {
   versions,
   fields: [
     { name: "title", type: "text", required: true },
-    slug,
+    slugField({ from: "title" }),
     { name: "category", type: "text" },
     // One summary serves both the story list and the story page: in the
     // source they were separate fields holding identical text in all five.

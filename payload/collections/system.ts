@@ -175,8 +175,27 @@ export const Redirects: CollectionConfig = {
     delete: allow("owner"),
   },
   fields: [
-    { name: "from", type: "text", required: true, unique: true },
-    { name: "to", type: "text", required: true },
+    {
+      name: "from",
+      label: "Old Address",
+      type: "text",
+      required: true,
+      unique: true,
+      admin: { description: "A path on this website, e.g. /programs/medical-aid." },
+      validate: (value: unknown) =>
+        (typeof value === "string" && /^\/(?!\/)[^\s\\]*$/.test(value)) ||
+        "Use a path on this website, starting with a single /.",
+    },
+    {
+      name: "to",
+      label: "New Address",
+      type: "text",
+      required: true,
+      admin: { description: "A path on this website, or a full address starting with https://." },
+      validate: (value: unknown) =>
+        (typeof value === "string" && (/^\/(?!\/)[^\s\\]*$/.test(value) || /^https:\/\/[^/\s]+/.test(value))) ||
+        "Use a path on this website starting with /, or an address starting with https://.",
+    },
   ],
 };
 

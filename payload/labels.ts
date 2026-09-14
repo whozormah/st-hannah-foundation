@@ -215,7 +215,7 @@ const BY_COLLECTION: Record<string, Record<string, string>> = {
 
 /* "Smallest unit" alone would puzzle anyone who is not the developer. */
 const SLUG_HELP =
-  "The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.";
+  "The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens; filled in from the title if left empty. Changing it after publishing keeps the old address working: it redirects to the new one.";
 
 const DESCRIPTIONS: Record<string, Record<string, string>> = {
   programmes: { slug: SLUG_HELP },

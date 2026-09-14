@@ -229,6 +229,22 @@ Interface defects that belong to no phase are tracked separately, in
      gallery shows them twice under different programmes. The migration
      reports each pair.
 
+### CR-012 — Permanent redirects are sent as 308, not 301
+
+- **Status:** Proposed — awaiting approval
+- **Affects:** PUB-01 ("No public URL changes without a 301 redirect recorded
+  in redirects")
+- **Conflict:** Redirects are recorded in the admin and looked up in the
+  database when an address is not found. From a page, Next.js sends a
+  permanent redirect as **308**. A literal 301 would need Next's proxy, which
+  its documentation recommends avoiding, and warns against for code that
+  relies on shared modules such as the database connection.
+- **Change:** Permanent redirects are sent as 308, the method-preserving form
+  of 301. Browsers follow both the same way, and search engines treat 308 as
+  a 301 when moving a page's ranking to its new address.
+- **If not approved:** a proxy limited to the public pages returns a 301,
+  keeping its database lookup as small as possible.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

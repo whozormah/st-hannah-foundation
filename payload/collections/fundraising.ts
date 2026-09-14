@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload";
 
 import { allow, never } from "../access";
+import { slugField } from "../slugs";
 
 /* Donations, donors and transactions — section 8.2: Owner CRUD, Administrator
    read, Finance create/read/update, Content and Case Officer none. */
@@ -40,7 +41,8 @@ export const Campaigns: CollectionConfig = {
   },
   fields: [
     { name: "name", type: "text", required: true },
-    { name: "slug", type: "text", required: true, unique: true },
+    // No page of its own, so no redirect; filled in from the name (CNT-07).
+    slugField({ from: "name" }),
     { name: "targetMinor", type: "number" },
     { name: "currency", type: "text", defaultValue: "NGN" },
     { name: "active", type: "checkbox", defaultValue: true },

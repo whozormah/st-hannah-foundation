@@ -6,6 +6,7 @@ import StoryDonationCTA from "@/components/sections/impact/StoryDonationCTA";
 import { notFound } from "next/navigation";
 
 import { getStory } from "@/lib/cms";
+import { followRedirect } from "@/lib/redirects";
 
 export async function generateMetadata({
   params,
@@ -44,6 +45,8 @@ export default async function StoryPage({
   const story = await getStory(slug);
 
   if (!story) {
+    // An address that changed keeps working (PUB-01, CNT-07).
+    await followRedirect(`/impact-stories/${slug}`);
     notFound();
   }
 

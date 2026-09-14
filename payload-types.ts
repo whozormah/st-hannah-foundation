@@ -275,9 +275,9 @@ export interface Programme {
   id: number;
   title: string;
   /**
-   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
+   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens; filled in from the title if left empty. Changing it after publishing keeps the old address working: it redirects to the new one.
    */
-  slug: string;
+  slug?: string | null;
   icon?: string | null;
   heroImage?: (number | null) | Media;
   excerpt?: string | null;
@@ -306,9 +306,9 @@ export interface ImpactStory {
   id: number;
   title: string;
   /**
-   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
+   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens; filled in from the title if left empty. Changing it after publishing keeps the old address working: it redirects to the new one.
    */
-  slug: string;
+  slug?: string | null;
   category?: string | null;
   excerpt?: string | null;
   beneficiaries?: string | null;
@@ -395,7 +395,7 @@ export interface Page {
   id: number;
   title: string;
   /**
-   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
+   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens; filled in from the title if left empty. Changing it after publishing keeps the old address working: it redirects to the new one.
    */
   slug: string;
   blocks?:
@@ -1084,9 +1084,9 @@ export interface Campaign {
   id: number;
   name: string;
   /**
-   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens.
+   * The end of the page's address, e.g. medical-aid in /programs/medical-aid. Lowercase words joined by hyphens; filled in from the title if left empty. Changing it after publishing keeps the old address working: it redirects to the new one.
    */
-  slug: string;
+  slug?: string | null;
   /**
    * In kobo for naira and cents for dollars: ₦1,000 is 100000.
    */
@@ -1203,7 +1203,13 @@ export interface Notification {
  */
 export interface Redirect {
   id: number;
+  /**
+   * A path on this website, e.g. /programs/medical-aid.
+   */
   from: string;
+  /**
+   * A path on this website, or a full address starting with https://.
+   */
   to: string;
   updatedAt: string;
   createdAt: string;

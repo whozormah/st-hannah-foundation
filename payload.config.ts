@@ -16,6 +16,8 @@ import { systemCollections } from "./payload/collections/system";
 import { globals } from "./payload/globals";
 import { labelCollection, labelGlobal } from "./payload/labels";
 import { addPreview } from "./payload/preview";
+import { addDeleteProtection } from "./payload/references";
+import { addSlugRedirects } from "./payload/slugs";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -124,7 +126,11 @@ export default buildConfig({
   ]
     .map(labelCollection)
     // CNT-05: a Preview button wherever the content has a page.
-    .map(addPreview),
+    .map(addPreview)
+    // CNT-08: content still in use cannot be deleted.
+    .map(addDeleteProtection)
+    // CNT-07: a published address that changes keeps working.
+    .map(addSlugRedirects),
   globals: globals.map(labelGlobal),
   plugins: storage,
   editor: lexicalEditor(),

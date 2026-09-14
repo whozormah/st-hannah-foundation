@@ -62,6 +62,25 @@ same way:
 Pages such as **About the Foundation**, **Statistics** and **Site Settings**
 have no drafts: **Save** publishes immediately, so check your wording first.
 
+## Web addresses
+
+A programme's or story's address ends in its **Web Address**, such as
+`medical-aid` in `/programs/medical-aid`. Leave it empty and it is filled in
+from the title; whatever you type is tidied into lowercase words joined by
+hyphens.
+
+You can change it at any time. Once the record is published, the old address
+keeps working: visitors, and links shared on WhatsApp or in newsletters, are
+sent to the new one. Administrators can see these under **Redirects**, and
+add their own for addresses from the old website.
+
+## Deleting
+
+Something still in use cannot be deleted: a photograph on a page, for
+instance. The message lists where it is used, such as *Page "Homepage"*.
+Remove it from there first, then delete it. To take a record off the website
+without deleting it, use **Unpublish**.
+
 ## The homepage
 
 **Pages → Homepage** lists the homepage's sections from top to bottom.
@@ -145,3 +164,5 @@ date. Never publish a figure the Foundation cannot back up.
 | *"Only the homepage (home) is built from sections"* | Other pages have fixed layouts; edit their content in their own section of the admin. |
 | You cannot find **Content** in the menu | Your role does not include website content. Ask the Owner. |
 | A change is not on the website | Check you chose **Publish changes**, not only **Save Draft**. |
+| *"…is still used, so it cannot be deleted"* | Remove it from the records listed, then delete it. |
+| *"Use lowercase letters and numbers joined by hyphens"* | The web address has characters it cannot use. |

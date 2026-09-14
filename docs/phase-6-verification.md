@@ -16,7 +16,7 @@ photographs, alt text and image sizes.
 
 | Requirement | Status | Implementation |
 |---|---|---|
-| **PUB-01** | Met | All fourteen routes unchanged; detail pages and the sitemap list what is published. |
+| **PUB-01** | Met, with CR-012 (proposed) | All fourteen routes unchanged; detail pages and the sitemap list what is published. A changed address redirects, sent as 308 rather than a literal 301. |
 | **PUB-02** | Met | No visual change (A18). |
 | **PUB-03** | Met | 35 components read the CMS; four sections nothing rendered were deleted. |
 | **PUB-04 / A10** | Met | Publishing expires the cached content at once: the **first** visit afterwards shows the change. |
@@ -30,8 +30,8 @@ photographs, alt text and image sizes.
 | **CNT-04** | Met | No HTML, styles or classes are stored. Links must be a page on the site or https/mailto/tel, checked on publishing and again when rendered. |
 | **CNT-05** | Met | Draft, **preview**, publish, version history and restore, for every content collection. Preview is draft mode in a new tab, for signed-in content editors only. |
 | **CNT-06** | Met | Every image is a media library record, and one cannot be saved without a description. |
-| **CNT-07** | **Not met** | Slugs are unique per collection, but not generated from the title, and not locked once published with an automatic redirect. |
-| **CNT-08** (SHOULD) | **Not met** | Deleting a record that other content refers to is not yet blocked. |
+| **CNT-07** | Met | Slugs are unique, filled in from the title, and editable. When a published slug changes, the old address redirects to the new one, with no chains. Administrators can add redirects too, and unsafe addresses are refused. |
+| **CNT-08** (SHOULD) | Met for website content | Content still in use, including in a draft, cannot be deleted, and the refusal names where it is used. Staff accounts, applications and donations are left to the audit and retention rules. |
 | **CNT-09 / CNT-10** | Met, with CR-010 | Each figure is stored once with its source and verification date; historic totals stay typed in. |
 | **CNT-11** | Met | Nothing invented; everything doubtful is reported below. |
 | **MIG-01, 02** | Met | One collection at a time; counts checked, page sections read back field by field. |
@@ -45,9 +45,10 @@ photographs, alt text and image sizes.
 
 ## Tests
 
-`npm run test:acl`: **84 of 84 passing.** 22 access control, 11 forms, 17
-workflow, 2 password reset, and Phase 6's 32: 15 content types, 1 publishing,
-2 statistics, 6 homepage blocks, 4 media, 4 preview.
+`npm run test:acl`: **89 of 89 passing.** 22 access control, 11 forms, 17
+workflow, 2 password reset, and Phase 6's 37: 15 content types, 1 publishing,
+2 statistics, 6 homepage blocks, 4 media, 4 preview, 3 addresses and
+redirects, 2 deleting content in use.
 
 **Each new test was proven able to fail:**
 
@@ -86,6 +87,18 @@ version; the media library's descriptions on the page.
    these branches have never been pushed. CI now sets `TEST_BASE_URL`.
 6. **Drafts are not validated by Payload,** so an unsafe link can sit in a
    draft. It cannot be published, and the sections refuse to render one.
+7. **The first redirect was never created.** Three causes, found one at a
+   time with the tests failing and by logging the hooks:
+   - a field hook did not receive the arguments it relied on;
+   - after a draft save, Payload's "previous version" is the draft, not
+     what was live;
+   - a database read inside a hook replaced the request's context,
+     discarding the remembered address.
+
+   The address that was live is now read just before publishing and kept
+   against the request.
+8. **An image used only in a draft could be deleted.** The check counted
+   published records only; it now counts drafts too, each record once.
 
 ## For the Foundation
 
@@ -105,8 +118,7 @@ version; the media library's descriptions on the page.
 
 ## Open before go-live
 
-- **CNT-07** (slugs from titles, locked once published, automatic redirect)
-  and **CNT-08** (blocking deletion of referenced records): not built.
+- **CR-012** (redirects sent as 308, not 301) awaits approval.
 - **Cloudflare R2** does not exist. Until it does, the media library cannot
   go live, and when it does, its address must be allowed in Next's image
   settings.

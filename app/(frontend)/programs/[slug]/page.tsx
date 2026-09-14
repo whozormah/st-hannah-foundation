@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { getProgramme } from "@/lib/cms";
+import { followRedirect } from "@/lib/redirects";
 
 interface Program {
   slug: string;
@@ -54,6 +55,9 @@ export default async function ProgramPage({ params }: PageProps) {
   const program: Program | null = await getProgramme(slug);
 
   if (!program) {
+    // An address that changed keeps working (PUB-01, CNT-07).
+    await followRedirect(`/programs/${slug}`);
+
     return (
       <div className="container-custom py-16 md:py-24 text-center">
         {" "}
