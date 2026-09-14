@@ -40,15 +40,23 @@ photographs, alt text and image sizes.
 | **MIG-05** | Met | All 13 migrations and all 19 content steps run from an empty database, twice, with no duplicates. |
 | **MIG-06** | Pending | The files stay until the content is verified in production. |
 | **MIG-07** | Met | Contradictions are reported, not resolved. |
-| **MIG-08** | Built, with CR-011 | 65 image paths are 47 photographs, each uploaded once with drafted alt text awaiting approval. Goes live with Cloudflare R2. |
+| **MIG-08** | Built, with CR-011 | 65 image paths are 47 photographs, each uploaded once with drafted alt text awaiting approval. Rehearsed against an S3 stand-in for R2 (see below); goes live once the R2 account exists. |
 | **Editor training** | Guide written | `docs/editor-guide.md`. A session with the Foundation's staff has not been held. |
 
 ## Tests
 
-`npm run test:acl`: **89 of 89 passing.** 22 access control, 11 forms, 17
-workflow, 2 password reset, and Phase 6's 37: 15 content types, 1 publishing,
-2 statistics, 6 homepage blocks, 4 media, 4 preview, 3 addresses and
-redirects, 2 deleting content in use.
+`npm run test:acl`: **91 of 91 passing.** 22 access control, 11 forms, 17
+workflow, 2 password reset, 2 private files (A13, new), and Phase 6's 37: 15
+content types, 1 publishing, 2 statistics, 6 homepage blocks, 4 media, 4
+preview, 3 addresses and redirects, 2 deleting content in use.
+
+**Rehearsed with external storage.** With MinIO standing in for R2 (the same
+S3 interface): a fresh database, all 14 migrations, the content migration
+uploading into storage, and the site running against it. All 47 photographs
+reached the bucket, nothing was written to local disk, all 91 tests and the
+25-page comparison passed, and a private file opened only through a signed
+link lasting 300 seconds (A13, SEC-07). Turning R2 on changes nothing in the
+database. Setup steps: `docs/r2-setup.md`.
 
 **Each new test was proven able to fail:**
 
@@ -99,6 +107,11 @@ version; the media library's descriptions on the page.
    against the request.
 8. **An image used only in a draft could be deleted.** The check counted
    published records only; it now counts drafts too, each record once.
+9. **With external storage, 46 of 47 photographs were silently never
+   uploaded.** Found by the storage rehearsal. Payload's storage plugin keeps
+   each upload's file on the write's context and never clears it, and the
+   content migration reused one context object for every write. Each write
+   now gets its own; the media test, which loads every image, catches it.
 
 ## For the Foundation
 

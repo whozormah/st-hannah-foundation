@@ -32,8 +32,13 @@ const readJson = <T>(file: string): T =>
 /* This runs outside the website, so it cannot refresh the website's cache:
    a running site keeps showing what it cached before, for up to an hour
    (lib/cms.ts). The script says so when it finishes. Asking the hooks not to
-   try saves each write a failing attempt. */
-const context = { skipRevalidate: true };
+   try saves each write a failing attempt.
+
+   A fresh object for every write, never one shared: Payload's storage plugin
+   keeps each upload's file on the write's context the first time it sees
+   one, and never clears it. With one shared object, every image after the
+   first reached the database but was never uploaded to R2 — silently. */
+const context = () => ({ skipRevalidate: true });
 
 type Result = { source: number; published: number; notes?: string[] };
 type Migrator = (payload: Payload) => Promise<Result>;
@@ -128,14 +133,14 @@ async function upsertAll(
         id: existing.docs[0].id,
         data: data as never,
         overrideAccess: true,
-        context,
+        context: context(),
       });
     } else {
       await payload.create({
         collection,
         data: data as never,
         overrideAccess: true,
-        context,
+        context: context(),
       });
     }
   }
@@ -156,7 +161,7 @@ async function writeGlobal(
   slug: GlobalSlug,
   data: Record<string, unknown>,
 ): Promise<Result> {
-  await payload.updateGlobal({ slug, data: data as never, overrideAccess: true, context });
+  await payload.updateGlobal({ slug, data: data as never, overrideAccess: true, context: context() });
 
   const saved = (await payload.findGlobal({
     slug,
@@ -240,7 +245,7 @@ const migrators: Record<string, Migrator> = {
           id: doc.id,
           data: { sourcePaths: sources, ...(doc.altApproved ? {} : { alt }) } as never,
           overrideAccess: true,
-          context,
+          context: context(),
         });
       } else {
         // Named after the first path it was at: readable, and unique.
@@ -252,7 +257,7 @@ const migrators: Record<string, Migrator> = {
           data: { alt, sourceHash: hash, sourcePaths: sources, altApproved: false } as never,
           filePath: file,
           overrideAccess: true,
-          context,
+          context: context(),
         });
       }
     }
@@ -505,10 +510,10 @@ const migrators: Record<string, Migrator> = {
         id: existing.docs[0].id,
         data: data as never,
         overrideAccess: true,
-        context,
+        context: context(),
       });
     } else {
-      await payload.create({ collection: "pages", data: data as never, overrideAccess: true, context });
+      await payload.create({ collection: "pages", data: data as never, overrideAccess: true, context: context() });
     }
 
     // Read back: every block, in order, with every field as written.

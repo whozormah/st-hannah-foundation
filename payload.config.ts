@@ -33,7 +33,10 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
    the test suite run without cloud credentials. Production must set these;
    without them uploads fall back to local disk, which a redeploy destroys. */
 const r2Config = {
-  endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+  // R2_ENDPOINT is for testing against a local S3-compatible server; in
+  // production the address is built from the Cloudflare account ID.
+  endpoint:
+    process.env.R2_ENDPOINT || `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
   region: "auto",
   forcePathStyle: true,
   credentials: {
