@@ -850,6 +850,10 @@ export interface CampaignStory {
   whyStoryMatters?: string | null;
   needs?: string[] | null;
   videoLink?: string | null;
+  /**
+   * Optional: shown in place of the main picture, playing silently until a visitor taps for sound. Portrait videos suit the panel.
+   */
+  video?: (number | null) | Media;
   featured?: boolean | null;
   order?: number | null;
   updatedAt: string;
@@ -2013,6 +2017,7 @@ export interface CampaignStoriesSelect<T extends boolean = true> {
   whyStoryMatters?: T;
   needs?: T;
   videoLink?: T;
+  video?: T;
   featured?: T;
   order?: T;
   updatedAt?: T;

@@ -1,4 +1,5 @@
 import { getFoundation } from "@/lib/cms";
+import Rays from "@/components/shared/Rays";
 
 interface FoundationData {
   badge: string;
@@ -13,27 +14,8 @@ interface FoundationData {
    and mission are two staggered panels, each with its name in a large outline
    down its edge — the same outline the event appeal gives its year.
    Every word is the Foundation's, from About the Foundation in the CMS; the
-   outlined names are decoration, hidden from screen readers. */
-
-function Rays() {
-  return (
-    <svg aria-hidden viewBox="0 0 40 24" className="h-5 w-8 text-accent">
-      {[-60, -30, 0, 30, 60].map((angle) => (
-        <line
-          key={angle}
-          x1="20"
-          y1="22"
-          x2="20"
-          y2="6"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          transform={`rotate(${angle} 20 22)`}
-        />
-      ))}
-    </svg>
-  );
-}
+   outlined names are decoration, hidden from screen readers. The panels rise
+   gently into place on scroll where browsers support it (see .reveal-rise). */
 
 export default async function VisionMission() {
   const foundation: FoundationData = await getFoundation();
@@ -69,7 +51,7 @@ export default async function VisionMission() {
 
           {/* Vision and mission, layered */}
           <div className="lg:col-span-7">
-            <article className="relative overflow-hidden rounded-[36px] bg-white px-7 pb-12 pt-10 shadow-[0_30px_80px_-40px_rgba(132,66,4,0.35)] sm:pb-16 sm:pl-12 sm:pr-32 sm:pt-12 lg:mr-10">
+            <article className="reveal-rise relative overflow-hidden rounded-[36px] bg-white px-7 pb-12 pt-10 shadow-[0_30px_80px_-40px_rgba(132,66,4,0.35)] sm:pb-16 sm:pl-12 sm:pr-32 sm:pt-12 lg:mr-10">
               {/* The name runs down the panel's edge, like a book's spine,
                   clear of the statement; phones leave it out. */}
               <span
@@ -86,7 +68,7 @@ export default async function VisionMission() {
               </p>
             </article>
 
-            <article className="relative -mt-8 overflow-hidden rounded-[36px] bg-gradient-to-br from-[#2E1B05] via-brand-dark to-brand px-7 pb-12 pt-10 text-white shadow-[0_40px_90px_-30px_rgba(46,27,5,0.7)] sm:pb-14 sm:pl-12 sm:pr-32 sm:pt-12 lg:-mt-10 lg:ml-10">
+            <article className="reveal-rise relative -mt-8 overflow-hidden rounded-[36px] bg-gradient-to-br from-[#2E1B05] via-brand-dark to-brand px-7 pb-12 pt-10 text-white shadow-[0_40px_90px_-30px_rgba(46,27,5,0.7)] sm:pb-14 sm:pl-12 sm:pr-32 sm:pt-12 lg:-mt-10 lg:ml-10">
               <span
                 aria-hidden
                 className="pointer-events-none absolute right-5 top-1/2 hidden -translate-y-1/2 select-none font-display text-[5.5rem] font-bold leading-none text-transparent [-webkit-text-stroke:1.5px_rgba(245,210,122,0.4)] [writing-mode:vertical-rl] sm:block"

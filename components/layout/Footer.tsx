@@ -407,6 +407,17 @@ export default function Footer({ settings }: { settings: FooterSettings }) {
                   Terms of Use
                 </Link>
               </nav>
+
+              {/* For the Foundation's staff (CR-017). A plain link: the admin
+                  is a separate app with its own layout, so it loads in full. */}
+              {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- the admin is Payload's app, not a site page */}
+              <a
+                href="/admin"
+                rel="nofollow"
+                className="py-2 text-sm text-gray-400 transition hover:text-white"
+              >
+                Staff Sign In
+              </a>
             </div>
 
             <p className="text-gray-400 text-sm text-center md:text-right">

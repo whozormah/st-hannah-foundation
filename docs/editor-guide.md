@@ -6,7 +6,8 @@ without a developer.
 
 ## Signing in
 
-Go to **/admin** on the website and sign in with your email and password. If
+Choose **Staff Sign In** at the very bottom of any page (or go to **/admin**
+on the website) and sign in with your email and password. If
 you have forgotten your password, choose **Forgot password?**: a reset link
 arrives by email and works once.
 
@@ -137,6 +138,20 @@ hero while the appeal runs). It changes by itself with the date:
 When it has run its course, remove the section from the homepage.
 
 Videos must be MP4 files of 50 MB or less; photographs 10 MB or less.
+
+## About the Foundation
+
+**About the Foundation** holds the introduction, vision and mission shown in
+the homepage's Vision and Mission section, and the founder's message on the
+About page.
+
+## Campaign stories
+
+A campaign story (such as Esther's) can have a **Video**. It plays silently
+in place of the main picture, with a **Tap for sound** button that starts it
+again from the beginning with sound. Portrait videos from a phone suit the
+panel, and subtitles recorded in the video stay fully visible. Leave it empty
+to show the picture.
 
 ## Photographs
 

@@ -153,6 +153,15 @@ export const CampaignStories: CollectionConfig = {
     { name: "whyStoryMatters", type: "textarea" },
     list("needs"),
     { name: "videoLink", type: "text" },
+    {
+      ...imageField("video"),
+      label: "Video",
+      filterOptions: { mimeType: { contains: "video" } },
+      admin: {
+        description:
+          "Optional: shown in place of the main picture, playing silently until a visitor taps for sound. Portrait videos suit the panel.",
+      },
+    } as Field,
     { name: "featured", type: "checkbox" },
     order,
   ],

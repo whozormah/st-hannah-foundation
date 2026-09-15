@@ -18,6 +18,8 @@ export interface Story {
 
   donationLink?: string;
   videoLink?: string;
+  /** A video file shown in place of the main picture. */
+  video?: string;
 
   featured?: boolean;
 }

@@ -327,6 +327,8 @@ export type CampaignStory = {
   whyStoryMatters: string;
   needs: string[];
   videoLink: string;
+  /** The story's own video file, shown in place of the main picture. */
+  video: string;
   featured: boolean;
 };
 
@@ -344,6 +346,7 @@ export const getCampaigns = cached(CMS_TAGS.campaigns, async (): Promise<Campaig
     whyStoryMatters: text(d.whyStoryMatters),
     needs: lines(d.needs),
     videoLink: text(d.videoLink),
+    video: src(d.video),
     featured: Boolean(d.featured),
   })),
 );

@@ -21,27 +21,31 @@
   --color-cream-warm: #fff8ec;
   --color-ink: #1b1815;
 
-  /* Type scale, raised for readability.
-     Body and caption sizes gain the most (the site read small); display sizes
-     are left close to where they were so existing layouts still hold. */
-  --text-xs: 0.8125rem; /* 12 -> 13 */
+  /* Type scale, raised for readability, then eased back a little at the
+     Foundation's request (CR-015): every step is about 5% smaller than the
+     raised scale, so body text stays above Tailwind's defaults. */
+  --text-xs: 0.78125rem; /* 12.5 */
   --text-xs--line-height: 1.5;
-  --text-sm: 0.9375rem; /* 14 -> 15 */
+  --text-sm: 0.90625rem; /* 14.5 */
   --text-sm--line-height: 1.6;
-  --text-base: 1.0625rem; /* 16 -> 17 */
+  --text-base: 1rem; /* 16 */
   --text-base--line-height: 1.7;
-  --text-lg: 1.25rem; /* 18 -> 20  (the dominant body size) */
+  --text-lg: 1.1875rem; /* 19  (the dominant body size) */
   --text-lg--line-height: 1.75;
-  --text-xl: 1.375rem; /* 20 -> 22 */
+  --text-xl: 1.3125rem; /* 21 */
   --text-xl--line-height: 1.6;
-  --text-2xl: 1.625rem; /* 24 -> 26 */
+  --text-2xl: 1.5625rem; /* 25 */
   --text-2xl--line-height: 1.4;
-  --text-3xl: 2rem; /* 30 -> 32 */
+  --text-3xl: 1.875rem; /* 30 */
   --text-3xl--line-height: 1.3;
-  --text-4xl: 2.375rem; /* 36 -> 38 */
+  --text-4xl: 2.25rem; /* 36 */
   --text-4xl--line-height: 1.2;
-  --text-5xl: 3.125rem; /* 48 -> 50 */
+  --text-5xl: 3rem; /* 48 */
   --text-5xl--line-height: 1.1;
+  --text-6xl: 3.5rem; /* 56 */
+  --text-6xl--line-height: 1;
+  --text-7xl: 4.25rem; /* 68 */
+  --text-7xl--line-height: 1;
 }
 
 :root {
@@ -146,6 +150,28 @@ body {
   to {
     transform: none;
     opacity: 1;
+  }
+}
+
+/* Vision and Mission (CR-014): panels rise into place as they scroll into
+   view. Only where scroll-driven animation is supported, never for visitors
+   who ask for less motion; everywhere else they simply sit in place. */
+@keyframes panel-rise {
+  from {
+    transform: translateY(48px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-rise {
+      animation: panel-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
   }
 }
 

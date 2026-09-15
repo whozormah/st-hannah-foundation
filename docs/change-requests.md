@@ -266,6 +266,12 @@ Interface defects that belong to no phase are tracked separately, in
      page. Not embedded from a video site, so visitors are not tracked.
   4. "Download flyer", "Share on WhatsApp" (a plain link), and the venue
      linking to a map (a plain link, no embedded map).
+- **Also, for campaign stories:** a story may have its own video, shown in
+  place of its main picture, silent on a loop until a visitor taps for sound
+  (then from the start, with controls). A video keeps its own shape, so
+  subtitles recorded in it are never cropped. Esther Orga's story uses her
+  video, supplied by the Foundation; the file was only re-wrapped for
+  streaming, not edited.
 - **Not included:** no goal amount or "raised so far" figure (the
   Foundation chose none; a raised figure must come from donation records,
   CNT-09, so it waits for Phase 5 in any case). No sign-ups or tickets,
@@ -297,13 +303,57 @@ Interface defects that belong to no phase are tracked separately, in
 - **Change:** The homepage's Vision and Mission section is redesigned as an
   editorial manifesto: the introduction with a drop cap; the vision and
   mission as two staggered panels, each with its name in large outline down
-  its edge (left out on phones), matching the event appeal. The brand's colours, typefaces
-  and every word (from About the Foundation) are unchanged.
+  its edge (left out on phones), matching the event appeal. After the
+  Foundation's second review ("make it better"): the panels rise gently into
+  place on scroll, only where browsers support scroll-driven animation and
+  never for visitors who ask for less motion. A photograph beside the
+  introduction was tried and removed at the Foundation's request. The
+  brand's colours, typefaces and every word (from About the Foundation) are
+  unchanged.
 - **A18:** the Foundation's words are identical in the page. The comparison
   reads text as displayed, so it also sees the two decorative words
   ("Vision", "Mission", hidden from screen readers) and the section's labels
   shown in capitals by style; the homepage is re-baselined for these
   intended differences only.
+
+### CR-015 — Text across the site a little smaller
+
+- **Status:** Approved, 15 September 2026 — requested by the Foundation's
+  developer ("reduce the website fonts just a bit")
+- **Affects:** PUB-02 ("the existing design system ... retained unchanged")
+- **Change:** Every step of the site's type scale is about 5% smaller (the
+  main body size goes from 20px to 19px; large headings from 50px to 48px).
+  It is one change in `app/globals.css`, so every page follows. Typefaces,
+  colours, spacing and words are unchanged; sizes set outside the scale
+  (the small uppercase labels and the outlined decorative words) keep theirs.
+- **A18:** text only changes size, so the words compared are unaffected.
+
+### CR-016 — A redesigned Join the Mission section
+
+- **Status:** Approved, 15 September 2026 — requested by the Foundation's
+  developer ("redesign the join the mission section")
+- **Affects:** PUB-02 ("the existing design system ... retained unchanged")
+- **Change:** The homepage's closing Call to Action is laid out like the
+  Vision and Mission section: the invitation, its quote and attribution on
+  the left; the three ways to join (donate, volunteer, partner) on the right
+  as tall doorways, donating first and in gold; a sunrise drawn from the
+  section-label rays behind the closing line. The doorways rise into place on
+  scroll where supported. What each doorway does, the brand's colours and
+  typefaces, and every word are unchanged; the editable eyebrow, title and
+  description still come from the homepage's Call to Action block.
+- **A18:** the words and their order in the page are identical.
+
+### CR-017 — A staff sign-in link in the footer
+
+- **Status:** Approved, 15 September 2026 — requested by the Foundation's
+  developer ("link to access the admin page should be on the footer too")
+- **Affects:** the public footer, on every page
+- **Change:** "Staff Sign In", beside the Privacy Policy and Terms of Use
+  links, opens `/admin`. The admin's own sign-in and roles are unchanged: the
+  link only saves staff typing the address. It carries `rel="nofollow"`, and
+  `robots.txt` now also asks search engines not to crawl `/admin`.
+- **A18:** every page gains the words "Staff Sign In"; pages are re-baselined
+  for that line only.
 
 ## Decisions
 
