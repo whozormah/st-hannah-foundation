@@ -24,6 +24,8 @@ COPY --from=build /app/.next ./.next
 COPY --from=build /app/public ./public
 COPY --from=build /app/package.json ./package.json
 COPY --from=build /app/next.config.ts ./next.config.ts
+# The data cache (next.config.ts points to it): without it the server cannot start.
+COPY --from=build /app/cache-handler.cjs ./cache-handler.cjs
 COPY --from=build /app/payload.config.ts ./payload.config.ts
 COPY --from=build /app/payload ./payload
 COPY --from=build /app/migrations ./migrations

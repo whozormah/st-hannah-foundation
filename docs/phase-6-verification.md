@@ -119,6 +119,15 @@ version; the media library's descriptions on the page.
    each upload's file on the write's context and never clears it, and the
    content migration reused one context object for every write. Each write
    now gets its own; the media test, which loads every image, catches it.
+10. **A restart brought back an old homepage.** A section published after the
+    homepage was last cached disappeared again once the server restarted.
+    Next.js's default cache marks copies stale in memory only, and the old
+    copy on disk was served again after the restart; on the live site any
+    restart or redeploy could do this with up to an hour of changes. The
+    data cache now lives in memory only, and publishing deletes cached copies
+    (`cache-handler.cjs`). Proven with the exact sequence: take a section
+    off and visit the page, put it back, restart. It was missing afterwards
+    before the fix, and present after it.
 
 ## For the Foundation
 
@@ -143,7 +152,8 @@ version; the media library's descriptions on the page.
   go live, and when it does, its address must be allowed in Next's image
   settings.
 - **The Docker image copies the build as root but runs as another user,**
-  so Next probably cannot write its cache at runtime. Phase 8.
+  so Next probably cannot write its image cache at runtime (the data cache
+  no longer writes to disk). Phase 8.
 - **A19** (every page at 360 and 390 px) to be run at go-live.
 
 ## Merge note
