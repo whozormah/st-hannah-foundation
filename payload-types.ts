@@ -82,6 +82,7 @@ export interface Config {
     'featured-events': FeaturedEvent;
     'video-highlights': VideoHighlight;
     'campaign-stories': CampaignStory;
+    events: Event;
     'reference-counters': ReferenceCounter;
     'support-applications': SupportApplication;
     beneficiaries: Beneficiary;
@@ -127,6 +128,7 @@ export interface Config {
     'featured-events': FeaturedEventsSelect<false> | FeaturedEventsSelect<true>;
     'video-highlights': VideoHighlightsSelect<false> | VideoHighlightsSelect<true>;
     'campaign-stories': CampaignStoriesSelect<false> | CampaignStoriesSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
     'reference-counters': ReferenceCountersSelect<false> | ReferenceCountersSelect<true>;
     'support-applications': SupportApplicationsSelect<false> | SupportApplicationsSelect<true>;
     beneficiaries: BeneficiariesSelect<false> | BeneficiariesSelect<true>;
@@ -410,6 +412,7 @@ export interface Page {
         | TestimonialsBlock
         | LeadershipPreviewBlock
         | CallToActionBlock
+        | EventAppealBlock
         | RichTextBlock
         | ImageTextBlock
         | QuoteBlock
@@ -592,6 +595,70 @@ export interface CallToActionBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'callToAction';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventAppealBlock".
+ */
+export interface EventAppealBlock {
+  /**
+   * The event to show. Its words, pictures and video are edited in Events.
+   */
+  event: number | Event;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'eventAppeal';
+}
+/**
+ * Fundraising events. Show one on the homepage by adding an Event Appeal section.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  date: string;
+  /**
+   * For example 10:00 am. Leave empty until it is confirmed.
+   */
+  time?: string | null;
+  venue: string;
+  /**
+   * Two or three sentences, in the Foundation's own words.
+   */
+  summary: string;
+  /**
+   * Shown before the video plays, and to visitors whose phones are set to reduce motion.
+   */
+  poster: number | Media;
+  /**
+   * Optional: 10 to 20 seconds, no sound, played on a loop in the section.
+   */
+  loop?: (number | null) | Media;
+  /**
+   * Optional: opens in the section when the video button is pressed.
+   */
+  film?: (number | null) | Media;
+  /**
+   * Say when the picture or video is from, e.g. "Widows Program 2025", so last year's footage is never taken for this year's event.
+   */
+  mediaCaption?: string | null;
+  filmLabel?: string | null;
+  /**
+   * Optional: offered as a download and for sharing.
+   */
+  flyer?: (number | null) | Media;
+  /**
+   * Shown in place of the appeal once the date has passed.
+   */
+  recap?: {
+    thankYou?: string | null;
+    photos?: (number | Media)[] | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1355,6 +1422,10 @@ export interface PayloadLockedDocument {
         value: number | CampaignStory;
       } | null)
     | ({
+        relationTo: 'events';
+        value: number | Event;
+      } | null)
+    | ({
         relationTo: 'reference-counters';
         value: number | ReferenceCounter;
       } | null)
@@ -1645,6 +1716,7 @@ export interface PagesSelect<T extends boolean = true> {
         testimonials?: T | TestimonialsBlockSelect<T>;
         leadershipPreview?: T | LeadershipPreviewBlockSelect<T>;
         callToAction?: T | CallToActionBlockSelect<T>;
+        eventAppeal?: T | EventAppealBlockSelect<T>;
         richText?: T | RichTextBlockSelect<T>;
         imageText?: T | ImageTextBlockSelect<T>;
         quote?: T | QuoteBlockSelect<T>;
@@ -1770,6 +1842,15 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
   description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventAppealBlock_select".
+ */
+export interface EventAppealBlockSelect<T extends boolean = true> {
+  event?: T;
   id?: T;
   blockName?: T;
 }
@@ -1934,6 +2015,32 @@ export interface CampaignStoriesSelect<T extends boolean = true> {
   videoLink?: T;
   featured?: T;
   order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  date?: T;
+  time?: T;
+  venue?: T;
+  summary?: T;
+  poster?: T;
+  loop?: T;
+  film?: T;
+  mediaCaption?: T;
+  filmLabel?: T;
+  flyer?: T;
+  recap?:
+    | T
+    | {
+        thankYou?: T;
+        photos?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

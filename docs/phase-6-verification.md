@@ -45,10 +45,17 @@ photographs, alt text and image sizes.
 
 ## Tests
 
-`npm run test:acl`: **91 of 91 passing.** 22 access control, 11 forms, 17
-workflow, 2 password reset, 2 private files (A13, new), and Phase 6's 37: 15
+`npm run test:acl`: **96 of 96 passing.** 22 access control, 11 forms, 17
+workflow, 2 password reset, 2 private files (A13), and Phase 6's 42: 15
 content types, 1 publishing, 2 statistics, 6 homepage blocks, 4 media, 4
-preview, 3 addresses and redirects, 2 deleting content in use.
+preview, 3 addresses and redirects, 2 deleting content in use, 5 event appeal
+(CR-013).
+
+**The event appeal (CR-013)** was also checked in a real browser: no
+sideways overflow at 360, 390 and 1440 px; the countdown ticks; an amount
+button opens the donation form with the event and amount chosen; the full
+video opens in a dialog; phones set to reduce motion get the still picture.
+Its video is served in parts (HTTP 206), which phones need to play it.
 
 **Rehearsed with external storage.** With MinIO standing in for R2 (the same
 S3 interface): a fresh database, all 14 migrations, the content migration

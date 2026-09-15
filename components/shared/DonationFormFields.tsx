@@ -8,6 +8,8 @@ import PrivacyNotice from "@/components/shared/PrivacyNotice";
 
 interface DonationFormFieldsProps {
   programName?: string;
+  /** Pre-selects an amount, e.g. from an appeal's amount buttons. */
+  initialAmount?: string;
 }
 
 /* One donation system, not four forms. Naira is live through Paystack; the
@@ -43,13 +45,14 @@ const fieldClass =
 
 export default function DonationFormFields({
   programName,
+  initialAmount,
 }: DonationFormFieldsProps) {
   const amountInputRef = useRef<HTMLInputElement>(null);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(initialAmount ?? "");
   const [purpose, setPurpose] = useState(programName ?? "");
 
   const purposeOptions =

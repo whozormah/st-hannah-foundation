@@ -1,4 +1,4 @@
-import type { CollectionConfig, Field } from "payload";
+import { APIError, type CollectionBeforeValidateHook, type CollectionConfig, type Field } from "payload";
 
 import { allow, allowField } from "../access";
 import {
@@ -65,11 +65,37 @@ export const refreshes = (tag: string) => ({
    (section 8.2), and the record-keeping fields are for staff only. */
 const staffOnly = allowField("owner", "administrator", "content");
 
+/* MED-03, extended by CR-013: images up to 10 MB, videos (MP4) up to 50 MB.
+   Checked when a file arrives, before anything is stored. */
+const MB = 1024 * 1024;
+const UPLOAD_LIMITS: Record<string, number> = { image: 10 * MB, video: 50 * MB };
+
+const enforceUploadLimits: CollectionBeforeValidateHook = ({ data }) => {
+  const size = Number((data as { filesize?: unknown } | undefined)?.filesize);
+  const kind = String((data as { mimeType?: unknown } | undefined)?.mimeType ?? "").split("/")[0];
+  const limit = UPLOAD_LIMITS[kind];
+
+  if (limit && size > limit) {
+    throw new APIError(
+      `This ${kind} is ${(size / MB).toFixed(1)} MB; the limit is ${limit / MB} MB. Use a smaller version.`,
+      400,
+      undefined,
+      true,
+    );
+  }
+
+  return data;
+};
+
 export const Media: CollectionConfig = {
   slug: "media",
   labels: { singular: "Image", plural: "Media Library" },
-  upload: { mimeTypes: ["image/jpeg", "image/png", "image/webp"] },
-  hooks: { afterChange: [revalidateAllOnChange], afterDelete: [revalidateAllOnDelete] },
+  upload: { mimeTypes: ["image/jpeg", "image/png", "image/webp", "video/mp4"] },
+  hooks: {
+    beforeValidate: [enforceUploadLimits],
+    afterChange: [revalidateAllOnChange],
+    afterDelete: [revalidateAllOnDelete],
+  },
   admin: {
     group: "Content",
     useAsTitle: "alt",

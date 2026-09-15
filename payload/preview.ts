@@ -16,6 +16,8 @@ const PAGE_FOR: Record<string, (doc: Record<string, unknown>) => string | null> 
   "video-highlights": () => "/gallery",
   "volunteer-opportunities": () => "/volunteer",
   "volunteer-benefits": () => "/volunteer",
+  // An event appears in the homepage's Event Appeal section (CR-013).
+  events: () => "/",
 };
 
 export const PREVIEWABLE = Object.keys(PAGE_FOR);

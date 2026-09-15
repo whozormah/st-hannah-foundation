@@ -159,6 +159,20 @@ export const homepageBlocks: Block[] = [
     "The closing invitation to give, volunteer or partner.",
     copy(SECTION_COPY.callToAction, { multiline: true }),
   ),
+  block(
+    "eventAppeal",
+    "Event Appeal",
+    "A fundraising event beside a donation appeal (CR-013).",
+    [
+      {
+        name: "event",
+        type: "relationship",
+        relationTo: "events",
+        required: true,
+        admin: { description: "The event to show. Its words, pictures and video are edited in Events." },
+      },
+    ],
+  ),
   block("richText", "Rich Text", "Formatted text: headings, lists, quotations and links.", [
     {
       name: "content",

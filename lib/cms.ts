@@ -348,6 +348,73 @@ export const getCampaigns = cached(CMS_TAGS.campaigns, async (): Promise<Campaig
   })),
 );
 
+/* ── Events (CR-013) ────────────────────────────────────────────────────── */
+
+type Picture = { src: string; alt: string };
+
+export type EventDetails = {
+  id: number;
+  title: string;
+  /** The event's day, as YYYY-MM-DD in Lagos. */
+  day: string;
+  time: string;
+  venue: string;
+  summary: string;
+  poster: Picture | null;
+  loop: string;
+  film: string;
+  filmLabel: string;
+  mediaCaption: string;
+  flyer: string;
+  recap: { thankYou: string; photos: Picture[] };
+};
+
+const picture = (value: unknown): Picture | null => (src(value) ? { src: src(value), alt: altOf(value) } : null);
+
+/** A date as the calendar day it falls on in Lagos, YYYY-MM-DD. */
+export const lagosDay = (value: Date | string) =>
+  new Intl.DateTimeFormat("en-CA", { timeZone: "Africa/Lagos" }).format(new Date(value));
+
+const getEventDocs = cached(CMS_TAGS.appeals, async (): Promise<Doc[]> => {
+  const payload = await payloadClient();
+  const { docs } = await payload.find({
+    collection: "events",
+    ...(inPreview() ? { draft: true } : { where: { _status: { equals: "published" } } }),
+    sort: "date",
+    limit: 100,
+    depth: 1,
+  });
+
+  return docs as unknown as Doc[];
+});
+
+export async function getEvent(id: number): Promise<EventDetails | null> {
+  const d = (await getEventDocs()).find((doc) => Number(doc.id) === id);
+
+  if (!d || typeof d.date !== "string") return null;
+
+  const recap = (d.recap ?? {}) as Doc;
+
+  return {
+    id,
+    title: text(d.title),
+    day: lagosDay(d.date),
+    time: text(d.time),
+    venue: text(d.venue),
+    summary: text(d.summary),
+    poster: picture(d.poster),
+    loop: src(d.loop),
+    film: src(d.film),
+    filmLabel: text(d.filmLabel) || "Watch the video",
+    mediaCaption: text(d.mediaCaption),
+    flyer: src(d.flyer),
+    recap: {
+      thankYou: text(recap.thankYou),
+      photos: (Array.isArray(recap.photos) ? recap.photos : []).map(picture).filter((p): p is Picture => p !== null),
+    },
+  };
+}
+
 /* ── Page sections (globals) ────────────────────────────────────────────── */
 
 export type SiteSettings = {
@@ -431,6 +498,7 @@ type CopyBlockType = keyof typeof SECTION_COPY;
 export type HomeBlock = { id: string } & (
   | { blockType: "hero"; slides: HeroSlide[] }
   | { blockType: "visionMission" }
+  | { blockType: "eventAppeal"; event: number | null }
   | { blockType: CopyBlockType; eyebrow: string; title: string; description: string }
   | { blockType: "richText"; content: SerializedEditorState | null }
   | {
@@ -473,6 +541,11 @@ function toBlock(b: Doc): HomeBlock | null {
       };
     case "visionMission":
       return { id, blockType: "visionMission" };
+    case "eventAppeal": {
+      const event = b.event && typeof b.event === "object" ? (b.event as Doc).id : b.event;
+
+      return { id, blockType: "eventAppeal", event: typeof event === "number" ? event : Number(event) || null };
+    }
     case "richText":
       return { id, blockType: "richText", content: (b.content as SerializedEditorState) ?? null };
     case "imageText":

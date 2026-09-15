@@ -12,12 +12,14 @@ interface DonationModalProps {
   isOpen: boolean;
   onClose: () => void;
   programName?: string;
+  initialAmount?: string;
 }
 
 export default function DonationModal({
   isOpen,
   onClose,
   programName,
+  initialAmount,
 }: DonationModalProps) {
   const [isInKindOpen, setIsInKindOpen] = useState(false);
   const [isDonationFormOpen, setIsDonationFormOpen] = useState(false);
@@ -153,6 +155,7 @@ export default function DonationModal({
       <DonationFormModal
         isOpen={isDonationFormOpen}
         programName={programName}
+        initialAmount={initialAmount}
         onClose={() => setIsDonationFormOpen(false)}
       />
 

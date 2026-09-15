@@ -9,12 +9,14 @@ interface DonationFormModalProps {
   isOpen: boolean;
   onClose: () => void;
   programName?: string;
+  initialAmount?: string;
 }
 
 export default function DonationFormModal({
   isOpen,
   onClose,
   programName,
+  initialAmount,
 }: DonationFormModalProps) {
   useBodyScrollLock(isOpen);
 
@@ -63,7 +65,7 @@ export default function DonationFormModal({
         {/* Form */}
 
         <div className="p-8">
-          <DonationFormFields programName={programName} />
+          <DonationFormFields programName={programName} initialAmount={initialAmount} />
         </div>
       </div>
     </div>

@@ -245,6 +245,64 @@ Interface defects that belong to no phase are tracked separately, in
 - **If not approved:** a proxy limited to the public pages returns a 301,
   keeping its database lookup as small as possible.
 
+### CR-013 — A homepage appeal for a fundraising event, with video
+
+- **Status:** Approved, 14 September 2026 — requested by the Foundation's
+  developer for the Widows Program 2026 (24 December 2026, 25 Ilaje Road,
+  Bariga, Lagos)
+- **Affects:** Section 5 (content model), CNT-03 (block library), MED-03
+  (upload types and limits)
+- **Change:**
+  1. A new **Events** collection (Content): title, date, venue, a few lines
+     in the Foundation's words, a photo or video, an optional flyer, and a
+     recap for after the event.
+  2. A new homepage block, **Event Appeal**: the chosen event beside a
+     donation appeal. The donation opens the existing form with the event
+     named. It counts down to the event, says "Happening today" on the day,
+     and becomes a thank-you with the recap afterwards. Placed straight
+     after the hero while the appeal runs; editors can move or remove it.
+  3. Video uploads (MP4) in the media library, for event films: a short
+     silent loop for the section and the full film, which opens on the
+     page. Not embedded from a video site, so visitors are not tracked.
+  4. "Download flyer", "Share on WhatsApp" (a plain link), and the venue
+     linking to a map (a plain link, no embedded map).
+- **Not included:** no goal amount or "raised so far" figure (the
+  Foundation chose none; a raised figure must come from donation records,
+  CNT-09, so it waits for Phase 5 in any case). No sign-ups or tickets,
+  which would collect personal data before the legal gate.
+- **Architecture:** the video is served by the application with range
+  requests, which Payload supports from local disk and from R2, so phones
+  can play and seek. Like all media it goes live with R2 (MED-01). Before
+  go-live, a Cloudflare cache rule must cache media files, so repeat plays
+  are served by Cloudflare rather than the 1 GB droplet.
+- **Limits (extending MED-03):** video MP4 only, up to 50 MB; the section's
+  loop is prepared at a few MB. MED-04's spirit applies: the developer
+  prepares web versions of the Foundation's file rather than publishing it
+  as recorded.
+- **As built:** a live countdown to the day in Lagos (days, hours, minutes,
+  seconds), the picture filling the section, the title set as a poster with
+  the year in gold outline, the date and venue on a ticket stub with
+  directions, and amount buttons that open the existing donation form with
+  the event and amount chosen. A picture caption says when footage is from,
+  so last year's is never taken for this year's. The redesign after the
+  Foundation's first review ("the design is boring — the countdown should
+  really count") is what is built. Media uploads are now held to MED-03's
+  limits too: they were not enforced before.
+
+### CR-014 — A redesigned Vision and Mission section
+
+- **Status:** Approved, 15 September 2026 — requested by the Foundation's
+  developer after reviewing the event appeal
+- **Affects:** PUB-02 ("the existing design system ... retained unchanged")
+- **Change:** The homepage's Vision and Mission section is redesigned as an
+  editorial manifesto: the introduction with a drop cap; the vision and
+  mission as two layered panels, each with its name in large outline behind
+  the statement, matching the event appeal. The brand's colours, typefaces
+  and every word (from About the Foundation) are unchanged.
+- **A18:** the homepage's visible text gains only the two decorative words,
+  "Vision" and "Mission", hidden from screen readers; the Foundation's text
+  is identical.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

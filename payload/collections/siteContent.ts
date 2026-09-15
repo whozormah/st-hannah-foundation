@@ -158,6 +158,102 @@ export const CampaignStories: CollectionConfig = {
   ],
 };
 
+/* CR-013: a fundraising event, shown on the homepage with an Event Appeal
+   section. The section counts down to the date, says "Happening today" on
+   the day, and turns into a thank-you with the recap afterwards. */
+const onlyImages = { mimeType: { contains: "image" } };
+const onlyVideos = { mimeType: { contains: "video" } };
+
+export const Events: CollectionConfig = {
+  slug: "events",
+  labels: { singular: "Event", plural: "Events" },
+  hooks: refreshes(CMS_TAGS.appeals),
+  admin: {
+    useAsTitle: "title",
+    group: "Content",
+    defaultColumns: ["title", "date", "_status"],
+    description: "Fundraising events. Show one on the homepage by adding an Event Appeal section.",
+  },
+  access: contentAccess,
+  versions,
+  fields: [
+    { name: "title", type: "text", required: true },
+    {
+      name: "date",
+      label: "Event Date",
+      type: "date",
+      required: true,
+      admin: { date: { pickerAppearance: "dayOnly", displayFormat: "d MMMM yyyy" } },
+    },
+    {
+      name: "time",
+      label: "Time",
+      type: "text",
+      admin: { description: "For example 10:00 am. Leave empty until it is confirmed." },
+    },
+    { name: "venue", type: "text", required: true },
+    {
+      name: "summary",
+      label: "Why It Matters",
+      type: "textarea",
+      required: true,
+      admin: { description: "Two or three sentences, in the Foundation's own words." },
+    },
+    {
+      ...imageField("poster"),
+      label: "Picture",
+      required: true,
+      filterOptions: onlyImages,
+      admin: {
+        description: "Shown before the video plays, and to visitors whose phones are set to reduce motion.",
+      },
+    } as Field,
+    {
+      ...imageField("loop"),
+      label: "Short Silent Video",
+      filterOptions: onlyVideos,
+      admin: { description: "Optional: 10 to 20 seconds, no sound, played on a loop in the section." },
+    } as Field,
+    {
+      ...imageField("film"),
+      label: "Full Video",
+      filterOptions: onlyVideos,
+      admin: { description: "Optional: opens in the section when the video button is pressed." },
+    } as Field,
+    {
+      name: "mediaCaption",
+      label: "Picture Caption",
+      type: "text",
+      admin: {
+        description:
+          "Say when the picture or video is from, e.g. \"Widows Program 2025\", so last year's footage is never taken for this year's event.",
+      },
+    },
+    {
+      name: "filmLabel",
+      label: "Video Button",
+      type: "text",
+      defaultValue: "Watch last year's programme",
+    },
+    {
+      ...imageField("flyer"),
+      label: "Flyer",
+      filterOptions: onlyImages,
+      admin: { description: "Optional: offered as a download and for sharing." },
+    } as Field,
+    {
+      name: "recap",
+      label: "After the Event",
+      type: "group",
+      admin: { description: "Shown in place of the appeal once the date has passed." },
+      fields: [
+        { name: "thankYou", label: "Thank-You Message", type: "textarea" },
+        { ...imageFields("photos"), label: "Photographs", filterOptions: onlyImages } as Field,
+      ],
+    },
+  ],
+};
+
 export const siteContentCollections = [
   GalleryPhotos,
   VolunteerProfiles,
@@ -167,4 +263,5 @@ export const siteContentCollections = [
   FeaturedEvents,
   VideoHighlights,
   CampaignStories,
+  Events,
 ];

@@ -40,14 +40,18 @@ test("media: every image the old website used is in the library, once, described
     assert.ok(holders.has(source), `${source} is not in the media library`);
   }
 
+  // Checked among the images the migration brought in; staff uploads have
+  // no migration record.
+  const migrated = docs.filter((doc) => doc.sourceHash);
+
   assert.equal(
-    new Set(docs.map((doc) => doc.sourceHash)).size,
-    docs.length,
+    new Set(migrated.map((doc) => doc.sourceHash)).size,
+    migrated.length,
     "the same photograph is in the library twice",
   );
 });
 
-test("media: visitors can load every image, and nothing else (MED-01)", async () => {
+test("media: visitors can load every image and video, and nothing else (MED-01)", async () => {
   const response = await fetch(`${BASE}/api/media?limit=1000&depth=0`);
 
   assert.equal(response.status, 200, "a visitor cannot see the images the website shows");
@@ -62,7 +66,8 @@ test("media: visitors can load every image, and nothing else (MED-01)", async ()
     const file = await fetch(new URL(new URL(doc.url, BASE).pathname, BASE));
 
     assert.equal(file.status, 200, `a visitor cannot load ${doc.filename}`);
-    assert.match(file.headers.get("content-type") ?? "", /^image\//, `${doc.filename} is not served as an image`);
+    // Images, and since CR-013 event videos.
+    assert.match(file.headers.get("content-type") ?? "", /^(image|video)\//, `${doc.filename} is not served as an image or video`);
     await file.arrayBuffer();
   }
 

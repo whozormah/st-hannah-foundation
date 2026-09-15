@@ -117,6 +117,27 @@ Links must go to a page on this website (starting with **/**, such as
 the video itself, such as `https://www.youtube.com/watch?v=…`, not the
 YouTube home page.
 
+## Events
+
+For a fundraising event, such as the Widows Program, open **Events** and add
+one: its title, date, venue, a few lines on why it matters, and a picture.
+Optionally add a short silent video, the full video, and the flyer. Use
+**Picture Caption** to say when the picture or video is from ("Widows Program
+2025"), so last year's footage is never taken for this year's event.
+
+To show it, open **Pages → Homepage**, choose **Add Section → Event Appeal**,
+pick the event and drag the section to where you want it (straight after the
+hero while the appeal runs). It changes by itself with the date:
+
+- **Before the day:** a countdown, and buttons to give.
+- **On the day:** "Happening today".
+- **After the day:** your **Thank-You Message** and up to four photographs
+  from **After the Event**, and a button to support the next programme.
+
+When it has run its course, remove the section from the homepage.
+
+Videos must be MP4 files of 50 MB or less; photographs 10 MB or less.
+
 ## Photographs
 
 Every photograph is in the **Media Library**, once, with a **description**:
