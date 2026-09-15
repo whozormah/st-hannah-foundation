@@ -363,6 +363,7 @@ Interface defects that belong to no phase are tracked separately, in
 | — | Who writes the legal documents? | Developer drafts from facts in the code; the Foundation's lawyer approves | 12 Sep 2026 | Documents stay `draft` until approved |
 | — | Consent on forms without it | One-line notice and policy link; existing checkboxes unchanged | 12 Sep 2026 | PRV-03 display |
 | 8 | Content freeze during migration | Agreed: nobody edits the content files in `public/data` while they are migrated | 13 Sep 2026 | MIG-04; Phase 6 may proceed |
+| — | Update the current Vercel site with the new work before launch? | No: the Vercel site stays as it is; the new site goes live on its own server as planned | 15 Sep 2026 | No Vercel preview or partial port; launch still waits on R2, the database and legal approval |
 
 ## Still open
 
