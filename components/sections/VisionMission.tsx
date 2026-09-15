@@ -1,5 +1,3 @@
-import { Eye, Target } from "lucide-react";
-
 import { getFoundation } from "@/lib/cms";
 
 interface FoundationData {
@@ -10,74 +8,100 @@ interface FoundationData {
   mission: string;
 }
 
-// Keyed by name rather than array position. The previous version indexed into
-// a fixed icon list, so reordering the data silently moved every icon and a
-// seventh value would have rendered without one.
+/* The Foundation's introduction, vision and mission, set as an editorial
+   manifesto (CR-014): the introduction opens with a drop cap, and the vision
+   and mission are two staggered panels, each with its name in a large outline
+   down its edge — the same outline the event appeal gives its year.
+   Every word is the Foundation's, from About the Foundation in the CMS; the
+   outlined names are decoration, hidden from screen readers. */
+
+function Rays() {
+  return (
+    <svg aria-hidden viewBox="0 0 40 24" className="h-5 w-8 text-accent">
+      {[-60, -30, 0, 30, 60].map((angle) => (
+        <line
+          key={angle}
+          x1="20"
+          y1="22"
+          x2="20"
+          y2="6"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          transform={`rotate(${angle} 20 22)`}
+        />
+      ))}
+    </svg>
+  );
+}
+
 export default async function VisionMission() {
   const foundation: FoundationData = await getFoundation();
 
   return (
-    <section className="relative overflow-hidden bg-white py-14 md:py-24">
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-32 -top-56 h-[520px] w-[520px] rounded-full bg-cream" />
-
-        <div className="absolute bottom-0 right-0 h-[420px] w-[420px] rounded-full bg-cream/70" />
-      </div>
+    <section className="relative overflow-hidden bg-cream py-16 md:py-28">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-40 top-1/3 h-[560px] w-[560px] rounded-full bg-[radial-gradient(circle,rgba(217,164,65,0.18),transparent_65%)]"
+      />
 
       <div className="container-custom relative">
-        {/* Heading */}
+        <div className="grid gap-14 lg:grid-cols-12 lg:gap-12">
+          {/* The introduction */}
+          <div className="lg:col-span-5 lg:pt-6">
+            <div className="lg:sticky lg:top-28">
+              <p className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[4px] text-brand">
+                <Rays />
+                {foundation.badge}
+              </p>
 
-        <div className="max-w-3xl">
-          <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
-            {foundation.badge}
-          </span>
+              <h2 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight text-ink md:text-5xl lg:text-6xl">
+                {foundation.title}
+              </h2>
 
-          <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-5xl">
-            {foundation.title}
-          </h2>
+              <div aria-hidden className="mt-8 h-[3px] w-20 rounded-full bg-gradient-to-r from-brand to-accent" />
 
-          <p className="mt-6 text-lg leading-9 text-gray-700">
-            {foundation.description}
-          </p>
-        </div>
+              <p className="mt-8 text-lg leading-9 text-gray-700 first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-display first-letter:text-7xl first-letter:font-bold first-letter:leading-[0.8] first-letter:text-brand">
+                {foundation.description}
+              </p>
+            </div>
+          </div>
 
-        {/* Vision and mission */}
-
-        <div className="mt-14 grid gap-6 lg:grid-cols-2">
-          {[
-            { label: "Our Vision", icon: Eye, body: foundation.vision },
-            { label: "Our Mission", icon: Target, body: foundation.mission },
-          ].map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <article
-                key={item.label}
-                className="group relative overflow-hidden rounded-[28px] border border-accent/20 bg-white p-9 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:border-accent hover:shadow-xl"
+          {/* Vision and mission, layered */}
+          <div className="lg:col-span-7">
+            <article className="relative overflow-hidden rounded-[36px] bg-white px-7 pb-12 pt-10 shadow-[0_30px_80px_-40px_rgba(132,66,4,0.35)] sm:pb-16 sm:pl-12 sm:pr-32 sm:pt-12 lg:mr-10">
+              {/* The name runs down the panel's edge, like a book's spine,
+                  clear of the statement; phones leave it out. */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute right-5 top-1/2 hidden -translate-y-1/2 select-none font-display text-[5.5rem] font-bold leading-none text-transparent [-webkit-text-stroke:1.5px_rgba(132,66,4,0.22)] [writing-mode:vertical-rl] sm:block"
               >
-                <span
-                  aria-hidden
-                  className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand/10 text-brand transition-all duration-500 group-hover:bg-brand group-hover:text-white"
-                >
-                  <Icon size={30} />
-                </span>
+                Vision
+              </span>
 
-                {/* The label is the heading. It previously sat above a filler
-                    line ("Inspiring Hope.") that was not in the data. */}
-                <h3 className="mt-7 text-2xl font-bold text-ink">
-                  {item.label}
-                </h3>
+              <h3 className="relative text-sm font-semibold uppercase tracking-[4px] text-brand">Our Vision</h3>
 
-                <div aria-hidden className="mt-5 h-[2px] w-14 bg-accent" />
+              <p className="relative mt-6 font-display text-xl italic leading-[1.6] text-ink sm:text-3xl sm:leading-[1.45]">
+                {foundation.vision}
+              </p>
+            </article>
 
-                <p className="mt-6 text-lg leading-9 text-gray-700">
-                  {item.body}
-                </p>
-              </article>
-            );
-          })}
+            <article className="relative -mt-8 overflow-hidden rounded-[36px] bg-gradient-to-br from-[#2E1B05] via-brand-dark to-brand px-7 pb-12 pt-10 text-white shadow-[0_40px_90px_-30px_rgba(46,27,5,0.7)] sm:pb-14 sm:pl-12 sm:pr-32 sm:pt-12 lg:-mt-10 lg:ml-10">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute right-5 top-1/2 hidden -translate-y-1/2 select-none font-display text-[5.5rem] font-bold leading-none text-transparent [-webkit-text-stroke:1.5px_rgba(245,210,122,0.4)] [writing-mode:vertical-rl] sm:block"
+              >
+                Mission
+              </span>
+
+              <h3 className="relative text-sm font-semibold uppercase tracking-[4px] text-accent-soft">Our Mission</h3>
+
+              <p className="relative mt-6 font-display text-xl leading-[1.6] sm:text-3xl sm:leading-[1.45]">
+                {foundation.mission}
+              </p>
+            </article>
+          </div>
         </div>
-
       </div>
     </section>
   );

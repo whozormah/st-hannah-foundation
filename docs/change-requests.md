@@ -296,12 +296,14 @@ Interface defects that belong to no phase are tracked separately, in
 - **Affects:** PUB-02 ("the existing design system ... retained unchanged")
 - **Change:** The homepage's Vision and Mission section is redesigned as an
   editorial manifesto: the introduction with a drop cap; the vision and
-  mission as two layered panels, each with its name in large outline behind
-  the statement, matching the event appeal. The brand's colours, typefaces
+  mission as two staggered panels, each with its name in large outline down
+  its edge (left out on phones), matching the event appeal. The brand's colours, typefaces
   and every word (from About the Foundation) are unchanged.
-- **A18:** the homepage's visible text gains only the two decorative words,
-  "Vision" and "Mission", hidden from screen readers; the Foundation's text
-  is identical.
+- **A18:** the Foundation's words are identical in the page. The comparison
+  reads text as displayed, so it also sees the two decorative words
+  ("Vision", "Mission", hidden from screen readers) and the section's labels
+  shown in capitals by style; the homepage is re-baselined for these
+  intended differences only.
 
 ## Decisions
 
