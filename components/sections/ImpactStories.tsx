@@ -2,9 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import Rays from "@/components/shared/Rays";
 import TitleLines from "@/components/shared/TitleLines";
 import { getStories } from "@/lib/cms";
 import { SECTION_COPY, type SectionCopy } from "@/lib/section-copy";
+
+/* The homepage's three impact stories (CR-018), set like a magazine: the
+   first story fills a tall cover with its words over the photograph, the
+   other two sit beside it as slim cards. Every word, and the link to the
+   full index, are the site's own; the stories come from the CMS. */
 
 interface Story {
   slug: string;
@@ -12,6 +18,35 @@ interface Story {
   category: string;
   image: string;
   excerpt: string;
+}
+
+function Category({ children, onDark = false }: { children: string; onDark?: boolean }) {
+  return (
+    <span
+      className={`text-xs font-semibold uppercase tracking-[4px] ${
+        onDark ? "text-accent-soft" : "text-brand"
+      }`}
+    >
+      {children}
+    </span>
+  );
+}
+
+function ReadLink({ onDark = false }: { onDark?: boolean }) {
+  return (
+    <span
+      className={`mt-5 inline-flex items-center gap-2 font-semibold ${
+        onDark ? "text-accent-soft" : "text-brand"
+      }`}
+    >
+      Read Full Story
+      <ArrowRight
+        aria-hidden
+        size={18}
+        className="transition-transform duration-300 group-hover:translate-x-1.5"
+      />
+    </span>
+  );
 }
 
 export default async function ImpactStories({
@@ -22,80 +57,115 @@ export default async function ImpactStories({
   const allStories: Story[] = await getStories();
 
   // Teaser; /impact-stories carries the full index.
-  const stories = allStories.slice(0, 3);
+  const [lead, ...rest] = allStories.slice(0, 3);
 
   return (
-    <section className="py-28 bg-white">
-      <div className="container-custom">
-        {/* Header */}
+    <section className="relative overflow-hidden bg-white py-16 md:py-28">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -left-52 top-24 h-[540px] w-[540px] rounded-full bg-[radial-gradient(circle,rgba(217,164,65,0.16),transparent_65%)]"
+      />
 
-        <div className="text-center max-w-3xl mx-auto mb-20">
+      <div className="container-custom relative">
+        {/* Header */}
+        <div className="max-w-3xl">
           {eyebrow && (
-            <span className="uppercase tracking-[5px] text-brand font-semibold">
+            <p className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[4px] text-brand">
+              <Rays className="h-5 w-8 shrink-0 text-accent" />
               {eyebrow}
-            </span>
+            </p>
           )}
 
-          <h2 className="text-4xl md:text-5xl font-bold mt-4 text-ink">
+          <h2 className="mt-6 font-display text-4xl font-bold leading-[1.05] tracking-tight text-ink md:text-5xl">
             <TitleLines text={title} />
           </h2>
 
           {description && (
-            <p className="max-w-3xl mx-auto mt-6 text-gray-700 text-lg leading-8">
-              {description}
-            </p>
+            <p className="mt-6 text-lg leading-9 text-gray-700">{description}</p>
           )}
         </div>
 
-        {/* Stories */}
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {stories.map((story) => (
-            <div
-              key={story.slug}
-              className="group bg-white rounded-[28px] overflow-hidden border border-accent/20 hover:shadow-xl transition-all duration-300"
+        {lead && (
+          <div className="mt-14 grid gap-6 lg:grid-cols-12">
+            {/* The lead story, told over its photograph */}
+            <Link
+              href={`/impact-stories/${lead.slug}`}
+              className="reveal-rise group relative flex min-h-[26rem] overflow-hidden rounded-[36px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand lg:col-span-7 lg:min-h-[34rem]"
             >
-              <div className="relative h-64 overflow-hidden">
-                <Image
-                  src={story.image}
-                  alt={story.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition duration-500"
-                />
-              </div>
+              <Image
+                src={lead.image}
+                alt={lead.title}
+                fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="object-cover transition duration-700 group-hover:scale-[1.04]"
+              />
 
-              <div className="p-6">
-                <span className="text-brand text-sm font-semibold uppercase tracking-[2px]">
-                  {story.category}
+              <span
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-[#1B0E02] via-[#1B0E02]/70 to-transparent"
+              />
+
+              <span className="relative mt-auto block p-7 text-white sm:p-10">
+                <Category onDark>{lead.category}</Category>
+
+                <span className="mt-3 block font-display text-3xl font-bold leading-tight sm:text-4xl">
+                  {lead.title}
                 </span>
 
-                <h3 className="text-2xl font-bold mt-3 text-ink">
-                  {story.title}
-                </h3>
+                <span className="mt-4 block max-w-xl leading-8 text-white/80">
+                  {lead.excerpt}
+                </span>
 
-                <p className="mt-4 text-gray-700 leading-7">{story.excerpt}</p>
+                <ReadLink onDark />
+              </span>
+            </Link>
 
+            {/* The other two, side by side with the cover */}
+            <div className="grid content-start gap-6 lg:col-span-5">
+              {rest.map((story) => (
                 <Link
+                  key={story.slug}
                   href={`/impact-stories/${story.slug}`}
-                  className="inline-flex items-center gap-2 mt-6 text-brand font-semibold hover:gap-3 transition-all"
+                  className="reveal-rise group flex flex-col gap-5 rounded-[28px] border border-accent/20 bg-cream-warm/60 p-5 transition-colors duration-500 hover:border-accent/60 hover:bg-cream-warm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand sm:flex-row sm:p-6"
                 >
-                  Read Full Story
-                  <ArrowRight size={18} />
+                  {/* On phones the picture sits above the words, so the title has the full width. */}
+                  <span className="relative block h-44 w-full shrink-0 overflow-hidden rounded-2xl sm:h-32 sm:w-32">
+                    <Image
+                      src={story.image}
+                      alt={story.title}
+                      fill
+                      sizes="(min-width: 640px) 128px, 100vw"
+                      className="object-cover transition duration-700 group-hover:scale-[1.06]"
+                    />
+                  </span>
+
+                  <span className="block flex-1">
+                    <Category>{story.category}</Category>
+
+                    <span className="mt-2 block font-display text-2xl font-bold leading-tight text-ink">
+                      {story.title}
+                    </span>
+
+                    <span className="mt-3 block leading-7 text-gray-700">
+                      {story.excerpt}
+                    </span>
+
+                    <ReadLink />
+                  </span>
                 </Link>
-              </div>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        )}
 
-        {/* CTA */}
-
-        <div className="text-center mt-16">
+        {/* The full index */}
+        <div className="mt-12 flex justify-center border-t border-accent/20 pt-10">
           <Link
             href="/impact-stories"
-            className="inline-flex items-center gap-3 bg-brand text-white px-8 py-4 rounded-xl font-semibold hover:bg-brand-dark transition"
+            className="inline-flex items-center gap-3 rounded-xl bg-brand px-8 py-4 font-semibold text-white transition hover:bg-brand-dark"
           >
             View All Impact Stories
-            <ArrowRight size={20} />
+            <ArrowRight aria-hidden size={20} />
           </Link>
         </div>
       </div>

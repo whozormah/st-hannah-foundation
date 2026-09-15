@@ -355,6 +355,21 @@ Interface defects that belong to no phase are tracked separately, in
 - **A18:** every page gains the words "Staff Sign In"; pages are re-baselined
   for that line only.
 
+### CR-018 — A redesigned Stories of Transformation section
+
+- **Status:** Approved, 15 September 2026 — requested by the Foundation's
+  developer ("redesign stories of transformation")
+- **Affects:** PUB-02 ("the existing design system ... retained unchanged")
+- **Change:** The homepage's three impact stories are set like a magazine
+  instead of three equal cards: the first story fills a tall cover with its
+  category, title and opening words over the photograph; the other two sit
+  beside it as slim cards with square pictures. The heading moves left and
+  takes the same rays mark as Vision and Mission and Join the Mission. The
+  cards rise into place on scroll where supported. Which stories appear
+  (the first three, newest first), where they link, the editable eyebrow,
+  title and description, and every word are unchanged.
+- **A18:** the words and their order in the page are identical.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |
