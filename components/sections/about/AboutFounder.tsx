@@ -56,9 +56,10 @@ export default async function AboutFounder() {
               </div>
             </div>
 
-            {/* Floating Quote Card */}
+            {/* Floating Quote Card. On phones it sits under the photograph
+                instead of over it, which covered the founder's face. */}
 
-            <div className="absolute -bottom-6 right-4 max-w-sm rounded-[28px] border border-accent/20 bg-white p-6 shadow-2xl sm:p-8 lg:-bottom-10 lg:-right-10">
+            <div className="mt-6 max-w-sm rounded-[28px] border border-accent/20 bg-white p-6 shadow-2xl sm:absolute sm:-bottom-6 sm:right-4 sm:mt-0 sm:p-8 lg:-bottom-10 lg:-right-10">
               <span className="text-6xl font-serif text-accent/20">&quot;</span>
 
               <p className="-mt-5 italic leading-8 text-gray-700">
