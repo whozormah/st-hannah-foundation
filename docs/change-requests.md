@@ -456,6 +456,16 @@ Interface defects that belong to no phase are tracked separately, in
   date. Testimonies, event videos and outreach photographs are added when the
   Foundation supplies them. The 2026 event's venue is corrected to 35 Ilaje
   Road.
+- **Media added, 16 September 2026:** the Foundation's own photographs and
+  videos, resized for the web and described (descriptions drafted for the
+  Foundation's approval, CR-011): the widows story, 20 photographs from the
+  24 December 2025 programme and 4 videos from that day; the UTME story, 6
+  photographs and 3 videos of the students; a new published story, "Equipping
+  Students for a New School Year" (Back-to-School Support Programme, 28
+  December 2025), in the Foundation's words, with 8 photographs, published
+  with parental consent confirmed by the Foundation. Seven packing
+  photographs are in the media library, unused. The 27 December 2025 widows
+  programme at another location waits for its photographs and words.
 - **Tests:** `tests/story-page.test.mjs`.
 
 ### CR-022 — Stories in parts, with key lines and what the support included
