@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Users, CalendarDays } from "lucide-react";
 
+import StoryContext from "@/components/shared/StoryContext";
 import { getStories } from "@/lib/cms";
 
 interface Story {
@@ -13,6 +14,7 @@ interface Story {
   beneficiaries: string;
   date: string;
   featured: boolean;
+  programme: string;
 }
 
 export default async function ImpactFeaturedStory() {
@@ -84,6 +86,8 @@ export default async function ImpactFeaturedStory() {
                 </div>
               </div>
             </dl>
+
+            <StoryContext programme={story.programme} className="mt-5 text-base" />
 
             <Link
               href={`/impact-stories/${story.slug}`}

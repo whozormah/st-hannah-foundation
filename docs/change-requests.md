@@ -400,6 +400,30 @@ Interface defects that belong to no phase are tracked separately, in
 - **A18:** the homepage gains the new slide's words; it is re-baselined for
   those lines only.
 
+### CR-020 — Stories say when they happened and which programme they came from
+
+- **Status:** Approved, 16 September 2026 — requested by the Foundation's
+  developer, to make the difference unmistakable: Our Programmes are what the
+  Foundation does; Stories of Transformation are what happened because it did
+- **Affects:** PUB-02, section 5 (the Impact Stories content type)
+- **Change:** every story card (the homepage section, the Impact Stories list,
+  the featured story and "Continue Reading" on story pages) shows, beneath the
+  summary, the story's date and how many it reached, and "Part of our …
+  programme". Each part appears only when the story has it: nothing is filled
+  in or guessed. "Reached" is the wording the site already used.
+- **New field:** Impact Stories gain an optional **Programme**, a link to a
+  programme. The card shows the programme's current name, so renaming a
+  programme updates every card; a programme a story links to cannot be deleted
+  while the link stands.
+- **Links set, at the Foundation's choice:** UTME Sponsorship → Education
+  Support; Family Feeding → Family Support; Medical Aid Outreach → Medical Aid;
+  Widow Empowerment → Widows Support Program. Business Empowerment matches no
+  programme and shows none until one is set.
+- **Not changed:** no extra spacing between the two homepage sections, which
+  are already three sections apart.
+- **A18:** story cards gain these lines; the affected pages are re-baselined for
+  them only.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

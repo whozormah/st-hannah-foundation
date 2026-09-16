@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import StoryContext from "@/components/shared/StoryContext";
 import { getStories } from "@/lib/cms";
 
 interface Story {
@@ -10,6 +11,9 @@ interface Story {
   category: string;
   excerpt: string;
   image: string;
+  date: string;
+  beneficiaries: string;
+  programme: string;
 }
 
 export default async function RelatedStories({
@@ -83,6 +87,13 @@ export default async function RelatedStories({
                 <div className="mt-5 h-[3px] w-14 rounded-full bg-accent" />
 
                 <p className="mt-6 leading-8 text-gray-700">{story.excerpt}</p>
+
+                <StoryContext
+                  date={story.date}
+                  beneficiaries={story.beneficiaries}
+                  programme={story.programme}
+                  className="mt-6"
+                />
 
                 <div className="mt-8 inline-flex items-center gap-2 font-semibold text-brand">
                   Read Story

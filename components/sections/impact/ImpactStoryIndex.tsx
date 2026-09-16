@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Users } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
+import StoryContext from "@/components/shared/StoryContext";
 import { getStories } from "@/lib/cms";
 
 interface Story {
@@ -13,6 +14,7 @@ interface Story {
   beneficiaries: string;
   date: string;
   featured: boolean;
+  programme: string;
 }
 
 export default async function ImpactStoryIndex() {
@@ -74,12 +76,14 @@ export default async function ImpactStoryIndex() {
                     {story.excerpt}
                   </p>
 
-                  <div className="mt-6 flex items-center justify-between gap-4 border-t border-accent/15 pt-5">
-                    <span className="inline-flex items-center gap-2 text-sm text-gray-600">
-                      <Users size={16} className="text-brand" aria-hidden />
-                      {story.beneficiaries} reached
-                    </span>
+                  <StoryContext
+                    date={story.date}
+                    beneficiaries={story.beneficiaries}
+                    programme={story.programme}
+                    className="mt-5"
+                  />
 
+                  <div className="mt-6 flex items-center justify-end gap-4 border-t border-accent/15 pt-5">
                     <span className="inline-flex items-center gap-2 font-semibold text-brand">
                       Read
                       <ArrowRight

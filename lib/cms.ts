@@ -118,6 +118,7 @@ export const getTestimonials = cached(CMS_TAGS.testimonials, async (): Promise<T
 );
 
 export type Programme = {
+  id: number;
   slug: string;
   title: string;
   icon: string;
@@ -134,6 +135,7 @@ export type Programme = {
 
 export const getProgrammes = cached(CMS_TAGS.programmes, async (): Promise<Programme[]> =>
   (await published("programmes")).map((d) => ({
+    id: Number(d.id),
     slug: text(d.slug),
     title: text(d.title),
     icon: text(d.icon),
@@ -155,6 +157,8 @@ export async function getProgramme(slug: string) {
 
 /** The shape of impact-stories/stories.json: what the story list shows. */
 export type StorySummary = {
+  /** The name of the programme the story came out of; empty if none. */
+  programme: string;
   slug: string;
   title: string;
   category: string;
@@ -189,7 +193,15 @@ export type Story = {
 const getStoryDocs = cached(CMS_TAGS.stories, () => published("impact-stories"));
 
 export async function getStories(): Promise<StorySummary[]> {
-  return (await getStoryDocs()).map((d) => ({
+  // The programme's name is looked up by id from the programmes themselves,
+  // so renaming a programme shows on every story card at once, and a story
+  // whose programme is unpublished simply shows no programme.
+  const [docs, programmes] = await Promise.all([getStoryDocs(), getProgrammes()]);
+  const names = new Map(programmes.map((p) => [p.id, p.title]));
+
+  return docs.map((d) => ({
+    programme:
+      names.get(Number(d.programme && typeof d.programme === "object" ? (d.programme as Doc).id : d.programme)) ?? "",
     slug: text(d.slug),
     title: text(d.title),
     category: text(d.category),

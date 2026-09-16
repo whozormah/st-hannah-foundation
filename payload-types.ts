@@ -312,6 +312,10 @@ export interface ImpactStory {
    */
   slug?: string | null;
   category?: string | null;
+  /**
+   * The programme this story came out of, shown on its card as "Part of our … programme". Leave it empty if it belongs to none.
+   */
+  programme?: (number | null) | Programme;
   excerpt?: string | null;
   beneficiaries?: string | null;
   featured?: boolean | null;
@@ -1628,6 +1632,7 @@ export interface ImpactStoriesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   category?: T;
+  programme?: T;
   excerpt?: T;
   beneficiaries?: T;
   featured?: T;

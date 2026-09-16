@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import Rays from "@/components/shared/Rays";
+import StoryContext from "@/components/shared/StoryContext";
 import TitleLines from "@/components/shared/TitleLines";
 import { getStories } from "@/lib/cms";
 import { SECTION_COPY, type SectionCopy } from "@/lib/section-copy";
@@ -18,6 +19,9 @@ interface Story {
   category: string;
   image: string;
   excerpt: string;
+  date: string;
+  beneficiaries: string;
+  programme: string;
 }
 
 function Category({ children, onDark = false }: { children: string; onDark?: boolean }) {
@@ -116,6 +120,14 @@ export default async function ImpactStories({
                   {lead.excerpt}
                 </span>
 
+                <StoryContext
+                  date={lead.date}
+                  beneficiaries={lead.beneficiaries}
+                  programme={lead.programme}
+                  onDark
+                  className="mt-5"
+                />
+
                 <ReadLink onDark />
               </span>
             </Link>
@@ -149,6 +161,13 @@ export default async function ImpactStories({
                     <span className="mt-3 block leading-7 text-gray-700">
                       {story.excerpt}
                     </span>
+
+                    <StoryContext
+                      date={story.date}
+                      beneficiaries={story.beneficiaries}
+                      programme={story.programme}
+                      className="mt-4"
+                    />
 
                     <ReadLink />
                   </span>

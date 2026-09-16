@@ -200,6 +200,15 @@ export const ImpactStories: CollectionConfig = {
     { name: "title", type: "text", required: true },
     slugField({ from: "title" }),
     { name: "category", type: "text" },
+    {
+      name: "programme",
+      type: "relationship",
+      relationTo: "programmes",
+      admin: {
+        description:
+          "The programme this story came out of, shown on its card as \"Part of our … programme\". Leave it empty if it belongs to none.",
+      },
+    },
     // One summary serves both the story list and the story page: in the
     // source they were separate fields holding identical text in all five.
     { name: "excerpt", type: "textarea" },
