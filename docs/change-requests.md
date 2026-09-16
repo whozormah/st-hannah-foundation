@@ -393,6 +393,10 @@ Interface defects that belong to no phase are tracked separately, in
   site's dark brown so the words keep the left of the frame, its edge softened
   into the background. No part of the photograph is altered; nothing is added
   to it.
+- **Phones:** the hero fills the screen's height, so a phone shows only a
+  narrow middle strip of each picture, which on this slide cut the founder's
+  face. At the Foundation's choice, phones now frame the pictures right of
+  centre (65%) on every slide; tablets and desktops are unchanged.
 - **A18:** the homepage gains the new slide's words; it is re-baselined for
   those lines only.
 

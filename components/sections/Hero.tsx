@@ -57,7 +57,10 @@ export default function Hero({ slides }: { slides: HeroSlide[] }) {
                 loading={index === 0 ? undefined : "lazy"}
                 sizes="100vw"
                 quality={70}
-                className="object-cover"
+                // Phones keep only a narrow strip of a wide picture; frame
+                // right of centre there, where the founder slide's subject
+                // stands. Wider screens show the picture as before.
+                className="object-cover object-[65%_center] md:object-center"
               />
 
               <div
