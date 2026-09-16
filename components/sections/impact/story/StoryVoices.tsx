@@ -7,7 +7,14 @@ import type { Testimony } from "@/lib/cms";
 /* Real testimonies, in the words the Foundation supplied, each only once its
    consent is confirmed: that check happens before they reach this component
    (CR-021). A testimony may be words, a video, a photograph, or a mix. */
-export default function StoryVoices({ testimonies }: { testimonies: Testimony[] }) {
+export default function StoryVoices({
+  testimonies,
+  eyebrow = "",
+}: {
+  testimonies: Testimony[];
+  /** The story's own small heading, such as "Hear From the Students". */
+  eyebrow?: string;
+}) {
   if (!testimonies.length) return null;
 
   return (
@@ -16,7 +23,7 @@ export default function StoryVoices({ testimonies }: { testimonies: Testimony[] 
         <div className="max-w-3xl">
           <p className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[4px] text-brand">
             <Rays className="h-5 w-8 shrink-0 text-accent" />
-            Hear From Them
+            {eyebrow || "Hear From Them"}
           </p>
 
           <h2 className="mt-6 font-display text-4xl font-bold leading-[1.05] tracking-tight text-ink md:text-5xl">

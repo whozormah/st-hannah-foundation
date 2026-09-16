@@ -9,7 +9,7 @@ import {
 } from "../revalidate";
 import { CMS_TAGS } from "../../lib/cms-tags";
 import { homepageBlocks } from "../blocks";
-import { imageField, imageFields, list, paragraphs } from "../fields";
+import { imageField, imageFields, list } from "../fields";
 import { slugField } from "../slugs";
 
 /* Content, media and SEO — section 8.2: Owner and Administrator CRUD, Content
@@ -225,7 +225,33 @@ export const ImpactStories: CollectionConfig = {
     { name: "challenge", type: "textarea" },
     { name: "response", type: "textarea" },
     { name: "impact", type: "textarea" },
-    paragraphs("story"),
+    {
+      name: "story",
+      label: "Story",
+      type: "array",
+      labels: { singular: "Paragraph", plural: "Paragraphs" },
+      fields: [
+        {
+          name: "heading",
+          label: "Heading Above (optional)",
+          type: "text",
+          admin: { description: "Starts a new part of the story, such as \"More Than Registration\"." },
+        },
+        { name: "text", type: "textarea", required: true },
+        {
+          name: "highlight",
+          label: "Highlight this line",
+          type: "checkbox",
+          defaultValue: false,
+          admin: { description: "Sets a key line larger, in the display type." },
+        },
+      ],
+    },
+    {
+      ...list("included"),
+      label: "What The Support Included",
+      admin: { description: "One item each, such as \"Mentorship\". Shown as a list after the story." },
+    } as Field,
     {
       name: "quote",
       type: "group",
@@ -271,6 +297,15 @@ export const ImpactStories: CollectionConfig = {
           admin: { description: "Optional: shown before the video plays." },
         } as Field,
       ],
+    },
+    {
+      name: "testimoniesHeading",
+      label: "Testimonies Heading",
+      type: "text",
+      admin: {
+        description:
+          "The small heading above the testimonies, such as \"Hear From the Students\". Leave it empty for \"Hear From Them\".",
+      },
     },
     {
       name: "testimonies",

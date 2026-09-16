@@ -1,15 +1,16 @@
 import Image from "next/image";
 
-import type { Picture } from "@/lib/cms";
+import type { Picture, StoryParagraph } from "@/lib/cms";
 
-/* The story itself, with its pictures placed between the paragraphs: one after
-   every second paragraph, and any left over at the end. A short line, such as
-   "And it is only the beginning.", is set larger as a pause (CR-021). */
+/* The story itself (CR-021, CR-022). A paragraph may open a new part with its
+   own heading, or be a highlighted key line, set larger in the display type.
+   Pictures sit between the paragraphs: one after every second paragraph, and
+   any left over at the end. */
 export default function StoryNarrative({
   paragraphs,
   pictures,
 }: {
-  paragraphs: string[];
+  paragraphs: StoryParagraph[];
   pictures: Picture[];
 }) {
   if (!paragraphs.length && !pictures.length) return null;
@@ -30,18 +31,27 @@ export default function StoryNarrative({
   );
 
   paragraphs.forEach((paragraph, index) => {
-    const short = paragraph.trim().length < 60;
+    if (paragraph.heading) {
+      nodes.push(
+        <h2
+          key={`h${index}`}
+          className={`font-display text-3xl font-bold leading-tight text-ink md:text-4xl ${index > 0 ? "pt-8" : ""}`}
+        >
+          {paragraph.heading}
+        </h2>,
+      );
+    }
 
     nodes.push(
       <p
         key={`p${index}`}
         className={
-          short
+          paragraph.highlight
             ? "font-display text-2xl italic leading-relaxed text-brand md:text-3xl"
             : "text-lg leading-9 text-gray-700"
         }
       >
-        {paragraph}
+        {paragraph.text}
       </p>,
     );
 

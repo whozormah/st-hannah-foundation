@@ -88,11 +88,32 @@ test("story page: figures, event videos and video testimonies appear when added"
 test("story page: sections without content stay hidden, and the story can be shared", async (t) => {
   const { html } = await withStory(t, { story: [{ text: "A single synthetic paragraph." }] });
 
-  for (const heading of ["Voices of Transformation", "Watch The Story", "Impact figures", "Moments From The Programme", "The Challenge"]) {
+  for (const heading of ["Voices of Transformation", "Watch The Story", "Impact figures", "Moments From The Programme", "The Challenge", "What the Support Included"]) {
     assert.ok(!html.includes(heading), `"${heading}" shows with nothing in it`);
   }
 
   assert.ok(html.includes("Share This Story") && html.includes("wa.me"), "sharing is missing");
+});
+
+test("story page: parts with headings, highlighted lines, the support list and the story's own testimony heading", async (t) => {
+  const stamp = Date.now();
+  const { html } = await withStory(t, {
+    story: [
+      { heading: `A Part Heading ${stamp}`, text: `An opening paragraph ${stamp}.` },
+      { text: `A key line ${stamp}.`, highlight: true },
+    ],
+    included: [`First support item ${stamp}`, `Second support item ${stamp}`],
+    testimoniesHeading: `Hear From Test ${stamp}`,
+    testimonies: [{ quote: `Consented words ${stamp}`, attribution: "anonymous", consentConfirmed: true }],
+  });
+
+  assert.ok(html.includes(`A Part Heading ${stamp}`), "the part heading is missing");
+
+  const keyLine = html.indexOf(`A key line ${stamp}.`);
+  assert.ok(keyLine > 0 && html.slice(html.lastIndexOf("<p", keyLine), keyLine).includes("font-display"), "the key line is not highlighted");
+
+  assert.ok(html.includes("What the Support Included") && html.includes(`Second support item ${stamp}`), "the support list is missing");
+  assert.ok(html.includes(`Hear From Test ${stamp}`), "the story's own testimony heading is missing");
 });
 
 test("testimonies: a named one needs a name, and each needs words or a video", async () => {

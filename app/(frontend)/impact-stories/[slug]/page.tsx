@@ -8,6 +8,7 @@ import StoryDonationCTA from "@/components/sections/impact/StoryDonationCTA";
 import ShareStory from "@/components/sections/impact/story/ShareStory";
 import StoryFigures from "@/components/sections/impact/story/StoryFigures";
 import StoryGallery from "@/components/sections/impact/story/StoryGallery";
+import StoryIncluded from "@/components/sections/impact/story/StoryIncluded";
 import StoryNarrative from "@/components/sections/impact/story/StoryNarrative";
 import StoryVideos from "@/components/sections/impact/story/StoryVideos";
 import StoryVoices from "@/components/sections/impact/story/StoryVoices";
@@ -179,11 +180,21 @@ export default async function StoryPage({
             <StoryNarrative paragraphs={story.story} pictures={story.supportingImages} />
           </div>
 
+          {story.included.length > 0 && (
+            <div className="mt-16">
+              <StoryIncluded items={story.included} />
+            </div>
+          )}
+
           <div className="mt-16">
             <ShareStory title={story.title} url={`${siteUrl}/impact-stories/${story.slug}`} />
           </div>
         </div>
       </section>
+
+      {/* The people the story is about, straight after it (CR-022) */}
+
+      <StoryVoices testimonies={story.testimonies} eyebrow={story.testimoniesHeading} />
 
       {/* Story Gallery, full width so the photographs lead (CR-021) */}
 
@@ -211,8 +222,6 @@ export default async function StoryPage({
       )}
 
       <StoryVideos videos={story.videos} />
-
-      <StoryVoices testimonies={story.testimonies} />
 
       {/* Quote */}
 

@@ -212,10 +212,18 @@ not appear.
   link to it.
 - **Impact Figures**: a value and a label, such as "500+" and "Widows
   gathered". Only figures the Foundation has confirmed.
+- **Story**: one paragraph at a time. Give a paragraph a **Heading Above** to
+  start a new part, such as "More Than Registration". Tick **Highlight this
+  line** for a key sentence, shown larger.
+- **What The Support Included**: one item each, such as "Mentorship". Shown as
+  a list after the story.
 - **Pictures Within The Story**: placed between the paragraphs, in order.
 - **Images**: the photo gallery. The first photograph is shown large.
 - **Event Videos**: upload the video, give it a title, and optionally a cover
   picture.
+- **Testimonies Heading**: the small heading above the testimonies, such as
+  "Hear From the Students". Leave it empty for "Hear From Them". Testimonies
+  are shown straight after the story.
 - **Testimonies**: the person's words, a video, a photograph, or a mix.
   - Choose **Show their name** or **Anonymous**, as they agreed.
   - Keep their words as given: correct spelling or punctuation only.

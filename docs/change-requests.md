@@ -458,6 +458,31 @@ Interface defects that belong to no phase are tracked separately, in
   Road.
 - **Tests:** `tests/story-page.test.mjs`.
 
+### CR-022 — Stories in parts, with key lines and what the support included
+
+- **Status:** Approved, 16 September 2026 — requested by the Foundation's
+  developer, first for the 2026 UTME story
+- **Affects:** section 5 (Impact Stories), the story page
+- **Change:** each paragraph of a story may carry a **Heading Above**, opening
+  a new part ("More Than Registration"), and may be marked **Highlight this
+  line**, set larger in the display type. A story may list **What The Support
+  Included**, shown after it. A story may name its own **Testimonies Heading**
+  ("Hear From the Students"; empty shows "Hear From Them"). Testimonies now
+  follow the story directly, before the gallery and videos, so the people it
+  is about come first. The automatic enlargement of short lines (CR-021) is
+  replaced by the explicit highlight; the widows story's "And it is only the
+  beginning." is marked so, and looks as before.
+- **Content, at the Foundation's choice:** "Opening Doors Through UTME
+  Sponsorship" becomes **"Making Education Possible"**, in the Foundation's
+  words, for the 2026 UTME: date "2026"; figure "15+ Students supported"; the
+  support list (UTME registration sponsorship, mentorship, examination
+  preparation, academic tutorials), which also stands for the Impact points,
+  as agreed. Its unsourced quote ("Without this sponsorship…", "Student
+  Beneficiary") is removed, and a photograph listed twice in its gallery is
+  listed once. Student testimonies, photographs and videos are added when the
+  Foundation supplies them.
+- **Tests:** `tests/story-page.test.mjs`.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

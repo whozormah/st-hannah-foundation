@@ -329,10 +329,22 @@ export interface ImpactStory {
   impact?: string | null;
   story?:
     | {
+        /**
+         * Starts a new part of the story, such as "More Than Registration".
+         */
+        heading?: string | null;
         text: string;
+        /**
+         * Sets a key line larger, in the display type.
+         */
+        highlight?: boolean | null;
         id?: string | null;
       }[]
     | null;
+  /**
+   * One item each, such as "Mentorship". Shown as a list after the story.
+   */
+  included?: string[] | null;
   quote?: {
     text?: string | null;
     author?: string | null;
@@ -362,6 +374,10 @@ export interface ImpactStory {
         id?: string | null;
       }[]
     | null;
+  /**
+   * The small heading above the testimonies, such as "Hear From the Students". Leave it empty for "Hear From Them".
+   */
+  testimoniesHeading?: string | null;
   /**
    * Real testimonies from the people the story is about. Upload a testimony's video or photograph only once they have agreed to it being published.
    */
@@ -1696,9 +1712,12 @@ export interface ImpactStoriesSelect<T extends boolean = true> {
   story?:
     | T
     | {
+        heading?: T;
         text?: T;
+        highlight?: T;
         id?: T;
       };
+  included?: T;
   quote?:
     | T
     | {
@@ -1721,6 +1740,7 @@ export interface ImpactStoriesSelect<T extends boolean = true> {
         poster?: T;
         id?: T;
       };
+  testimoniesHeading?: T;
   testimonies?:
     | T
     | {

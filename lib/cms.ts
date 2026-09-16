@@ -171,6 +171,8 @@ export type StorySummary = {
 
 /** The shape of each impact-stories/<slug>.json: a story's own page. */
 export type StoryFigure = { value: string; label: string };
+/** A paragraph of a story; it may open a new part with a heading, or be a key line. */
+export type StoryParagraph = { heading: string; text: string; highlight: boolean };
 export type StoryVideo = { src: string; poster: string; title: string };
 /** A testimony that may be shown: consent is checked before it gets here (CR-021). */
 export type Testimony = { quote: string; video: string; photo: Picture | null; name: string; about: string };
@@ -192,10 +194,14 @@ export type Story = {
   challenge: string;
   response: string;
   impact: string;
-  story: string[];
+  story: StoryParagraph[];
   /** Absent when the story has no quote; the page then shows none. */
   quote?: { text: string; author: string };
   programme: { title: string; slug: string } | null;
+  /** What the support included, as a list after the story. */
+  included: string[];
+  /** The small heading above the testimonies; empty for the default. */
+  testimoniesHeading: string;
   stats: StoryFigure[];
   supportingImages: Picture[];
   videos: StoryVideo[];
@@ -257,9 +263,13 @@ export async function getStory(slug: string): Promise<Story | null> {
     challenge: text(d.challenge),
     response: text(d.response),
     impact: text(d.impact),
-    story: paras(d.story),
+    story: ((d.story ?? []) as Doc[])
+      .map((p) => ({ heading: text(p.heading), text: text(p.text), highlight: p.highlight === true }))
+      .filter((p) => p.text),
     ...(text(quote.text) ? { quote: { text: text(quote.text), author: text(quote.author) } } : {}),
     programme: programme ? { title: programme.title, slug: programme.slug } : null,
+    included: lines(d.included).filter(Boolean),
+    testimoniesHeading: text(d.testimoniesHeading),
     stats: ((d.stats ?? []) as Doc[])
       .map((s) => ({ value: text(s.value), label: text(s.label) }))
       .filter((s) => s.value && s.label),

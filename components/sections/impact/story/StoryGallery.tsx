@@ -22,7 +22,11 @@ export default function StoryGallery({ title, pictures }: { title: string; pictu
         {pictures.map((picture, index) => (
           <li
             key={`${picture.src}-${index}`}
-            className={index === 0 ? "col-span-2 row-span-2" : index % 5 === 3 ? "md:col-span-2" : ""}
+            // One or two photographs share the width equally; from three, the
+            // first leads, large.
+            className={
+              count <= 2 || index === 0 ? "col-span-2 row-span-2" : index % 5 === 3 ? "md:col-span-2" : ""
+            }
           >
             <button
               type="button"
