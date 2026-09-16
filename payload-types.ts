@@ -337,6 +337,55 @@ export interface ImpactStory {
     text?: string | null;
     author?: string | null;
   };
+  /**
+   * Shown beneath the story's opening, such as "500+" and "Widows gathered". Only figures the Foundation has confirmed.
+   */
+  stats?:
+    | {
+        value: string;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Placed between the paragraphs of the story, in this order.
+   */
+  supportingImages?: (number | Media)[] | null;
+  videos?:
+    | {
+        video: number | Media;
+        title?: string | null;
+        /**
+         * Optional: shown before the video plays.
+         */
+        poster?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Real testimonies from the people the story is about. Upload a testimony's video or photograph only once they have agreed to it being published.
+   */
+  testimonies?:
+    | {
+        /**
+         * As they gave them. Correct spelling or punctuation only, never the meaning.
+         */
+        quote?: string | null;
+        video?: (number | null) | Media;
+        photo?: (number | null) | Media;
+        attribution: 'named' | 'anonymous';
+        name?: string | null;
+        /**
+         * For example "Widow, Bariga". Leave it empty unless they agreed to it.
+         */
+        about?: string | null;
+        /**
+         * Tick only once they have agreed to this being published, named or anonymously as chosen above. Until then it is kept here but never shown on the website.
+         */
+        consentConfirmed?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
   order?: number | null;
   seo?: {
     title?: string | null;
@@ -1655,6 +1704,34 @@ export interface ImpactStoriesSelect<T extends boolean = true> {
     | {
         text?: T;
         author?: T;
+      };
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  supportingImages?: T;
+  videos?:
+    | T
+    | {
+        video?: T;
+        title?: T;
+        poster?: T;
+        id?: T;
+      };
+  testimonies?:
+    | T
+    | {
+        quote?: T;
+        video?: T;
+        photo?: T;
+        attribution?: T;
+        name?: T;
+        about?: T;
+        consentConfirmed?: T;
+        id?: T;
       };
   order?: T;
   seo?:

@@ -189,6 +189,9 @@ export const Programmes: CollectionConfig = {
 /* Values are kept as the Foundation wrote them (MIG-07): "100+" and
    "October 2025" are stored as text, not converted into a number or a date
    the source never stated. */
+const storyImagesOnly = { mimeType: { contains: "image" } };
+const storyVideosOnly = { mimeType: { contains: "video" } };
+
 export const ImpactStories: CollectionConfig = {
   slug: "impact-stories",
   labels: { singular: "Impact Story", plural: "Impact Stories" },
@@ -229,6 +232,105 @@ export const ImpactStories: CollectionConfig = {
       fields: [
         { name: "text", type: "textarea" },
         { name: "author", type: "text" },
+      ],
+    },
+    /* CR-021: a full transformation story. Every part is optional and its
+       section on the page stays hidden until it has real content. */
+    {
+      name: "stats",
+      label: "Impact Figures",
+      type: "array",
+      labels: { singular: "Figure", plural: "Figures" },
+      admin: {
+        description:
+          "Shown beneath the story's opening, such as \"500+\" and \"Widows gathered\". Only figures the Foundation has confirmed.",
+      },
+      fields: [
+        { name: "value", type: "text", required: true },
+        { name: "label", type: "text", required: true },
+      ],
+    },
+    {
+      ...imageFields("supportingImages"),
+      label: "Pictures Within The Story",
+      filterOptions: storyImagesOnly,
+      admin: { description: "Placed between the paragraphs of the story, in this order." },
+    } as Field,
+    {
+      name: "videos",
+      label: "Event Videos",
+      type: "array",
+      labels: { singular: "Video", plural: "Videos" },
+      fields: [
+        { name: "video", type: "upload", relationTo: "media", required: true, filterOptions: storyVideosOnly },
+        { name: "title", type: "text" },
+        {
+          ...imageField("poster"),
+          label: "Cover Picture",
+          filterOptions: storyImagesOnly,
+          admin: { description: "Optional: shown before the video plays." },
+        } as Field,
+      ],
+    },
+    {
+      name: "testimonies",
+      label: "Testimonies",
+      type: "array",
+      labels: { singular: "Testimony", plural: "Testimonies" },
+      admin: {
+        description:
+          "Real testimonies from the people the story is about. Upload a testimony's video or photograph only once they have agreed to it being published.",
+      },
+      validate: ((rows: unknown) =>
+        !Array.isArray(rows) ||
+        rows.every((row: { quote?: string; video?: unknown }) => row?.quote?.trim() || row?.video) ||
+        "Each testimony needs their words, a video, or both.") as never,
+      fields: [
+        {
+          name: "quote",
+          label: "Their Words",
+          type: "textarea",
+          admin: {
+            description: "As they gave them. Correct spelling or punctuation only, never the meaning.",
+          },
+        },
+        { name: "video", label: "Video Testimony", type: "upload", relationTo: "media", filterOptions: storyVideosOnly },
+        { ...imageField("photo"), label: "Photograph", filterOptions: storyImagesOnly } as Field,
+        {
+          name: "attribution",
+          type: "select",
+          required: true,
+          defaultValue: "anonymous",
+          options: [
+            { label: "Show their name", value: "named" },
+            { label: "Anonymous", value: "anonymous" },
+          ],
+        },
+        {
+          name: "name",
+          type: "text",
+          admin: { condition: (_data: unknown, row: { attribution?: string }) => row?.attribution === "named" },
+          validate: ((value: unknown, { siblingData }: { siblingData?: { attribution?: string } }) =>
+            siblingData?.attribution === "named" && !(typeof value === "string" && value.trim())
+              ? "Add their name, or choose Anonymous."
+              : true) as never,
+        } as Field,
+        {
+          name: "about",
+          label: "About Them (optional)",
+          type: "text",
+          admin: { description: "For example \"Widow, Bariga\". Leave it empty unless they agreed to it." },
+        },
+        {
+          name: "consentConfirmed",
+          label: "Consent to publish confirmed",
+          type: "checkbox",
+          defaultValue: false,
+          admin: {
+            description:
+              "Tick only once they have agreed to this being published, named or anonymously as chosen above. Until then it is kept here but never shown on the website.",
+          },
+        },
       ],
     },
     { name: "order", type: "number" },

@@ -202,3 +202,25 @@ date. Never publish a figure the Foundation cannot back up.
 | A change is not on the website | Check you chose **Publish changes**, not only **Save Draft**. |
 | *"…is still used, so it cannot be deleted"* | Remove it from the records listed, then delete it. |
 | *"Use lowercase letters and numbers joined by hyphens"* | The web address has characters it cannot use. |
+
+## Impact stories: figures, videos and testimonies
+
+A story's page is built from what you fill in. Any part left empty simply does
+not appear.
+
+- **Programme**: the programme the story came out of. The card and the page
+  link to it.
+- **Impact Figures**: a value and a label, such as "500+" and "Widows
+  gathered". Only figures the Foundation has confirmed.
+- **Pictures Within The Story**: placed between the paragraphs, in order.
+- **Images**: the photo gallery. The first photograph is shown large.
+- **Event Videos**: upload the video, give it a title, and optionally a cover
+  picture.
+- **Testimonies**: the person's words, a video, a photograph, or a mix.
+  - Choose **Show their name** or **Anonymous**, as they agreed.
+  - Keep their words as given: correct spelling or punctuation only.
+  - Tick **Consent to publish confirmed** only once they have agreed. Until
+    then the testimony is saved but never shown on the website.
+  - Upload a testimony's video or photograph only after consent: files in the
+    media library can be opened by anyone who has their address.
+

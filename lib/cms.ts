@@ -170,6 +170,11 @@ export type StorySummary = {
 };
 
 /** The shape of each impact-stories/<slug>.json: a story's own page. */
+export type StoryFigure = { value: string; label: string };
+export type StoryVideo = { src: string; poster: string; title: string };
+/** A testimony that may be shown: consent is checked before it gets here (CR-021). */
+export type Testimony = { quote: string; video: string; photo: Picture | null; name: string; about: string };
+
 export type Story = {
   slug: string;
   category: string;
@@ -182,12 +187,19 @@ export type Story = {
   location: string;
   image: string;
   images: string[];
+  /** The same photographs as images, each with its description. */
+  gallery: Picture[];
   challenge: string;
   response: string;
   impact: string;
   story: string[];
   /** Absent when the story has no quote; the page then shows none. */
   quote?: { text: string; author: string };
+  programme: { title: string; slug: string } | null;
+  stats: StoryFigure[];
+  supportingImages: Picture[];
+  videos: StoryVideo[];
+  testimonies: Testimony[];
 };
 
 const getStoryDocs = cached(CMS_TAGS.stories, () => published("impact-stories"));
@@ -214,11 +226,18 @@ export async function getStories(): Promise<StorySummary[]> {
 }
 
 export async function getStory(slug: string): Promise<Story | null> {
-  const d = (await getStoryDocs()).find((doc) => doc.slug === slug);
+  const [docs, programmes] = await Promise.all([getStoryDocs(), getProgrammes()]);
+  const d = docs.find((doc) => doc.slug === slug);
 
   if (!d) return null;
 
   const quote = (d.quote ?? {}) as { text?: unknown; author?: unknown };
+  const programmeId = Number(
+    d.programme && typeof d.programme === "object" ? (d.programme as Doc).id : d.programme,
+  );
+  const programme = programmes.find((p) => p.id === programmeId);
+  const pictures = (value: unknown) =>
+    Array.isArray(value) ? value.map(picture).filter((p): p is Picture => p !== null) : [];
 
   return {
     slug: text(d.slug),
@@ -234,11 +253,31 @@ export async function getStory(slug: string): Promise<Story | null> {
     location: text(d.location),
     image: src(d.image),
     images: srcs(d.images),
+    gallery: pictures(d.images),
     challenge: text(d.challenge),
     response: text(d.response),
     impact: text(d.impact),
     story: paras(d.story),
     ...(text(quote.text) ? { quote: { text: text(quote.text), author: text(quote.author) } } : {}),
+    programme: programme ? { title: programme.title, slug: programme.slug } : null,
+    stats: ((d.stats ?? []) as Doc[])
+      .map((s) => ({ value: text(s.value), label: text(s.label) }))
+      .filter((s) => s.value && s.label),
+    supportingImages: pictures(d.supportingImages),
+    videos: ((d.videos ?? []) as Doc[])
+      .map((v) => ({ src: src(v.video), poster: src(v.poster), title: text(v.title) }))
+      .filter((v) => v.src),
+    // Consent is checked here, on the server: a testimony without it never
+    // reaches the page, nor the data sent along with the page (CR-021).
+    testimonies: ((d.testimonies ?? []) as Doc[])
+      .filter((t) => t.consentConfirmed === true && (text(t.quote).trim() || src(t.video)))
+      .map((t) => ({
+        quote: text(t.quote),
+        video: src(t.video),
+        photo: picture(t.photo),
+        name: t.attribution === "named" ? text(t.name) : "",
+        about: text(t.about),
+      })),
   };
 }
 
@@ -365,7 +404,7 @@ export const getCampaigns = cached(CMS_TAGS.campaigns, async (): Promise<Campaig
 
 /* ── Events (CR-013) ────────────────────────────────────────────────────── */
 
-type Picture = { src: string; alt: string };
+export type Picture = { src: string; alt: string };
 
 export type EventDetails = {
   id: number;

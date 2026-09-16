@@ -424,6 +424,40 @@ Interface defects that belong to no phase are tracked separately, in
 - **A18:** story cards gain these lines; the affected pages are re-baselined for
   them only.
 
+### CR-021 — A full transformation story, with real testimonies
+
+- **Status:** Approved, 16 September 2026 — requested by the Foundation's
+  developer, first for the 24 December 2025 widows outreach
+- **Affects:** PUB-02, section 5 (Impact Stories), the story page
+- **Change:** a story page can now carry, each part hidden until it has real
+  content: confirmed **impact figures**; **pictures within the story**, placed
+  between its paragraphs; a full-width **photo gallery** in the site's gallery
+  viewer; a **Watch The Story** video section; **Hear From Them: Voices of
+  Transformation**, for written, video and photo testimonies; the **programme**
+  it belongs to, linking to it; and **Share This Story** (the device's share
+  sheet, WhatsApp, Facebook, X, copy link; plain links, no third-party
+  scripts). The Challenge, Our Response and Impact Created headings now show
+  only when they have text.
+- **Consent:** each testimony records whether the person is named or
+  anonymous and carries **Consent to publish confirmed**. Without the tick it
+  is kept in the CMS but never shown: the check runs on the server, so its
+  words and name are not sent with the page either. A named testimony needs a
+  name; each needs words or a video. Stories are not readable through the API
+  by visitors.
+- **Known limit:** files in the media library are public by address (MED-01).
+  Staff are told, in the admin and the editor guide, to upload a testimony's
+  video or photograph only once consent is given.
+- **Content, at the Foundation's choice:** the August 2025 widows story is
+  replaced, at the same address, by "Restoring Dignity, Renewing Hope for
+  Widows" (24 December 2025, 35 Ilaje Road, Bariga, Lagos; figure: 500+ widows
+  gathered), in the Foundation's words. Its old quote, not a testimony
+  supplied for this outreach, is removed. The gallery keeps the Foundation's
+  widows programme photographs under its existing heading, which names no
+  date. Testimonies, event videos and outreach photographs are added when the
+  Foundation supplies them. The 2026 event's venue is corrected to 35 Ilaje
+  Road.
+- **Tests:** `tests/story-page.test.mjs`.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |
