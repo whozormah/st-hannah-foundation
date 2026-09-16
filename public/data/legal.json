@@ -1,14 +1,14 @@
 {
   "status": "draft",
-  "draftNotice": "This is a draft for review by the Foundation's lawyer. It is not yet in effect.",
-  "registeredName": null,
+  "draftNotice": "This is a draft for approval by the Foundation. It is not yet in effect.",
+  "registeredName": "St. Hannah Charity Foundation",
   "dataProtectionContact": {
-    "name": null,
-    "email": null
+    "name": "The St. Hannah Foundation team",
+    "email": "support@sthannahfoundation.org"
   },
   "emailProvider": {
-    "name": null,
-    "location": null
+    "name": "Resend",
+    "location": "the United States"
   },
   "privacy": {
     "version": "1.0",
@@ -85,14 +85,38 @@
       }
     ],
     "retention": [
-      { "record": "Applications for support", "period": null },
-      { "record": "Volunteer applications", "period": null },
-      { "record": "Partnership enquiries", "period": null },
-      { "record": "Donation records", "period": null },
-      { "record": "In-kind donation arrangements", "period": null },
-      { "record": "Contact messages", "period": null },
-      { "record": "Newsletter subscriptions", "period": null },
-      { "record": "International giving updates", "period": null }
+      {
+        "record": "Applications for support",
+        "period": "6 years after the case is closed"
+      },
+      {
+        "record": "Volunteer applications",
+        "period": "2 years after our last contact with you"
+      },
+      {
+        "record": "Partnership enquiries",
+        "period": "3 years after our last contact with you"
+      },
+      {
+        "record": "Donation records",
+        "period": "6 years, for tax and audit purposes"
+      },
+      {
+        "record": "In-kind donation arrangements",
+        "period": "3 years after the donation is completed"
+      },
+      {
+        "record": "Contact messages",
+        "period": "2 years after your message is resolved"
+      },
+      {
+        "record": "Newsletter subscriptions",
+        "period": "Until you unsubscribe; removed within 30 days after"
+      },
+      {
+        "record": "International giving updates",
+        "period": "Until you ask us to stop, or 2 years without contact"
+      }
     ],
     "sections": [
       {
@@ -129,7 +153,9 @@
       {
         "id": "legal-basis",
         "heading": "Our legal basis",
-        "paragraphs": ["We rely on:"],
+        "paragraphs": [
+          "We rely on:"
+        ],
         "items": [
           "Your consent — for support applications, the newsletter and international giving updates. You can withdraw it at any time.",
           "Taking steps you have asked us to take — processing a donation, arranging an in-kind gift, and responding to volunteer, partnership and contact enquiries.",
@@ -184,7 +210,9 @@
       {
         "id": "your-rights",
         "heading": "Your rights",
-        "paragraphs": ["Under the Nigeria Data Protection Act 2023, you have the right to:"],
+        "paragraphs": [
+          "Under the Nigeria Data Protection Act 2023, you have the right to:"
+        ],
         "items": [
           "be told how your information is used, as this policy does;",
           "have a copy of the information we hold about you;",
@@ -221,7 +249,7 @@
     "version": "1.0",
     "lastUpdated": "2026-09-12",
     "effectiveDate": null,
-    "governingLaw": null,
+    "governingLaw": "the laws of the Federal Republic of Nigeria",
     "summary": "The terms that apply when you use this website, give a donation or submit a form.",
     "sections": [
       {
@@ -293,7 +321,9 @@
       {
         "id": "law",
         "heading": "Governing law",
-        "paragraphs": ["These terms are governed by {{governingLaw}}."]
+        "paragraphs": [
+          "These terms are governed by {{governingLaw}}."
+        ]
       },
       {
         "id": "changes",
@@ -305,7 +335,9 @@
       {
         "id": "contact",
         "heading": "Contact us",
-        "paragraphs": ["Questions about these terms: {{email}}"]
+        "paragraphs": [
+          "Questions about these terms: {{email}}"
+        ]
       }
     ]
   }

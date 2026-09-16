@@ -601,6 +601,11 @@ Interface defects that belong to no phase are tracked separately, in
 | — | Who writes the legal documents? | Developer drafts from facts in the code; the Foundation's lawyer approves | 12 Sep 2026 | Documents stay `draft` until approved |
 | — | Consent on forms without it | One-line notice and policy link; existing checkboxes unchanged | 12 Sep 2026 | PRV-03 display |
 | 8 | Content freeze during migration | Agreed: nobody edits the content files in `public/data` while they are migrated | 13 Sep 2026 | MIG-04; Phase 6 may proceed |
+| — | Who approves the Privacy Policy and Terms? | The Foundation itself: it has no lawyer. Reasonable defaults were proposed by the developer and accepted | 16 Sep 2026 | CR-004's "lawyer decisions" condition is met by the Foundation's own approval; the approval guard is unchanged |
+| 3 | Named data protection contact | "The St. Hannah Foundation team", support@sthannahfoundation.org | 16 Sep 2026 | PRV-02, PRV-10, PRV-11 |
+| 4 | Retention periods per record type | Support applications 6 years after closing; volunteer applications 2 years; partnership enquiries 3 years; donation records 6 years; in-kind arrangements 3 years; contact messages 2 years; newsletter until unsubscribe (+30 days); international giving updates until stopped or 2 years | 16 Sep 2026 | PRV-06 |
+| — | Registered name, email provider, governing law | St. Hannah Charity Foundation; Resend, the United States; the laws of the Federal Republic of Nigeria | 16 Sep 2026 | The legal documents |
+| — | When the documents take effect | On the go-live day: the effective dates are set and the documents marked approved then | 16 Sep 2026 | Go-live runbook, Step 9 |
 | — | Update the current Vercel site with the new work before launch? | No: the Vercel site stays as it is; the new site goes live on its own server as planned | 15 Sep 2026 | No Vercel preview or partial port; launch still waits on R2, the database and legal approval |
 
 ## Still open
@@ -609,7 +614,5 @@ Interface defects that belong to no phase are tracked separately, in
 |---|---|---|
 | 1 | Is there a US legal entity? | Phase 5 (CR-001) |
 | 2 | Has Paystack approved USD settlement? | Phase 5 (CR-001) |
-| 3 | Named data protection contact | PRV-02, PRV-10, PRV-11 — approval of the Privacy Policy |
-| 4 | Retention periods per record type | PRV-06 — approval of the Privacy Policy |
 | 6 | Who holds each role | Phase 2 |
 | 7 | Tax-deductibility status | RCP-05 |

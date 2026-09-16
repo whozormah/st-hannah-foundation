@@ -28,37 +28,21 @@ Found while writing this runbook, 16 September 2026. None of these is live yet.
 
 ---
 
-## Step 1 — YOU: legal approval (blocks going live)
+## Step 1 — YOU: staff roles (legal details are done)
 
-The forms save personal information, so the Privacy Policy and Terms must be
-approved first (CR-004). Send Claude these, then the lawyer approves the final
-text:
+The Privacy Policy and Terms are filled in with the Foundation's decisions of
+16 September 2026 (no lawyer; the Foundation approves them). Their effective
+dates are set, and they are marked approved, on go-live day (Step 9).
+
+Decide **who holds each staff role** and send Claude a name and email for each:
 
 ```
-Registered name of the Foundation:
-Data protection contact — name:
-Data protection contact — email:
-Email provider — name:                 (Resend)
-Email provider — where it stores data:
-Privacy Policy effective date:
-Terms of Use effective date:
-Governing law:                          (e.g. the laws of the Federal Republic of Nigeria)
-How long to keep (for each):
-  1. Support applications:
-  2. Volunteer applications:
-  3. Partnership enquiries:
-  4. Contact messages:
-  5. Newsletter subscriptions:
-  6. In-kind donation offers (and photos):
-  7. Donation records:
-  8. Beneficiary records:
-Lawyer's approval (name and date):
+Owner:
+Administrator:
+Content Manager:
+Case Officer:
+Finance:
 ```
-
-Also decide **who holds each staff role**: Owner, Administrator, Content
-Manager, Case Officer, Finance (a name and email for each).
-
-**CLAUDE** then fills in the documents and marks them approved.
 
 ---
 
@@ -277,9 +261,12 @@ restore test.
 
 ---
 
-## Step 9 — YOU: go live (only after Step 1 is approved)
+## Step 9 — CLAUDE + YOU: go live
 
-Cloudflare → **DNS → Records**:
+**CLAUDE**, first: set the Privacy Policy and Terms effective dates to today,
+mark them approved, and deploy.
+
+**YOU**, then, in Cloudflare → **DNS → Records**:
 
 1. Edit the `A` record for `sthannahfoundation.org` → **SERVER_IP**,
    Proxy **on** (orange cloud).
