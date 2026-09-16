@@ -14,6 +14,7 @@ import * as migration_20260914_114118_phase6_media_library_images from './202609
 import * as migration_20260914_122152_phase6_slugs_and_redirects from './20260914_122152_phase6_slugs_and_redirects';
 import * as migration_20260914_190531_phase6_events_and_video from './20260914_190531_phase6_events_and_video';
 import * as migration_20260915_071710_phase6_story_video from './20260915_071710_phase6_story_video';
+import * as migration_20260916_123601_phase6_hero_slide_eyebrow from './20260916_123601_phase6_hero_slide_eyebrow';
 
 export const migrations = [
   {
@@ -94,6 +95,11 @@ export const migrations = [
   {
     up: migration_20260915_071710_phase6_story_video.up,
     down: migration_20260915_071710_phase6_story_video.down,
-    name: '20260915_071710_phase6_story_video'
+    name: '20260915_071710_phase6_story_video',
+  },
+  {
+    up: migration_20260916_123601_phase6_hero_slide_eyebrow.up,
+    down: migration_20260916_123601_phase6_hero_slide_eyebrow.down,
+    name: '20260916_123601_phase6_hero_slide_eyebrow'
   },
 ];

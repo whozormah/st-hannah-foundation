@@ -97,6 +97,15 @@ export const homepageBlocks: Block[] = [
       minRows: 1,
       required: true,
       fields: [
+        {
+          name: "eyebrow",
+          label: "Small Label",
+          type: "text",
+          admin: {
+            description:
+              "The small label above the heading. Leave it empty for the usual \"Serving Widows, Children & Families\".",
+          },
+        },
         { name: "title", label: "Heading", type: "text", required: true },
         { name: "description", label: "Text", type: "textarea" },
         imageField("image"),

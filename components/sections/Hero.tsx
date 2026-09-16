@@ -67,8 +67,10 @@ export default function Hero({ slides }: { slides: HeroSlide[] }) {
 
               <div className="container-custom relative z-10">
                 <div className="max-w-3xl text-white">
-                  <span className="inline-flex items-center rounded-full bg-accent px-5 py-2 text-sm font-semibold text-black shadow-lg">
-                    Serving Widows, Children &amp; Families
+                  {/* A slide may carry its own label; the rest keep the one
+                      the site has always shown. */}
+                  <span className="inline-flex items-center rounded-full bg-accent px-5 py-2 text-sm font-semibold uppercase tracking-[2px] text-black shadow-lg">
+                    {slide.eyebrow || "Serving Widows, Children & Families"}
                   </span>
 
                   <h2 className="mt-6 text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">

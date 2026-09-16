@@ -434,6 +434,10 @@ export interface Page {
  */
 export interface HeroBlock {
   slides: {
+    /**
+     * The small label above the heading. Leave it empty for the usual "Serving Widows, Children & Families".
+     */
+    eyebrow?: string | null;
     title: string;
     description?: string | null;
     image?: (number | null) | Media;
@@ -1745,6 +1749,7 @@ export interface HeroBlockSelect<T extends boolean = true> {
   slides?:
     | T
     | {
+        eyebrow?: T;
         title?: T;
         description?: T;
         image?: T;

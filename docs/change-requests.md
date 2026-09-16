@@ -370,6 +370,32 @@ Interface defects that belong to no phase are tracked separately, in
   title and description, and every word are unchanged.
 - **A18:** the words and their order in the page are identical.
 
+### CR-019 — A fourth hero slide: the vision behind the work
+
+- **Status:** Approved, 16 September 2026 — requested by the Foundation's
+  developer
+- **Affects:** PUB-02 ("the existing design system ... retained unchanged"),
+  CNT-03 (the hero block's fields)
+- **Change:** The homepage hero gains a fourth slide carrying the founder's
+  photograph, with the Foundation's own words: label "The Vision Behind The
+  Work", heading "A Vision to See Lives Changed.", and text "St. Hannah
+  Foundation was born from a conviction that every person deserves the
+  opportunity to live with dignity, hope and purpose." Its button reads "Our
+  Story" and opens the About page; the fixed "Apply For Aid" button stays, as
+  on every slide. The hero's layout, timing, pagination, reduced-motion
+  behaviour and gradient are untouched.
+- **Editable:** the small label above the heading was fixed in code for every
+  slide ("Serving Widows, Children & Families"). It is now a per-slide field,
+  **Small Label**, and slides that leave it empty still show that wording, so
+  the first three slides are unchanged. The new slide is edited in the CMS
+  exactly like the others (Pages → Home → Hero → Slides).
+- **The photograph:** the founder's portrait, placed to the right over the
+  site's dark brown so the words keep the left of the frame, its edge softened
+  into the background. No part of the photograph is altered; nothing is added
+  to it.
+- **A18:** the homepage gains the new slide's words; it is re-baselined for
+  those lines only.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

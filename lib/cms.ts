@@ -486,6 +486,7 @@ export async function getFounder() {
 }
 
 export type HeroSlide = {
+  eyebrow: string;
   image: string;
   title: string;
   description: string;
@@ -535,6 +536,7 @@ function toBlock(b: Doc): HomeBlock | null {
         id,
         blockType: "hero",
         slides: ((b.slides ?? []) as Doc[]).map((slide) => ({
+          eyebrow: text(slide.eyebrow),
           image: src(slide.image),
           title: text(slide.title),
           description: text(slide.description),
