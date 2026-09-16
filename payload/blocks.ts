@@ -158,6 +158,12 @@ export const homepageBlocks: Block[] = [
     copy(SECTION_COPY.programmeCards),
   ),
   block(
+    "storiesInMotion",
+    "Stories in Motion",
+    "The first three videos from Video Highlights, with a link to all of them on the gallery page (CR-026).",
+    copy(SECTION_COPY.storiesInMotion),
+  ),
+  block(
     "galleryStrip",
     "Gallery Strip",
     "One tile per gallery area, from the Gallery.",

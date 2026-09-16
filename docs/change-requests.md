@@ -569,6 +569,21 @@ Interface defects that belong to no phase are tracked separately, in
 - **A18:** the homepage's Stories of Hope words change as above; re-baselined
   for them only.
 
+### CR-026 — Stories in Motion on the homepage
+
+- **Status:** Approved, 16 September 2026 — requested by the Foundation's
+  developer
+- **Affects:** CNT-03 (the homepage block library), PUB-02
+- **Change:** a new homepage section, straight after the gallery strip: the
+  first three Video Highlights with the Foundation's own video files, on a
+  dark band, the first large, each playing on the page; and "See all videos",
+  which opens the gallery page at its video section. It uses the gallery's
+  wording ("Stories In Motion", "Experience the impact"), editable like the
+  other sections, and hides itself when there is no video. Videos are managed
+  once, under Video Highlights.
+- **A18:** the homepage gains this section's words; re-baselined for them only.
+- **Tests:** `tests/gallery-videos.test.mjs`.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

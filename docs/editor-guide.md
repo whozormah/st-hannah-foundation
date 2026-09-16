@@ -98,6 +98,7 @@ without deleting it, use **Unpublish**.
 | Heart of the Foundation | The woman the Foundation is named after: her portrait and a link to her story | Small heading, heading, caption, closing line, photograph, button |
 | Programme Cards | The first four programmes | Small heading, heading |
 | Gallery Strip | One tile per gallery area | Small heading, heading, introduction |
+| Stories in Motion | The first three videos from **Video Highlights**, and a link to all of them | Small heading, heading, introduction |
 | Statistics Row | The homepage's four figures | Small heading, heading, introduction |
 | Donation Call to Action | The featured campaign stories | Small heading, introduction |
 | Story Cards | The first three impact stories | Small heading, heading, introduction |

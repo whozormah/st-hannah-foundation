@@ -5,6 +5,7 @@ import ImpactStats from "@/components/sections/ImpactStats";
 import FeaturedCampaign from "@/components/sections/FeaturedCampaign";
 import Causes from "@/components/sections/Causes";
 import ImpactStories from "@/components/sections/ImpactStories";
+import StoriesInMotion from "@/components/sections/StoriesInMotion";
 import GalleryPreview from "@/components/sections/GalleryPreview";
 import LeadershipPreview from "@/components/sections/LeadershipPreview";
 import HomeCTA from "@/components/sections/HomeCTA";
@@ -50,6 +51,8 @@ export default async function HomeBlocks({ blocks }: { blocks: HomeBlock[] }) {
         return <Causes key={block.id} programs={programmes} eyebrow={eyebrow} title={title} />;
       case "galleryStrip":
         return <GalleryPreview key={block.id} eyebrow={eyebrow} title={title} description={description} />;
+      case "storiesInMotion":
+        return <StoriesInMotion key={block.id} eyebrow={eyebrow} title={title} description={description} />;
       case "statistics":
         return <ImpactStats key={block.id} eyebrow={eyebrow} title={title} description={description} />;
       case "donationCallToAction":

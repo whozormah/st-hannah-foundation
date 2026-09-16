@@ -475,6 +475,7 @@ export interface Page {
         | VisionMissionBlock
         | HeartOfFoundationBlock
         | ProgrammeCardsBlock
+        | StoriesInMotionBlock
         | GalleryStripBlock
         | StatisticsBlock
         | DonationCallToActionBlock
@@ -566,6 +567,24 @@ export interface ProgrammeCardsBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'programmeCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoriesInMotionBlock".
+ */
+export interface StoriesInMotionBlock {
+  /**
+   * The short line above the heading. Leave empty for none.
+   */
+  eyebrow?: string | null;
+  title: string;
+  /**
+   * Leave empty for none.
+   */
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'storiesInMotion';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1856,6 +1875,7 @@ export interface PagesSelect<T extends boolean = true> {
         visionMission?: T | VisionMissionBlockSelect<T>;
         heartOfFoundation?: T | HeartOfFoundationBlockSelect<T>;
         programmeCards?: T | ProgrammeCardsBlockSelect<T>;
+        storiesInMotion?: T | StoriesInMotionBlockSelect<T>;
         galleryStrip?: T | GalleryStripBlockSelect<T>;
         statistics?: T | StatisticsBlockSelect<T>;
         donationCallToAction?: T | DonationCallToActionBlockSelect<T>;
@@ -1929,6 +1949,17 @@ export interface HeartOfFoundationBlockSelect<T extends boolean = true> {
 export interface ProgrammeCardsBlockSelect<T extends boolean = true> {
   eyebrow?: T;
   title?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoriesInMotionBlock_select".
+ */
+export interface StoriesInMotionBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
   id?: T;
   blockName?: T;
 }

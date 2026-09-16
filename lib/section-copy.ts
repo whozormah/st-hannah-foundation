@@ -25,6 +25,12 @@ export const SECTION_COPY = {
     description:
       "Every photograph records a life touched and a community strengthened. Browse the work by programme area, or open the full gallery.",
   },
+  storiesInMotion: {
+    eyebrow: "Stories In Motion",
+    title: "Experience the impact",
+    description:
+      "Watch the work through the lives of the people and communities we serve.",
+  },
   statistics: {
     eyebrow: "Impact At A Glance",
     title: "Impact That Changes Lives",
