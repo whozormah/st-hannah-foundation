@@ -26,8 +26,7 @@ interface StoryCardProps {
 
 /* The Stories of Hope experience (CR-025): her video beside her story, set
    like a personal letter rather than a report. The opening paragraph leads,
-   large; the areas of her life the Foundation supports are shown as four
-   warm cards; why it matters is a quotation; the appeal closes it. Every word
+   large; what she needs is shown as four warm cards; why it matters is a quotation; the appeal closes it. Every word
    comes from the campaign story in the CMS. */
 
 // An icon for each area of support, matched on the words editors use.
@@ -102,7 +101,7 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
                 id="story-support"
                 className="text-sm font-semibold uppercase tracking-[3px] text-brand"
               >
-                How we&apos;re standing with {firstName}
+                What {firstName} needs
               </h3>
 
               <ul className="mt-5 grid gap-4 sm:grid-cols-2">
