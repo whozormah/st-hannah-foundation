@@ -42,6 +42,16 @@ function referencePaths(target: string, fields: Field[], prefix = ""): string[] 
   return paths;
 }
 
+/** Whether `fields` contain blocks anywhere. */
+function hasBlocks(fields: Field[]): boolean {
+  return fields.some((field) => {
+    if (field.type === "blocks") return true;
+    if (field.type === "tabs") return field.tabs.some((tab) => hasBlocks(tab.fields));
+
+    return "fields" in field && Array.isArray(field.fields) && hasBlocks(field.fields);
+  });
+}
+
 /** The values at a dotted path in a document, through arrays and blocks. */
 function valuesAt(data: unknown, path: string[]): unknown[] {
   if (Array.isArray(data)) return data.flatMap((item) => valuesAt(item, path));
@@ -68,12 +78,21 @@ export const blockDeleteWhenReferenced: CollectionBeforeDeleteHook = async ({ co
   for (const other of payload.config.collections) {
     if (other.slug.startsWith("payload-")) continue;
 
-    const paths = referencePaths(collection.slug, other.fields);
+    const paths = [...new Set(referencePaths(collection.slug, other.fields))];
 
     if (!paths.length) continue;
 
     const where = { or: paths.map((path) => ({ [path]: { equals: id } })) };
     const drafts = Boolean(typeof other.versions === "object" && other.versions?.drafts);
+
+    /* Through blocks, a database condition cannot be trusted: two block types
+       with a field of the same name share one path, and the database checks
+       only one of them (or, given the path twice, fails). Records built from
+       blocks (the homepage) are few, so they are read and checked here
+       instead (CR-024). */
+    const throughBlocks = hasBlocks(other.fields);
+    const uses = (doc: Record<string, unknown>) =>
+      paths.some((path) => valuesAt(doc, path.split(".")).some((value) => String(idOf(value)) === String(id)));
 
     /* Both what is published and the latest drafts: a published page may use
        an image a newer draft has dropped, and a draft may use one the
@@ -81,12 +100,23 @@ export const blockDeleteWhenReferenced: CollectionBeforeDeleteHook = async ({ co
     const using = async (asUser: boolean) => {
       const access = asUser ? { overrideAccess: false, user: req.user } : { overrideAccess: true };
       const reads = [false, ...(drafts ? [true] : [])].map((draft) =>
-        payload.find({ collection: other.slug, where, depth: 0, limit: 100, draft, pagination: false, req, ...access }),
+        payload.find({
+          collection: other.slug,
+          ...(throughBlocks ? {} : { where }),
+          depth: 0,
+          limit: 100,
+          draft,
+          pagination: false,
+          req,
+          ...access,
+        }),
       );
       const docs = new Map<string, Record<string, unknown>>();
 
       for (const result of await Promise.all(reads)) {
-        for (const doc of result.docs as unknown as Record<string, unknown>[]) docs.set(String(doc.id), doc);
+        for (const doc of result.docs as unknown as Record<string, unknown>[]) {
+          if (!throughBlocks || uses(doc)) docs.set(String(doc.id), doc);
+        }
       }
 
       return [...docs.values()];

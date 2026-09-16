@@ -563,9 +563,23 @@ export type HeroSlide = {
 /** Blocks that wrap an existing section and carry only its heading wording. */
 type CopyBlockType = keyof typeof SECTION_COPY;
 
+/** The woman the Foundation is named after (CR-024). */
+export type HeartOfFoundationBlock = {
+  blockType: "heartOfFoundation";
+  eyebrow: string;
+  title: string;
+  text: string;
+  closing: string;
+  /** Her portrait; without one, the drawing from the logo is shown. */
+  image: Picture | null;
+  buttonLabel: string;
+  buttonLink: string;
+};
+
 export type HomeBlock = { id: string } & (
   | { blockType: "hero"; slides: HeroSlide[] }
   | { blockType: "visionMission" }
+  | HeartOfFoundationBlock
   | { blockType: "eventAppeal"; event: number | null }
   | { blockType: CopyBlockType; eyebrow: string; title: string; description: string }
   | { blockType: "richText"; content: SerializedEditorState | null }
@@ -610,6 +624,18 @@ function toBlock(b: Doc): HomeBlock | null {
       };
     case "visionMission":
       return { id, blockType: "visionMission" };
+    case "heartOfFoundation":
+      return {
+        id,
+        blockType: "heartOfFoundation",
+        eyebrow: text(b.eyebrow),
+        title: text(b.title),
+        text: text(b.text),
+        closing: text(b.closing),
+        image: picture(b.image),
+        buttonLabel: text(b.buttonLabel),
+        buttonLink: text(b.buttonLink),
+      };
     case "eventAppeal": {
       const event = b.event && typeof b.event === "object" ? (b.event as Doc).id : b.event;
 

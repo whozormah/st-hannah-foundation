@@ -473,6 +473,7 @@ export interface Page {
     | (
         | HeroBlock
         | VisionMissionBlock
+        | HeartOfFoundationBlock
         | ProgrammeCardsBlock
         | GalleryStripBlock
         | StatisticsBlock
@@ -526,6 +527,31 @@ export interface VisionMissionBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'visionMission';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeartOfFoundationBlock".
+ */
+export interface HeartOfFoundationBlock {
+  /**
+   * The short line above the heading. Leave empty for none.
+   */
+  eyebrow?: string | null;
+  title: string;
+  text: string;
+  /**
+   * Shown larger, in italics, after the caption. Leave empty for none.
+   */
+  closing?: string | null;
+  /**
+   * Her portrait. Until one is chosen, the drawing of her from the logo is shown.
+   */
+  image?: (number | null) | Media;
+  buttonLabel?: string | null;
+  buttonLink?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heartOfFoundation';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1828,6 +1854,7 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         hero?: T | HeroBlockSelect<T>;
         visionMission?: T | VisionMissionBlockSelect<T>;
+        heartOfFoundation?: T | HeartOfFoundationBlockSelect<T>;
         programmeCards?: T | ProgrammeCardsBlockSelect<T>;
         galleryStrip?: T | GalleryStripBlockSelect<T>;
         statistics?: T | StatisticsBlockSelect<T>;
@@ -1877,6 +1904,21 @@ export interface HeroBlockSelect<T extends boolean = true> {
  * via the `definition` "VisionMissionBlock_select".
  */
 export interface VisionMissionBlockSelect<T extends boolean = true> {
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeartOfFoundationBlock_select".
+ */
+export interface HeartOfFoundationBlockSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  text?: T;
+  closing?: T;
+  image?: T;
+  buttonLabel?: T;
+  buttonLink?: T;
   id?: T;
   blockName?: T;
 }

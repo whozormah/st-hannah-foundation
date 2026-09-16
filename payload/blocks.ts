@@ -15,7 +15,7 @@ import {
 
 import { imageField } from "./fields";
 import { isPlayableVideo, isSafeLink } from "../lib/links";
-import { SECTION_COPY, type SectionCopy } from "../lib/section-copy";
+import { HEART_OF_FOUNDATION_COPY, SECTION_COPY, type SectionCopy } from "../lib/section-copy";
 
 /* The homepage block library: CNT-03's twelve, plus vision and mission and
    the leadership preview (CR-009).
@@ -119,6 +119,37 @@ export const homepageBlocks: Block[] = [
     "Vision and Mission",
     "The Foundation's introduction, vision and mission, from About the Foundation.",
     [],
+  ),
+  block(
+    "heartOfFoundation",
+    "Heart of the Foundation",
+    "The woman the Foundation is named after: her portrait, a short caption and a link to her story (CR-024).",
+    [
+      {
+        name: "eyebrow",
+        label: "Small Heading",
+        type: "text",
+        defaultValue: HEART_OF_FOUNDATION_COPY.eyebrow,
+        admin: { description: "The short line above the heading. Leave empty for none." },
+      },
+      { name: "title", label: "Heading", type: "text", required: true, defaultValue: HEART_OF_FOUNDATION_COPY.title },
+      { name: "text", label: "Caption", type: "textarea", required: true, defaultValue: HEART_OF_FOUNDATION_COPY.text },
+      {
+        name: "closing",
+        label: "Closing Line",
+        type: "text",
+        defaultValue: HEART_OF_FOUNDATION_COPY.closing,
+        admin: { description: "Shown larger, in italics, after the caption. Leave empty for none." },
+      },
+      {
+        ...imageField("image"),
+        label: "Photograph",
+        filterOptions: { mimeType: { contains: "image" } },
+        admin: { description: "Her portrait. Until one is chosen, the drawing of her from the logo is shown." },
+      } as Field,
+      { name: "buttonLabel", label: "Button Label", type: "text", defaultValue: HEART_OF_FOUNDATION_COPY.buttonLabel },
+      { ...link("buttonLink", "Button Link"), defaultValue: HEART_OF_FOUNDATION_COPY.buttonLink } as Field,
+    ],
   ),
   block(
     "programmeCards",

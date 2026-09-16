@@ -75,3 +75,15 @@ export const HOMEPAGE_ORDER = [
   "leadershipPreview",
   "callToAction",
 ] as const;
+
+/* The homepage's Heart of the Foundation section (CR-024): the woman the
+   Foundation is named after. The caption is from her story on the About
+   page, in the Foundation's words. */
+export const HEART_OF_FOUNDATION_COPY = {
+  eyebrow: "The Heart Behind The Name",
+  title: "Where It All Began",
+  text: "Prophetess Hannah Okoh dedicated much of her life to caring for the less privileged. During festive seasons, she visited orphanages and underserved communities, making sure children and families received food, clothing and essential support.",
+  closing: "Her legacy of compassion lives on through St. Hannah Foundation.",
+  buttonLabel: "Read Her Story",
+  buttonLink: "/about#her-story",
+};

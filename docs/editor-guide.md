@@ -89,12 +89,13 @@ without deleting it, use **Unpublish**.
 - **Reorder** by dragging a section by its handle.
 - **Remove** a section with its menu. It disappears from the homepage; the
   content it showed (the stories, the testimonials) is not deleted.
-- **Add** a section with **Add Section**, then choose one of the fourteen:
+- **Add** a section with **Add Section**, then choose one of these:
 
 | Section | What it shows | What you write |
 |---|---|---|
 | Hero | The large rotating banner | Each slide's heading, text, image and button |
 | Vision and Mission | The introduction, vision and mission | Nothing: it shows **About the Foundation** |
+| Heart of the Foundation | The woman the Foundation is named after: her portrait and a link to her story | Small heading, heading, caption, closing line, photograph, button |
 | Programme Cards | The first four programmes | Small heading, heading |
 | Gallery Strip | One tile per gallery area | Small heading, heading, introduction |
 | Statistics Row | The homepage's four figures | Small heading, heading, introduction |

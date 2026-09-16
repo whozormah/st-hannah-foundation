@@ -19,7 +19,8 @@ export default async function AboutFounder() {
   if (!founder) return null;
 
   return (
-    <section className="bg-cream py-16 md:py-24">
+    // "Read Her Story" on the homepage opens the page here (CR-024).
+    <section id="her-story" className="scroll-mt-24 bg-cream py-16 md:py-24">
       <div className="container-custom">
         {/* Section Heading */}
 

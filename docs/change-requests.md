@@ -517,6 +517,26 @@ Interface defects that belong to no phase are tracked separately, in
   first three now shares the bottom row with the gallery card.
 - **Tests:** `tests/gallery-videos.test.mjs`.
 
+### CR-024 — Heart of the Foundation: where it all began
+
+- **Status:** Approved, 16 September 2026 — requested by the Foundation's
+  developer
+- **Affects:** CNT-03 (the homepage block library), PUB-02
+- **Change:** a new homepage section, straight after Vision and Mission,
+  about the woman the Foundation is named after: her portrait framed on a
+  deep brown band, "The Heart Behind The Name / Where It All Began", a caption
+  from her story on the About page, "Her legacy of compassion lives on through
+  St. Hannah Foundation.", and **Read Her Story**, which opens the About page
+  at her story. The drawing of her from the logo rests faintly behind the
+  words. Every part is edited in the CMS as the **Heart of the Foundation**
+  section.
+- **At the Foundation's direction:** Prophetess Hannah Okoh has passed on,
+  and the section does not say so; the wording keeps the past tense of the
+  About page. The logo's drawing is of her, and stands in as the portrait
+  until her photograph is supplied.
+- **A18:** the homepage gains this section's words, and is re-baselined for
+  them only.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

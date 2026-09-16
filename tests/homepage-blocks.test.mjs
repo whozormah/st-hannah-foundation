@@ -118,6 +118,7 @@ test("blocks: all fourteen block types render, in the order the editor sets", as
       link: "https://www.youtube.com/watch?v=test",
     },
     { blockType: "visionMission" },
+    { blockType: "heartOfFoundation", title: m("heartOfFoundation"), text: "A caption." },
   ];
 
   const saved = await publish(doc.id, blocks);

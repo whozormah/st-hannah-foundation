@@ -9,6 +9,7 @@ import GalleryPreview from "@/components/sections/GalleryPreview";
 import LeadershipPreview from "@/components/sections/LeadershipPreview";
 import HomeCTA from "@/components/sections/HomeCTA";
 import EventAppeal from "@/components/blocks/EventAppeal";
+import HeartOfFoundation from "@/components/blocks/HeartOfFoundation";
 import ImageTextBlock from "@/components/blocks/ImageTextBlock";
 import QuoteBlock from "@/components/blocks/QuoteBlock";
 import RichTextBlock from "@/components/blocks/RichTextBlock";
@@ -41,6 +42,8 @@ export default async function HomeBlocks({ blocks }: { blocks: HomeBlock[] }) {
         return <Hero key={block.id} slides={block.slides} />;
       case "visionMission":
         return <VisionMission key={block.id} />;
+      case "heartOfFoundation":
+        return <HeartOfFoundation key={block.id} {...block} />;
       case "eventAppeal":
         return <EventAppeal key={block.id} eventId={block.event} />;
       case "programmeCards":
