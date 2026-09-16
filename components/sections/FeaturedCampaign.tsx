@@ -4,7 +4,6 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import DonationModal from "@/components/shared/DonationModal";
-import Rays from "@/components/shared/Rays";
 
 import StoryCard from "@/components/story/StoryCard";
 import StoryNavigation from "@/components/story/StoryNavigation";
@@ -27,7 +26,8 @@ export default function FeaturedCampaign({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-cream py-14 md:py-24">
+      {/* Fitted to one screen on desktop (CR-025). */}
+      <section className="relative overflow-hidden bg-cream py-12 lg:py-8">
         {/* Decorative Background */}
 
         <div className="absolute inset-0">
@@ -39,22 +39,8 @@ export default function FeaturedCampaign({
         </div>
 
         <div className="container-custom relative">
-          {/* A lean intro: the story's own headline below is the section
-              heading, so this no longer stacks a second full-height header. */}
-          <div className="max-w-2xl">
-            {eyebrow && (
-              <span className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[4px] text-brand">
-                <Rays className="h-5 w-8 shrink-0 text-accent" />
-                {eyebrow}
-              </span>
-            )}
-
-            {description && (
-              <p className="mt-4 text-lg leading-9 text-gray-700">{description}</p>
-            )}
-          </div>
-
-          <div className="mt-14" />
+          {/* The intro sits in the story's own column (StoryCard), so the
+              section fits one screen on desktop (CR-025). */}
 
           {/* Navigation only earns its place when there is more than one
               story to move between; campaigns.json currently holds one. */}
@@ -97,6 +83,8 @@ export default function FeaturedCampaign({
               {" "}
               <StoryCard
                 story={currentStory}
+                eyebrow={eyebrow}
+                description={description}
                 onDonate={() => setShowDonationModal(true)}
               />
             </motion.div>

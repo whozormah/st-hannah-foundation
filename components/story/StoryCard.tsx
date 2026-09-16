@@ -4,6 +4,7 @@ import { useState } from "react";
 import {
   ArrowRight,
   Check,
+  ChevronDown,
   GraduationCap,
   HandHeart,
   HeartPulse,
@@ -21,17 +22,22 @@ import StoryGalleryModal from "./StoryGalleryModal";
 
 interface StoryCardProps {
   story: Story;
+  /** The section's small heading and introduction, from the homepage block. */
+  eyebrow?: string;
+  description?: string;
   onDonate: () => void;
 }
 
-/* The Stories of Hope experience (CR-025): her video beside her story, set
-   like a personal letter rather than a report. The opening paragraph leads,
-   large; what she needs is shown as four warm cards; why it matters is a quotation; the appeal closes it. Every word
-   comes from the campaign story in the CMS. */
+/* The Stories of Hope experience (CR-025), fitted to one screen on desktop:
+   her video beside her story, the opening and first paragraph shown, the rest
+   of her story and why it matters behind "Read her full story" (still in the
+   page, so nothing is lost to search or to people who open it), what she
+   needs as a row of pills, and a slim appeal. Every word comes from the
+   campaign story in the CMS. */
 
-// An icon for each area of support, matched on the words editors use.
-function iconFor(area: string): LucideIcon {
-  const words = area.toLowerCase();
+// An icon for each need, matched on the words editors use.
+function iconFor(need: string): LucideIcon {
+  const words = need.toLowerCase();
 
   if (/food|feed|meal|nutrition/.test(words)) return UtensilsCrossed;
   if (/medic|health|hospital|care/.test(words)) return HeartPulse;
@@ -41,12 +47,14 @@ function iconFor(area: string): LucideIcon {
   return HandHeart;
 }
 
-export default function StoryCard({ story, onDonate }: StoryCardProps) {
+export default function StoryCard({ story, eyebrow, description, onDonate }: StoryCardProps) {
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
+  const [expanded, setExpanded] = useState(false);
 
   const galleryImages = [story.heroImage, ...(story.gallery ?? [])];
-  const [opening, ...rest] = story.description;
+  const [opening, first, ...more] = story.description;
+  const hasMore = more.length > 0 || Boolean(story.whyStoryMattersTitle || story.whyStoryMatters);
 
   // First name only, so the appeal reads naturally for whichever story is
   // featured rather than being written for one person.
@@ -60,7 +68,7 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
 
   return (
     <>
-      <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,440px)_1fr] xl:gap-20">
+      <div className="grid items-center gap-10 lg:grid-cols-[auto_1fr] xl:gap-16">
         <StoryVisualPanel
           story={story}
           imageCount={galleryImages.length}
@@ -71,55 +79,85 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
         />
 
         <article>
-          <p className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[4px] text-brand">
-            <Rays className="h-5 w-8 shrink-0 text-accent" />
-            {firstName}&apos;s Story
-          </p>
+          {eyebrow && (
+            <p className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[4px] text-brand">
+              <Rays className="h-5 w-8 shrink-0 text-accent" />
+              {eyebrow}
+            </p>
+          )}
+
+          {description && <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-600">{description}</p>}
 
           {/* The one heading for this section. */}
-          <h2 className="mt-6 font-display text-4xl font-bold leading-[1.08] tracking-tight text-ink md:text-5xl">
+          <h2 className="mt-4 font-display text-3xl font-bold leading-[1.1] tracking-tight text-ink lg:text-[2.1rem] xl:text-[2.4rem]">
             {story.headline}
           </h2>
 
           {opening && (
-            <p className="mt-8 font-display text-2xl leading-relaxed text-ink/90 md:text-[1.7rem]">
-              {opening}
-            </p>
+            <p className="mt-5 font-display text-xl leading-relaxed text-ink/90 md:text-2xl">{opening}</p>
           )}
 
-          {rest.length > 0 && (
-            <div className="mt-6 space-y-5 text-lg leading-9 text-gray-700">
-              {rest.map((paragraph) => (
-                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-              ))}
-            </div>
+          {first && <p className="mt-3 leading-8 text-gray-700">{first}</p>}
+
+          {hasMore && (
+            <>
+              <div id="story-more" hidden={!expanded} className="mt-3 space-y-3 leading-8 text-gray-700">
+                {more.map((paragraph) => (
+                  <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+                ))}
+
+                {(story.whyStoryMattersTitle || story.whyStoryMatters) && (
+                  <figure className="pt-3">
+                    {story.whyStoryMattersTitle && (
+                      <p className="font-display text-2xl italic leading-snug text-brand">
+                        <span aria-hidden className="mr-1 text-accent">
+                          &ldquo;
+                        </span>
+                        {story.whyStoryMattersTitle}
+                      </p>
+                    )}
+                    {story.whyStoryMatters && (
+                      <figcaption className="mt-2 leading-8 text-gray-700">{story.whyStoryMatters}</figcaption>
+                    )}
+                  </figure>
+                )}
+              </div>
+
+              <button
+                type="button"
+                aria-expanded={expanded}
+                aria-controls="story-more"
+                onClick={() => setExpanded((open) => !open)}
+                className="mt-3 inline-flex items-center gap-2 font-semibold text-brand underline-offset-4 hover:underline"
+              >
+                {expanded ? "Show less" : "Read her full story"}
+                <ChevronDown aria-hidden size={18} className={`transition-transform ${expanded ? "rotate-180" : ""}`} />
+              </button>
+            </>
           )}
 
           {story.needs?.length > 0 && (
-            <section aria-labelledby="story-support" className="mt-12">
-              <h3
-                id="story-support"
-                className="text-sm font-semibold uppercase tracking-[3px] text-brand"
-              >
+            <section aria-labelledby="story-needs" className="mt-6">
+              <h3 id="story-needs" className="text-xs font-semibold uppercase tracking-[3px] text-brand">
                 What {firstName} needs
               </h3>
 
-              <ul className="mt-5 grid gap-4 sm:grid-cols-2">
-                {story.needs.map((area) => {
-                  const Icon = iconFor(area);
+              <ul className="mt-3 flex flex-wrap gap-2.5">
+                {story.needs.map((need) => {
+                  const Icon = iconFor(need);
 
                   return (
                     <li
-                      key={area}
-                      className="reveal-rise flex items-center gap-4 rounded-[22px] border border-accent/20 bg-white/80 p-5 shadow-[0_20px_50px_-35px_rgba(132,66,4,0.45)]"
+                      key={need}
+                      className="inline-flex items-center gap-2.5 rounded-full border border-accent/25 bg-white py-1.5 pl-1.5 pr-4 shadow-[0_12px_30px_-22px_rgba(132,66,4,0.5)]"
                     >
                       <span
                         aria-hidden
-                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-brand to-[#B8741C] text-white"
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-brand to-[#B8741C] text-white"
                       >
-                        <Icon size={22} />
+                        <Icon size={16} />
                       </span>
-                      <span className="font-display text-xl font-bold text-ink">{area}</span>
+                      <span className="font-semibold text-ink">{need}</span>
                     </li>
                   );
                 })}
@@ -127,57 +165,24 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
             </section>
           )}
 
-          {/* Why this story matters, as a quotation */}
-          {(story.whyStoryMattersTitle || story.whyStoryMatters) && (
-            <figure className="mt-14">
-              <span aria-hidden className="block font-display text-7xl leading-none text-accent">
-                &ldquo;
-              </span>
-
-              {story.whyStoryMattersTitle && (
-                <p className="-mt-6 font-display text-3xl italic leading-snug text-brand md:text-4xl">
-                  {story.whyStoryMattersTitle}
-                </p>
-              )}
-
-              {story.whyStoryMatters && (
-                <figcaption className="mt-5 text-lg leading-9 text-gray-700">
-                  {story.whyStoryMatters}
-                </figcaption>
-              )}
-            </figure>
-          )}
-
           {/* Appeal */}
-          <div className="relative mt-14 overflow-hidden rounded-[32px] bg-gradient-to-br from-[#2A1703] via-brand-dark to-brand p-8 text-white shadow-[0_40px_90px_-40px_rgba(46,27,5,0.8)] md:p-10">
+          <div className="relative mt-7 overflow-hidden rounded-[24px] bg-gradient-to-br from-[#2A1703] via-brand-dark to-brand px-6 py-5 text-white shadow-[0_30px_70px_-40px_rgba(46,27,5,0.8)] md:px-7">
             <div
               aria-hidden
-              className="pointer-events-none absolute -right-20 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(245,210,122,0.25),transparent_65%)]"
+              className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(245,210,122,0.25),transparent_65%)]"
             />
 
-            <div className="relative grid items-center gap-8 md:grid-cols-[1fr_auto]">
+            <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[3px] text-accent-soft">
-                  Be part of what happens next
-                </p>
+                <h3 className="font-display text-2xl font-bold leading-tight">Stand with {firstName}</h3>
 
-                <h3 className="mt-3 font-display text-3xl font-bold leading-tight md:text-4xl">
-                  Stand with {firstName}
-                </h3>
-
-                <p className="mt-4 max-w-xl leading-8 text-white/85">
-                  Every gift helps provide education, healthcare, protection and
-                  renewed hope for families in the same circumstances.
-                </p>
-
-                <ul className="mt-6 flex flex-wrap gap-x-7 gap-y-3 text-sm text-white/85">
-                  <li className="inline-flex items-center gap-2">
-                    <ShieldCheck size={16} aria-hidden className="text-accent-soft" />
+                <ul className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-sm text-white/80">
+                  <li className="inline-flex items-center gap-1.5">
+                    <ShieldCheck size={15} aria-hidden className="text-accent-soft" />
                     Secure payment
                   </li>
-
-                  <li className="inline-flex items-center gap-2">
-                    <Check size={16} aria-hidden className="text-accent-soft" />
+                  <li className="inline-flex items-center gap-1.5">
+                    <Check size={15} aria-hidden className="text-accent-soft" />
                     Instant receipt
                   </li>
                 </ul>
@@ -186,10 +191,10 @@ export default function StoryCard({ story, onDonate }: StoryCardProps) {
               <button
                 type="button"
                 onClick={onDonate}
-                className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-accent px-8 py-4 text-lg font-bold text-ink transition hover:bg-accent-soft focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-soft md:w-auto"
+                className="group inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-accent px-7 py-3.5 font-bold text-ink transition hover:bg-accent-soft focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-soft"
               >
                 Help {firstName} Rebuild
-                <ArrowRight aria-hidden size={20} className="transition-transform group-hover:translate-x-1" />
+                <ArrowRight aria-hidden size={18} className="transition-transform group-hover:translate-x-1" />
               </button>
             </div>
           </div>

@@ -58,7 +58,9 @@ export default function StoryVisualPanel({
   };
 
   return (
-    <div className="relative lg:sticky lg:top-28">
+    // Narrower on phones. On desktop its width follows the screen's height,
+    // so the tall video and the row beneath it always fit one screen.
+    <div className="relative mx-auto w-full max-w-[280px] sm:max-w-[320px] lg:w-[min(320px,calc((100svh_-_15rem)*0.5625))] lg:max-w-none">
       {/* A thin gold frame, like a treasured photograph (CR-025). */}
       <span aria-hidden className="pointer-events-none absolute -inset-2.5 rounded-[40px] border border-accent/40" />
       <figure className="relative overflow-hidden rounded-[32px] bg-white shadow-[0_40px_90px_-40px_rgba(46,27,5,0.55)]">
@@ -97,7 +99,7 @@ export default function StoryVisualPanel({
           )}
 
           <div
-            className={`pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-7 pt-16 transition-opacity ${
+            className={`pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-5 pt-14 transition-opacity ${
               withSound ? "opacity-0" : ""
             }`}
           >
@@ -119,7 +121,7 @@ export default function StoryVisualPanel({
               <button
                 type="button"
                 onClick={playWithSound}
-                className="pointer-events-auto mt-5 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-ink shadow-lg transition hover:bg-cream"
+                className="pointer-events-auto mt-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink shadow-lg transition hover:bg-cream"
               >
                 <Volume2 aria-hidden size={16} className="text-brand" />
                 {moving ? "Tap for sound" : "Play with sound"}
@@ -130,20 +132,18 @@ export default function StoryVisualPanel({
 
         {preview.length > 0 && (
           <figcaption>
+            {/* One compact row, so the panel stays within the screen. */}
             <button
               onClick={onGalleryOpen}
-              className="group w-full px-7 py-7 text-left"
+              className="group flex w-full items-center gap-3 px-4 py-3.5 text-left"
             >
-              <span className="flex items-center gap-2 text-sm font-semibold uppercase tracking-[3px] text-brand">
-                <Images size={16} aria-hidden />
-                Photographs
-              </span>
+              <span className="sr-only">Photographs: </span>
 
-              <span className="mt-5 flex gap-3">
+              <span className="flex shrink-0 gap-1.5">
                 {preview.map((image, index) => (
                   <span
                     key={image}
-                    className="relative h-20 flex-1 overflow-hidden rounded-xl"
+                    className="relative h-11 w-11 overflow-hidden rounded-lg"
                   >
                     <Image
                       src={image}
@@ -163,9 +163,10 @@ export default function StoryVisualPanel({
                 ))}
               </span>
 
-              <span className="mt-6 flex items-center gap-2 font-semibold text-brand transition-all group-hover:gap-4">
+              <span className="flex items-center gap-1.5 text-sm font-semibold text-brand transition-all group-hover:gap-3">
+                <Images size={15} aria-hidden className="shrink-0" />
                 See the full story in pictures
-                <ArrowRight size={18} aria-hidden />
+                <ArrowRight size={15} aria-hidden className="shrink-0" />
               </span>
             </button>
           </figcaption>

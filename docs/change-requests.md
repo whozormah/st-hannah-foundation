@@ -560,6 +560,12 @@ Interface defects that belong to no phase are tracked separately, in
   a deep brown band with a gold "Help Esther Rebuild" button. The video's
   behaviour (silent until tapped, subtitles uncropped) is unchanged. The
   section and cards serve any future campaign story the same way.
+- **One screen:** at the Foundation's request the section fits one desktop
+  screen (measured at 1440×900, 1366×768 and 1280×720): the video panel's
+  width follows the screen's height, the intro sits in the story column, the
+  rest of the story and why it matters open under "Read her full story" (still
+  in the page), the needs are a row of pills and the appeal a slim bar. Phones
+  scroll, at about half the former height.
 - **A18:** the homepage's Stories of Hope words change as above; re-baselined
   for them only.
 
