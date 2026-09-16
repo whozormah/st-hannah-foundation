@@ -4,6 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import DonationModal from "@/components/shared/DonationModal";
+import Rays from "@/components/shared/Rays";
 
 import StoryCard from "@/components/story/StoryCard";
 import StoryNavigation from "@/components/story/StoryNavigation";
@@ -42,7 +43,8 @@ export default function FeaturedCampaign({
               heading, so this no longer stacks a second full-height header. */}
           <div className="max-w-2xl">
             {eyebrow && (
-              <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
+              <span className="inline-flex items-center gap-3 text-sm font-semibold uppercase tracking-[4px] text-brand">
+                <Rays className="h-5 w-8 shrink-0 text-accent" />
                 {eyebrow}
               </span>
             )}

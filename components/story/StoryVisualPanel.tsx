@@ -58,8 +58,10 @@ export default function StoryVisualPanel({
   };
 
   return (
-    <div className="lg:sticky lg:top-28">
-      <figure className="overflow-hidden rounded-[32px] bg-white shadow-[0_24px_60px_rgba(0,0,0,.10)]">
+    <div className="relative lg:sticky lg:top-28">
+      {/* A thin gold frame, like a treasured photograph (CR-025). */}
+      <span aria-hidden className="pointer-events-none absolute -inset-2.5 rounded-[40px] border border-accent/40" />
+      <figure className="relative overflow-hidden rounded-[32px] bg-white shadow-[0_40px_90px_-40px_rgba(46,27,5,0.55)]">
         {/* A video keeps its own tall shape: filling the 4:5 picture frame
             would crop the top and bottom, and with them the subtitles
             recorded in it — how visitors follow her story with the sound
