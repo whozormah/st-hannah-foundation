@@ -549,8 +549,10 @@ Interface defects that belong to no phase are tracked separately, in
   received this support but is asking for it; her home is unsafe, with rain
   water coming into her room; she is unwell and needs medical care; the
   Foundation wants to stand with her across food, medical care, education and
-  a safe place to live. Nothing is added about her family, where she lives,
-  the causes of her hardship, or numbers.
+  a safe place to live. Added at the Foundation's direction: she is raising
+  her four children alone, and her menial work is not steady or always enough
+  to feed them. Nothing is added about where she lives or the causes of her
+  hardship.
 - **Change, design:** her video panel sits in a thin gold frame; her story
   opens with a gold label and a display heading, its first paragraph set
   large; what she needs ("What Esther needs") is four cards, each with its
