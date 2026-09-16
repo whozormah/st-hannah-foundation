@@ -584,6 +584,15 @@ Interface defects that belong to no phase are tracked separately, in
 - **A18:** the homepage gains this section's words; re-baselined for them only.
 - **Tests:** `tests/gallery-videos.test.mjs`.
 
+### CR-027 — Hero slides can be switched off
+
+- **Status:** Approved, 16 September 2026 — requested by the Foundation's
+  developer ("just turn it off for now")
+- **Affects:** the hero block (CNT-03)
+- **Change:** each hero slide has **Hide this slide**. A hidden slide stays in
+  the CMS with everything in it but is not shown. The founder slide (CR-019)
+  is hidden for now.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

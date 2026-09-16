@@ -613,7 +613,8 @@ function toBlock(b: Doc): HomeBlock | null {
       return {
         id,
         blockType: "hero",
-        slides: ((b.slides ?? []) as Doc[]).map((slide) => ({
+        // A hidden slide stays in the CMS but is not shown (CR-027).
+        slides: ((b.slides ?? []) as Doc[]).filter((slide) => slide.hidden !== true).map((slide) => ({
           eyebrow: text(slide.eyebrow),
           image: src(slide.image),
           title: text(slide.title),

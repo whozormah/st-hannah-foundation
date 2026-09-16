@@ -514,6 +514,10 @@ export interface HeroBlock {
     image?: (number | null) | Media;
     buttonText?: string | null;
     buttonLink?: string | null;
+    /**
+     * Takes the slide off the website but keeps it here, ready to switch back on.
+     */
+    hidden?: boolean | null;
     id?: string | null;
   }[];
   id?: string | null;
@@ -1914,6 +1918,7 @@ export interface HeroBlockSelect<T extends boolean = true> {
         image?: T;
         buttonText?: T;
         buttonLink?: T;
+        hidden?: T;
         id?: T;
       };
   id?: T;

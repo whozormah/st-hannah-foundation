@@ -111,6 +111,13 @@ export const homepageBlocks: Block[] = [
         imageField("image"),
         { name: "buttonText", label: "Button Label", type: "text" },
         link("buttonLink", "Button Link"),
+        {
+          name: "hidden",
+          label: "Hide this slide",
+          type: "checkbox",
+          defaultValue: false,
+          admin: { description: "Takes the slide off the website but keeps it here, ready to switch back on." },
+        },
       ],
     },
   ]),

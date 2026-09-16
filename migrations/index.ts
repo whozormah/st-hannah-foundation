@@ -21,6 +21,7 @@ import * as migration_20260916_135555_phase6_story_parts_and_support from './202
 import * as migration_20260916_145214_phase6_video_highlight_files from './20260916_145214_phase6_video_highlight_files';
 import * as migration_20260916_154420_phase6_heart_of_foundation from './20260916_154420_phase6_heart_of_foundation';
 import * as migration_20260916_172718_phase6_stories_in_motion from './20260916_172718_phase6_stories_in_motion';
+import * as migration_20260916_175918_phase6_hero_slide_hidden from './20260916_175918_phase6_hero_slide_hidden';
 
 export const migrations = [
   {
@@ -136,6 +137,11 @@ export const migrations = [
   {
     up: migration_20260916_172718_phase6_stories_in_motion.up,
     down: migration_20260916_172718_phase6_stories_in_motion.down,
-    name: '20260916_172718_phase6_stories_in_motion'
+    name: '20260916_172718_phase6_stories_in_motion',
+  },
+  {
+    up: migration_20260916_175918_phase6_hero_slide_hidden.up,
+    down: migration_20260916_175918_phase6_hero_slide_hidden.down,
+    name: '20260916_175918_phase6_hero_slide_hidden'
   },
 ];
