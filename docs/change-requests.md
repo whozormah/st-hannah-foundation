@@ -493,6 +493,30 @@ Interface defects that belong to no phase are tracked separately, in
   Foundation supplies them.
 - **Tests:** `tests/story-page.test.mjs`.
 
+### CR-023 — Gallery videos play the Foundation's own files
+
+- **Status:** Approved, 16 September 2026 — requested by the Foundation's
+  developer ("ensure there is a video section")
+- **Affects:** the Gallery page's Video Highlights, section 5
+- **Conflict:** Video Highlights only linked out to YouTube or Vimeo. The
+  Foundation has no channel, and the three highlights all pointed at
+  "https://youtube.com", so the video section never showed.
+- **Change:** a highlight can carry an uploaded **Video**, which plays on the
+  page in the same viewer as the story videos; a YouTube or Vimeo link still
+  works when no file is uploaded; placeholders still show nothing.
+- **Content:** the three highlights now play the Foundation's videos (a widow
+  after the Bariga programme, a UTME student, Esther Orga's story) and three
+  are added (widows leaving the Bariga programme, the UTME students, the Lagos
+  widows programme on 29 December 2025). The gallery gains 34 photographs,
+  first in its order: the Bariga widows programme, Back-to-School Support (a
+  new gallery area), the UTME students and the Lagos widows programme. The
+  Lagos programme's story is drafted and unpublished, awaiting the
+  Foundation's approval.
+- **Homepage gallery strip:** it showed at most four gallery areas, so the new
+  fifth pushed Family Support off it (caught by A21). Every area beyond the
+  first three now shares the bottom row with the gallery card.
+- **Tests:** `tests/gallery-videos.test.mjs`.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

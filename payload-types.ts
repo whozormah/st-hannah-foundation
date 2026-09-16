@@ -894,7 +894,17 @@ export interface VideoHighlight {
   title: string;
   category?: string | null;
   description?: string | null;
+  /**
+   * The Foundation's own video file. It plays on the gallery page. Use this rather than a link.
+   */
+  video?: (number | null) | Media;
+  /**
+   * Optional: shown before the video plays. Without one, the video's first frame is shown.
+   */
   thumbnail?: (number | null) | Media;
+  /**
+   * Optional: a YouTube or Vimeo address, used only when no video file is uploaded.
+   */
   link?: string | null;
   order?: number | null;
   updatedAt: string;
@@ -2096,6 +2106,7 @@ export interface VideoHighlightsSelect<T extends boolean = true> {
   title?: T;
   category?: T;
   description?: T;
+  video?: T;
   thumbnail?: T;
   link?: T;
   order?: T;

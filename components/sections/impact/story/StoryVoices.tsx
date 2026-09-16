@@ -49,7 +49,8 @@ export default function StoryVoices({
                     src={testimony.video}
                     poster={testimony.photo?.src}
                     label={`Watch the testimony: ${who}`}
-                    className="aspect-[4/5] rounded-none"
+                    className="aspect-[4/5]"
+                    radius="rounded-none"
                   />
                 ) : testimony.photo ? (
                   <div className="relative aspect-[4/5]">

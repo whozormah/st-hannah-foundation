@@ -39,6 +39,15 @@ export default async function GalleryPreview({
     .sort((a, b) => b.count - a.count);
 
   const [lead, ...supporting] = areas;
+  // Every area beyond the first three shares the bottom row with the gallery
+  // card, so adding an area never pushes another off the homepage (A21).
+  const remaining = supporting.slice(2);
+  const bottomColumns =
+    remaining.length >= 3
+      ? "md:grid-cols-2 lg:grid-cols-4"
+      : remaining.length === 2
+        ? "md:grid-cols-2 lg:grid-cols-[1fr_1fr_1.3fr]"
+        : "lg:grid-cols-[1fr_1.4fr]";
 
   return (
     <section className="bg-white py-14 md:py-24">
@@ -134,8 +143,8 @@ export default async function GalleryPreview({
 
         {/* Remaining areas + gallery card */}
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_1.4fr]">
-          {supporting.slice(2, 3).map((area) => (
+        <div className={`mt-6 grid gap-6 ${bottomColumns}`}>
+          {remaining.map((area) => (
             <Link
               key={area.category}
               href="/gallery"

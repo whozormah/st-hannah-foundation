@@ -125,8 +125,24 @@ export const VideoHighlights: CollectionConfig = {
     { name: "title", type: "text", required: true },
     { name: "category", type: "text" },
     { name: "description", type: "textarea" },
-    imageField("thumbnail"),
-    { name: "link", type: "text" },
+    {
+      name: "video",
+      type: "upload",
+      relationTo: "media",
+      filterOptions: { mimeType: { contains: "video" } },
+      admin: {
+        description: "The Foundation's own video file. It plays on the gallery page. Use this rather than a link.",
+      },
+    } as Field,
+    {
+      ...imageField("thumbnail"),
+      admin: { description: "Optional: shown before the video plays. Without one, the video's first frame is shown." },
+    } as Field,
+    {
+      name: "link",
+      type: "text",
+      admin: { description: "Optional: a YouTube or Vimeo address, used only when no video file is uploaded." },
+    },
     order,
   ],
 };

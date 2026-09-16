@@ -346,6 +346,8 @@ export type VideoHighlight = {
   description: string;
   thumbnail: string;
   link: string;
+  /** The Foundation's own video file (CR-023); plays on the page. */
+  video: string;
 };
 
 export const getVideoHighlights = cached(CMS_TAGS.videos, async (): Promise<VideoHighlight[]> =>
@@ -355,6 +357,7 @@ export const getVideoHighlights = cached(CMS_TAGS.videos, async (): Promise<Vide
     description: text(d.description),
     thumbnail: src(d.thumbnail),
     link: text(d.link),
+    video: src(d.video),
   })),
 );
 

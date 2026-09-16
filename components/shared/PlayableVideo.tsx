@@ -13,12 +13,14 @@ type Props = {
   /** What the play button says to screen readers. */
   label: string;
   className?: string;
+  /** The tile's corner rounding; "rounded-none" inside a card that is already rounded. */
+  radius?: string;
 };
 
 /* A video as a picture with a play button, opening the full video in a native
    dialog, closed with Escape or Close. Same behaviour as the event film
    (EventFilm), shaped as a tile for story pages (CR-021). */
-export default function PlayableVideo({ src, poster = "", title = "", label, className = "" }: Props) {
+export default function PlayableVideo({ src, poster = "", title = "", label, className = "", radius = "rounded-[28px]" }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const player = useRef<HTMLVideoElement>(null);
 
@@ -38,7 +40,7 @@ export default function PlayableVideo({ src, poster = "", title = "", label, cla
         type="button"
         onClick={open}
         aria-label={label}
-        className={`group relative block w-full overflow-hidden rounded-[28px] bg-ink text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${className}`}
+        className={`group relative block w-full overflow-hidden ${radius} bg-ink text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${className}`}
       >
         {poster ? (
           <Image

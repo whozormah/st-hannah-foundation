@@ -232,3 +232,9 @@ not appear.
   - Upload a testimony's video or photograph only after consent: files in the
     media library can be opened by anyone who has their address.
 
+## Gallery videos
+
+**Video Highlights** are the videos on the Gallery page. Upload the video
+itself under **Video**; it plays on the page. Add a **Thumbnail** if you want a
+picture shown before it plays. A YouTube or Vimeo address under **Link** is
+used only when no video is uploaded.

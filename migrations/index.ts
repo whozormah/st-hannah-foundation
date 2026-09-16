@@ -18,6 +18,7 @@ import * as migration_20260916_123601_phase6_hero_slide_eyebrow from './20260916
 import * as migration_20260916_130833_phase6_story_programme from './20260916_130833_phase6_story_programme';
 import * as migration_20260916_133032_phase6_story_media_testimonies from './20260916_133032_phase6_story_media_testimonies';
 import * as migration_20260916_135555_phase6_story_parts_and_support from './20260916_135555_phase6_story_parts_and_support';
+import * as migration_20260916_145214_phase6_video_highlight_files from './20260916_145214_phase6_video_highlight_files';
 
 export const migrations = [
   {
@@ -118,6 +119,11 @@ export const migrations = [
   {
     up: migration_20260916_135555_phase6_story_parts_and_support.up,
     down: migration_20260916_135555_phase6_story_parts_and_support.down,
-    name: '20260916_135555_phase6_story_parts_and_support'
+    name: '20260916_135555_phase6_story_parts_and_support',
+  },
+  {
+    up: migration_20260916_145214_phase6_video_highlight_files.up,
+    down: migration_20260916_145214_phase6_video_highlight_files.down,
+    name: '20260916_145214_phase6_video_highlight_files'
   },
 ];

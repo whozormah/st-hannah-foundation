@@ -2,24 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { PlayCircle } from "lucide-react";
 
+import PlayableVideo from "@/components/shared/PlayableVideo";
 import { getVideoHighlights } from "@/lib/cms";
 import { isPlayableVideo } from "@/lib/links";
 
-interface VideoItem {
-  title: string;
-  category: string;
-  description: string;
-  thumbnail: string;
-  link: string;
-}
-
-// Only entries with a real video address are shown, and the section hides
-// itself when none qualify: the placeholder highlights all point at
-// "https://youtube.com", and a Watch button that lands nowhere is worse than
-// none. Fill in the links and the cards return on their own.
+// A highlight shows when it has the Foundation's own video file, which plays
+// here on the page (CR-023), or a real YouTube or Vimeo address, which opens
+// there. The old placeholders all point at "https://youtube.com": they still
+// show nothing, and the section hides itself when no highlight qualifies.
 export default async function VideoHighlights() {
-  const videos: VideoItem[] = (await getVideoHighlights()).filter((video) =>
-    isPlayableVideo(video.link),
+  const videos = (await getVideoHighlights()).filter(
+    (video) => video.video || isPlayableVideo(video.link),
   );
 
   if (!videos.length) return null;
@@ -43,50 +36,75 @@ export default async function VideoHighlights() {
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {videos.map((video) => (
-            <Link
-              key={video.title}
-              href={video.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group overflow-hidden rounded-[24px] bg-white shadow-sm transition hover:shadow-xl"
-            >
-              <div className="relative aspect-[16/10]">
-                <Image
-                  src={video.thumbnail}
-                  alt=""
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover transition duration-500 group-hover:scale-105"
+          {videos.map((video) =>
+            video.video ? (
+              <div
+                key={video.title}
+                className="overflow-hidden rounded-[24px] bg-white shadow-sm transition hover:shadow-xl"
+              >
+                <PlayableVideo
+                  src={video.video}
+                  poster={video.thumbnail}
+                  label={`Play ${video.title}`}
+                  className="aspect-[16/10]"
+                  radius="rounded-none"
                 />
 
-                <span
-                  aria-hidden
-                  className="absolute inset-0 flex items-center justify-center bg-black/30"
-                >
-                  <PlayCircle size={62} className="text-white" />
-                </span>
+                <div className="p-7">
+                  <span className="text-sm font-semibold uppercase tracking-[3px] text-brand">
+                    {video.category}
+                  </span>
+
+                  <h3 className="mt-3 text-xl font-bold text-ink">{video.title}</h3>
+
+                  <p className="mt-3 leading-8 text-gray-700">{video.description}</p>
+                </div>
               </div>
+            ) : (
+              <Link
+                key={video.title}
+                href={video.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group overflow-hidden rounded-[24px] bg-white shadow-sm transition hover:shadow-xl"
+              >
+                <div className="relative aspect-[16/10]">
+                  <Image
+                    src={video.thumbnail}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
 
-              <div className="p-7">
-                <span className="text-sm font-semibold uppercase tracking-[3px] text-brand">
-                  {video.category}
-                </span>
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 flex items-center justify-center bg-black/30"
+                  >
+                    <PlayCircle size={62} className="text-white" />
+                  </span>
+                </div>
 
-                <h3 className="mt-3 text-xl font-bold text-ink">
-                  {video.title}
-                </h3>
+                <div className="p-7">
+                  <span className="text-sm font-semibold uppercase tracking-[3px] text-brand">
+                    {video.category}
+                  </span>
 
-                <p className="mt-3 leading-8 text-gray-700">
-                  {video.description}
-                </p>
+                  <h3 className="mt-3 text-xl font-bold text-ink">
+                    {video.title}
+                  </h3>
 
-                <span className="mt-5 inline-block font-semibold text-brand">
-                  Watch story →
-                </span>
-              </div>
-            </Link>
-          ))}
+                  <p className="mt-3 leading-8 text-gray-700">
+                    {video.description}
+                  </p>
+
+                  <span className="mt-5 inline-block font-semibold text-brand">
+                    Watch story →
+                  </span>
+                </div>
+              </Link>
+            ),
+          )}
         </div>
       </div>
     </section>
