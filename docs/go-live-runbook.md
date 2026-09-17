@@ -42,15 +42,18 @@ The Privacy Policy and Terms are filled in with the Foundation's decisions of
 16 September 2026 (no lawyer; the Foundation approves them). Their effective
 dates are set, and they are marked approved, on go-live day (Step 9).
 
-Decide **who holds each staff role** and send Claude a name and email for each:
+**Decided, 17 September 2026:**
 
-```
-Owner:
-Administrator:
-Content Manager:
-Case Officer:
-Finance:
-```
+| Role | Who | Email |
+|---|---|---|
+| Owner | Glory Akinola | thesthannah@gmail.com |
+| Administrator | Uzoma Udoma | uzoma.udoma@gmail.com |
+| Content Manager | not yet named | — |
+| Case Officer | not yet named | — |
+| Finance | not yet named | — |
+
+The accounts are created on the server at Step 7. The others can be added at
+any time from the admin, under **Staff Accounts**.
 
 ---
 
@@ -59,9 +62,12 @@ Finance:
 ### 2a. Cloudflare (domain and storage)
 
 1. Sign in at <https://dash.cloudflare.com> and **add the domain**
-   `sthannahfoundation.org` (free plan). Change the nameservers at your
-   domain registrar to the two Cloudflare shows. **Do not change any DNS
-   records yet** — keep the ones pointing at Vercel.
+   `sthannahfoundation.org` (free plan). Cloudflare scans your current DNS
+   records first. **Check that the records pointing at Vercel came across**
+   (an `A` record for the domain and a `CNAME` for `www`) before you change
+   the nameservers at your registrar; if they are missing, add them by hand
+   from your registrar's list. Getting this wrong takes the current site
+   down. Change nothing else yet.
 2. **R2:** follow `docs/r2-setup.md`, creating **three** buckets:
    `shf-media`, `shf-private`, `shf-backups`. Create one API token with
    **Object Read & Write** on all three. Keep the **Account ID**, **Access
@@ -179,11 +185,11 @@ BACKUP_ENCRYPTION_KEY=PASTE_SECRET_3
 NEXT_PUBLIC_SITE_URL=https://sthannahfoundation.org
 
 RESEND_API_KEY=PASTE_RESEND_KEY
-FROM_EMAIL=St. Hannah Foundation <no-reply@sthannahfoundation.org>
-DONATION_EMAIL=DONATIONS_INBOX@EXAMPLE
-VOLUNTEER_EMAIL=VOLUNTEER_INBOX@EXAMPLE
-APPLICATIONS_EMAIL=APPLICATIONS_INBOX@EXAMPLE
-CONTACT_EMAIL=CONTACT_INBOX@EXAMPLE
+FROM_EMAIL=St. Hannah Foundation <support@sthannahfoundation.org>
+DONATION_EMAIL=support@sthannahfoundation.org
+VOLUNTEER_EMAIL=support@sthannahfoundation.org
+APPLICATIONS_EMAIL=support@sthannahfoundation.org
+CONTACT_EMAIL=support@sthannahfoundation.org
 
 PAYSTACK_SECRET_KEY=PASTE_PAYSTACK_LIVE_SECRET
 PAYSTACK_WEBHOOK_SECRET=

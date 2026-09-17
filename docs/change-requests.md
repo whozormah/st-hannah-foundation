@@ -652,6 +652,7 @@ Interface defects that belong to no phase are tracked separately, in
 | — | Who writes the legal documents? | Developer drafts from facts in the code; the Foundation's lawyer approves | 12 Sep 2026 | Documents stay `draft` until approved |
 | — | Consent on forms without it | One-line notice and policy link; existing checkboxes unchanged | 12 Sep 2026 | PRV-03 display |
 | 8 | Content freeze during migration | Agreed: nobody edits the content files in `public/data` while they are migrated | 13 Sep 2026 | MIG-04; Phase 6 may proceed |
+| 6 | Who holds each role | Owner: Glory Akinola (thesthannah@gmail.com); Administrator: Uzoma Udoma (uzoma.udoma@gmail.com). Content Manager, Case Officer and Finance not yet named | 17 Sep 2026 | Phase 2; the accounts are created on the server at go-live Step 7 |
 | — | Who approves the Privacy Policy and Terms? | The Foundation itself: it has no lawyer. Reasonable defaults were proposed by the developer and accepted | 16 Sep 2026 | CR-004's "lawyer decisions" condition is met by the Foundation's own approval; the approval guard is unchanged |
 | 3 | Named data protection contact | "The St. Hannah Foundation team", support@sthannahfoundation.org | 16 Sep 2026 | PRV-02, PRV-10, PRV-11 |
 | 4 | Retention periods per record type | Support applications 6 years after closing; volunteer applications 2 years; partnership enquiries 3 years; donation records 6 years; in-kind arrangements 3 years; contact messages 2 years; newsletter until unsubscribe (+30 days); international giving updates until stopped or 2 years | 16 Sep 2026 | PRV-06 |
@@ -665,5 +666,4 @@ Interface defects that belong to no phase are tracked separately, in
 |---|---|---|
 | 1 | Is there a US legal entity? | Phase 5 (CR-001) |
 | 2 | Has Paystack approved USD settlement? | Phase 5 (CR-001) |
-| 6 | Who holds each role | Phase 2 |
 | 7 | Tax-deductibility status | RCP-05 |
