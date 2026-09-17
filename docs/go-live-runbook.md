@@ -5,7 +5,14 @@ are for the developer (ask Claude: *"do go-live step X"*). Copy each block as
 it is and replace only the words in `CAPITALS`.
 
 Nothing here changes the live website until **Step 9**. Until then the
-current Vercel site keeps running.
+current site keeps running.
+
+**Where things stand (checked 17 September 2026).** The live site is on
+**Hostinger** (`platform: hostinger`), not Vercel, and the domain's
+nameservers are Hostinger's (`ns1.dns-parking.com`). Email is Hostinger
+mailboxes (`mx1`/`mx2.hostinger.com`, SPF `_spf.mail.hostinger.com`), and
+**Resend is already verified** on `send.sthannahfoundation.org` with its DKIM
+key. Every one of those records must survive the move, or email stops.
 
 ---
 
@@ -62,12 +69,24 @@ any time from the admin, under **Staff Accounts**.
 ### 2a. Cloudflare (domain and storage)
 
 1. Sign in at <https://dash.cloudflare.com> and **add the domain**
-   `sthannahfoundation.org` (free plan). Cloudflare scans your current DNS
-   records first. **Check that the records pointing at Vercel came across**
-   (an `A` record for the domain and a `CNAME` for `www`) before you change
-   the nameservers at your registrar; if they are missing, add them by hand
-   from your registrar's list. Getting this wrong takes the current site
-   down. Change nothing else yet.
+   `sthannahfoundation.org` (free plan). Cloudflare scans the current DNS
+   records and lists them. **Done, 17 September 2026.**
+2. In **DNS → Records**, set these to **DNS only** (click the orange cloud so
+   it turns grey): `ftp`, `autoconfig`, `autodiscover` and the three
+   `hostingermail-…` records. Proxying mail and FTP records breaks them.
+3. Check the list holds all of these, and add any that are missing:
+   `MX mx1.hostinger.com` (5), `MX mx2.hostinger.com` (10),
+   `TXT v=spf1 include:_spf.mail.hostinger.com ~all`,
+   `MX send → feedback-smtp.us-east-1.amazonses.com` (10),
+   `TXT send → v=spf1 include:amazonses.com ~all`,
+   `TXT resend._domainkey → p=MIGfMA0…`, `TXT _dmarc`, and the `A`/`AAAA`
+   records with `CNAME www`.
+4. **Do not change the nameservers yet.** Hostinger still answers for the
+   domain, and the addresses Cloudflare scanned (`88.223.87.253`,
+   `88.223.87.33`) differ from what the domain answers today
+   (`77.37.83.10`, `93.127.179.113`): Hostinger's CDN rotates them. The
+   nameservers change on go-live day (Step 9), when the website records point
+   at the new server, so there is one switch, not two.
 2. **R2:** follow `docs/r2-setup.md`, creating **three** buckets:
    `shf-media`, `shf-private`, `shf-backups`. Create one API token with
    **Object Read & Write** on all three. Keep the **Account ID**, **Access
@@ -226,9 +245,9 @@ gh secret set DROPLET_USER --body "deploy"
 gh secret set DROPLET_SSH_KEY < ~/.ssh/shf_deploy
 ```
 
-**Vercel — important.** Vercel redeploys the live site whenever `main`
-changes. Before Step 7: Vercel → the project → **Settings → Git →
-Disconnect**. The current site stays up; it just stops redeploying.
+**Nothing to disconnect.** The live site is on Hostinger and is not built
+from this repository, so pushing to `main` cannot disturb it. Leave the
+Hostinger site running until the new one has been live for a week.
 
 ---
 
@@ -297,12 +316,17 @@ restore test.
 **CLAUDE**, first: set the Privacy Policy and Terms effective dates to today,
 mark them approved, and deploy.
 
-**YOU**, then, in Cloudflare → **DNS → Records**:
+**YOU**, then, in Cloudflare → **DNS → Records**, with the nameservers still at Hostinger:
 
 1. Edit the `A` record for `sthannahfoundation.org` → **SERVER_IP**,
-   Proxy **on** (orange cloud).
+   Proxy **on** (orange cloud). Delete the second `A` record and both
+   `AAAA` records: they point at Hostinger.
 2. Edit `www` → `CNAME` to `sthannahfoundation.org`, Proxy **on**.
-3. Delete any remaining records that point at Vercel.
+3. Leave every mail record exactly as it is (`MX`, the SPF and DKIM `TXT`
+   records, `send`, `autoconfig`, `autodiscover`, `hostingermail-…`).
+4. Only now, at the registrar (Hostinger → Domains → DNS / Nameservers),
+   change the nameservers to the two Cloudflare shows on its Overview page.
+   The switch takes a few minutes to a few hours.
 
 The new site is live within minutes. Open it in a private window to confirm.
 
@@ -322,8 +346,10 @@ ssh deploy@SERVER_IP 'chmod +x /srv/st-hannah/backup.sh && \
   (crontab -l 2>/dev/null; echo "15 2 * * * /srv/st-hannah/backup.sh >> /srv/st-hannah/backup.log 2>&1") | crontab -'
 ssh deploy@SERVER_IP '/srv/st-hannah/backup.sh'   # run one now to prove it works
 ```
-- [ ] **YOU:** after a week with no issues, delete the Vercel project.
+- [ ] **YOU:** after a week with no issues, take the old Hostinger site
+      down (keep the mailboxes: email still runs there).
 
-**If something goes wrong after Step 9:** point the Cloudflare DNS records
-back to Vercel's values (keep a screenshot of them before Step 9) and tell
-Claude.
+**If something goes wrong after Step 9:** set the `A` record back to
+Hostinger's address (keep a screenshot of the records before Step 9), or
+change the nameservers back to `ns1.dns-parking.com` and
+`ns2.dns-parking.com`, and tell Claude.
