@@ -130,10 +130,11 @@ test("blocks: all fourteen block types render, in the order the editor sets", as
   const main = page.slice(page.indexOf("<main"), page.indexOf("</main>"));
 
   // Vision and mission carries no wording of its own: it shows the
-  // Foundation's, so that is what is looked for.
+  // Foundation's, so that is what is looked for — its opening paragraph, which
+  // is what the homepage shows when the statement runs longer (CR-028).
   const foundation = (await as("content", "/api/globals/foundation?depth=0")).body;
   const markers = blocks.map((block) =>
-    block.blockType === "visionMission" ? foundation.vision : m(block.blockType),
+    block.blockType === "visionMission" ? foundation.vision.split(/\n\s*\n|\n/)[0].trim() : m(block.blockType),
   );
 
   let last = -1;

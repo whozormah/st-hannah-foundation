@@ -1,3 +1,6 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
 import { getFoundation } from "@/lib/cms";
 import Rays from "@/components/shared/Rays";
 
@@ -5,8 +8,8 @@ interface FoundationData {
   badge: string;
   title: string;
   description: string;
-  vision: string;
-  mission: string;
+  vision: string[];
+  mission: string[];
 }
 
 /* The Foundation's introduction, vision and mission, set as an editorial
@@ -64,8 +67,19 @@ export default async function VisionMission() {
               <h3 className="relative text-sm font-semibold uppercase tracking-[4px] text-brand">Our Vision</h3>
 
               <p className="relative mt-6 font-display text-xl italic leading-[1.6] text-ink sm:text-3xl sm:leading-[1.45]">
-                {foundation.vision}
+                {foundation.vision[0]}
               </p>
+
+              {/* The rest of the statement is on the About page (CR-028). */}
+              {foundation.vision.length > 1 && (
+                <Link
+                  href="/about#our-vision"
+                  className="relative mt-7 inline-flex items-center gap-2 font-semibold text-brand underline-offset-4 hover:underline"
+                >
+                  Read our full vision
+                  <ArrowRight aria-hidden size={18} />
+                </Link>
+              )}
             </article>
 
             <article className="reveal-rise relative -mt-8 overflow-hidden rounded-[36px] bg-gradient-to-br from-[#2E1B05] via-brand-dark to-brand px-7 pb-12 pt-10 text-white shadow-[0_40px_90px_-30px_rgba(46,27,5,0.7)] sm:pb-14 sm:pl-12 sm:pr-32 sm:pt-12 lg:-mt-10 lg:ml-10">
@@ -79,8 +93,18 @@ export default async function VisionMission() {
               <h3 className="relative text-sm font-semibold uppercase tracking-[4px] text-accent-soft">Our Mission</h3>
 
               <p className="relative mt-6 font-display text-xl leading-[1.6] sm:text-3xl sm:leading-[1.45]">
-                {foundation.mission}
+                {foundation.mission[0]}
               </p>
+
+              {foundation.mission.length > 1 && (
+                <Link
+                  href="/about#our-mission"
+                  className="relative mt-7 inline-flex items-center gap-2 font-semibold text-accent-soft underline-offset-4 hover:underline"
+                >
+                  Read our full mission
+                  <ArrowRight aria-hidden size={18} />
+                </Link>
+              )}
             </article>
           </div>
         </div>

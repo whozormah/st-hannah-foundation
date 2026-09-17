@@ -593,6 +593,20 @@ Interface defects that belong to no phase are tracked separately, in
   the CMS with everything in it but is not shown. The founder slide (CR-019)
   is hidden for now.
 
+### CR-028 — The vision and mission may run to several paragraphs
+
+- **Status:** Approved, 17 September 2026 — the Foundation supplied a longer
+  vision and mission statement
+- **Affects:** About the Foundation (section 5), the homepage's Vision and
+  Mission section, the About page
+- **Change:** blank lines in the **Vision** and **Mission** fields separate
+  paragraphs. The About page shows the whole statement; the homepage's panels
+  show the opening paragraph, with "Read our full vision" and "Read our full
+  mission" opening the About page at that card. A one-paragraph statement
+  looks exactly as before, with no link.
+- **A18:** the homepage and About page carry the Foundation's new wording;
+  re-baselined for it.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

@@ -93,6 +93,13 @@ const src = (value: unknown) => {
 const srcs = (value: unknown) => (Array.isArray(value) ? value.map(src).filter(Boolean) : []);
 const altOf = (value: unknown) => text((value as { alt?: unknown } | null)?.alt);
 
+/** A block of writing split into paragraphs on its blank lines. */
+const paragraphsOf = (value: unknown) =>
+  text(value)
+    .split(/\n\s*\n|\n/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
 /* Publishing refreshes a read at once, through its tag. The hour is a safety
    net for changes made outside the website — the content migration, a
    backup restore — which cannot reach its cache: such a change shows within
@@ -529,8 +536,10 @@ export async function getFoundation() {
     badge: text(d.badge),
     title: text(d.title),
     description: text(d.description),
-    vision: text(d.vision),
-    mission: text(d.mission),
+    // A statement may run to several paragraphs: blank lines separate them
+    // (CR-028). The homepage shows the first; the About page shows them all.
+    vision: paragraphsOf(d.vision),
+    mission: paragraphsOf(d.mission),
   };
 }
 

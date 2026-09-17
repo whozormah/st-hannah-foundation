@@ -147,6 +147,10 @@ Videos must be MP4 files of 50 MB or less; photographs 10 MB or less.
 the homepage's Vision and Mission section, and the founder's message on the
 About page.
 
+The **Vision** and **Mission** may run to several paragraphs: leave a blank
+line between them. The About page shows the whole statement; the homepage
+shows the first paragraph with a link to the rest.
+
 ## Campaign stories
 
 A campaign story (such as Esther's) can have a **Video**. It plays silently
