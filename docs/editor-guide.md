@@ -34,6 +34,8 @@ Everything that appears on the website is under **Content** in the menu.
 | Photographs and their descriptions | **Media Library** |
 | Email, phone, office addresses, social links (Administrators and Owner) | **Site Settings** |
 
+Social links show in the footer as icons. Fill in **Facebook**, **Instagram**, **TikTok**, **YouTube** or **LinkedIn** in Site Settings and that icon appears; leave one empty and it stays hidden.
+
 **In-kind Categories** and **Donate Page** are marked "Not shown on the
 website at the moment". Changing them changes nothing that visitors see.
 

@@ -7,6 +7,7 @@ import type { SiteSettings } from "@/lib/cms";
 
 import DonationModal from "@/components/shared/DonationModal";
 import PrivacyNotice from "@/components/shared/PrivacyNotice";
+import SocialLinks from "@/components/shared/SocialLinks";
 
 /** What the footer shows. Only these reach the browser: the rest of Site
     Settings, the bank details among them, stays on the server. */
@@ -351,34 +352,10 @@ export default function Footer({ settings }: { settings: FooterSettings }) {
                 <div className="pt-6 border-t border-white/10">
                   <p className="font-semibold mb-4">Follow Us</p>
 
-                  <div className="flex flex-wrap gap-4">
-                    <a
-                      href={settings?.socials.facebook}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-accent transition"
-                    >
-                      Facebook
-                    </a>
-
-                    <a
-                      href={settings?.socials.instagram}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-accent transition"
-                    >
-                      Instagram
-                    </a>
-
-                    <a
-                      href={settings?.socials.tiktok}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-accent transition"
-                    >
-                      TikTok
-                    </a>
-                  </div>
+                  <SocialLinks
+                    socials={settings.socials}
+                    foundationName={settings?.foundationName ?? "St. Hannah Foundation"}
+                  />
                 </div>
               </div>
             </div>

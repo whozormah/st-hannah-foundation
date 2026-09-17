@@ -607,6 +607,21 @@ Interface defects that belong to no phase are tracked separately, in
 - **A18:** the homepage and About page carry the Foundation's new wording;
   re-baselined for it.
 
+### CR-029 — The social accounts show as icons
+
+- **Status:** Approved, 17 September 2026 — requested by the Foundation's
+  developer ("icons for all the socials")
+- **Affects:** the footer, on every page
+- **Change:** Facebook, Instagram, TikTok, YouTube and LinkedIn show as round
+  icon buttons that light up in gold, instead of the words "Facebook",
+  "Instagram" and "TikTok". Each carries its name for screen readers
+  ("St. Hannah Foundation on Instagram"). An account shows only when its
+  address is set in Site Settings, so YouTube and LinkedIn appear the moment
+  the Foundation adds them. The icons come from `react-icons`, already part of
+  the project; no new dependency.
+- **A18:** the three words are replaced by labelled icons; pages are
+  re-baselined for that.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |
