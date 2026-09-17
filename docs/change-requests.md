@@ -622,6 +622,28 @@ Interface defects that belong to no phase are tracked separately, in
 - **A18:** the three words are replaced by labelled icons; pages are
   re-baselined for that.
 
+### CR-030 — Five fixes before the first deployment
+
+- **Status:** Approved, 17 September 2026 — found while writing the go-live
+  runbook, before any deployment
+- **Affects:** section 21 (deployment), section 19 (backups), ARC-05
+- **Change:**
+  1. the production image now carries `lib/`, without which the CMS
+     configuration cannot load and `payload migrate` fails on the server
+     (proved by building the image and running `migrate:status` inside it);
+  2. the deploy's rollback remembers the tag that last passed its health
+     check, instead of reading a file nothing wrote;
+  3. the nightly backup dumps through compose and uploads with the AWS CLI in
+     a container, so it can reach a database sealed inside Docker (ARC-03) and
+     the droplet needs nothing installed; its schedule is in the runbook;
+  4. `docker-compose.yml` passes the volunteer, applications and contact
+     inboxes and the backup settings to the app;
+  5. `scripts/production-export.sh` produces the content without the test
+     data. Deleting the test staff accounts had to blank the "who touched
+     this" references first: truncating them cascaded and emptied the media
+     library and the pages.
+- **Evidence:** `docs/go-live-runbook.md`, Step 0.
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

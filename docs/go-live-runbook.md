@@ -9,22 +9,30 @@ current Vercel site keeps running.
 
 ---
 
-## Step 0 — CLAUDE: fix what would break the launch
+## Step 0 — CLAUDE: fix what would break the launch ✅ done, 17 September 2026
 
-Found while writing this runbook, 16 September 2026. None of these is live yet.
+Found while writing this runbook and fixed before any deployment:
 
-- [ ] The production image leaves out `lib/`, which the CMS configuration
-      needs: `npx payload migrate` on the server would fail.
-- [ ] The deploy's automatic rollback reads `.previous-image`, which nothing
-      writes.
-- [ ] The nightly backup runs on the server but cannot reach the database,
-      which is sealed inside Docker; and nothing schedules it.
-- [ ] `docker-compose.yml` does not pass `VOLUNTEER_EMAIL`,
-      `APPLICATIONS_EMAIL`, `CONTACT_EMAIL`, `R2_BUCKET_BACKUPS` or
-      `BACKUP_ENCRYPTION_KEY` to the app.
-- [ ] Prepare a **clean production export**: the content built in the CMS
-      (stories, gallery, videos, homepage) without the test accounts and test
-      submissions the test suite creates, plus a list of the media files.
+- [x] The production image left out `lib/`, which the CMS configuration needs:
+      `npx payload migrate` on the server would have failed. **Proved fixed:**
+      the image was built (389 MB) and `payload migrate:status` ran inside it,
+      listing all 20 migrations.
+- [x] The deploy's automatic rollback read `.previous-image`, which nothing
+      wrote. It now remembers the tag that last passed its health check
+      (`.last-good-image`).
+- [x] The nightly backup could not reach the database, which is sealed inside
+      Docker. It now dumps through compose and uploads with the AWS CLI in a
+      container, so the droplet needs nothing installed but Docker. Scheduling
+      it is Step 10.
+- [x] `docker-compose.yml` now passes `VOLUNTEER_EMAIL`, `APPLICATIONS_EMAIL`,
+      `CONTACT_EMAIL`, `R2_BUCKET_BACKUPS` and `BACKUP_ENCRYPTION_KEY`.
+- [x] **Clean production export** (`scripts/production-export.sh`): the
+      content without the test data. The development database held 834
+      synthetic support applications, 240 in-kind offers, 229 contact
+      messages, 112 beneficiaries and the 5 test staff accounts; the export
+      has none of them, and keeps 116 media files, 8 programmes, 7 stories,
+      61 gallery photographs, 6 videos and the homepage. Re-run it on the day,
+      so the export is current.
 
 ---
 
@@ -222,8 +230,25 @@ Disconnect**. The current site stays up; it just stops redeploying.
 
 1. **CLAUDE:** merge the finished work into `main`, push, and watch CI and
    Deploy go green. (DNS still points at Vercel, so visitors see nothing new.)
-2. **CLAUDE:** load the clean production export into the server's database
-   and upload the media files into `shf-media`.
+2. **CLAUDE:** load the content and the media files:
+
+```bash
+cd ~/st-hannah-foundation
+./scripts/production-export.sh
+scp production-export/production-content.dump deploy@SERVER_IP:/srv/st-hannah/
+
+# the content
+ssh deploy@SERVER_IP 'cd /srv/st-hannah && docker compose exec -T postgres \
+  pg_restore --clean --if-exists --no-owner --no-privileges -U shf -d shf \
+  < production-content.dump'
+
+# the photographs and videos, straight into R2
+docker run --rm -e AWS_ACCESS_KEY_ID=PASTE_ACCESS_KEY_ID \
+  -e AWS_SECRET_ACCESS_KEY=PASTE_SECRET_ACCESS_KEY -e AWS_DEFAULT_REGION=auto \
+  -v "$PWD/media:/media:ro" amazon/aws-cli:2 \
+  s3 sync /media s3://shf-media \
+  --endpoint-url https://PASTE_ACCOUNT_ID.r2.cloudflarestorage.com
+```
 3. **YOU:** create the Owner account — open
    `https://SERVER_IP/admin` (accept the certificate warning; it is only
    because you are not going through Cloudflare yet) and create the first
@@ -282,8 +307,15 @@ The new site is live within minutes. Open it in a private window to confirm.
 - [ ] **YOU:** Cloudflare → **Zero Trust → Access → Applications → Add →
       Self-hosted**: `sthannahfoundation.org/admin`, allow only staff emails
       (SEC-02).
-- [ ] **CLAUDE:** confirm the nightly backup ran, and sets up a daily health
-      alert.
+- [ ] **CLAUDE:** schedule the nightly backup and confirm the first one ran:
+
+```bash
+cd ~/st-hannah-foundation
+scp scripts/backup.sh deploy@SERVER_IP:/srv/st-hannah/
+ssh deploy@SERVER_IP 'chmod +x /srv/st-hannah/backup.sh && \
+  (crontab -l 2>/dev/null; echo "15 2 * * * /srv/st-hannah/backup.sh >> /srv/st-hannah/backup.log 2>&1") | crontab -'
+ssh deploy@SERVER_IP '/srv/st-hannah/backup.sh'   # run one now to prove it works
+```
 - [ ] **YOU:** after a week with no issues, delete the Vercel project.
 
 **If something goes wrong after Step 9:** point the Cloudflare DNS records

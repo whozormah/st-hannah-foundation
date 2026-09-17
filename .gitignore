@@ -48,3 +48,4 @@ nginx/certs/
 # Production stores these in R2 (MED-01); they must never be committed.
 /media/
 /submission-files/
+production-export/

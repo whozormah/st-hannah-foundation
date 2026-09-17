@@ -44,6 +44,8 @@ jobs:
           script: |
             set -euo pipefail
             cd /srv/st-hannah
+            # DEP-04: the tag that last passed its health check, for rollback.
+            PREVIOUS="$(cat .last-good-image 2>/dev/null || echo ghcr.io/${{ github.repository }}:latest)"
             export APP_IMAGE=ghcr.io/${{ github.repository }}:${{ github.sha }}
             docker compose pull app
             # DEP-01: migrations complete before the new container serves.
@@ -52,11 +54,12 @@ jobs:
             # DEP-04: a failing health check rolls back to the previous tag.
             for i in $(seq 1 30); do
               if curl -fsS http://localhost/api/health >/dev/null; then
+                echo "$APP_IMAGE" > .last-good-image
                 echo "healthy"; exit 0
               fi
               sleep 2
             done
-            echo "health check failed, rolling back"
-            export APP_IMAGE=$(cat .previous-image)
+            echo "health check failed, rolling back to $PREVIOUS"
+            export APP_IMAGE="$PREVIOUS"
             docker compose up -d
             exit 1

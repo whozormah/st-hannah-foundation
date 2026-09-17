@@ -28,6 +28,10 @@ COPY --from=build /app/next.config.ts ./next.config.ts
 COPY --from=build /app/cache-handler.cjs ./cache-handler.cjs
 COPY --from=build /app/payload.config.ts ./payload.config.ts
 COPY --from=build /app/payload ./payload
+# The configuration reads from lib/ (tags, links, section wording): without it
+# `payload migrate` on the server cannot load the config at all.
+COPY --from=build /app/lib ./lib
+COPY --from=build /app/types ./types
 COPY --from=build /app/migrations ./migrations
 COPY --from=build /app/tsconfig.json ./tsconfig.json
 
