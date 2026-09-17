@@ -80,26 +80,30 @@ export default async function AboutMission() {
             <div className="mt-12 grid gap-8">
               {/* Vision */}
 
-              <div className="rounded-[28px] border border-accent/20 bg-cream p-8">
+              <div id="our-vision" className="scroll-mt-28 rounded-[28px] border border-accent/20 bg-cream p-8">
                 <h4 className="text-2xl font-bold text-brand">
                   Our Vision
                 </h4>
 
-                <p className="mt-4 leading-8 text-gray-700">
-                  {foundation.vision}
-                </p>
+                <div className="mt-4 space-y-4 leading-8 text-gray-700">
+                  {foundation.vision.map((paragraph) => (
+                    <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+                  ))}
+                </div>
               </div>
 
               {/* Mission */}
 
-              <div className="rounded-[28px] border border-accent/20 bg-white p-8 shadow-lg">
+              <div id="our-mission" className="scroll-mt-28 rounded-[28px] border border-accent/20 bg-white p-8 shadow-lg">
                 <h4 className="text-2xl font-bold text-brand">
                   Our Mission
                 </h4>
 
-                <p className="mt-4 leading-8 text-gray-700">
-                  {foundation.mission}
-                </p>
+                <div className="mt-4 space-y-4 leading-8 text-gray-700">
+                  {foundation.mission.map((paragraph) => (
+                    <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
