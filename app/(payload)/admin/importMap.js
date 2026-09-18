@@ -15,6 +15,7 @@ import { StatusField as StatusField_58a821e4be6f90965a8b52ec999d51b9 } from '../
 import { Icon as Icon_9abc6a0eda54972459e8ec55822fafb2 } from '../../../payload/components/Brand'
 import { Logo as Logo_9abc6a0eda54972459e8ec55822fafb2 } from '../../../payload/components/Brand'
 import { SignInHeading as SignInHeading_9abc6a0eda54972459e8ec55822fafb2 } from '../../../payload/components/Brand'
+import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -36,5 +37,6 @@ export const importMap = {
   "/payload/components/Brand#Icon": Icon_9abc6a0eda54972459e8ec55822fafb2,
   "/payload/components/Brand#Logo": Logo_9abc6a0eda54972459e8ec55822fafb2,
   "/payload/components/Brand#SignInHeading": SignInHeading_9abc6a0eda54972459e8ec55822fafb2,
+  "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }
