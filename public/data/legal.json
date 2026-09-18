@@ -1,5 +1,5 @@
 {
-  "status": "draft",
+  "status": "approved",
   "draftNotice": "This is a draft for approval by the Foundation. It is not yet in effect.",
   "registeredName": "St. Hannah Charity Foundation",
   "dataProtectionContact": {
@@ -12,8 +12,8 @@
   },
   "privacy": {
     "version": "1.0",
-    "lastUpdated": "2026-09-12",
-    "effectiveDate": null,
+    "lastUpdated": "2026-09-18",
+    "effectiveDate": "2026-09-18",
     "summary": "What personal information we collect through this website, why we collect it, who we share it with, how long we keep it and the rights you have.",
     "collection": [
       {
@@ -247,8 +247,8 @@
   },
   "terms": {
     "version": "1.0",
-    "lastUpdated": "2026-09-12",
-    "effectiveDate": null,
+    "lastUpdated": "2026-09-18",
+    "effectiveDate": "2026-09-18",
     "governingLaw": "the laws of the Federal Republic of Nigeria",
     "summary": "The terms that apply when you use this website, give a donation or submit a form.",
     "sections": [
