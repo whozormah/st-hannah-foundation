@@ -486,6 +486,9 @@ const migrators: Record<string, Migrator> = {
       readJson<Record<string, string>[]>("homepage/hero.json").map(async (slide) => ({
         ...slide,
         image: await mediaId(payload, slide.image),
+        // Written explicitly: the field has a default, so the saved slide
+        // carries it and the read-back comparison would differ (CR-027).
+        hidden: false,
       })),
     );
     const blocks = HOMEPAGE_ORDER.map((type) =>
