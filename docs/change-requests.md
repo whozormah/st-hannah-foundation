@@ -18,7 +18,7 @@ Interface defects that belong to no phase are tracked separately, in
 
 ### CR-002 — PRV-08 takes effect in Phase 3, not Phase 1
 
-- **Status:** Proposed — awaiting approval
+- **Status:** Approved, 18 September 2026, and implemented
 - **Affects:** PRV-08, EML-07
 - **Reason:** Until Phase 3, the email to the Foundation is the only copy of
   a submission. Removing sensitive values from it now would lose them,
@@ -26,19 +26,30 @@ Interface defects that belong to no phase are tracked separately, in
 - **Change:** PRV-08 applies from the moment submissions persist to the
   database. Until then, sensitive values continue to reach the Foundation by
   email, and this is disclosed in the Privacy Policy's description of Resend.
+- **As built, 18 September 2026:** submissions now persist (Phase 3), so the
+  Foundation's copy of a support application leaves out the most personal
+  answers: national ID, income and its source, the applicant's account of
+  their situation, dependants with special needs and their details, housing
+  challenges, living conditions and documents (`lib/privacy.ts`). The email
+  still names the applicant, carries the reference and says how many answers
+  are held back and where to read them. **Evidence:** the Foundation email was
+  rendered with seven marked sensitive answers; none appeared in it, and the
+  name, reference and pointer to Support Applications did.
 
 ### CR-003 — Add the international giving form to section 6.1
 
-- **Status:** On hold — **do not implement.** The form's requirements and
-  acceptance coverage must first be added to the specification, or the form
-  must be explicitly deferred. Until then no work proceeds on it, and the
-  existing endpoint is left exactly as it is.
+- **Status:** Approved, 18 September 2026 — documentation only. The form keeps
+  working exactly as it does now; nothing is built or changed.
 - **Affects:** Section 6.1, section 3 (form path)
 - **Reason:** `/api/international-interest` collects an email address but is
   not listed. The site collects personal information in eight places, not
   six: the six listed, plus this form and the online donation form.
 - **Change:** Add `international_interest` (email, source endpoint
   `/api/international-interest`) to the table of carried-forward forms.
+- **Settled, 18 September 2026:** the site collects personal information in
+  eight places, and the Privacy Policy already lists all eight, including this
+  form's email address. The specification's table is brought in line; the card
+  on the donate page stays.
 
 ### CR-004 — Work may continue while the Phase 1 gate is open, within limits
 

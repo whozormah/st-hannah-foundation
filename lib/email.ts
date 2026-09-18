@@ -26,6 +26,7 @@ import type { PartnershipEnquiryDetails } from "@/emails/FoundationPartnershipEn
 
 import { formatCurrency, formatDate } from "./formatter";
 import { generateReceiptNumber } from "./receipt";
+import { withoutWithheld } from "./privacy";
 
 /**
  * Resolved lazily, never at module scope: importing this file must stay free of
@@ -288,11 +289,16 @@ export async function sendAidApplicationEmails(
     }),
   );
 
+  // PRV-08 (CR-002): the most personal answers are read in the admin, not
+  // carried in an inbox. The application is already saved before this runs.
+  const { kept, withheld } = withoutWithheld(details);
+
   const foundationEmail = await render(
     FoundationAidApplication({
-      details,
+      details: kept as AidApplicationDetails,
       reference,
       date: formattedDate,
+      withheld,
     }),
   );
 

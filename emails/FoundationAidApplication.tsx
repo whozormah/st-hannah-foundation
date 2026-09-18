@@ -22,6 +22,8 @@ interface Props {
   details: AidApplicationDetails;
   reference: string;
   date: string;
+  /** How many personal answers were left out (CR-002). */
+  withheld?: number;
 }
 
 const GROUPS: { title: string; fields: [string, string][] }[] = [
@@ -104,6 +106,7 @@ export default function FoundationAidApplication({
   details,
   reference,
   date,
+  withheld = 0,
 }: Props) {
   return (
     <Html>
@@ -122,6 +125,18 @@ export default function FoundationAidApplication({
             <Text style={styles.subHeading}>Reference {reference}</Text>
 
             <Text style={styles.paragraph}>Submitted {date}</Text>
+
+            {/* PRV-08 (CR-002): the rest is in the admin, not in this email. */}
+            {withheld > 0 && (
+              <Text style={styles.paragraph}>
+                <strong>
+                  {withheld} more personal {withheld === 1 ? "answer is" : "answers are"} held in the
+                  admin, not sent by email.
+                </strong>{" "}
+                Open Support Applications and find reference {reference} to read the full
+                application.
+              </Text>
+            )}
 
             {GROUPS.map((group) => {
               const present = group.fields.filter(([key]) => details[key]);
