@@ -4,6 +4,18 @@ Follow in order. **YOU** steps are for you or the Foundation; **CLAUDE** steps
 are for the developer (ask Claude: *"do go-live step X"*). Copy each block as
 it is and replace only the words in `CAPITALS`.
 
+**Launched 19 September 2026.** The new site went live at
+https://sthannahfoundation.org once the nameservers moved to Cloudflare
+(`dale`/`josephine.ns.cloudflare.com`, registry updated 10:57 UTC). A 526 error
+followed for a few minutes because Cloudflare was in Full (strict) while the
+server still had its temporary certificate; set to **Full**, the site came up.
+The Owner account (Glory Akinola) was created before launch. The first nightly
+backup ran and was **restored** successfully the same day.
+
+Still to do: the Cloudflare origin certificate and **Full (strict)**,
+Cloudflare Access on `/admin`, Uzoma's Administrator account, the Paystack live
+key, and a form test end to end.
+
 Nothing here changes the live website until **Step 9**. Until then the
 current site keeps running.
 
@@ -270,7 +282,7 @@ ssh deploy@SERVER_IP 'cd /srv/st-hannah && docker compose exec -T postgres \
 # the photographs and videos, straight into R2
 docker run --rm -e AWS_ACCESS_KEY_ID=PASTE_ACCESS_KEY_ID \
   -e AWS_SECRET_ACCESS_KEY=PASTE_SECRET_ACCESS_KEY -e AWS_DEFAULT_REGION=auto \
-  -v "$PWD/media:/media:ro" amazon/aws-cli:2 \
+  -v "$PWD/media:/media:ro" public.ecr.aws/aws-cli/aws-cli:latest \
   s3 sync /media s3://shf-media \
   --endpoint-url https://PASTE_ACCOUNT_ID.r2.cloudflarestorage.com
 ```

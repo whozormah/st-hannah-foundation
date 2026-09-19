@@ -12,7 +12,16 @@ set -euo pipefail
 
 STACK="${STACK_DIR:-/srv/st-hannah}"
 cd "${STACK}"
-set -a; . ./.env; set +a
+
+# Only the values this script needs, read line by line: .env is written for
+# Docker Compose, not the shell (FROM_EMAIL holds "<…>", which the shell
+# cannot source).
+while IFS='=' read -r key value; do
+  case "${key}" in
+    POSTGRES_USER|POSTGRES_DB|BACKUP_ENCRYPTION_KEY|R2_BUCKET_BACKUPS|R2_ACCOUNT_ID|R2_ACCESS_KEY_ID|R2_SECRET_ACCESS_KEY)
+      export "${key}=${value}" ;;
+  esac
+done < ./.env
 
 : "${POSTGRES_USER:?POSTGRES_USER is required}"
 : "${POSTGRES_DB:?POSTGRES_DB is required}"
@@ -44,7 +53,7 @@ upload() {
     -e AWS_SECRET_ACCESS_KEY="${R2_SECRET_ACCESS_KEY}" \
     -e AWS_DEFAULT_REGION=auto \
     -v "${WORKDIR}:/backup:ro" \
-    amazon/aws-cli:2 s3 cp "/backup/$(basename "$1")" "$2" \
+    public.ecr.aws/aws-cli/aws-cli:latest s3 cp "/backup/$(basename "$1")" "$2" \
     --endpoint-url "https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
 }
 
