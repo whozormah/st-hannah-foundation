@@ -663,9 +663,11 @@ Interface defects that belong to no phase are tracked separately, in
 - **Changes:**
   1. **The President stands alone.** The homepage's leadership section showed
      the first three leaders side by side, the President among them; she asked
-     for her photograph not to be grouped with others. She now has her own
-     feature, and the rest of the team sit in a separate row beneath her. The
-     Team page already worked this way.
+     for her photograph not to be grouped with others. Every leader now has the
+     same card (her own is not larger or different, at her request): hers alone
+     in the centre of the first row, the rest of the team in a row beneath her.
+     The homepage and the Team page share this layout
+     (`components/shared/LeadershipCards.tsx`).
   2. **No "Governance & Leadership" or "Volunteer Leadership" labels** above
      their headings, on the homepage and the Team page.
   3. **Event appeal amounts:** ₦10,000, ₦25,000, ₦50,000, ₦100,000,
