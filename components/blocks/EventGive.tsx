@@ -6,7 +6,7 @@ import { Heart } from "lucide-react";
 import DonationModal from "@/components/shared/DonationModal";
 
 // The donation form's own first amounts, so the choice carries straight over.
-const AMOUNTS = ["10000", "25000", "50000"];
+const AMOUNTS = ["10000", "25000", "50000", "100000", "250000"];
 
 type Props = {
   /** The cause named on the donation; none after the event. */

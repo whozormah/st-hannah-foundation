@@ -21,19 +21,19 @@ interface LeadershipPreviewProps {
   showButton?: boolean;
 }
 
+/* The homepage's leadership section (CR-031). At the Foundation's request the
+   President stands alone, in her own feature, and the rest of the team sit in
+   a separate row beneath her: never grouped with her in one cluster. The
+   first leader in the CMS order leads; the others follow in that order. */
 export default async function LeadershipPreview({
   eyebrow = SECTION_COPY.leadershipPreview.eyebrow,
   title = SECTION_COPY.leadershipPreview.title,
   description = SECTION_COPY.leadershipPreview.description,
   showButton = true,
 }: LeadershipPreviewProps) {
-  const allLeaders: Leader[] = await getLeadership();
+  const [lead, ...team]: Leader[] = await getLeadership();
 
-  // A preview with a link to /team, which lists everyone. Rendering all six here
-  // cost six phone screens on the homepage.
-  const leaders = allLeaders.slice(0, 3);
-
-  if (!leaders.length) return null;
+  if (!lead) return null;
 
   return (
     <section className="bg-white py-14 md:py-24">
@@ -46,7 +46,7 @@ export default async function LeadershipPreview({
               </span>
             )}
 
-            <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
+            <h2 className={`${eyebrow ? "mt-4 " : ""}text-3xl font-bold leading-tight text-ink md:text-4xl`}>
               <TitleLines text={title} />
             </h2>
 
@@ -68,41 +68,62 @@ export default async function LeadershipPreview({
           )}
         </div>
 
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {leaders.map((leader) => (
-            <li key={leader.name}>
-              <article className="group h-full overflow-hidden rounded-[24px] border border-accent/15 bg-white transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl">
-                <div className="relative aspect-[4/5] w-full overflow-hidden bg-cream">
-                  <Image
-                    src={leader.image}
-                    alt={leader.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
-                  />
-                </div>
+        {/* The President, on her own */}
+        <article className="mt-12 grid items-center overflow-hidden rounded-[28px] border border-accent/20 bg-cream lg:grid-cols-[minmax(0,400px)_1fr]">
+          <div className="relative aspect-[4/5] w-full lg:h-full lg:min-h-[440px] lg:aspect-auto">
+            <Image
+              src={lead.image}
+              alt={lead.name}
+              fill
+              sizes="(max-width: 1024px) 100vw, 400px"
+              className="object-cover object-top"
+            />
+          </div>
 
-                <div className="p-6">
-                  <p className="text-[11px] font-semibold uppercase tracking-[2px] text-brand">
-                    {leader.role}
-                  </p>
+          <div className="p-8 lg:p-12">
+            <span className="inline-flex rounded-full bg-brand px-4 py-2 text-xs font-bold uppercase tracking-[3px] text-white">
+              {lead.role}
+            </span>
 
-                  <h3 className="mt-2 text-xl font-bold leading-tight text-ink">
-                    {leader.name}
-                  </h3>
+            <h3 className="mt-6 font-display text-3xl font-bold leading-tight text-ink md:text-4xl">
+              {lead.name}
+            </h3>
 
-                  {/* Nothing invented here. The previous version printed a
-                      quotation attributed to the President that appears
-                      nowhere in the data, and a generic paragraph under the
-                      others. */}
-                  {leader.bio && (
-                    <p className="mt-3 leading-8 text-gray-700">{leader.bio}</p>
-                  )}
-                </div>
-              </article>
-            </li>
-          ))}
-        </ul>
+            <div aria-hidden className="mt-6 h-[3px] w-16 rounded-full bg-accent" />
+
+            {/* Nothing invented: a bio appears once the CMS carries one. */}
+            {lead.bio && <p className="mt-6 text-lg leading-9 text-gray-700">{lead.bio}</p>}
+          </div>
+        </article>
+
+        {/* The team, beneath her */}
+        {team.length > 0 && (
+          <ul className="mt-10 grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-5">
+            {team.map((member) => (
+              <li key={member.name}>
+                <article className="group h-full overflow-hidden rounded-[22px] border border-accent/15 bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-lg">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-cream">
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                      className="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+                    />
+                  </div>
+
+                  <div className="p-4">
+                    <p className="text-[10px] font-semibold uppercase tracking-[2px] text-brand">
+                      {member.role}
+                    </p>
+
+                    <h3 className="mt-1.5 text-base font-bold leading-snug text-ink">{member.name}</h3>
+                  </div>
+                </article>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </section>
   );

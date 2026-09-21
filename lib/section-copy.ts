@@ -55,7 +55,8 @@ export const SECTION_COPY = {
       "Beneficiaries, volunteers and community leaders on what the Foundation's work has meant to them.",
   },
   leadershipPreview: {
-    eyebrow: "Governance & Leadership",
+    // No small label, at the Foundation's request (CR-031).
+    eyebrow: "",
     title: "Meet the leaders behind the mission",
     description:
       "The people responsible for the Foundation's direction, oversight and accountability.",

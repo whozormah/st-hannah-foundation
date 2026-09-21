@@ -22,11 +22,7 @@ export default async function AboutGovernance() {
     <section className="bg-white py-14 md:py-24">
       <div className="container-custom">
         <div className="max-w-2xl">
-          <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
-            Governance &amp; Leadership
-          </span>
-
-          <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-5xl">
+          <h2 className="text-3xl font-bold leading-tight text-ink md:text-5xl">
             Stewarding the mission
           </h2>
 

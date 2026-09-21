@@ -655,6 +655,26 @@ Interface defects that belong to no phase are tracked separately, in
      library and the pages.
 - **Evidence:** `docs/go-live-runbook.md`, Step 0.
 
+### CR-031 — The Foundation's review of 21 September 2026
+
+- **Status:** Approved, 21 September 2026 — the President's review of the
+  live site
+- **Affects:** the homepage, the Team page, the event appeal
+- **Changes:**
+  1. **The President stands alone.** The homepage's leadership section showed
+     the first three leaders side by side, the President among them; she asked
+     for her photograph not to be grouped with others. She now has her own
+     feature, and the rest of the team sit in a separate row beneath her. The
+     Team page already worked this way.
+  2. **No "Governance & Leadership" or "Volunteer Leadership" labels** above
+     their headings, on the homepage and the Team page.
+  3. **Event appeal amounts:** ₦10,000, ₦25,000, ₦50,000, ₦100,000,
+     ₦250,000, then Other amount.
+  4. **Where It All Began** shows Prophetess Hannah Okoh's photograph,
+     supplied by the Foundation, in place of the logo drawing.
+- **Content, applied on the live site:** `scripts/client-review-2026-09-21.ts`
+  (the homepage label and the photograph).
+
 ## Decisions
 
 | # | Decision | Answer | Date | Effect |

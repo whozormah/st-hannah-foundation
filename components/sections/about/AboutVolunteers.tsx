@@ -20,11 +20,7 @@ export default async function AboutVolunteers() {
       <div className="container-custom">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-2xl">
-            <span className="text-sm font-semibold uppercase tracking-[4px] text-brand">
-              Volunteer Leadership
-            </span>
-
-            <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
+            <h2 className="text-3xl font-bold leading-tight text-ink md:text-4xl">
               The heartbeat of our mission
             </h2>
 
