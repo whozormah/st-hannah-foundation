@@ -44,8 +44,11 @@ export default function Hero({ slides }: { slides: HeroSlide[] }) {
         {slides.map((slide, index) => (
           <SwiperSlide key={slide.title}>
             {/* svh rather than vh: on phones 100vh includes the browser bar,
-                so the slide ran taller than the visible screen. */}
-            <div className="relative flex min-h-[100svh] items-center">
+                so the slide ran taller than the visible screen. The deep brown
+                ground is what the slide shows in the moment before its
+                photograph arrives; without it the dark overlay sat on the white
+                page and the hero flashed grey (CR-032). */}
+            <div className="relative flex min-h-[100svh] items-center bg-[#2A1703]">
               {/* Served through next/image. These are 2MB PNGs and were set as
                   CSS background-image, which skips optimisation entirely, so
                   all three downloaded at full size on every visit. */}
@@ -60,7 +63,10 @@ export default function Hero({ slides }: { slides: HeroSlide[] }) {
                 // Phones keep only a narrow strip of a wide picture; frame
                 // right of centre there, where the founder slide's subject
                 // stands. Wider screens show the picture as before.
-                className="object-cover object-[65%_center] md:object-center"
+                className="object-cover object-[65%_center] opacity-0 transition-opacity duration-700 [&.loaded]:opacity-100 md:object-center"
+                // onLoad, not the deprecated onLoadingComplete. next/image
+                // calls it for pictures already in the browser's cache too.
+                onLoad={(event) => event.currentTarget.classList.add("loaded")}
               />
 
               <div

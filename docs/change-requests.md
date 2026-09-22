@@ -655,7 +655,29 @@ Interface defects that belong to no phase are tracked separately, in
      library and the pages.
 - **Evidence:** `docs/go-live-runbook.md`, Step 0.
 
-### CR-031 — The Foundation's review of 21 September 2026
+### CR-032 — The hero's grey flash, and the website's icon
+
+**Asked for:** 22 September 2026, by the Foundation, from the client's review
+of the live site: the hero should not show a grey panel before its photograph
+appears, and the browser tab should carry the Foundation's own icon, not the
+one the website was started from.
+
+**Done:**
+
+  1. **The hero's ground.** The hero laid a dark gradient over the page itself,
+     which is white, so until the photograph arrived the screen read as grey.
+     The slide now sits on the Foundation's deep brown (`#2A1703`), the colour
+     the closing section ends on, and the photograph fades in over it
+     (`components/sections/Hero.tsx`).
+  2. **The website's icon.** `app/favicon.ico` was still the one the project
+     was started from. The icon is now built from the Foundation's logo: the
+     portrait cropped out of it, its line-work painted cream and set on the
+     Foundation's brown, which stays legible at the size a browser tab shows.
+     Written to `app/favicon.ico` (16, 32 and 48 pixels), `app/icon.png` (512)
+     and `app/apple-icon.png` (180) by `scripts/make-favicon.mjs`, so it can be
+     rebuilt if the logo changes.
+
+## CR-031 — The Foundation's review of 21 September 2026
 
 - **Status:** Approved, 21 September 2026 — the President's review of the
   live site
